@@ -1,0 +1,105 @@
+{
+  "author": "Milos Bugarinovic <milos.bugarinovic@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/beecode-rs/msh-test-contractor/issues"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@beecode/msh-node-log": "2.0.2",
+    "base-64": "1.0.0",
+    "deep-equal": "2.0.5"
+  },
+  "description": "",
+  "devDependencies": {
+    "@commitlint/cli": "12.1.1",
+    "@commitlint/config-conventional": "12.1.1",
+    "@commitlint/prompt": "12.1.1",
+    "@istanbuljs/nyc-config-typescript": "1.0.1",
+    "@semantic-release/changelog": "5.0.1",
+    "@semantic-release/commit-analyzer": "8.0.1",
+    "@semantic-release/exec": "5.0.0",
+    "@semantic-release/git": "9.0.0",
+    "@semantic-release/github": "7.2.1",
+    "@semantic-release/release-notes-generator": "9.0.2",
+    "@types/base-64": "0.1.3",
+    "@types/chai": "4.2.16",
+    "@types/deep-equal": "1.0.1",
+    "@types/dotenv": "8.2.0",
+    "@types/mocha": "8.2.2",
+    "@types/node": "14.14.41",
+    "@types/proxyquire": "1.3.28",
+    "@types/sinon": "10.0.0",
+    "@typescript-eslint/eslint-plugin": "4.22.0",
+    "@typescript-eslint/parser": "4.22.0",
+    "chai": "4.3.4",
+    "codecov": "3.8.1",
+    "commitizen": "4.2.3",
+    "dotenv": "8.2.0",
+    "eslint": "7.24.0",
+    "eslint-config-prettier": "8.2.0",
+    "eslint-plugin-import": "2.22.1",
+    "husky": "6.0.0",
+    "markdown-toc": "1.2.0",
+    "mocha": "8.3.2",
+    "nyc": "15.1.0",
+    "pinst": "2.1.6",
+    "prettier": "2.2.1",
+    "proxyquire": "2.1.3",
+    "replace-json-property": "1.6.3",
+    "rimraf": "3.0.2",
+    "semantic-release": "17.4.2",
+    "sinon": "10.0.0",
+    "source-map-support": "0.5.19",
+    "ts-node": "9.1.1",
+    "tsc-watch-2": "0.0.2",
+    "typescript": "4.2.4"
+  },
+  "files": [
+    "lib",
+    "package-lock.json"
+  ],
+  "homepage": "https://github.com/beecode-rs/msh-test-contractor#readme",
+  "keywords": [],
+  "license": "mit",
+  "main": "./lib/index.js",
+  "name": "@beecode/msh-test-contractor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beecode-rs/msh-test-contractor.git"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc -p ./tsconfig-build.json",
+    "build:watch": "npm run clean && tsc-watch -p tsconfig-build.json --preserveWatchOutput",
+    "bump-version": "rjp package.json version",
+    "clean": "rimraf ./lib/*",
+    "commit": "git-cz",
+    "coverage": "nyc npm run test:unit",
+    "coverage:publish": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "doc:toc": "markdown-toc -i ./README.md",
+    "eslint": "eslint . --ext .ts --quiet",
+    "eslint:fix": "npm run eslint -- --fix",
+    "lint": "npm run eslint && npm run prettier",
+    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "postinstall": "husky install",
+    "postpublish": "pinst --enable",
+    "prepublishOnly": "pinst --disable",
+    "prettier": "prettier --check \"./src/**/*.{ts,json}\"",
+    "prettier:fix": "prettier --write \"./src/**/*.{ts,json}\"",
+    "semantic-release": "semantic-release",
+    "semantic-release:check": "npm run semantic-release -- --dry-run --no-ci",
+    "test": "npm run test:unit -- --forbid-only && npm run test:int -- --forbid-only",
+    "test:int": "mocha ./src/test/{**/,/}*.ts",
+    "test:unit": "mocha ./src/{**/,/}*.test.ts"
+  },
+  "typings": "./lib/index.d.ts",
+  "version": "0.0.0"
+}

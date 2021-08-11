@@ -1,0 +1,103 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint", "eslint-plugin-import", "import"],
+  "root": true,
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "format": ["camelCase"],
+        "leadingUnderscore": "require",
+        "modifiers": ["protected"],
+        "selector": ["default"]
+      },
+      {
+        "format": ["camelCase"],
+        "modifiers": ["private"],
+        "prefix": ["__"],
+        "selector": ["default"]
+      },
+      {
+        "format": ["PascalCase", "camelCase"],
+        "selector": ["accessor"]
+      },
+      {
+        "format": ["PascalCase"],
+        "leadingUnderscore": "require",
+        "modifiers": ["protected"],
+        "selector": ["accessor"]
+      },
+      {
+        "format": ["PascalCase"],
+        "modifiers": ["private"],
+        "prefix": ["__"],
+        "selector": ["accessor"]
+      },
+      {
+        "format": ["PascalCase"],
+        "selector": ["enum"]
+      },
+      {
+        "format": ["UPPER_CASE"],
+        "selector": ["enumMember"]
+      }
+    ],
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "arrow-parens": "error",
+    "import/namespace": [
+      "error",
+      {
+        "allowComputed": true
+      }
+    ],
+    "import/newline-after-import": "error",
+    "import/no-unresolved": "off",
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "caseInsensitive": false,
+          "order": "asc"
+        },
+        "groups": [["index", "sibling", "parent", "internal", "external", "builtin", "object"]],
+        "newlines-between": "always"
+      }
+    ],
+    "no-console": "error",
+    "no-duplicate-imports": "error",
+    "prefer-template": "error",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true,
+        "avoidEscape": true
+      }
+    ],
+    "semi": ["error", "never"],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+version: v1.0
+name: Prod Deploy
+agent:
+  machine:
+    type: e1-standard-2
+
+  containers:
+    - name: main
+      image: 'registry.semaphoreci.com/node:14'
+blocks:
+  - name: Deploy to Production
+    task:
+      secrets:
+        - name: bc-git-secret
+        - name: bc-npm-secret
+        - name: bc-msh-test-contractor-secret
+      jobs:
+        - name: Deploy
+          commands:
+            - cache restore bc-msh-test-contractor-version-$SEMAPHORE_GIT_SHA
+            - export $(cat version.txt)
+            - rm version.txt
+            - checkout
+            - git remote rm origin
+            - git remote add origin https://$GH_USER:$GH_TOKEN@github.com/beecode-rs/msh-test-contractor.git
+            - git checkout tags/v$VERSION -b tmp-prod-branch
+            - npm ci
+            - npm run build
+            - git tag v$VERSION-prod && git push origin --tags
+            - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
+            - npm config set unsafe-perm true
+            - npm publish --access public
+    skip:
+      when: branch != 'main'

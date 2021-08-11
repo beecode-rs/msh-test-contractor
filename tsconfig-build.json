@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["./node_modules", "./lib", "./.idea", "./.semaphore", "./resource", "./src/test"]
+}

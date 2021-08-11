@@ -1,0 +1,26 @@
+{
+  "cache": false,
+  "check-coverage": false,
+  "extends": "@istanbuljs/nyc-config-typescript",
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    ".base-frame-tm/**",
+    ".idea/**",
+    "lib/**",
+    "node_modules/**",
+    "resource/**",
+    "**/*.d.ts",
+    "**/*.test.ts",
+    "src/test/**/*.ts"
+  ],
+  "sourceMap": true,
+  "reporter": [
+    "html",
+    "text",
+    "text-summary"
+  ],
+  "all": true,
+  "instrument": true
+}

@@ -1,0 +1,8 @@
+.base-frame-tm
+.idea
+.nyc_output
+.semaphore
+coverage
+lib
+node_modules
+resource
