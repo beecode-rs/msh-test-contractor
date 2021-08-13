@@ -1,7 +1,9 @@
+import { Contract } from '../contract-type/contract'
+
 export default {
   subject: {
     fn: 'logger._message',
-    module: require('./logger'),
+    source: require('./logger'),
   },
   mock: {
     jest: (jest: any): (() => void) => {
@@ -13,18 +15,18 @@ export default {
       }
     },
   },
-  contracts: [
+  terms: [
     {
-      inputParams: ['type', 'test-message'],
+      params: ['type', 'test-message'],
       result: '2020-01-01T00:00:00.000Z:TYPE:test-message',
     },
     {
-      inputParams: ['DEBUG', 'test-message'],
+      params: ['DEBUG', 'test-message'],
       result: '2020-01-01T00:00:00.000Z:DEBUG:test-message',
     },
     {
-      inputParams: ['error', 'test-message'],
+      params: ['error', 'test-message'],
       result: '2020-01-01T00:00:00.000Z:ERROR:test-message',
     },
   ],
-}
+} as Contract

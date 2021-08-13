@@ -1,12 +1,16 @@
+import { Contract } from '../contract-type/contract'
+import { SubjectSourceType } from '../contract-type/subject-source-type'
+
 export default {
   subject: {
     fn: 'dummyFunction.add',
-    module: require('./dummy-function'),
+    source: require('./dummy-function'),
+    sourceType: SubjectSourceType.MODULE,
   },
-  contracts: [
+  terms: [
     {
-      inputParams: [1, 2],
+      params: [1, 2],
       result: 3,
     },
   ],
-}
+} as Contract

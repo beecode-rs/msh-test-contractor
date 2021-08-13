@@ -1,5 +1,11 @@
+import { Contract } from '../contract-type/contract'
+
 export default {
-  subject: { object: 'Date' },
+  subject: {
+    fn: 'Date',
+    source: global,
+    isConstructor: true,
+  },
   mock: {
     jest: (jest: any, inputParams?: any[]): (() => void) => {
       const realDateNow = Date.bind(global.Date)
@@ -16,14 +22,14 @@ export default {
       }
     },
   },
-  contracts: [
+  terms: [
     {
-      inputParams: [],
+      params: [],
       result: new Date('2020-01-01'),
     },
     {
-      inputParams: ['2020-01-02'],
+      params: ['2020-01-02'],
       result: new Date('2020-01-02'),
     },
   ],
-}
+} as Contract
