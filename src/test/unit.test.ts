@@ -1,15 +1,21 @@
 import { contractor } from '..'
+import newDateContract from '../global-contract/new-date.contract'
+import dummyFunctionContract from './dummy-function.contract'
+import loggerContract from './logger.contract'
+// import setTimeoutContract from '../node-global-contract/set-timeout.contract'
 
 describe('new Date', () => {
-  contractor.unitTestJest('src/node-global-contract/new-date.contract')
+  contractor(newDateContract)
 })
-describe('dummyFunction.add', () => {
-  contractor.unitTestJest('src/test/dummy-function.contract')
+describe('dummyFunction', () => {
+  contractor(dummyFunctionContract.add)
+  contractor(dummyFunctionContract.sub)
 })
-describe('logger._message', () => {
-  contractor.unitTestJest('src/test/logger.contract')
+describe('logger', () => {
+  contractor(loggerContract.message)
+  contractor(loggerContract.debug)
 })
 
 // describe('setTimeout', () => {
-//   contractor.unitTestJest('src/node-global-contract/set-timeout.contract')
+//   contractor(setTimeoutContract)
 // })

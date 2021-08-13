@@ -1,4 +1,4 @@
-import { Contract } from '../contract-type/contract'
+import { Contract, ContractMockRevertFn } from '../contract-type/contract'
 
 export default {
   subject: {
@@ -7,18 +7,18 @@ export default {
     isConstructor: true,
   },
   mock: {
-    jest: (jest: any, inputParams?: any[]): (() => void) => {
-      const realDateNow = Date.bind(global.Date)
+    jest: (jest: any, params: any[] = []): ContractMockRevertFn => {
+      const realDate = Date.bind(global.Date)
 
-      const DATE_TO_USE = new Date((inputParams ?? [])[0] ?? '2020-01-01')
+      const mockedDate = new Date(params[0] ?? '2020-01-01')
       const _Date = Date
-      global.Date = jest.fn(() => DATE_TO_USE)
+      global.Date = jest.fn(() => mockedDate)
       global.Date.UTC = _Date.UTC
       global.Date.parse = _Date.parse
       global.Date.now = _Date.now
 
       return (): void => {
-        global.Date = realDateNow
+        global.Date = realDate
       }
     },
   },

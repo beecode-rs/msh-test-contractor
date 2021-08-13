@@ -1,16 +1,39 @@
-import { Contract } from '../contract-type/contract'
-import { SubjectSourceType } from '../contract-type/subject-source-type'
+import { Contract, ContractMockRevertFn } from '../contract-type/contract'
+import { mocker } from '../mocker'
+import loggerContract from './logger.contract'
 
 export default {
-  subject: {
-    fn: 'dummyFunction.add',
-    source: require('./dummy-function'),
-    sourceType: SubjectSourceType.MODULE,
-  },
-  terms: [
-    {
-      params: [1, 2],
-      result: 3,
+  add: {
+    subject: {
+      fn: 'add',
+      source: require('./dummy-function').dummyFunction,
     },
-  ],
-} as Contract
+    mock: {
+      jest: (_jest: any): ContractMockRevertFn => {
+        const restoreAll = [mocker(loggerContract.message)]
+
+        return (): void => {
+          restoreAll.forEach((um) => um())
+        }
+      },
+    },
+    terms: [
+      {
+        params: [1, 2],
+        result: 3,
+      },
+    ],
+  },
+  sub: {
+    subject: {
+      fn: 'sub',
+      source: require('./dummy-function').dummyFunction,
+    },
+    terms: [
+      {
+        params: [1, 2],
+        result: -1,
+      },
+    ],
+  },
+} as { [k: string]: Contract }
