@@ -10,7 +10,7 @@ const self = {
     },
     mock: {
       jest: (): ContractMockRevertFn => {
-        const restoreAll = [mocker(newDateContract)]
+        const restoreAll = [mocker(newDateContract.Date)]
         return (): void => {
           restoreAll.forEach((um) => um())
         }

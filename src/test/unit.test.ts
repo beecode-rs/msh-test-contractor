@@ -5,7 +5,7 @@ import loggerContract from './logger.contract'
 // import setTimeoutContract from '../node-global-contract/set-timeout.contract'
 
 describe('new Date', () => {
-  contractor(newDateContract)
+  contractor(newDateContract.Date)
 })
 describe('dummyFunction', () => {
   contractor(dummyFunctionContract.add)

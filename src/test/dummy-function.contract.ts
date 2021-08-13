@@ -10,7 +10,7 @@ export default {
     },
     mock: {
       jest: (_jest: any): ContractMockRevertFn => {
-        const restoreAll = [mocker(loggerContract.message)]
+        const restoreAll = [mocker(loggerContract.debug)]
 
         return (): void => {
           restoreAll.forEach((um) => um())
