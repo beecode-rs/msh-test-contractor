@@ -2,38 +2,36 @@ import { Contract, ContractMockRevertFn } from '../contract-type/contract'
 import { mocker } from '../mocker'
 import loggerContract from './logger.contract'
 
-export default {
-  add: {
-    subject: {
-      fn: 'add',
-      source: require('./dummy-function').dummyFunction,
-    },
-    mock: {
-      jest: (_jest: any): ContractMockRevertFn => {
-        const restoreAll = [mocker(loggerContract.debug)]
+const mock = {
+  jest: (): ContractMockRevertFn => {
+    const restoreAll = [mocker(loggerContract, 'debug')]
 
-        return (): void => {
-          restoreAll.forEach((um) => um())
-        }
-      },
-    },
-    terms: [
-      {
-        params: [1, 2],
-        result: 3,
-      },
-    ],
+    return (): void => {
+      restoreAll.forEach((um) => um())
+    }
   },
-  sub: {
-    subject: {
-      fn: 'sub',
-      source: require('./dummy-function').dummyFunction,
+}
+export default {
+  name: 'dummyFunction',
+  module: require('./dummy-function'),
+  fn: {
+    add: {
+      mock,
+      terms: [
+        {
+          params: [1, 2],
+          result: 3,
+        },
+      ],
     },
-    terms: [
-      {
-        params: [1, 2],
-        result: -1,
-      },
-    ],
+    sub: {
+      mock,
+      terms: [
+        {
+          params: [1, 2],
+          result: -1,
+        },
+      ],
+    },
   },
-} as { [k: string]: Contract }
+} as Contract

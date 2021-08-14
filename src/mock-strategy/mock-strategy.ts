@@ -1,4 +1,4 @@
 export interface MockStrategy {
-  mock(params: any[]): void
+  mock(options: { params?: any[] }): void
   restore(): void
 }

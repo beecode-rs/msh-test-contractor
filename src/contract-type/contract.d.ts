@@ -1,13 +1,12 @@
 export type Contract = {
-  subject: ContractSubject
-  terms: ContractTerm[]
-  mock?: ContractMock
+  name: string
+  module: any
+  fn: { [k: string]: ContractFunction }
 }
 
-export type ContractSubject = {
-  fn: string
-  source: any
-  isConstructor?: boolean
+export type ContractFunction = {
+  terms: ContractTerm[]
+  mock?: ContractMock
 }
 
 export type ContractTerm = {
@@ -20,5 +19,5 @@ export type ContractMock = {
   jest?: ContractMockJest
 }
 
-export type ContractMockJest = (jest: any, params: any[]) => ContractMockRevertFn
+export type ContractMockJest = (jest: any, options: { params?: any[] }) => ContractMockRevertFn
 export type ContractMockRevertFn = () => void

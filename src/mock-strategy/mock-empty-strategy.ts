@@ -1,7 +1,7 @@
 import { MockStrategy } from './mock-strategy'
 
 export class MockEmptyStrategy implements MockStrategy {
-  public mock(_params: any[]): void {
+  public mock(_options: { params?: any[] }): void {
     // dummy call
   }
 
