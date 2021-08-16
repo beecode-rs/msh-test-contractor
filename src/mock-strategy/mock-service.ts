@@ -1,4 +1,4 @@
-import { ContractMock } from '../contract-type/contract'
+import { ContractMock } from '../types/index'
 import { MockEmptyStrategy } from './mock-empty-strategy'
 import { MockJestStrategy } from './mock-jest-strategy'
 import { MockStrategy } from './mock-strategy'

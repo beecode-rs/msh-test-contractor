@@ -16,7 +16,8 @@
   "dependencies": {
     "@beecode/msh-node-log": "2.0.2",
     "deep-equal": "2.0.5",
-    "dotenv": "10.0.0"
+    "dotenv": "10.0.0",
+    "glob": "7.1.7"
   },
   "description": "",
   "devDependencies": {
@@ -32,6 +33,7 @@
     "@semantic-release/release-notes-generator": "9.0.3",
     "@types/deep-equal": "1.0.1",
     "@types/dotenv": "8.2.0",
+    "@types/glob": "7.1.4",
     "@types/jest": "27.0.0",
     "@types/node": "16.6.0",
     "@typescript-eslint/eslint-plugin": "4.29.1",

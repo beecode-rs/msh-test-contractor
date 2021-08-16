@@ -3,8 +3,16 @@ import { SubjectFunctionStrategy } from './subject-function-strategy'
 import { SubjectStrategy } from './subject-strategy'
 
 export const subjectService = {
-  getSubjectStrategyFromContractSubject: ({ name, module, fn }: { name: string; module: any; fn: string }): SubjectStrategy => {
-    if (fn === '_constructor') return new SubjectConstructorStrategy({ name, module })
-    return new SubjectFunctionStrategy({ name, module, fn })
+  getSubjectStrategyFromContractSubject: ({
+    module,
+    subjectName,
+    fnName,
+  }: {
+    module: any
+    subjectName: string
+    fnName: string
+  }): SubjectStrategy => {
+    if (fnName === '_constructor') return new SubjectConstructorStrategy({ module, subjectName })
+    return new SubjectFunctionStrategy({ module, subjectName, fnName })
   },
 }

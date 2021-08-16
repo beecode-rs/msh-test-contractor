@@ -1,9 +1,22 @@
-import { Contract, ContractMockRevertFn } from './contract-type/contract'
+import { Contract, ContractFunction, ContractMockRevertFn, PropType } from './types/index'
 import deepEqual from 'deep-equal'
 
-export const mocker = (contract: Contract, fn: string): ContractMockRevertFn => {
-  const { terms } = contract.fn[fn]
-  const spy = fn === '_constructor' ? jest.spyOn(contract.module, contract.name) : jest.spyOn(contract.module[contract.name], fn)
+export const mocker = <
+  M,
+  SN extends string,
+  // @ts-ignore
+  S extends PropType<M, SN>,
+  C extends Contract<M, SN, S>,
+  CFNK extends keyof PropType<C, 'fn'>
+>(
+  { subjectName, module, fn }: C,
+  fnName: CFNK
+): ContractMockRevertFn => {
+  // @ts-ignore
+  const { terms } = fn[fnName] as ContractFunction
+  const spy =
+    // @ts-ignore
+    fnName.toString() === '_constructor' ? jest.spyOn(module, subjectName) : jest.spyOn(module[subjectName], fnName.toString())
 
   spy.mockImplementation((...params: any[]) => {
     const foundTerm = terms.find((term) => deepEqual(term.params, params))

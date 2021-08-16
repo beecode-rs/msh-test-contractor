@@ -1,12 +1,11 @@
-import { functionService } from '../service/function-service'
 import { SubjectStrategy } from './subject-strategy'
 
 export class SubjectConstructorStrategy implements SubjectStrategy {
-  protected readonly _name: string
   protected readonly _module: any
-  constructor({ name, module }: { name: string; module: any }) {
-    this._name = name
+  protected readonly _subjectName: any
+  constructor({ module, subjectName }: { module: any; subjectName: string }) {
     this._module = module
+    this._subjectName = subjectName
   }
 
   public exec(params: any[]): any {
@@ -14,6 +13,6 @@ export class SubjectConstructorStrategy implements SubjectStrategy {
   }
 
   public fn(): any {
-    return functionService.extract({ module: this._module, fnPath: [this._name].join('.') })
+    return this._module[this._subjectName]
   }
 }
