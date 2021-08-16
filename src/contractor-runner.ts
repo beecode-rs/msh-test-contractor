@@ -6,8 +6,7 @@ export const contractorRunner = {
   contract: (contract: Contract<any, any, any>): void => {
     describe(contract.subjectName, () => {
       Object.keys(contract.fn).forEach((fnName: string) => {
-        // @ts-ignore
-        contractor(contract, fnName)
+        contractor(contract as any, fnName)
       })
     })
   },
