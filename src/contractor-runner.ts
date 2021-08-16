@@ -1,17 +1,9 @@
 import { contractor } from './contractor'
-import { Contract, PropType } from './types/index'
+import { Contract } from './types/index'
 import { glob } from 'glob'
 
 export const contractorRunner = {
-  contract: <
-    M,
-    SN extends string,
-    // @ts-ignore
-    S extends PropType<M, SN>,
-    C extends Contract<M, SN, S>
-  >(
-    contract: C
-  ): void => {
+  contract: (contract: Contract<any, any, any>): void => {
     describe(contract.subjectName, () => {
       Object.keys(contract.fn).forEach((fnName: string) => {
         // @ts-ignore

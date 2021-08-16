@@ -1,6 +1,10 @@
-export type PropType<T, P extends Extract<keyof T, string>> = T[P]
+export type PropType<T, P extends keyof T> = T[P]
 
-export type Contract<MODULE, SUBJECT_NAME extends string, SUBJECT extends PropType<MODULE, SUBJECT_NAME>> = {
+export type Contract<
+  MODULE,
+  SUBJECT_NAME extends Extract<keyof MODULE, string>,
+  SUBJECT extends PropType<MODULE, SUBJECT_NAME>
+> = {
   module: MODULE
   subjectName: SUBJECT_NAME
 } & {

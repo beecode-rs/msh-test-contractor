@@ -4,11 +4,9 @@ import { Contract, PropType } from './types/index'
 
 export const contractor = <
   M,
-  SN extends string,
-  // @ts-ignore
+  SN extends Extract<keyof M, string>,
   S extends PropType<M, SN>,
   C extends Contract<M, SN, S>,
-  // @ts-ignore
   CFNK extends Extract<keyof PropType<C, 'fn'>, string>
 >(
   { subjectName, module, fn }: C,

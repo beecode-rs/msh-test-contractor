@@ -1,7 +1,6 @@
 import { Contract, ContractFunctions, PropType } from './types/index'
 
-// @ts-ignore
-export const contractFactory = <M, SN extends string, S extends PropType<M, SN>>(
+export const contractFactory = <M, SN extends Extract<keyof M, string>, S extends PropType<M, SN>>(
   module: M,
   subjectName: SN,
   fn: Partial<ContractFunctions<S>>
