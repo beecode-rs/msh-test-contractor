@@ -1,4 +1,4 @@
-export type PropType<T, P extends keyof T> = T[P]
+export type PropType<T, P extends Extract<keyof T, string>> = T[P]
 
 export type Contract<MODULE, SUBJECT_NAME extends string, SUBJECT extends PropType<MODULE, SUBJECT_NAME>> = {
   module: MODULE
@@ -7,7 +7,7 @@ export type Contract<MODULE, SUBJECT_NAME extends string, SUBJECT extends PropTy
   fn: Partial<ContractFunctions<SUBJECT>>
 }
 
-export type ContractFunctions<SUBJECT> = { [key in keyof SUBJECT]: ContractFunction } & {
+export type ContractFunctions<SUBJECT> = { [key in Extract<keyof SUBJECT, string>]: ContractFunction } & {
   _constructor: ContractFunction
 }
 
