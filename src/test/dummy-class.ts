@@ -7,7 +7,7 @@ export class DummyClass {
     this.__b = b
   }
 
-  public sum(): number {
-    return this.__a + this.__b
+  public add(c: number): number {
+    return this.__a + this.__b + c
   }
 }

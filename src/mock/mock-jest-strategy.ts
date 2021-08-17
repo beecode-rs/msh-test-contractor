@@ -1,4 +1,4 @@
-import { ContractMockJest, ContractMockRevertFns } from '../types/index'
+import { ContractMockJest, ContractMockRevertFns } from '../types'
 import { MockStrategy } from './mock-strategy'
 
 export class MockJestStrategy implements MockStrategy {

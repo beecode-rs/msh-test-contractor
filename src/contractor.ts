@@ -1,6 +1,6 @@
-import { mockService } from './mock-strategy/mock-service'
+import { mockService } from './mock/mock-service'
 import { subjectService } from './subject/subject-service'
-import { Contract, PropType } from './types/index'
+import { Contract, PropType } from './types'
 
 export const contractor = <
   M,
@@ -9,21 +9,16 @@ export const contractor = <
   C extends Contract<M, SN, S>,
   CFNK extends Extract<keyof PropType<C, 'fn'>, string>
 >(
-  { subjectName, module, fn }: C,
+  contract: C,
   fnName: CFNK
 ): void => {
   describe(`${fnName} [contract]`, () => {
-    const { terms, mock } = fn[fnName]!
-    const subjectStrategy = subjectService.getSubjectStrategyFromContractSubject({
-      subjectName,
-      module,
-      fnName,
-    })
-    const mockStrategy = mockService.getMockStrategyFromContractMock(mock)
+    const { terms, mock } = contract.fn[fnName]!
+    const subjectStrategy = subjectService.subjectStrategyFromContract({ contract, fnName })
+    const mockStrategy = mockService.mockStrategyFromFunctionMock(mock)
 
     terms.forEach((term) => {
       const testTitle = `input: ${JSON.stringify(term.params)}   output: ${JSON.stringify(term.result)}`
-
       it(testTitle, () => {
         mockStrategy.mock({ params: term.params })
         expect(subjectStrategy.exec(term.params)).toEqual(term.result)

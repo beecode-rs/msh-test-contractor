@@ -1,5 +1,5 @@
 import { contractFactory } from '../contractor-factory'
-import { ContractMockRevertFns } from '../types/index'
+import { ContractMockRevertFns } from '../types'
 
 const selfContract = contractFactory(global, 'Date', {
   _constructor: {

@@ -1,7 +1,7 @@
 import { contractFactory } from '../contractor-factory'
 import dateContract from '../global-contract/date.contract'
 import { mocker } from '../mocker'
-import { ContractMockRevertFns } from '../types/index'
+import { ContractMockRevertFns } from '../types'
 
 const selfContract = contractFactory(require('./logger'), 'logger', {
   _message: {

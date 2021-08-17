@@ -1,10 +1,17 @@
-import { SubjectStrategy } from './subject-strategy'
+import { SubjectFomContract, SubjectStrategy } from './subject-strategy'
 
 export class SubjectFunctionStrategy implements SubjectStrategy {
   protected readonly _subjectName: string
   protected readonly _module: any
   protected readonly _fnName: string
-  constructor({ module, subjectName, fnName }: { module: any; subjectName: string; fnName: string }) {
+
+  constructor({
+    subjectFromContract: { module, subjectName },
+    fnName,
+  }: {
+    subjectFromContract: SubjectFomContract
+    fnName: string
+  }) {
     this._subjectName = subjectName
     this._module = module
     this._fnName = fnName

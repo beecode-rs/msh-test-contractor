@@ -1,9 +1,9 @@
 import { contractor } from './contractor'
-import { Contract } from './types/index'
+import { AnyContract } from './types'
 import { glob } from 'glob'
 
 export const contractorRunner = {
-  contract: (contract: Contract<any, any, any>): void => {
+  contract: (contract: AnyContract): void => {
     describe(contract.subjectName, () => {
       Object.keys(contract.fn).forEach((fnName: string) => {
         contractor(contract as any, fnName)
