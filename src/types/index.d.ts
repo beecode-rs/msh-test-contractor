@@ -25,6 +25,7 @@ export type ContractFunction = {
 export type ContractTerm = {
   params: any[]
   result: any
+  constructorParams?: any[]
 }
 
 // TODO define mock object

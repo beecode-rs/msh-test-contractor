@@ -12,6 +12,7 @@ export default contractFactory(require('./dummy-class'), 'DummyClass', {
   add: {
     terms: [
       {
+        constructorParams: [1, 2],
         params: [3],
         result: 6,
       },

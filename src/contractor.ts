@@ -12,16 +12,17 @@ export const contractor = <
   contract: C,
   fnName: CFNK
 ): void => {
-  describe(`${fnName} [contract]`, () => {
-    const { terms, mock } = contract.fn[fnName]!
-    const subjectStrategy = subjectService.subjectStrategyFromContract({ contract, fnName })
-    const mockStrategy = mockService.mockStrategyFromFunctionMock(mock)
+  const { terms, mock } = contract.fn[fnName]!
+  const mockStrategy = mockService.mockStrategyFromFunctionMock(mock)
 
+  describe(`${fnName} [contract]`, () => {
     terms.forEach((term) => {
+      const subjectStrategy = subjectService.subjectStrategyFromContract({ contract, fnName, term })
+
       const testTitle = `input: ${JSON.stringify(term.params)}   output: ${JSON.stringify(term.result)}`
       it(testTitle, () => {
         mockStrategy.mock({ params: term.params })
-        expect(subjectStrategy.exec(term.params)).toEqual(term.result)
+        expect(subjectStrategy.exec(term)).toEqual(term.result)
         mockStrategy.restore()
       })
     })
