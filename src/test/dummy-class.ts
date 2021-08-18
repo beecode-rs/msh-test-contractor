@@ -12,6 +12,9 @@ export class DummyClass {
   public add(c: number): number {
     return this.__a + this.__b + c
   }
+  public sub(c: number): number {
+    return this.__a + this.__b - c
+  }
 
   public externalAdd(c: number): number {
     return dummyFunction.add(this.__a, this.__b) + c

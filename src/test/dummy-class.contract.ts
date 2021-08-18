@@ -21,6 +21,15 @@ export default contractFactory(require('./dummy-class'), 'DummyClass', {
       },
     ],
   },
+  sub: {
+    terms: [
+      {
+        constructorParams: [1, 2],
+        params: [1],
+        result: 2,
+      },
+    ],
+  },
   externalAdd: {
     mock: {
       jest: (_jest: any): ContractMockRevertFns => {

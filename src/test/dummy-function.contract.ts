@@ -41,4 +41,17 @@ export default contractFactory(require('./dummy-function'), 'dummyFunction', {
       },
     ],
   },
+  callClassMultiFun: {
+    mock: {
+      jest: (_jest: any): ContractMockRevertFns => {
+        return [mocker(dummyClassContract, 'add'), mocker(dummyClassContract, 'sub')]
+      },
+    },
+    terms: [
+      {
+        params: [1, 2, 3, 1],
+        result: 8,
+      },
+    ],
+  },
 })

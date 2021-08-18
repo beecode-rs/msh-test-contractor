@@ -14,4 +14,8 @@ export const dummyFunction = {
     const someClass = new DummyClass(a, b)
     return someClass.add(c)
   },
+  callClassMultiFun: (a: number, b: number, c: number, d: number): number => {
+    const someClass = new DummyClass(a, b)
+    return someClass.add(c) + someClass.sub(d)
+  },
 }
