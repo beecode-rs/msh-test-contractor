@@ -1,3 +1,5 @@
+import { dummyFunction } from './dummy-function'
+
 export class DummyClass {
   private readonly __a: number
   private readonly __b: number
@@ -9,5 +11,9 @@ export class DummyClass {
 
   public add(c: number): number {
     return this.__a + this.__b + c
+  }
+
+  public externalAdd(c: number): number {
+    return dummyFunction.add(this.__a, this.__b) + c
   }
 }

@@ -1,4 +1,7 @@
 import { contractFactory } from '../contractor-factory'
+import { mocker } from '../mocker'
+import { ContractMockRevertFns } from '../types'
+import dummyFunctionContract from './dummy-function.contract'
 
 export default contractFactory(require('./dummy-class'), 'DummyClass', {
   _constructor: {
@@ -10,6 +13,20 @@ export default contractFactory(require('./dummy-class'), 'DummyClass', {
     ],
   },
   add: {
+    terms: [
+      {
+        constructorParams: [1, 2],
+        params: [3],
+        result: 6,
+      },
+    ],
+  },
+  externalAdd: {
+    mock: {
+      jest: (_jest: any): ContractMockRevertFns => {
+        return [mocker(dummyFunctionContract, 'add')]
+      },
+    },
     terms: [
       {
         constructorParams: [1, 2],

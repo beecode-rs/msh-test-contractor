@@ -6,7 +6,7 @@ import { SubjectFunctionStrategy } from './subject-function-strategy'
 import { SubjectFomContract, SubjectStrategy } from './subject-strategy'
 
 export const subjectService = {
-  subjectStrategyFromContract: ({
+  strategyFromContract: ({
     contract: { module, subjectName },
     fnName,
     term: { constructorParams },

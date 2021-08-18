@@ -4,7 +4,7 @@ import { MockJestStrategy } from './mock-jest-strategy'
 import { MockStrategy } from './mock-strategy'
 
 export const mockService = {
-  mockStrategyFromFunctionMock: (mock?: ContractMock): MockStrategy => {
+  strategyFromFunctionMock: (mock?: ContractMock): MockStrategy => {
     if (mock?.jest) return new MockJestStrategy(mock.jest)
     return new MockEmptyStrategy()
   },

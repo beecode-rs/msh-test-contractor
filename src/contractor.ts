@@ -13,11 +13,11 @@ export const contractor = <
   fnName: CFNK
 ): void => {
   const { terms, mock } = contract.fn[fnName]!
-  const mockStrategy = mockService.mockStrategyFromFunctionMock(mock)
+  const mockStrategy = mockService.strategyFromFunctionMock(mock)
 
   describe(`${fnName} [contract]`, () => {
     terms.forEach((term) => {
-      const subjectStrategy = subjectService.subjectStrategyFromContract({ contract, fnName, term })
+      const subjectStrategy = subjectService.strategyFromContract({ contract, fnName, term })
 
       const testTitle = `input: ${JSON.stringify(term.params)}   output: ${JSON.stringify(term.result)}`
       it(testTitle, () => {
