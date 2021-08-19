@@ -1,5 +1,5 @@
 import { ContractTerm } from '../types'
-import { SubjectFomContract, SubjectStrategy } from './subject-strategy'
+import { SubjectFromContract, SubjectStrategy } from './subject-strategy'
 
 export class SubjectFunctionStrategy implements SubjectStrategy {
   protected readonly _subjectName: string
@@ -10,7 +10,7 @@ export class SubjectFunctionStrategy implements SubjectStrategy {
     subjectFromContract: { module, subjectName },
     fnName,
   }: {
-    subjectFromContract: SubjectFomContract
+    subjectFromContract: SubjectFromContract
     fnName: string
   }) {
     this._subjectName = subjectName

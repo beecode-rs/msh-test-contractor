@@ -3,7 +3,7 @@ import { fnUtil } from '../util/fn-util'
 import { SubjectClassFunctionStrategy } from './subject-class-function-strategy'
 import { SubjectConstructorStrategy } from './subject-constructor-strategy'
 import { SubjectFunctionStrategy } from './subject-function-strategy'
-import { SubjectFomContract, SubjectStrategy } from './subject-strategy'
+import { SubjectFromContract, SubjectStrategy } from './subject-strategy'
 
 export const subjectService = {
   strategyFromContract: ({
@@ -15,7 +15,7 @@ export const subjectService = {
     fnName: string
     term: ContractTerm
   }): SubjectStrategy => {
-    const subjectFromContract = { module, subjectName } as SubjectFomContract
+    const subjectFromContract = { module, subjectName } as SubjectFromContract
     if (fnUtil.isConstructor(fnName)) return new SubjectConstructorStrategy({ subjectFromContract })
 
     if (constructorParams) return new SubjectClassFunctionStrategy({ subjectFromContract, constructorParams, fnName })

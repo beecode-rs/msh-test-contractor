@@ -1,4 +1,4 @@
-import { SubjectFomContract } from '../../subject/subject-strategy'
+import { SubjectFromContract } from '../../subject/subject-strategy'
 import { AnyContract, ContractTerm } from '../../types'
 import { fnUtil } from '../../util/fn-util'
 import { JestSpyClassFunctionStrategy } from './jest-spy-class-function-strategy'
@@ -9,13 +9,13 @@ import deepEqual from 'deep-equal'
 
 export const jestSpyService = {
   strategyFromContract: ({
-    contract: { module, subjectName, fn },
+    contract: { module, subjectName },
     fnName,
   }: {
     contract: AnyContract
     fnName: string
   }): JestSpyStrategy => {
-    const subjectFromContract = { module, subjectName } as SubjectFomContract
+    const subjectFromContract = { module, subjectName } as SubjectFromContract
     const constructorParams = fn[fnName]!.terms[0].constructorParams
 
     if (fnUtil.isConstructor(fnName)) return new JestSpyConstructorStrategy({ subjectFromContract })

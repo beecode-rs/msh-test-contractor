@@ -1,4 +1,4 @@
-import { SubjectFomContract } from '../../subject/subject-strategy'
+import { SubjectFromContract } from '../../subject/subject-strategy'
 import { ContractTerm } from '../../types'
 import { jestSpyService } from './jest-spy-service'
 import { JestSpyStrategy } from './jest-spy-strategy'
@@ -12,7 +12,7 @@ export class JestSpyClassFunctionStrategy implements JestSpyStrategy {
     subjectFromContract: { module, subjectName },
     fnName,
   }: {
-    subjectFromContract: SubjectFomContract
+    subjectFromContract: SubjectFromContract
     fnName: string
   }) {
     this._module = module
@@ -20,7 +20,7 @@ export class JestSpyClassFunctionStrategy implements JestSpyStrategy {
     this._fnName = fnName
   }
 
-  public spyOn(terms: ContractTerm[]): jest.SpyInstance {
+  public spyOnFunction(terms: ContractTerm[]): jest.SpyInstance {
     // TODO check what happens if we want to mock two functions of the same object
     return jest.spyOn(this._module, this._subjectName).mockImplementation(jestSpyService.classMock(terms, this._fnName))
   }

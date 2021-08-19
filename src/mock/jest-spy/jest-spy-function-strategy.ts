@@ -1,4 +1,4 @@
-import { SubjectFomContract } from '../../subject/subject-strategy'
+import { SubjectFromContract } from '../../subject/subject-strategy'
 import { ContractTerm } from '../../types'
 import { jestSpyService } from './jest-spy-service'
 import { JestSpyStrategy } from './jest-spy-strategy'
@@ -12,7 +12,7 @@ export class JestSpyFunctionStrategy implements JestSpyStrategy {
     subjectFromContract: { module, subjectName },
     fnName,
   }: {
-    subjectFromContract: SubjectFomContract
+    subjectFromContract: SubjectFromContract
     fnName: string
   }) {
     this._module = module
@@ -20,7 +20,7 @@ export class JestSpyFunctionStrategy implements JestSpyStrategy {
     this._fnName = fnName
   }
 
-  public spyOn(terms: ContractTerm[]): jest.SpyInstance {
+  public spyOnFunction(terms: ContractTerm[]): jest.SpyInstance {
     return jest.spyOn(this._module[this._subjectName], this._fnName).mockImplementation(jestSpyService.simpleMock(terms))
   }
 }

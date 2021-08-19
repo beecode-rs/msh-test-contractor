@@ -1,5 +1,5 @@
 import { ContractTerm } from '../types'
-import { SubjectFomContract, SubjectStrategy } from './subject-strategy'
+import { SubjectFromContract, SubjectStrategy } from './subject-strategy'
 
 export class SubjectClassFunctionStrategy implements SubjectStrategy {
   protected readonly _module: any
@@ -12,7 +12,7 @@ export class SubjectClassFunctionStrategy implements SubjectStrategy {
     constructorParams,
     fnName,
   }: {
-    subjectFromContract: SubjectFomContract
+    subjectFromContract: SubjectFromContract
     constructorParams: any[]
     fnName: string
   }) {

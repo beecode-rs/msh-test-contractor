@@ -1,11 +1,11 @@
 import { ContractTerm } from '../types'
-import { SubjectFomContract, SubjectStrategy } from './subject-strategy'
+import { SubjectFromContract, SubjectStrategy } from './subject-strategy'
 
 export class SubjectConstructorStrategy implements SubjectStrategy {
   protected readonly _module: any
   protected readonly _subjectName: string
 
-  constructor({ subjectFromContract: { module, subjectName } }: { subjectFromContract: SubjectFomContract }) {
+  constructor({ subjectFromContract: { module, subjectName } }: { subjectFromContract: SubjectFromContract }) {
     this._module = module
     this._subjectName = subjectName
   }

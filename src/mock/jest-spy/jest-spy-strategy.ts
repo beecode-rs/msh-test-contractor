@@ -1,5 +1,5 @@
 import { ContractTerm } from '../../types'
 
 export interface JestSpyStrategy {
-  spyOn(terms: ContractTerm[]): jest.SpyInstance
+  spyOnFunction(terms: ContractTerm[]): jest.SpyInstance
 }
