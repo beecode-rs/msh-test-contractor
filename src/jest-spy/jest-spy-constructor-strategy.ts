@@ -1,6 +1,4 @@
-import { SubjectFromContract } from '../../subject/subject-strategy'
-import { ContractTerm } from '../../types'
-import { jestSpyService } from './jest-spy-service'
+import { SubjectFromContract } from '../subject/subject-strategy'
 import { JestSpyStrategy } from './jest-spy-strategy'
 
 export class JestSpyConstructorStrategy implements JestSpyStrategy {
@@ -12,7 +10,8 @@ export class JestSpyConstructorStrategy implements JestSpyStrategy {
     this._module = module
   }
 
-  public spyOnFunction(terms: ContractTerm[]): jest.SpyInstance {
-    return jest.spyOn(this._module, this._subjectName).mockImplementation(jestSpyService.simpleMock(terms))
+  public mockImplementation(): (...args: any[]) => any {
+    // return jest.spyOn(this._module, this._subjectName).mockImplementation(jestSpyService.simpleMock(terms))
+    throw new Error('not implemented')
   }
 }

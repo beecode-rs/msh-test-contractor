@@ -7,7 +7,7 @@ const selfContract = contractFactory(require('./logger'), 'logger', {
   _message: {
     mock: {
       jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker(dateContract, '_constructor')]
+        return [mocker.contract(dateContract)]
       },
     },
     terms: [
@@ -36,7 +36,7 @@ const selfContract = contractFactory(require('./logger'), 'logger', {
   debug: {
     mock: {
       jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker(selfContract, '_message')]
+        return [mocker.function(selfContract, '_message')]
       },
     },
     terms: [

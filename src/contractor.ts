@@ -1,4 +1,4 @@
-import { mockService } from './mock/mock-service'
+import { mockService } from './contract-mock/mock-service'
 import { subjectService } from './subject/subject-service'
 import { Contract, PropType } from './types'
 

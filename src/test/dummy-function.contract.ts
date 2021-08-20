@@ -6,7 +6,7 @@ import loggerContract from './logger.contract'
 
 const mock = {
   jest: (_jest: any): ContractMockRevertFns => {
-    return [mocker(loggerContract, 'debug')]
+    return [mocker.contract(loggerContract)]
   },
 }
 export default contractFactory(require('./dummy-function'), 'dummyFunction', {
@@ -31,7 +31,7 @@ export default contractFactory(require('./dummy-function'), 'dummyFunction', {
   callClass: {
     mock: {
       jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker(dummyClassContract, 'add')]
+        return [mocker.contract(dummyClassContract)]
       },
     },
     terms: [
@@ -44,7 +44,7 @@ export default contractFactory(require('./dummy-function'), 'dummyFunction', {
   callClassMultiFun: {
     mock: {
       jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker(dummyClassContract, 'add'), mocker(dummyClassContract, 'sub')]
+        return [mocker.contract(dummyClassContract)]
       },
     },
     terms: [

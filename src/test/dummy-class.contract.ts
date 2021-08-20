@@ -33,7 +33,7 @@ export default contractFactory(require('./dummy-class'), 'DummyClass', {
   externalAdd: {
     mock: {
       jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker(dummyFunctionContract, 'add')]
+        return [mocker.contract(dummyFunctionContract)]
       },
     },
     terms: [
