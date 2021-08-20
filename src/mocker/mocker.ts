@@ -1,6 +1,6 @@
-import { mockerService } from './mocker/mocker-service'
-import { AnyContract, ContractMockRevertFn, PropType } from './types'
-import { fnUtil } from './util/fn-util'
+import { AnyContract, ContractMockRevertFn, PropType } from '../types/index'
+import { fnUtil } from '../util/fn-util'
+import { mockerService } from './mocker-service'
 import deepEqual from 'deep-equal'
 
 export const mocker = {

@@ -1,5 +1,5 @@
+import { AnyContract } from '../types/index'
 import { contractor } from './contractor'
-import { AnyContract } from './types'
 import { glob } from 'glob'
 
 export const contractorRunner = {

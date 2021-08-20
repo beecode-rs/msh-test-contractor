@@ -1,5 +1,5 @@
-import { contractFactory } from '../contractor-factory'
-import { mocker } from '../mocker'
+import { contractFactory } from '../contract/contractor-factory'
+import { mocker } from '../mocker/mocker'
 import { ContractMockRevertFns } from '../types'
 
 const selfContract = contractFactory(global, 'Date', {
