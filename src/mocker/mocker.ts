@@ -11,11 +11,11 @@ export const mocker = {
       mockerStrategy.mockRestore()
     }
   },
-  function: <C extends AnyContract, CFNK extends Extract<keyof PropType<C, 'fn'>, string>>(
-    { subjectName, module, fn }: C,
+  function: <C extends AnyContract, CFNK extends Extract<keyof PropType<C, 'fns'>, string>>(
+    { subjectName, module, fns }: C,
     fnName: CFNK
   ): ContractMockRevertFn => {
-    const { terms } = fn[fnName]!
+    const { terms } = fns[fnName]!
     if (!terms) throw Error(`Terms not found in function ${fnName} for module ${subjectName}`)
 
     // TODO cleanup

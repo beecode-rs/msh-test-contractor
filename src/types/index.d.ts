@@ -8,7 +8,7 @@ export type Contract<
   module: MODULE
   subjectName: SUBJECT_NAME
 } & {
-  fn: Partial<ContractFunctions<SUBJECT>>
+  fns: Partial<ContractFunctions<SUBJECT>>
 }
 
 export type AnyContract = Contract<any, any, any>

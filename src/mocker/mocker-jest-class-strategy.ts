@@ -24,11 +24,11 @@ export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance>
   }
 
   protected _mockClass(): (...args: any[]) => any {
-    const { fn } = this._contract
+    const { fns } = this._contract
 
     return (...mockParams: any[]): any => {
       const objectWithMockedFunctions = Object.fromEntries(
-        Object.entries(fn)
+        Object.entries(fns)
           .filter(([fnName]) => !fnUtil.isConstructor(fnName))
           .map(([fnName, ctFunc]) => {
             return [fnName, this._mockFunction({ fnName, terms: ctFunc!.terms, mockClassParams: mockParams })]
@@ -36,7 +36,7 @@ export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance>
       )
 
       // TODO should move above mockClass
-      const foundTerm = fn[SpecialFnName.CONSTRUCTOR]!.terms.find((term) => deepEqual(term.params, mockParams))
+      const foundTerm = fns[SpecialFnName.CONSTRUCTOR]!.terms.find((term) => deepEqual(term.params, mockParams))
       if (!foundTerm) throw Error(`Unknown contract for params ${JSON.stringify(mockParams)}`)
       if (foundTerm instanceof Error) throw foundTerm.result
 

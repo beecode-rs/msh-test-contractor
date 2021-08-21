@@ -1,3 +1,3 @@
-import { contractorRunner } from '../contract/contractor-runner'
+import { contractorTestRunner } from '../contract/contractor-test-runner'
 
-contractorRunner.dir('./src')
+contractorTestRunner.dir('./src')

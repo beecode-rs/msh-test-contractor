@@ -8,12 +8,12 @@ export const contractor = <
   SN extends Extract<keyof M, string>,
   S extends PropType<M, SN>,
   C extends Contract<M, SN, S>,
-  CFNK extends Extract<keyof PropType<C, 'fn'>, string>
+  CFNK extends Extract<keyof PropType<C, 'fns'>, string>
 >(
   contract: C,
   fnName: CFNK
 ): void => {
-  const { terms, mock } = contract.fn[fnName]!
+  const { terms, mock } = contract.fns[fnName]!
   const mockStrategy = mockService.strategyFromFunctionMock(mock)
 
   describe(contractorService.testDescription({ fnName }), () => {

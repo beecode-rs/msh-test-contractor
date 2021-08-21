@@ -2,10 +2,10 @@ import { AnyContract } from '../types/index'
 import { contractor } from './contractor'
 import { glob } from 'glob'
 
-export const contractorRunner = {
+export const contractorTestRunner = {
   contract: (contract: AnyContract): void => {
     describe(contract.subjectName, () => {
-      Object.keys(contract.fn).forEach((fnName: string) => {
+      Object.keys(contract.fns).forEach((fnName: string) => {
         contractor(contract as any, fnName)
       })
     })
@@ -14,7 +14,7 @@ export const contractorRunner = {
     describe(location, () => {
       glob.sync(`${location}/**/*.contract.ts`).forEach((file) => {
         const contract = require(file.slice(2, -3))
-        contractorRunner.contract(contract.default as any)
+        contractorTestRunner.contract(contract.default as any)
       })
     })
   },
