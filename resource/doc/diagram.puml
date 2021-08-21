@@ -1,0 +1,76 @@
+@startuml
+interface MockStrategy {
+    +mock(options: { params?: any[] | undefined; }): void
+    +restore(): void
+}
+class MockEmptyStrategy implements MockStrategy {
+    +mock(_options: { params?: any[] | undefined; }): void
+    +restore(): void
+}
+class MockJestStrategy implements MockStrategy {
+    #_restoreMockFn?: ContractMockRevertFns | undefined
+    #_jestMock?: ContractMockJest | undefined
+    +mock(__0: { params?: any[] | undefined; }): void
+    +restore(): void
+}
+enum SpecialFnName {
+    CONSTRUCTOR
+}
+interface SubjectStrategy {
+    +exec: (term: ContractTerm) => any
+    +fn: () => any
+}
+class SubjectClassFunctionStrategy implements SubjectStrategy {
+    #_module: any
+    #_subjectName: string
+    #_constructorParams: any[]
+    #_fnName: string
+    +exec(term: ContractTerm): any
+    +fn(): any
+}
+class SubjectConstructorStrategy implements SubjectStrategy {
+    #_module: any
+    #_subjectName: string
+    +exec(term: ContractTerm): any
+    +fn(): any
+}
+class SubjectFunctionStrategy implements SubjectStrategy {
+    #_subjectName: string
+    #_module: any
+    #_fnName: string
+    +exec(term: ContractTerm): any
+    +fn(): any
+}
+interface JestSpyStrategy {
+    +mockImplementation(): (...args: any[]) => any
+}
+class JestSpyFunctionStrategy implements JestSpyStrategy {
+    #_terms: ContractTerm[]
+    +mockImplementation(): (...args: any[]) => any
+}
+class JestSpyClassFunctionStrategy implements JestSpyStrategy {
+    #_terms: ContractTerm[]
+    #_mockClassParams: any[]
+    #_fnName: string
+    +mockImplementation(): (...args: any[]) => any
+}
+interface MockerStrategy<T> {
+    +mockRestore(): void
+    +contractSpy(): T
+}
+class MockerJestClassStrategy implements MockerStrategy {
+    #_spy?: jest.SpyInstance<any, any> | undefined
+    #_contract: AnyContract
+    +mockRestore(): void
+    +contractSpy(): jest.SpyInstance<any, any>
+    #_mockClass(): (...args: any[]) => any
+    #_mockFunction(__0: { fnName: string; terms: ContractTerm[]; mockClassParams: any[]; }): (...args: any[]) => any
+}
+class MockerJestObjectStrategy implements MockerStrategy {
+    #_spies: jest.SpyInstance<any, any>[]
+    #_contract: AnyContract
+    +mockRestore(): void
+    +contractSpy(): { [k: string]: (...args: any[]) => any; }
+    #_mockObject(): { [k: string]: (...args: any[]) => any; }
+}
+@enduml

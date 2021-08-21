@@ -16,6 +16,6 @@ export const jestSpyService = {
     if (!terms || terms.length === 0) throw new Error(`Terms missing from the [${fnName}] function`)
     const { constructorParams } = terms[0]
     if (mockClassParams && constructorParams) return new JestSpyClassFunctionStrategy({ fnName, terms, mockClassParams })
-    return new JestSpyFunctionStrategy({ fnName, terms })
+    return new JestSpyFunctionStrategy({ terms })
   },
 }

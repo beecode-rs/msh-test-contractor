@@ -38,7 +38,7 @@ export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance>
       // TODO should move above mockClass
       const foundTerm = fns[SpecialFnName.CONSTRUCTOR]!.terms.find((term) => deepEqual(term.params, mockParams))
       if (!foundTerm) throw Error(`Unknown contract for params ${JSON.stringify(mockParams)}`)
-      if (foundTerm instanceof Error) throw foundTerm.result
+      // if (foundTerm instanceof Error) throw foundTerm.result
 
       foundTerm.result
 

@@ -4,11 +4,9 @@ import deepEqual from 'deep-equal'
 
 export class JestSpyFunctionStrategy implements JestSpyStrategy {
   protected readonly _terms: ContractTerm[]
-  protected readonly _fnName: string
 
-  constructor({ terms, fnName }: { terms: ContractTerm[]; fnName: string }) {
+  constructor({ terms }: { terms: ContractTerm[] }) {
     this._terms = terms
-    this._fnName = fnName
   }
 
   public mockImplementation(): (...args: any[]) => any {

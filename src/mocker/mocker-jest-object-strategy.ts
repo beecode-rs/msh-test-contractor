@@ -1,15 +1,15 @@
-import { AnyContract, ContractTerm } from '../types/index'
+import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy'
+import { AnyContract } from '../types/index'
 import { MockerStrategy } from './mocker-strategy'
-import deepEqual from 'deep-equal'
 
 export class MockerJestObjectStrategy implements MockerStrategy<{ [k: string]: (...args: any[]) => any }> {
-  protected _spys: jest.SpyInstance[] = []
-
-  public mockRestore(): void {
-    this._spys.forEach((spy) => spy.mockRestore())
-  }
+  protected _spies: jest.SpyInstance[] = []
 
   constructor(protected _contract: AnyContract) {}
+
+  public mockRestore(): void {
+    this._spies.forEach((spy) => spy.mockRestore())
+  }
 
   public contractSpy(): { [k: string]: (...args: any[]) => any } {
     return this._mockObject()
@@ -20,20 +20,9 @@ export class MockerJestObjectStrategy implements MockerStrategy<{ [k: string]: (
 
     return Object.fromEntries(
       Object.entries(fns).map(([fnName, ctFunc]) => {
-        return [fnName, this._mockFunction({ terms: ctFunc!.terms })]
+        const jestSpyFunction = new JestSpyFunctionStrategy({ terms: ctFunc!.terms })
+        return [fnName, jestSpyFunction.mockImplementation()]
       })
     )
-  }
-
-  protected _mockFunction({ terms }: { terms: ContractTerm[] }): (...args: any[]) => any {
-    return (...mockParams: any[]): any => {
-      const foundTerm = terms.find((term) => deepEqual(term.params, mockParams))
-      if (!foundTerm) throw Error(`Unknown contract for params ${JSON.stringify(mockParams)}`)
-
-      // TODO what to do if we expect error to be return, should we throw it
-      // if (foundTerm instanceof Error) throw foundTerm.result
-
-      return foundTerm.result
-    }
   }
 }

@@ -79,6 +79,7 @@
     "commit": "git-cz",
     "coverage": "nyc npm run test:unit",
     "coverage:publish": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "doc:diagram": "npx tplant -i ./src/index.ts -p ./tsconfig-build.json -o resource/doc/diagram.puml",
     "doc:toc": "markdown-toc -i ./README.md",
     "eslint": "eslint . --ext .ts --quiet",
     "eslint:fix": "npm run eslint -- --fix",
