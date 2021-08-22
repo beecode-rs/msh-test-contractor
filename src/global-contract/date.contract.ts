@@ -1,4 +1,5 @@
 import { contractFactory } from '../contract/contractor-factory'
+import { SpecialFnName } from '../enum/special-fn-name'
 import { mocker } from '../mocker/mocker'
 import { ContractMockRevertFns } from '../types'
 
@@ -41,7 +42,7 @@ const selfContract = contractFactory(global, 'Date', {
   toISOString: {
     mock: {
       jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker.function(selfContract, '_constructor')]
+        return [mocker.function(selfContract, SpecialFnName.CONSTRUCTOR)]
       },
     },
     terms: [

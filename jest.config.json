@@ -1,13 +1,5 @@
 {
   "maxConcurrency": 1,
-  "moduleFileExtensions": ["js", "ts"],
   "preset": "ts-jest",
-  "roots": ["<rootDir>/src"],
-  "testEnvironment": "node",
-  "testMatch": ["<rootDir>/**/*.test.ts"],
-  "testTimeout": 20000,
-  "moduleNameMapper": {
-    "^src/(.*)$": "<rootDir>/src/$1"
-  },
-  "setupFiles": ["./src/index-test.ts"]
+  "testEnvironment": "node"
 }

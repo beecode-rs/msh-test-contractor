@@ -22,7 +22,8 @@ export const contractor = <
 
       it(contractorService.testName({ term }), () => {
         mockStrategy.mock({ params: term.params })
-        expect(subjectStrategy.exec(term)).toEqual(term.result)
+        const result = subjectStrategy.exec(term)
+        expect(result).toEqual(term.result)
         mockStrategy.restore()
       })
     })

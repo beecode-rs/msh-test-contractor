@@ -1,6 +1,7 @@
 import { AnyContract } from '../types/index'
 import { contractor } from './contractor'
 import { glob } from 'glob'
+import path from 'path'
 
 export const contractorTestRunner = {
   contract: (contract: AnyContract): void => {
@@ -13,7 +14,9 @@ export const contractorTestRunner = {
   dir: (location: string): void => {
     describe(location, () => {
       glob.sync(`${location}/**/*.contract.ts`).forEach((file) => {
-        const contract = require(file.slice(2, -3))
+        const modulePath = path.join(process.cwd(), file)
+        // console.log('contractorTestRunner.dir params:', { location, file, modulePath, cwd: process.cwd(), __dirname }) // eslint-disable-line no-console
+        const contract = require(modulePath)
         contractorTestRunner.contract(contract.default as any)
       })
     })
