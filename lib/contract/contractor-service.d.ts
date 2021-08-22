@@ -1,10 +1,10 @@
-import { ContractTerm } from '../types/index';
+import { ContractFnTerm } from '../types';
 export declare const contractorService: {
     testDescription: ({ fnName }: {
         fnName: string;
     }) => string;
     testName: ({ term: { params, result } }: {
-        term: ContractTerm;
+        term: ContractFnTerm;
     }) => string;
 };
 //# sourceMappingURL=contractor-service.d.ts.map

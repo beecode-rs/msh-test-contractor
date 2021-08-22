@@ -1,9 +1,14 @@
-import { Contract, ContractFunctions, PropType } from '../types/index'
+import { Contract, ContractFns, PropType } from '../types'
 
-export const contractFactory = <M, SN extends Extract<keyof M, string>, S extends PropType<M, SN>>(
+export const contractFactory = <
+  M,
+  SN extends Extract<keyof M, string>,
+  S extends PropType<M, SN>,
+  CFNS extends Partial<ContractFns<S>>
+>(
   module: M,
   subjectName: SN,
-  fns: Partial<ContractFunctions<S>>
+  fns: CFNS
 ): Contract<M, SN, S> => ({
   module,
   subjectName,

@@ -1,9 +1,6 @@
 import { contractFactory } from '../contract/contractor-factory'
 import { mocker } from '../mocker/mocker'
-import { ContractMockRevertFns } from '../types/index'
-// import { SpecialFnName } from '../enum/special-fn-name'
-// import { mocker } from '../mocker/mocker'
-// import { ContractMockRevertFns } from '../types/index'
+import { ContractMockRevertFns } from '../types'
 
 class DummySubject {
   a(_a: string): string {
@@ -45,8 +42,8 @@ const selfContract = contractFactory(require('./subject-constructor-strategy'), 
     terms: [
       {
         constructorParams: dummyConstructorParams(),
-        params: [],
-        result: DummySubject,
+        params: [{ params: [] }],
+        result: new DummySubject(),
       },
     ],
   },

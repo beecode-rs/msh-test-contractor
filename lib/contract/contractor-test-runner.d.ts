@@ -1,4 +1,4 @@
-import { AnyContract } from '../types/index';
+import { AnyContract } from '../types';
 export declare const contractorTestRunner: {
     contract: (contract: AnyContract) => void;
     dir: (location: string) => void;

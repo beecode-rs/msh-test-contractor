@@ -1,10 +1,10 @@
-import { AnyContract, ContractTerm } from '../types';
+import { AnyContract, ContractFnTerm } from '../types';
 import { SubjectStrategy } from './subject-strategy';
 export declare const subjectService: {
     strategyFromContract: ({ contract: { module, subjectName }, fnName, term: { constructorParams }, }: {
         contract: AnyContract;
         fnName: string;
-        term: ContractTerm;
+        term: ContractFnTerm;
     }) => SubjectStrategy;
 };
 //# sourceMappingURL=subject-service.d.ts.map

@@ -1,4 +1,4 @@
-import { AnyContract } from '../types/index'
+import { AnyContract } from '../types'
 import { typeUtil } from '../util/type-util'
 import { MockerJestClassStrategy } from './mocker-jest-class-strategy'
 import { MockerJestObjectStrategy } from './mocker-jest-object-strategy'

@@ -1,5 +1,5 @@
 import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy'
-import { AnyContract, ContractMockRevertFn, PropType } from '../types/index'
+import { AnyContract, ContractFn, ContractMockRevertFn, PropType } from '../types'
 import { fnUtil } from '../util/fn-util'
 import { mockerService } from './mocker-service'
 
@@ -16,7 +16,7 @@ export const mocker = {
     fnName: CFNK
   ): ContractMockRevertFn => {
     const { module, subjectName, fns } = contract
-    const { terms } = fns[fnName]!
+    const { terms } = fns[fnName]! as ContractFn
 
     const spy = fnUtil.isConstructor(fnName)
       ? jest.spyOn(module, subjectName)

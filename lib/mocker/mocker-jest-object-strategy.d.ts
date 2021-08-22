@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import { AnyContract } from '../types/index';
+import { AnyContract } from '../types';
 import { MockerStrategy } from './mocker-strategy';
 export declare class MockerJestObjectStrategy implements MockerStrategy<{
     [k: string]: (...args: any[]) => any;

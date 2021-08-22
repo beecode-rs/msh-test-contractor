@@ -1,4 +1,4 @@
-import { ContractTerm } from '../types';
+import { ContractFnTerm } from '../types';
 import { SubjectFromContract, SubjectStrategy } from './subject-strategy';
 export declare class SubjectConstructorStrategy implements SubjectStrategy {
     protected readonly _module: any;
@@ -6,7 +6,7 @@ export declare class SubjectConstructorStrategy implements SubjectStrategy {
     constructor({ subjectFromContract: { module, subjectName } }: {
         subjectFromContract: SubjectFromContract;
     });
-    exec(term: ContractTerm): any;
+    exec(term: ContractFnTerm): any;
     fn(): any;
 }
 //# sourceMappingURL=subject-constructor-strategy.d.ts.map

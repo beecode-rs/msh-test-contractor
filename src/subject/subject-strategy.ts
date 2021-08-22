@@ -1,8 +1,8 @@
-import { AnyContract, ContractTerm } from '../types'
+import { AnyContract, ContractFnTerm } from '../types'
 
 export type SubjectFromContract = Pick<AnyContract, 'subjectName' | 'module'>
 
 export interface SubjectStrategy {
-  exec: (term: ContractTerm) => any
+  exec: (term: ContractFnTerm) => any
   fn: () => any
 }

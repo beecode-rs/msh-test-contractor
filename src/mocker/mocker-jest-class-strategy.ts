@@ -1,6 +1,6 @@
 import { SpecialFnName } from '../enum/special-fn-name'
 import { jestSpyService } from '../jest-spy/jest-spy-service'
-import { AnyContract, ContractTerm } from '../types'
+import { AnyContract, ContractFnTerm } from '../types'
 import { fnUtil } from '../util/fn-util'
 import { MockerStrategy } from './mocker-strategy'
 import deepEqual from 'deep-equal'
@@ -52,7 +52,7 @@ export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance>
     mockClassParams,
   }: {
     fnName: string
-    terms: ContractTerm[]
+    terms: ContractFnTerm[]
     mockClassParams: any[]
   }): (...args: any[]) => any {
     const jestSpyStrategy = jestSpyService.strategyFromTerms({ terms, fnName, mockClassParams })

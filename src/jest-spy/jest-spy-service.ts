@@ -1,4 +1,4 @@
-import { ContractTerm } from '../types/index'
+import { ContractFnTerm } from '../types'
 import { JestSpyClassFunctionStrategy } from './jest-spy-class-function-strategy'
 import { JestSpyFunctionStrategy } from './jest-spy-function-strategy'
 import { JestSpyStrategy } from './jest-spy-strategy'
@@ -9,7 +9,7 @@ export const jestSpyService = {
     fnName,
     mockClassParams,
   }: {
-    terms: ContractTerm[]
+    terms: ContractFnTerm[]
     fnName: string
     mockClassParams?: any[]
   }): JestSpyStrategy => {

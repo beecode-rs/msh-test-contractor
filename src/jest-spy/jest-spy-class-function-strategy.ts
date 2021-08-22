@@ -1,13 +1,13 @@
-import { ContractTerm } from '../types/index'
+import { ContractFnTerm } from '../types'
 import { JestSpyStrategy } from './jest-spy-strategy'
 import deepEqual from 'deep-equal'
 
 export class JestSpyClassFunctionStrategy implements JestSpyStrategy {
-  protected readonly _terms: ContractTerm[]
+  protected readonly _terms: ContractFnTerm[]
   protected readonly _mockClassParams: any[]
   protected readonly _fnName: string
 
-  constructor({ terms, fnName, mockClassParams }: { terms: ContractTerm[]; fnName: string; mockClassParams: any[] }) {
+  constructor({ terms, fnName, mockClassParams }: { terms: ContractFnTerm[]; fnName: string; mockClassParams: any[] }) {
     this._terms = terms
     this._mockClassParams = mockClassParams
     this._fnName = fnName

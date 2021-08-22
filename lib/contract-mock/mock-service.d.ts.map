@@ -1,1 +1,0 @@
-{"version":3,"file":"mock-service.d.ts","sourceRoot":"","sources":["../../src/contract-mock/mock-service.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,UAAU,CAAA;AAGvC,OAAO,EAAE,YAAY,EAAE,MAAM,iBAAiB,CAAA;AAE9C,eAAO,MAAM,WAAW;mEAC2B,YAAY;CAI9D,CAAA"}

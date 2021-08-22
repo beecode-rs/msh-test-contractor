@@ -1,9 +1,9 @@
-import { ContractTerm } from '../types/index';
+import { ContractFnTerm } from '../types';
 import { JestSpyStrategy } from './jest-spy-strategy';
 export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
-    protected readonly _terms: ContractTerm[];
+    protected readonly _terms: ContractFnTerm[];
     constructor({ terms }: {
-        terms: ContractTerm[];
+        terms: ContractFnTerm[];
     });
     mockImplementation(): (...args: any[]) => any;
 }
