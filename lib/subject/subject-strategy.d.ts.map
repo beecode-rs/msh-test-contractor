@@ -1,0 +1,1 @@
+{"version":3,"file":"subject-strategy.d.ts","sourceRoot":"","sources":["../../src/subject/subject-strategy.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAE,YAAY,EAAE,MAAM,UAAU,CAAA;AAEpD,oBAAY,mBAAmB,GAAG,IAAI,CAAC,WAAW,EAAE,aAAa,GAAG,QAAQ,CAAC,CAAA;AAE7E,MAAM,WAAW,eAAe;IAC9B,IAAI,EAAE,CAAC,IAAI,EAAE,YAAY,KAAK,GAAG,CAAA;IACjC,EAAE,EAAE,MAAM,GAAG,CAAA;CACd"}

@@ -4,7 +4,7 @@
   "preset": "ts-jest",
   "roots": ["<rootDir>/src"],
   "testEnvironment": "node",
-  "testMatch": ["<rootDir>/src/**/*.test.ts"],
+  "testMatch": ["<rootDir>/**/*.test.ts"],
   "testTimeout": 20000,
   "moduleNameMapper": {
     "^src/(.*)$": "<rootDir>/src/$1"

@@ -1,0 +1,3 @@
+import { Contract, ContractFunctions, PropType } from '../types/index';
+export declare const contractFactory: <M, SN extends Extract<keyof M, string>, S extends PropType<M, SN>>(module: M, subjectName: SN, fns: Partial<ContractFunctions<S>>) => Contract<M, SN, S>;
+//# sourceMappingURL=contractor-factory.d.ts.map

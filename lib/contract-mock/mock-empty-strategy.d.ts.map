@@ -1,0 +1,1 @@
+{"version":3,"file":"mock-empty-strategy.d.ts","sourceRoot":"","sources":["../../src/contract-mock/mock-empty-strategy.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,iBAAiB,CAAA;AAE9C,qBAAa,iBAAkB,YAAW,YAAY;IAC7C,IAAI,CAAC,QAAQ,EAAE;QAAE,MAAM,CAAC,EAAE,GAAG,EAAE,CAAA;KAAE,GAAG,IAAI;IAIxC,OAAO,IAAI,IAAI;CAGvB"}

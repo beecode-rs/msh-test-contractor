@@ -1,5 +1,5 @@
-import { contractorTestRunner } from '../contract/contractor-test-runner'
-import dateContract from '../global-contract/date.contract'
+import { contractorTestRunner } from '../src/contract/contractor-test-runner'
+import dateContract from '../src/global-contract/date.contract'
 import dummyFunctionContract from './dummy-function.contract'
 import loggerContract from './logger.contract'
 

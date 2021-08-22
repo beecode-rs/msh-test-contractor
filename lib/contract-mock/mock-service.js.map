@@ -1,0 +1,1 @@
+{"version":3,"file":"mock-service.js","sourceRoot":"","sources":["../../src/contract-mock/mock-service.ts"],"names":[],"mappings":";;;AACA,+DAAyD;AACzD,6DAAuD;AAG1C,QAAA,WAAW,GAAG;IACzB,wBAAwB,EAAE,CAAC,IAAmB,EAAgB,EAAE;QAC9D,IAAI,IAAI,aAAJ,IAAI,uBAAJ,IAAI,CAAE,IAAI;YAAE,OAAO,IAAI,qCAAgB,CAAC,IAAI,CAAC,IAAI,CAAC,CAAA;QACtD,OAAO,IAAI,uCAAiB,EAAE,CAAA;IAChC,CAAC;CACF,CAAA"}

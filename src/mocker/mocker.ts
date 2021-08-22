@@ -16,10 +16,14 @@ export const mocker = {
     fnName: CFNK
   ): ContractMockRevertFn => {
     const { module, subjectName, fns } = contract
-
-    const spy = fnUtil.isConstructor(fnName) ? jest.spyOn(module, subjectName) : jest.spyOn(module[subjectName], fnName)
-
     const { terms } = fns[fnName]!
+
+    const spy = fnUtil.isConstructor(fnName)
+      ? jest.spyOn(module, subjectName)
+      : terms[0].constructorParams // if function belongs to class mock prototype
+      ? jest.spyOn(module[subjectName].prototype, fnName)
+      : jest.spyOn(module[subjectName], fnName)
+
     if (!terms) throw Error(`Terms not found in function ${fnName} for module ${subjectName}`)
 
     const jestSpyFunction = new JestSpyFunctionStrategy({ terms })
