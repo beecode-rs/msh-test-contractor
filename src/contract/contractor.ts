@@ -18,10 +18,12 @@ export const contractor = <
 
   describe(contractorService.testDescription({ fnName }), () => {
     terms.forEach((term) => {
-      const subjectStrategy = subjectService.strategyFromContract({ contract, fnName, term })
+      const subjectStrategy = subjectService.strategyFromContractFunction({ contract, fnName, term })
 
       it(contractorService.testName({ term }), () => {
         mockStrategy.mock({ params: term.params })
+        // TODO create strategy for checking the result (error, equal)
+        // TODO create wrapper if function returns promise
         const result = subjectStrategy.exec(term)
         expect(result).toEqual(term.result)
         mockStrategy.restore()

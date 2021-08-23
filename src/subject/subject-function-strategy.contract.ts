@@ -10,7 +10,7 @@ const dummyModule = {
 const dummySubjectName = 'dummySubject'
 const dummyFnName = 'a'
 
-const dummyConstructorParams = (): any => {
+const dummyConstructorParamsFactory = (): any[] => {
   return [{ subjectFromContract: { module: dummyModule, subjectName: dummySubjectName }, fnName: dummyFnName }]
 }
 
@@ -18,7 +18,7 @@ const selfContract = contractFactory(require('./subject-function-strategy'), 'Su
   _constructor: {
     terms: [
       {
-        params: dummyConstructorParams(),
+        params: dummyConstructorParamsFactory(),
         result: { _subjectName: dummySubjectName, _module: dummyModule, _fnName: dummyFnName },
       },
     ],
@@ -26,7 +26,7 @@ const selfContract = contractFactory(require('./subject-function-strategy'), 'Su
   fn: {
     terms: [
       {
-        constructorParams: dummyConstructorParams(),
+        constructorParams: dummyConstructorParamsFactory(),
         params: [],
         result: dummyModule.dummySubject.a,
       },
@@ -40,7 +40,7 @@ const selfContract = contractFactory(require('./subject-function-strategy'), 'Su
     },
     terms: [
       {
-        constructorParams: dummyConstructorParams(),
+        constructorParams: dummyConstructorParamsFactory(),
         params: [{ params: ['testParam'] }],
         result: 'testParam',
       },
