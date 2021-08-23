@@ -10,7 +10,7 @@ export class JestSpyConstructorStrategy implements JestSpyStrategy {
     this._module = module
   }
 
-  public mockImplementation(): (...args: any[]) => any {
+  public mockImplementationFactory(): (...args: any[]) => any {
     // return jest.spyOn(this._module, this._subjectName).mockImplementation(jestSpyService.simpleMock(terms))
     throw new Error('not implemented')
   }

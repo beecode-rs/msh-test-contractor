@@ -16,12 +16,10 @@ export class MockerJestObjectStrategy implements MockerStrategy<{ [k: string]: (
   }
 
   protected _mockObject(): { [k: string]: (...args: any[]) => any } {
-    const { fns } = this._contract
-
     return Object.fromEntries(
-      Object.entries(fns).map(([fnName, ctFunc]) => {
+      Object.entries(this._contract.fns).map(([fnName, ctFunc]) => {
         const jestSpyFunction = new JestSpyFunctionStrategy({ terms: ctFunc!.terms })
-        return [fnName, jestSpyFunction.mockImplementation()]
+        return [fnName, jestSpyFunction.mockImplementationFactory()]
       })
     )
   }

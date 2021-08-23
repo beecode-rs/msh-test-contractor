@@ -27,7 +27,7 @@ export const mocker = {
     if (!terms) throw Error(`Terms not found in function ${fnName} for module ${subjectName}`)
 
     const jestSpyFunction = new JestSpyFunctionStrategy({ terms })
-    spy.mockImplementation(jestSpyFunction.mockImplementation())
+    spy.mockImplementation(jestSpyFunction.mockImplementationFactory())
 
     return (): void => {
       spy.mockRestore()
