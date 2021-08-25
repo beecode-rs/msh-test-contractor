@@ -1,7 +1,14 @@
 import { contractFactory } from '../contract/contractor-factory'
+import { mocker } from '../mocker/mocker'
+import { ContractMockRevertFns } from '../types'
 
-export default contractFactory(require('./type-util'), 'typeUtil', {
+const selfContract = contractFactory(require('./type-util'), 'typeUtil', {
   isClass: {
+    mock: {
+      jest: (_jest: any): ContractMockRevertFns => {
+        return [mocker.function(selfContract, 'isObject'), mocker.function(selfContract, 'isFunction')]
+      },
+    },
     terms: [
       {
         params: [Date],
@@ -29,4 +36,26 @@ export default contractFactory(require('./type-util'), 'typeUtil', {
       },
     ],
   },
+  isFunction: {
+    terms: [
+      {
+        params: [Date],
+        result: true,
+      },
+      {
+        params: [{}],
+        result: false,
+      },
+      {
+        params: [
+          (): void => {
+            return
+          },
+        ],
+        result: true,
+      },
+    ],
+  },
 })
+
+export default selfContract

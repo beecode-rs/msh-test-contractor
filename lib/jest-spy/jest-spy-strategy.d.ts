@@ -1,4 +1,4 @@
 export interface JestSpyStrategy {
-    mockImplementation(): (...args: any[]) => any;
+    mockImplementationFactory(): (...args: any[]) => any;
 }
 //# sourceMappingURL=jest-spy-strategy.d.ts.map

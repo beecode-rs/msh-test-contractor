@@ -8,8 +8,7 @@ export declare class MockerJestClassStrategy implements MockerStrategy<jest.SpyI
     mockRestore(): void;
     contractSpy(): jest.SpyInstance;
     protected _mockClass(): (...args: any[]) => any;
-    protected _mockFunction({ fnName, terms, mockClassParams, }: {
-        fnName: string;
+    protected _mockFunction({ terms, mockClassParams, }: {
         terms: ContractFnTerm[];
         mockClassParams: any[];
     }): (...args: any[]) => any;

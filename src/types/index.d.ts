@@ -26,6 +26,7 @@ export type ContractFnTerm = {
   params: any[]
   result: any
   constructorParams?: any[]
+  returnFnParams?: any[]
 }
 
 // TODO define mock object

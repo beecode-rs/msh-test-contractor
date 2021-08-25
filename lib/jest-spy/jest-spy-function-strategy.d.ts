@@ -5,6 +5,6 @@ export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
     constructor({ terms }: {
         terms: ContractFnTerm[];
     });
-    mockImplementation(): (...args: any[]) => any;
+    mockImplementationFactory(): (...args: any[]) => any;
 }
 //# sourceMappingURL=jest-spy-function-strategy.d.ts.map

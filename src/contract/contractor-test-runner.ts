@@ -11,14 +11,16 @@ export const contractorTestRunner = {
       })
     })
   },
-  dir: (location: string): void => {
-    describe(location, () => {
-      glob.sync(`${location}/**/*.contract.ts`).forEach((file) => {
-        const modulePath = path.join(process.cwd(), file)
-        // console.log('contractorTestRunner.dir params:', { location, file, modulePath, cwd: process.cwd(), __dirname }) // eslint-disable-line no-console
-        const contract = require(modulePath)
-        contractorTestRunner.contract(contract.default as any)
-      })
-    })
+  dir: (dirLocation: string): void => {
+    describe(dirLocation, () => glob.sync(`${dirLocation}/**/*.contract.ts`).forEach(contractorTestRunner._file))
+  },
+  file: (fileLocation: string): void => {
+    describe(fileLocation, () => contractorTestRunner._file(fileLocation))
+  },
+  _file: (fileLocation: string): void => {
+    const modulePath = path.join(process.cwd(), fileLocation)
+    // console.log('contractorTestRunner.dir params:', { fileLocation, modulePath, cwd: process.cwd(), __dirname }) // eslint-disable-line no-console
+    const contract = require(modulePath)
+    contractorTestRunner.contract(contract.default as any)
   },
 }

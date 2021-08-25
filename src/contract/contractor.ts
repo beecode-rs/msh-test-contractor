@@ -25,7 +25,11 @@ export const contractor = <
         // TODO create strategy for checking the result (error, equal)
         // TODO create wrapper if function returns promise
         const result = subjectStrategy.exec(term)
-        expect(result).toEqual(term.result)
+        if (term.returnFnParams) {
+          expect(result(...term.returnFnParams)).toEqual(term.result)
+        } else {
+          expect(result).toEqual(term.result)
+        }
         mockStrategy.restore()
       })
     })
