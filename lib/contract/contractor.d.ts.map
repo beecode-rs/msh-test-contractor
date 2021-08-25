@@ -1,1 +1,1 @@
-{"version":3,"file":"contractor.d.ts","sourceRoot":"","sources":["../../src/contract/contractor.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,QAAQ,EAAc,QAAQ,EAAE,MAAM,UAAU,CAAA;AAGzD,eAAO,MAAM,UAAU,0LASpB,IAsBF,CAAA"}
+{"version":3,"file":"contractor.d.ts","sourceRoot":"","sources":["../../src/contract/contractor.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,QAAQ,EAAc,QAAQ,EAAE,MAAM,UAAU,CAAA;AAIzD,eAAO,MAAM,UAAU,0LASpB,IAiBF,CAAA"}

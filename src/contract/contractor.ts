@@ -2,6 +2,7 @@ import { contractMockService } from '../contract-mock/contract-mock-service'
 import { subjectService } from '../subject/subject-service'
 import { Contract, ContractFn, PropType } from '../types'
 import { contractorService } from './contractor-service'
+import { contractExpectService } from './expect/contract-expect-service'
 
 export const contractor = <
   M,
@@ -22,14 +23,9 @@ export const contractor = <
 
       it(contractorService.testName({ term }), () => {
         mockStrategy.mock({ params: term.params })
-        // TODO create strategy for checking the result (error, equal)
-        // TODO create wrapper if function returns promise
         const result = subjectStrategy.exec(term)
-        if (term.returnFnParams) {
-          expect(result(...term.returnFnParams)).toEqual(term.result)
-        } else {
-          expect(result).toEqual(term.result)
-        }
+        const expectStrategy = contractExpectService.fromTerm({ result, term })
+        expectStrategy.test()
         mockStrategy.restore()
       })
     })
