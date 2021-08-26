@@ -99,5 +99,5 @@
     "test:unit": "npm run test:unit:contract && npm run test:unit:contract:self"
   },
   "typings": "./lib/index.d.ts",
-  "version": "0.0.0"
+  "version": "1.0.0"
 }
