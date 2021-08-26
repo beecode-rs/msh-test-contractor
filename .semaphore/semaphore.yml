@@ -27,7 +27,7 @@ blocks:
             - npm run prettier
             - npm run coverage
             - 'npm run coverage:publish'
-            - npm run test:int
+            - npm run test
   - name: Bump Version
     task:
       secrets:

@@ -93,8 +93,10 @@
     "semantic-release": "semantic-release",
     "semantic-release:check": "npm run semantic-release -- --dry-run --no-ci",
     "test": "npm run test:unit && npm run test:int",
+    "test:unit:contract": "jest --config=./test/jest.config.json",
+    "test:unit:contract:self": "jest ./unit.test.js",
     "test:int": "#mocha ./src/test/{**/,/}*.ts",
-    "test:unit": "jest"
+    "test:unit": "npm run test:unit:contract && npm run test:unit:contract:self"
   },
   "typings": "./lib/index.d.ts",
   "version": "0.0.0"
