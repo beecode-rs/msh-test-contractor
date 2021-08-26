@@ -1,4 +1,5 @@
 {
+  "collectCoverage": true,
   "maxConcurrency": 1,
   "preset": "ts-jest",
   "testEnvironment": "node"
