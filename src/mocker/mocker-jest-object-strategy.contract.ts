@@ -7,7 +7,7 @@ export default contractFactory(require('./mocker-jest-object-strategy'), 'Mocker
     terms: [
       {
         params: [dummyContract],
-        result: { _contract: dummyContract },
+        result: { _contract: dummyContract, _spies: [] },
       },
     ],
   },
