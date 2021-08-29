@@ -1,6 +1,8 @@
 {
   "collectCoverage": true,
-  "maxConcurrency": 1,
+  "collectCoverageFrom": ["src/**/*.ts", "!src/**/*.{contract,d}.ts"],
   "preset": "ts-jest",
-  "testEnvironment": "node"
+  "roots": ["./src"],
+  "testEnvironment": "node",
+  "testPathIgnorePatterns": ["/node_modules/", "/test/"]
 }

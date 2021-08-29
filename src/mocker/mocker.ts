@@ -7,6 +7,7 @@ export const mocker = {
   contract: <C extends AnyContract>(contract: C): ContractMockRevertFn => {
     const mockerStrategy = mockerService.strategyFromContract(contract)
     mockerStrategy.contractSpy()
+    // TODO check if we can return the jest spy object so we can use it in unit tests
     return (): void => {
       mockerStrategy.mockRestore()
     }

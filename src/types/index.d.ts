@@ -15,7 +15,7 @@ export type AnyContract = Contract<any, any, any>
 
 export type ContractFns<SUBJECT> = { [key in Extract<keyof SUBJECT, string>]: ContractFn } & {
   _constructor: ContractFn
-} & { [k: string]: ContractFunction }
+} & { [k: string]: ContractFn }
 
 export type ContractFn = {
   terms: ContractFnTerm[]

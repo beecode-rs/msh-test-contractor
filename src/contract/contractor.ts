@@ -18,16 +18,21 @@ export const contractor = <
   const mockStrategy = contractMockService.strategyFromFunctionMock(mock)
 
   describe(contractorService.testDescription({ fnName }), () => {
-    terms.forEach((term) => {
-      const subjectStrategy = subjectService.strategyFromContractFunction({ contract, fnName, term })
+    try {
+      terms.forEach((term) => {
+        const subjectStrategy = subjectService.strategyFromContractFunction({ contract, fnName, term })
 
-      it(contractorService.testName({ term }), () => {
-        mockStrategy.mock({ params: term.params })
-        const result = subjectStrategy.exec(term)
-        const expectStrategy = contractExpectService.fromTerm({ result, term })
-        expectStrategy.test()
-        mockStrategy.restore()
+        it(contractorService.testName({ term }), () => {
+          mockStrategy.mock({ params: term.params })
+          const result = subjectStrategy.exec(term)
+          const expectStrategy = contractExpectService.fromTerm({ result, term })
+          expectStrategy.test()
+          mockStrategy.restore()
+        })
       })
-    })
+    } catch (err) {
+      console.error(`Error running test on contract:${contract.subjectName}, fn:${fnName}`) // eslint-disable-line no-console
+      throw err
+    }
   })
 }

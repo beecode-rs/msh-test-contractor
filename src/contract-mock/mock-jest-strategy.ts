@@ -6,11 +6,11 @@ export class MockJestStrategy implements MockStrategy {
 
   constructor(protected readonly _jestMock?: ContractJestMock) {}
 
-  public mock({ params }: { params?: any[] }): void {
+  public mock({ params }: { params?: any[] } = {}): void {
     this._restoreMockFn = this._jestMock ? this._jestMock(jest, { params }) : []
   }
 
   public restore(): void {
-    if (this._restoreMockFn) this._restoreMockFn?.forEach((rf) => rf())
+    if (this._restoreMockFn) this._restoreMockFn.forEach((rf) => rf())
   }
 }
