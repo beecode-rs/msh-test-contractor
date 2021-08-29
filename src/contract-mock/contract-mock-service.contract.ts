@@ -1,6 +1,6 @@
 import { contractFactory } from '../contract/contractor-factory'
 import { mocker } from '../mocker/mocker'
-import { ContractMockRevertFns } from '../types/index'
+import { ContractMockRevertFns } from '../types'
 import mockJestEmptyStrategyContract from './mock-jest-empty-strategy.contract'
 import mockJestStrategyContract from './mock-jest-strategy.contract'
 

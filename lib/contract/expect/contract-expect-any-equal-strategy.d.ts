@@ -1,12 +1,10 @@
 import { ContractFnTerm } from '../../types';
 import { ContractExpectStrategy } from './contract-expect-strategy';
 export declare class ContractExpectAnyEqualStrategy implements ContractExpectStrategy {
-    protected readonly _result: any;
     protected readonly _termResult: any;
-    constructor({ result, term }: {
-        result: any;
+    constructor({ term }: {
         term: ContractFnTerm;
     });
-    test(): void;
+    test(fn: () => any): void;
 }
 //# sourceMappingURL=contract-expect-any-equal-strategy.d.ts.map

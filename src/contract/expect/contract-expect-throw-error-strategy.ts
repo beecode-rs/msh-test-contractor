@@ -1,7 +1,7 @@
 import { ContractFnTerm } from '../../types'
 import { ContractExpectStrategy } from './contract-expect-strategy'
 
-export class ContractExpectAnyEqualStrategy implements ContractExpectStrategy {
+export class ContractExpectThrowErrorStrategy implements ContractExpectStrategy {
   protected readonly _termResult: any
 
   constructor({ term }: { term: ContractFnTerm }) {
@@ -9,6 +9,6 @@ export class ContractExpectAnyEqualStrategy implements ContractExpectStrategy {
   }
 
   public test(fn: () => any): void {
-    expect(fn()).toEqual(this._termResult)
+    expect(() => fn()).toThrow(this._termResult.message)
   }
 }

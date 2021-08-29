@@ -54,4 +54,16 @@ export default contractFactory(require('./dummy-function'), 'dummyFunction', {
       },
     ],
   },
+  errorIfMoreThenTen: {
+    terms: [
+      {
+        params: [1],
+        result: 1,
+      },
+      {
+        params: [11],
+        result: new Error('More then 10'),
+      },
+    ],
+  },
 })

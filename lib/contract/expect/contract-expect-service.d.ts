@@ -1,8 +1,7 @@
 import { ContractFnTerm } from '../../types';
 import { ContractExpectStrategy } from './contract-expect-strategy';
 export declare const contractExpectService: {
-    fromTerm: ({ result, term }: {
-        result: any;
+    fromTerm: ({ term }: {
         term: ContractFnTerm;
     }) => ContractExpectStrategy;
 };

@@ -1,4 +1,4 @@
 export interface ContractExpectStrategy {
-    test(): void;
+    test(fn: () => any): void;
 }
 //# sourceMappingURL=contract-expect-strategy.d.ts.map
