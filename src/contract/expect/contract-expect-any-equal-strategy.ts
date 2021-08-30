@@ -9,6 +9,7 @@ export class ContractExpectAnyEqualStrategy implements ContractExpectStrategy {
   }
 
   public test(fn: () => any): void {
-    expect(fn()).toEqual(this._termResult)
+    const result = fn()
+    expect(result).toEqual(this._termResult)
   }
 }
