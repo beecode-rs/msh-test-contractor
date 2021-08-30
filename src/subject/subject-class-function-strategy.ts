@@ -17,6 +17,7 @@ export class SubjectClassFunctionStrategy implements SubjectStrategy {
     fnName: string
   }) {
     this._module = module
+    if (!subjectName) throw new Error('Subject name must be specified for class functions strategy')
     this._subjectName = subjectName
     this._constructorParams = constructorParams
     this._fnName = fnName

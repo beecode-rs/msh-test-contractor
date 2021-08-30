@@ -93,10 +93,12 @@
     "semantic-release": "semantic-release",
     "semantic-release:check": "npm run semantic-release -- --dry-run --no-ci",
     "test": "npm run test:unit && npm run test:int",
+    "test:int": "#",
+    "test:unit": "jest",
     "test:unit:contract": "jest --config=./test/jest.config.json",
     "test:unit:contract:self": "jest ./unit.test.js",
-    "test:int": "#",
-    "test:unit": "jest"
+    "tsc": "tsc -p ./tsconfig-build.json",
+    "tsc:check": "npm run tsc -- --noEmit"
   },
   "typings": "./lib/index.d.ts",
   "version": "1.1.0"

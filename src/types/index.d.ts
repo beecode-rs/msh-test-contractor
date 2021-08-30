@@ -6,16 +6,18 @@ export type Contract<
   SUBJECT extends PropType<MODULE, SUBJECT_NAME>
 > = {
   module: MODULE
-  subjectName: SUBJECT_NAME
-} & {
-  fns: Partial<ContractFns<SUBJECT>>
+  subjectName?: SUBJECT_NAME
+  fns: ContractFns<SUBJECT>
 }
 
 export type AnyContract = Contract<any, any, any>
 
-export type ContractFns<SUBJECT> = { [key in Extract<keyof SUBJECT, string>]: ContractFn } & {
-  _constructor: ContractFn
-} & { [k: string]: ContractFn }
+export type ContractFns<SUBJECT> = Partial<
+  { [key in Extract<keyof SUBJECT, string>]: ContractFn } & {
+    _constructor: ContractFn
+    [k: string]: ContractFn
+  }
+>
 
 export type ContractFn = {
   terms: ContractFnTerm[]
