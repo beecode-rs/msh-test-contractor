@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.0.1...v1.1.0) (2021-08-30)
+
+
+### Bug Fixes
+
+* tests ([65ba1a2](https://github.com/beecode-rs/msh-test-contractor/commit/65ba1a25b476f959c786fae74e7e3925f50adec3))
+
+
+### Features
+
+* add expect to throw error ([5fcf7ef](https://github.com/beecode-rs/msh-test-contractor/commit/5fcf7ef4faa0b24bb268854986f6c68838a98475))
+
 ## [1.0.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.0.0...v1.0.1) (2021-08-29)
 
 
