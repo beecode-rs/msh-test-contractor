@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.1.0...v1.2.0) (2021-08-30)
+
+
+### Features
+
+* contract without subject ([ecd8b50](https://github.com/beecode-rs/msh-test-contractor/commit/ecd8b506dd61ee77de1c18034a089252063948c4))
+
 # [1.1.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.0.1...v1.1.0) (2021-08-30)
 
 
