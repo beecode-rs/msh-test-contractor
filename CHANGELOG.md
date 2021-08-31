@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.2.0...v1.2.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* do not use .t.ts files ([7be43d7](https://github.com/beecode-rs/msh-test-contractor/commit/7be43d76d693c65bab7108826c66e54bdf20004e))
+
 # [1.2.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.1.0...v1.2.0) (2021-08-30)
 
 
