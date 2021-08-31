@@ -1,4 +1,4 @@
-import { ContractFnTerm } from '../../types'
+import { ContractFnTerm } from '../../types/index'
 import { ContractExpectStrategy } from './contract-expect-strategy'
 
 export class ContractExpectFunctionResultEqualStrategy implements ContractExpectStrategy {

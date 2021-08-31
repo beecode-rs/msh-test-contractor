@@ -1,6 +1,6 @@
 import { contractFactory } from '../src/contract/contractor-factory'
 import { mocker } from '../src/mocker/mocker'
-import { ContractMockRevertFns } from '../src/types'
+import { ContractMockRevertFns } from '../src/types/index'
 import dummyFunctionContract from './dummy-function.contract'
 
 export default contractFactory(require('./dummy-class'), 'DummyClass', {

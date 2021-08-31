@@ -1,4 +1,4 @@
-import { Contract, ContractFns, PropType } from '../types'
+import { Contract, ContractFns, PropType } from '../types/index'
 
 type IOverload = {
   <M, SN extends Extract<keyof M, string>, S extends PropType<M, SN>, CFNS extends Partial<ContractFns<S>>>(

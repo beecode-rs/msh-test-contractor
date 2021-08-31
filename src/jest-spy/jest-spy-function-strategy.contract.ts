@@ -1,5 +1,5 @@
 import { contractFactory } from '../contract/contractor-factory'
-import { ContractFnTerm } from '../types'
+import { ContractFnTerm } from '../types/index'
 
 const dummyTerms: { terms: ContractFnTerm[] } = {
   terms: [

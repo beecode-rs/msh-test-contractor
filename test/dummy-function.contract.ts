@@ -1,6 +1,6 @@
 import { contractFactory } from '../src/contract/contractor-factory'
 import { mocker } from '../src/mocker/mocker'
-import { ContractMockRevertFns } from '../src/types'
+import { ContractMockRevertFns } from '../src/types/index'
 import dummyClassContract from './dummy-class.contract'
 import loggerContract from './logger.contract'
 

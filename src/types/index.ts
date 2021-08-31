@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export type PropType<T, P extends keyof T> = T[P]
 
 export type Contract<

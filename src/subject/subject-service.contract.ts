@@ -1,6 +1,6 @@
 import { contractFactory } from '../contract/contractor-factory'
 import { mocker } from '../mocker/mocker'
-import { ContractMockRevertFns } from '../types'
+import { ContractMockRevertFns } from '../types/index'
 import subjectClassFunctionStrategyContract from './subject-class-function-strategy.contract'
 import subjectConstructorStrategyContract from './subject-constructor-strategy.contract'
 import subjectFunctionStrategyContract from './subject-function-strategy.contract'

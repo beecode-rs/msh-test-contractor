@@ -1,4 +1,4 @@
-import { ContractJestMock, ContractMockRevertFns } from '../types';
+import { ContractJestMock, ContractMockRevertFns } from '../types/index';
 import { MockStrategy } from './mock-strategy';
 export declare class MockJestStrategy implements MockStrategy {
     protected readonly _jestMock?: ContractJestMock | undefined;

@@ -1,4 +1,4 @@
-import { ContractFnMock } from '../types'
+import { ContractFnMock } from '../types/index'
 import { MockJestEmptyStrategy } from './mock-jest-empty-strategy'
 import { MockJestStrategy } from './mock-jest-strategy'
 import { MockStrategy } from './mock-strategy'

@@ -1,4 +1,4 @@
-import { AnyContract, ContractFnTerm } from '../types'
+import { AnyContract, ContractFnTerm } from '../types/index'
 import { fnUtil } from '../util/fn-util'
 import { SubjectClassFunctionStrategy } from './subject-class-function-strategy'
 import { SubjectConstructorStrategy } from './subject-constructor-strategy'

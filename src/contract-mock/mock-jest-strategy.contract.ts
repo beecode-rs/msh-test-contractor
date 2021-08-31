@@ -1,5 +1,5 @@
 import { contractFactory } from '../contract/contractor-factory'
-import { ContractJestMock } from '../types'
+import { ContractJestMock } from '../types/index'
 
 const dummyJestMock: ContractJestMock = (_jest, _options) => {
   return []

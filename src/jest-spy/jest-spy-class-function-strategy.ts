@@ -1,4 +1,4 @@
-import { ContractFnTerm } from '../types'
+import { ContractFnTerm } from '../types/index'
 import { JestSpyFunctionStrategy } from './jest-spy-function-strategy'
 import { JestSpyStrategy } from './jest-spy-strategy'
 import deepEqual from 'deep-equal'

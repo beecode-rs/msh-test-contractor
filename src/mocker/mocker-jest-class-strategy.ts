@@ -1,7 +1,7 @@
 import { SpecialFnName } from '../enum/special-fn-name'
 import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy'
 import { jestSpyService } from '../jest-spy/jest-spy-service'
-import { AnyContract, ContractFnTerm } from '../types'
+import { AnyContract, ContractFnTerm } from '../types/index'
 import { MockerStrategy } from './mocker-strategy'
 
 export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance> {

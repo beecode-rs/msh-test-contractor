@@ -1,8 +1,5 @@
-import { ContractFnTerm } from '../types';
-export declare type SubjectFromContract = {
-    subjectName?: string;
-    module: any;
-};
+import { AnyContract, ContractFnTerm } from '../types/index';
+export declare type SubjectFromContract = Pick<AnyContract, 'subjectName' | 'module'>;
 export interface SubjectStrategy {
     exec: (term: ContractFnTerm) => any;
     fn: () => any;

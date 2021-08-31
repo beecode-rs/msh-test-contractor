@@ -1,4 +1,4 @@
-import { ContractFnTerm } from '../types'
+import { ContractFnTerm } from '../types/index'
 import { SubjectFromContract, SubjectStrategy } from './subject-strategy'
 
 export class SubjectFunctionStrategy implements SubjectStrategy {

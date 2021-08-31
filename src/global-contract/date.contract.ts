@@ -1,7 +1,7 @@
 import { contractFactory } from '../contract/contractor-factory'
 import { SpecialFnName } from '../enum/special-fn-name'
 import { mocker } from '../mocker/mocker'
-import { ContractMockRevertFns } from '../types'
+import { ContractMockRevertFns } from '../types/index'
 
 const selfContract = contractFactory(global, 'Date', {
   _constructor: {

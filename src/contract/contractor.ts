@@ -1,6 +1,6 @@
 import { contractMockService } from '../contract-mock/contract-mock-service'
 import { subjectService } from '../subject/subject-service'
-import { Contract, ContractFn, PropType } from '../types'
+import { Contract, ContractFn, PropType } from '../types/index'
 import { contractorService } from './contractor-service'
 import { contractExpectService } from './expect/contract-expect-service'
 

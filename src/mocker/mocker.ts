@@ -1,5 +1,5 @@
 import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy'
-import { AnyContract, ContractFn, ContractMockRevertFn, PropType } from '../types'
+import { AnyContract, ContractFn, ContractMockRevertFn, PropType } from '../types/index'
 import { fnUtil } from '../util/fn-util'
 import { mockerService } from './mocker-service'
 

@@ -1,5 +1,5 @@
 import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy'
-import { AnyContract } from '../types'
+import { AnyContract } from '../types/index'
 import { MockerStrategy } from './mocker-strategy'
 
 export class MockerJestObjectStrategy implements MockerStrategy<{ [k: string]: (...args: any[]) => any }> {
