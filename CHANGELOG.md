@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.2.1...v1.3.0) (2021-09-02)
+
+
+### Features
+
+* add moduleMock, refactor contracts ([e900856](https://github.com/beecode-rs/msh-test-contractor/commit/e90085601cd187c5ed7c36e9f84c2d662eeec760))
+
 ## [1.2.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.2.0...v1.2.1) (2021-08-31)
 
 
