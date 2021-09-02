@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.0...v1.3.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* update package ([e866393](https://github.com/beecode-rs/msh-test-contractor/commit/e866393e93b8570fbad810e7b480f46b6d363777))
+
 # [1.3.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.2.1...v1.3.0) (2021-09-02)
 
 
