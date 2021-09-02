@@ -1,4 +1,4 @@
 export declare enum SpecialFnName {
-    CONSTRUCTOR = "_constructor"
+    CONSTRUCTOR = "CONSTRUCTOR"
 }
 //# sourceMappingURL=special-fn-name.d.ts.map

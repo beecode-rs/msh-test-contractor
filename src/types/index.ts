@@ -8,24 +8,25 @@ export type Contract<
 > = {
   module: MODULE
   subjectName?: SUBJECT_NAME
+  mock?: ContractMock
   fns: ContractFns<SUBJECT>
 }
 
 export type AnyContract = Contract<any, any, any>
 
 export type ContractFns<SUBJECT> = Partial<
-  { [key in Extract<keyof SUBJECT, string>]: ContractFn } & {
-    _constructor: ContractFn
-    [k: string]: ContractFn
+  { [key in Extract<keyof SUBJECT, string>]: ContractFunction } & {
+    CONSTRUCTOR: ContractFunction
+    [k: string]: ContractFunction
   }
 >
 
-export type ContractFn = {
-  terms: ContractFnTerm[]
-  mock?: ContractFnMock
+export type ContractFunction = {
+  terms: ContractTerm[]
+  mock?: ContractMock
 }
 
-export type ContractFnTerm = {
+export type ContractTerm = {
   params: any[]
   result: any
   constructorParams?: any[]
@@ -33,10 +34,10 @@ export type ContractFnTerm = {
 }
 
 // TODO define mock object
-export type ContractFnMock = {
+export type ContractMock = {
   jest?: ContractJestMock
 }
-export type ContractJestMock = (jest: any, options: { params?: any[] }) => ContractMockRevertFns
+export type ContractJestMock = (options?: { params?: any[] }) => ContractMockRevertFns
 
 export type ContractMockRevertFn = () => void
 export type ContractMockRevertFns = ContractMockRevertFn[]

@@ -1,4 +1,4 @@
-import { AnyContract, ContractFnTerm } from '../types/index'
+import { AnyContract, ContractTerm } from '../types/index'
 import { fnUtil } from '../util/fn-util'
 import { SubjectClassFunctionStrategy } from './subject-class-function-strategy'
 import { SubjectConstructorStrategy } from './subject-constructor-strategy'
@@ -13,7 +13,7 @@ export const subjectService = {
   }: {
     contract: AnyContract
     fnName: string
-    term: ContractFnTerm
+    term: ContractTerm
   }): SubjectStrategy => {
     const subjectFromContract = { module, subjectName } as SubjectFromContract
     if (fnUtil.isConstructor(fnName)) return new SubjectConstructorStrategy({ subjectFromContract })

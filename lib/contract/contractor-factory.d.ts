@@ -1,8 +1,11 @@
-import { Contract, ContractFns, PropType } from '../types/index';
-declare type IOverload = {
-    <M, SN extends Extract<keyof M, string>, S extends PropType<M, SN>, CFNS extends Partial<ContractFns<S>>>(module: M, fns: CFNS): Contract<M, SN, S>;
-    <M, SN extends Extract<keyof M, string>, S extends PropType<M, SN>, CFNS extends Partial<ContractFns<S>>>(module: M, subjectName: SN, fns: CFNS): Contract<M, SN, S>;
-};
-export declare const contractFactory: IOverload;
-export {};
+/// <reference types="node" />
+import { Contract, ContractMock, PropType } from '../types/index';
+export declare const contractFactory: <M, SN extends Extract<keyof M, string>, S extends PropType<M, SN>, CFNS extends Partial<Partial<{ [key in Extract<keyof S, string>]: import("../types/index").ContractFunction; } & {
+    [k: string]: import("../types/index").ContractFunction;
+    CONSTRUCTOR: import("../types/index").ContractFunction;
+}>>>(options: {
+    module: M;
+    subjectName?: SN | undefined;
+    mock?: ContractMock | undefined;
+}, fns: CFNS) => Contract<M, SN, S>;
 //# sourceMappingURL=contractor-factory.d.ts.map

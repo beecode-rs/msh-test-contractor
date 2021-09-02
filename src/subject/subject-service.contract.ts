@@ -1,4 +1,5 @@
 import { contractFactory } from '../contract/contractor-factory'
+import { SpecialFnName } from '../enum/special-fn-name'
 import { mocker } from '../mocker/mocker'
 import { ContractMockRevertFns } from '../types/index'
 import subjectClassFunctionStrategyContract from './subject-class-function-strategy.contract'
@@ -16,36 +17,44 @@ const dummyContract = {
   subjectName: 'DummyClass',
 }
 
-export default contractFactory(require('./subject-service'), 'subjectService', {
-  strategyFromContractFunction: {
-    terms: [
-      {
-        mock: {
-          jest: (_jest: any): ContractMockRevertFns => {
-            return [mocker.contract(subjectConstructorStrategyContract)]
+export default contractFactory(
+  { module: require('./subject-service'), subjectName: 'subjectService' },
+  {
+    strategyFromContractFunction: {
+      terms: [
+        {
+          mock: {
+            jest: (): ContractMockRevertFns => {
+              return [mocker.contract(subjectConstructorStrategyContract).mockRestore]
+            },
+          },
+          params: [{ contract: dummyContract, fnName: SpecialFnName.CONSTRUCTOR, term: {} }],
+          result: { _module: dummyContract.module, _subjectName: dummyContract.subjectName },
+        },
+        {
+          mock: {
+            jest: (): ContractMockRevertFns => {
+              return [mocker.contract(subjectClassFunctionStrategyContract).mockRestore]
+            },
+          },
+          params: [{ contract: dummyContract, fnName: 'a', term: { constructorParams: [] } }],
+          result: {
+            _module: dummyContract.module,
+            _subjectName: dummyContract.subjectName,
+            _constructorParams: [],
+            _fnName: 'a',
           },
         },
-        params: [{ contract: dummyContract, fnName: '_constructor', term: {} }],
-        result: { _module: dummyContract.module, _subjectName: dummyContract.subjectName },
-      },
-      {
-        mock: {
-          jest: (_jest: any): ContractMockRevertFns => {
-            return [mocker.contract(subjectClassFunctionStrategyContract)]
+        {
+          mock: {
+            jest: (): ContractMockRevertFns => {
+              return [mocker.contract(subjectFunctionStrategyContract).mockRestore]
+            },
           },
+          params: [{ contract: dummyContract, fnName: 'a', term: {} }],
+          result: { _module: dummyContract.module, _subjectName: dummyContract.subjectName, _fnName: 'a' },
         },
-        params: [{ contract: dummyContract, fnName: 'a', term: { constructorParams: [] } }],
-        result: { _module: dummyContract.module, _subjectName: dummyContract.subjectName, _constructorParams: [], _fnName: 'a' },
-      },
-      {
-        mock: {
-          jest: (_jest: any): ContractMockRevertFns => {
-            return [mocker.contract(subjectFunctionStrategyContract)]
-          },
-        },
-        params: [{ contract: dummyContract, fnName: 'a', term: {} }],
-        result: { _module: dummyContract.module, _subjectName: dummyContract.subjectName, _fnName: 'a' },
-      },
-    ],
-  },
-})
+      ],
+    },
+  }
+)

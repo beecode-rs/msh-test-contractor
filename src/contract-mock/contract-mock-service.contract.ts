@@ -4,18 +4,23 @@ import { ContractMockRevertFns } from '../types/index'
 import mockJestEmptyStrategyContract from './mock-jest-empty-strategy.contract'
 import mockJestStrategyContract from './mock-jest-strategy.contract'
 
-export default contractFactory(require('./contract-mock-service.ts'), 'contractMockService', {
-  strategyFromFunctionMock: {
-    mock: {
-      jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker.contract(mockJestStrategyContract), mocker.contract(mockJestEmptyStrategyContract)]
+export default contractFactory(
+  { module: require('./contract-mock-service.ts'), subjectName: 'contractMockService' },
+  {
+    strategyFromFunctionMock: {
+      mock: {
+        jest: (): ContractMockRevertFns => {
+          return [mocker.contract(mockJestStrategyContract), mocker.contract(mockJestEmptyStrategyContract)].map(
+            (f) => f.mockRestore
+          )
+        },
       },
+      terms: [
+        {
+          params: [],
+          result: {},
+        },
+      ],
     },
-    terms: [
-      {
-        params: [],
-        result: {},
-      },
-    ],
-  },
-})
+  }
+)

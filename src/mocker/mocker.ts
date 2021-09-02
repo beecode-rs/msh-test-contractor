@@ -1,23 +1,26 @@
 import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy'
-import { AnyContract, ContractFn, ContractMockRevertFn, PropType } from '../types/index'
+import { AnyContract, ContractFunction, ContractMockRevertFn, PropType } from '../types/index'
 import { fnUtil } from '../util/fn-util'
 import { mockerService } from './mocker-service'
 
+export type MockerContractResult = {
+  spy: jest.SpyInstance
+  mockRestore: ContractMockRevertFn
+}
+
 export const mocker = {
-  contract: <C extends AnyContract>(contract: C): ContractMockRevertFn => {
+  contract: <C extends AnyContract>(contract: C): MockerContractResult => {
     const mockerStrategy = mockerService.strategyFromContract(contract)
-    mockerStrategy.contractSpy()
-    // TODO check if we can return the jest spy object so we can use it in unit tests
-    return (): void => {
-      mockerStrategy.mockRestore()
-    }
+    const spy = mockerStrategy.contractSpy()
+    const mockRestore = (): void => mockerStrategy.mockRestore()
+    return { mockRestore, spy }
   },
   function: <C extends AnyContract, CFNK extends Extract<keyof PropType<C, 'fns'>, string>>(
     contract: C,
     fnName: CFNK
-  ): ContractMockRevertFn => {
+  ): MockerContractResult => {
     const { module, subjectName, fns } = contract
-    const { terms } = fns[fnName]! as ContractFn
+    const { terms } = fns[fnName]! as ContractFunction
 
     const spy = fnUtil.isConstructor(fnName)
       ? jest.spyOn(module, subjectName)
@@ -30,8 +33,7 @@ export const mocker = {
     const jestSpyFunction = new JestSpyFunctionStrategy({ terms })
     spy.mockImplementation(jestSpyFunction.mockImplementationFactory())
 
-    return (): void => {
-      spy.mockRestore()
-    }
+    const mockRestore = (): void => spy.mockRestore()
+    return { mockRestore, spy }
   },
 }

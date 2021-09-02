@@ -4,66 +4,60 @@ import { ContractMockRevertFns } from '../src/types/index'
 import dummyClassContract from './dummy-class.contract'
 import loggerContract from './logger.contract'
 
-const mock = {
-  jest: (_jest: any): ContractMockRevertFns => {
-    return [mocker.contract(loggerContract)]
-  },
-}
-export default contractFactory(require('./dummy-function'), 'dummyFunction', {
-  add: {
-    mock,
-    terms: [
-      {
-        params: [1, 2],
-        result: 3,
-      },
-    ],
-  },
-  sub: {
-    mock,
-    terms: [
-      {
-        params: [1, 2],
-        result: -1,
-      },
-    ],
-  },
-  callClass: {
+export default contractFactory(
+  {
+    module: require('./dummy-function'),
+    subjectName: 'dummyFunction',
     mock: {
-      jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker.contract(dummyClassContract)]
+      jest: (): ContractMockRevertFns => {
+        return [mocker.contract(loggerContract).mockRestore, mocker.contract(dummyClassContract).mockRestore]
       },
     },
-    terms: [
-      {
-        params: [1, 2, 3],
-        result: 6,
-      },
-    ],
   },
-  callClassMultiFun: {
-    mock: {
-      jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker.contract(dummyClassContract)]
-      },
+  {
+    add: {
+      terms: [
+        {
+          params: [1, 2],
+          result: 3,
+        },
+      ],
     },
-    terms: [
-      {
-        params: [1, 2, 3, 1],
-        result: 8,
-      },
-    ],
-  },
-  errorIfMoreThenTen: {
-    terms: [
-      {
-        params: [1],
-        result: 1,
-      },
-      {
-        params: [11],
-        result: new Error('More then 10'),
-      },
-    ],
-  },
-})
+    sub: {
+      terms: [
+        {
+          params: [1, 2],
+          result: -1,
+        },
+      ],
+    },
+    callClass: {
+      terms: [
+        {
+          params: [1, 2, 3],
+          result: 6,
+        },
+      ],
+    },
+    callClassMultiFun: {
+      terms: [
+        {
+          params: [1, 2, 3, 1],
+          result: 8,
+        },
+      ],
+    },
+    errorIfMoreThenTen: {
+      terms: [
+        {
+          params: [1],
+          result: 1,
+        },
+        {
+          params: [11],
+          result: new Error('More then 10'),
+        },
+      ],
+    },
+  }
+)

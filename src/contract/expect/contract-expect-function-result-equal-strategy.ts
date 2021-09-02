@@ -1,11 +1,11 @@
-import { ContractFnTerm } from '../../types/index'
+import { ContractTerm } from '../../types/index'
 import { ContractExpectStrategy } from './contract-expect-strategy'
 
 export class ContractExpectFunctionResultEqualStrategy implements ContractExpectStrategy {
   protected readonly _termResult: any
   protected readonly _termReturnFnParams: any
 
-  constructor({ term }: { term: ContractFnTerm }) {
+  constructor({ term }: { term: ContractTerm }) {
     this._termResult = term.result
     this._termReturnFnParams = term.returnFnParams
   }

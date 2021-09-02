@@ -19,52 +19,55 @@ const dummyConstructorFnParamsFactory = (): any[] => {
   return [{ subjectFromContract: { module: dummyModuleFunction }, fnName: dummyFnName }]
 }
 
-const selfContract = contractFactory(require('./subject-function-strategy'), 'SubjectFunctionStrategy', {
-  _constructor: {
-    terms: [
-      {
-        params: dummyConstructorParamsFactory(),
-        result: { _subjectName: dummySubjectName, _module: dummyModule, _fnName: dummyFnName },
-      },
-      {
-        params: dummyConstructorFnParamsFactory(),
-        result: { _module: dummyModuleFunction, _fnName: dummyFnName },
-      },
-    ],
-  },
-  fn: {
-    terms: [
-      {
-        constructorParams: dummyConstructorParamsFactory(),
-        params: [],
-        result: dummyModule.dummySubject.a,
-      },
-      {
-        constructorParams: dummyConstructorFnParamsFactory(),
-        params: [],
-        result: dummyModuleFunction.a,
-      },
-    ],
-  },
-  exec: {
-    mock: {
-      jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker.function(selfContract, 'fn')]
-      },
+const selfContract = contractFactory(
+  { module: require('./subject-function-strategy'), subjectName: 'SubjectFunctionStrategy' },
+  {
+    CONSTRUCTOR: {
+      terms: [
+        {
+          params: dummyConstructorParamsFactory(),
+          result: { _subjectName: dummySubjectName, _module: dummyModule, _fnName: dummyFnName },
+        },
+        {
+          params: dummyConstructorFnParamsFactory(),
+          result: { _module: dummyModuleFunction, _fnName: dummyFnName },
+        },
+      ],
     },
-    terms: [
-      {
-        constructorParams: dummyConstructorParamsFactory(),
-        params: [{ params: ['testParam'] }],
-        result: 'testParam',
+    fn: {
+      terms: [
+        {
+          constructorParams: dummyConstructorParamsFactory(),
+          params: [],
+          result: dummyModule.dummySubject.a,
+        },
+        {
+          constructorParams: dummyConstructorFnParamsFactory(),
+          params: [],
+          result: dummyModuleFunction.a,
+        },
+      ],
+    },
+    exec: {
+      mock: {
+        jest: (): ContractMockRevertFns => {
+          return [mocker.function(selfContract, 'fn').mockRestore]
+        },
       },
-      {
-        constructorParams: dummyConstructorFnParamsFactory(),
-        params: [{ params: ['testParam'] }],
-        result: 'testParam',
-      },
-    ],
-  },
-})
+      terms: [
+        {
+          constructorParams: dummyConstructorParamsFactory(),
+          params: [{ params: ['testParam'] }],
+          result: 'testParam',
+        },
+        {
+          constructorParams: dummyConstructorFnParamsFactory(),
+          params: [{ params: ['testParam'] }],
+          result: 'testParam',
+        },
+      ],
+    },
+  }
+)
 
 export default selfContract

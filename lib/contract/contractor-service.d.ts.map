@@ -1,1 +1,1 @@
-{"version":3,"file":"contractor-service.d.ts","sourceRoot":"","sources":["../../src/contract/contractor-service.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,gBAAgB,CAAA;AAE/C,eAAO,MAAM,iBAAiB;;gBACY,MAAM;UAAK,MAAM;6CAGhB;QAAE,IAAI,EAAE,cAAc,CAAA;KAAE,KAAG,MAAM;CAG3E,CAAA"}
+{"version":3,"file":"contractor-service.d.ts","sourceRoot":"","sources":["../../src/contract/contractor-service.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,gBAAgB,CAAA;AAE7C,eAAO,MAAM,iBAAiB;;gBACY,MAAM;UAAK,MAAM;6CAGhB;QAAE,IAAI,EAAE,YAAY,CAAA;KAAE,KAAG,MAAM;CAGzE,CAAA"}

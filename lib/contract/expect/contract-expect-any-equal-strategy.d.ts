@@ -1,9 +1,9 @@
-import { ContractFnTerm } from '../../types/index';
+import { ContractTerm } from '../../types/index';
 import { ContractExpectStrategy } from './contract-expect-strategy';
 export declare class ContractExpectAnyEqualStrategy implements ContractExpectStrategy {
     protected readonly _termResult: any;
     constructor({ term }: {
-        term: ContractFnTerm;
+        term: ContractTerm;
     });
     test(fn: () => any): void;
 }

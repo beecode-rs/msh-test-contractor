@@ -1,7 +1,7 @@
 import { SpecialFnName } from '../enum/special-fn-name'
 import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy'
 import { jestSpyService } from '../jest-spy/jest-spy-service'
-import { AnyContract, ContractFnTerm } from '../types/index'
+import { AnyContract, ContractTerm } from '../types/index'
 import { MockerStrategy } from './mocker-strategy'
 
 export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance> {
@@ -24,7 +24,7 @@ export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance>
     const { fns } = this._contract
 
     return (...mockParams: any[]): any => {
-      const { _constructor: constructorFns, ...restFns } = fns
+      const { CONSTRUCTOR: constructorFns, ...restFns } = fns
 
       const objectWithMockedFunctions = Object.fromEntries(
         Object.entries(restFns).map(([fnName, ctFunc]) => [
@@ -43,7 +43,7 @@ export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance>
     terms,
     mockClassParams,
   }: {
-    terms: ContractFnTerm[]
+    terms: ContractTerm[]
     mockClassParams: any[]
   }): (...args: any[]) => any {
     const jestSpyStrategy = jestSpyService.strategyFromTerms({ terms, mockClassParams })

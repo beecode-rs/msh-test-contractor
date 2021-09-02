@@ -23,44 +23,47 @@ const dummyConstructorParamsFactory = (): any[] => {
   ]
 }
 
-const selfContract = contractFactory(require('./subject-class-function-strategy'), 'SubjectClassFunctionStrategy', {
-  _constructor: {
-    terms: [
-      {
-        params: dummyConstructorParamsFactory(),
-        result: {
-          _subjectName: dummySubjectName,
-          _module: dummyModule,
-          _constructorParams: dummyConstructorParams,
-          _fnName: dummyFnName,
+const selfContract = contractFactory(
+  { module: require('./subject-class-function-strategy'), subjectName: 'SubjectClassFunctionStrategy' },
+  {
+    CONSTRUCTOR: {
+      terms: [
+        {
+          params: dummyConstructorParamsFactory(),
+          result: {
+            _subjectName: dummySubjectName,
+            _module: dummyModule,
+            _constructorParams: dummyConstructorParams,
+            _fnName: dummyFnName,
+          },
+        },
+      ],
+    },
+    fn: {
+      terms: [
+        {
+          constructorParams: dummyConstructorParamsFactory(),
+          params: [],
+          result: DummyClass,
+        },
+      ],
+    },
+
+    exec: {
+      mock: {
+        jest: (): ContractMockRevertFns => {
+          return [mocker.function(selfContract, 'fn').mockRestore]
         },
       },
-    ],
-  },
-  fn: {
-    terms: [
-      {
-        constructorParams: dummyConstructorParamsFactory(),
-        params: [],
-        result: DummyClass,
-      },
-    ],
-  },
-
-  exec: {
-    mock: {
-      jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker.function(selfContract, 'fn')]
-      },
+      terms: [
+        {
+          constructorParams: dummyConstructorParamsFactory(),
+          params: [{ params: ['testString'] }],
+          result: 'testString',
+        },
+      ],
     },
-    terms: [
-      {
-        constructorParams: dummyConstructorParamsFactory(),
-        params: [{ params: ['testString'] }],
-        result: 'testString',
-      },
-    ],
-  },
-})
+  }
+)
 
 export default selfContract

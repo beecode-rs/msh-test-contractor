@@ -1,4 +1,4 @@
-import { ContractFnTerm } from '../types/index'
+import { ContractTerm } from '../types/index'
 import { SubjectFromContract, SubjectStrategy } from './subject-strategy'
 
 export class SubjectConstructorStrategy implements SubjectStrategy {
@@ -11,7 +11,7 @@ export class SubjectConstructorStrategy implements SubjectStrategy {
     this._subjectName = subjectName
   }
 
-  public exec(term: ContractFnTerm): any {
+  public exec(term: ContractTerm): any {
     return new (this.fn())(...term.params)
   }
   public fn(): any {

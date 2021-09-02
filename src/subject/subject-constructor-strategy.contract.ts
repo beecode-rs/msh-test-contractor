@@ -15,38 +15,41 @@ const dummyConstructorParamsFactory = (): any[] => {
   return [{ subjectFromContract: { module: dummyModule, subjectName: dummySubjectName } }]
 }
 
-const selfContract = contractFactory(require('./subject-constructor-strategy'), 'SubjectConstructorStrategy', {
-  _constructor: {
-    terms: [
-      {
-        params: dummyConstructorParamsFactory(),
-        result: { _subjectName: dummySubjectName, _module: dummyModule },
-      },
-    ],
-  },
-  fn: {
-    terms: [
-      {
-        constructorParams: dummyConstructorParamsFactory(),
-        params: [],
-        result: DummyClass,
-      },
-    ],
-  },
-  exec: {
-    mock: {
-      jest: (_jest: any): ContractMockRevertFns => {
-        return [mocker.function(selfContract, 'fn')]
-      },
+const selfContract = contractFactory(
+  { module: require('./subject-constructor-strategy'), subjectName: 'SubjectConstructorStrategy' },
+  {
+    CONSTRUCTOR: {
+      terms: [
+        {
+          params: dummyConstructorParamsFactory(),
+          result: { _subjectName: dummySubjectName, _module: dummyModule },
+        },
+      ],
     },
-    terms: [
-      {
-        constructorParams: dummyConstructorParamsFactory(),
-        params: [{ params: [] }],
-        result: new DummyClass(),
+    fn: {
+      terms: [
+        {
+          constructorParams: dummyConstructorParamsFactory(),
+          params: [],
+          result: DummyClass,
+        },
+      ],
+    },
+    exec: {
+      mock: {
+        jest: (): ContractMockRevertFns => {
+          return [mocker.function(selfContract, 'fn').mockRestore]
+        },
       },
-    ],
-  },
-})
+      terms: [
+        {
+          constructorParams: dummyConstructorParamsFactory(),
+          params: [{ params: [] }],
+          result: new DummyClass(),
+        },
+      ],
+    },
+  }
+)
 
 export default selfContract

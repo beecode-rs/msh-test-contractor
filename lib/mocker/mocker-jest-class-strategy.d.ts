@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import { AnyContract, ContractFnTerm } from '../types/index';
+import { AnyContract, ContractTerm } from '../types/index';
 import { MockerStrategy } from './mocker-strategy';
 export declare class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance> {
     protected _contract: AnyContract;
@@ -9,7 +9,7 @@ export declare class MockerJestClassStrategy implements MockerStrategy<jest.SpyI
     contractSpy(): jest.SpyInstance;
     protected _mockClass(): (...args: any[]) => any;
     protected _mockFunction({ terms, mockClassParams, }: {
-        terms: ContractFnTerm[];
+        terms: ContractTerm[];
         mockClassParams: any[];
     }): (...args: any[]) => any;
 }

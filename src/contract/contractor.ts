@@ -1,6 +1,6 @@
 import { contractMockService } from '../contract-mock/contract-mock-service'
 import { subjectService } from '../subject/subject-service'
-import { Contract, ContractFn, PropType } from '../types/index'
+import { Contract, ContractFunction, PropType } from '../types/index'
 import { contractorService } from './contractor-service'
 import { contractExpectService } from './expect/contract-expect-service'
 
@@ -14,8 +14,10 @@ export const contractor = <
   contract: C,
   fnName: CFNK
 ): void => {
-  const { terms, mock } = contract.fns[fnName]! as ContractFn
-  const mockStrategy = contractMockService.strategyFromFunctionMock(mock)
+  const { terms, mock } = contract.fns[fnName]! as ContractFunction
+
+  const moduleMockStrategy = contractMockService.strategyFromFunctionMock(contract.mock)
+  const functionMockStrategy = contractMockService.strategyFromFunctionMock(mock)
 
   describe(contractorService.testDescription({ fnName }), () => {
     try {
@@ -23,10 +25,12 @@ export const contractor = <
         const subjectStrategy = subjectService.strategyFromContractFunction({ contract, fnName, term })
 
         it(contractorService.testName({ term }), () => {
-          mockStrategy.mock({ params: term.params })
+          moduleMockStrategy.mock({ params: term.params })
+          functionMockStrategy.mock({ params: term.params })
           const expectStrategy = contractExpectService.fromTerm({ term })
           expectStrategy.test(() => subjectStrategy.exec(term))
-          mockStrategy.restore()
+          functionMockStrategy.restore()
+          moduleMockStrategy.restore()
         })
       })
     } catch (err) {
