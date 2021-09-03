@@ -9,11 +9,12 @@ export class JestSpyFunctionStrategy implements JestSpyStrategy {
     this._terms = terms
   }
 
-  public mockImplementationFactory(): (...args: any[]) => any {
-    return (...mockParams: any[]): any => {
+  public mockImplementationFactory(): jest.Mock {
+    const fakeImplementation = (...mockParams: any[]): any => {
       const foundTerm = this._terms.find((term) => deepEqual(term.params, mockParams))
       if (!foundTerm) throw Error(`Unknown contract for params ${JSON.stringify(mockParams)}`)
       return foundTerm.result
     }
+    return jest.fn().mockImplementation(fakeImplementation)
   }
 }

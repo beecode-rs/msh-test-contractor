@@ -1,4 +1,5 @@
 import { contractFactory } from '../contract/contractor-factory'
+import { SpecialFnName } from '../enum/special-fn-name'
 import { ContractTerm } from '../types/index'
 
 const dummyTerms: { terms: ContractTerm[]; mockClassParams: any[] } = {
@@ -13,7 +14,7 @@ const dummyTerms: { terms: ContractTerm[]; mockClassParams: any[] } = {
 const selfContract = contractFactory(
   { module: require('./jest-spy-class-function-strategy'), subjectName: 'JestSpyClassFunctionStrategy' },
   {
-    CONSTRUCTOR: {
+    [SpecialFnName.CONSTRUCTOR]: {
       terms: [
         {
           params: [dummyTerms],

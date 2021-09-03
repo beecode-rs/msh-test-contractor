@@ -1,4 +1,5 @@
 import { contractFactory } from '../src/contract/contractor-factory'
+import { SpecialFnName } from '../src/enum/special-fn-name'
 import { mocker } from '../src/mocker/mocker'
 import { ContractMockRevertFns } from '../src/types/index'
 import dummyFunctionContract from './dummy-function.contract'
@@ -6,7 +7,7 @@ import dummyFunctionContract from './dummy-function.contract'
 export default contractFactory(
   { module: require('./dummy-class'), subjectName: 'DummyClass' },
   {
-    CONSTRUCTOR: {
+    [SpecialFnName.CONSTRUCTOR]: {
       terms: [
         {
           params: [1, 2],

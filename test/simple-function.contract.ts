@@ -1,10 +1,11 @@
 import { contractFactory } from '../src/contract/contractor-factory'
+import { SpecialFnName } from '../src/enum/special-fn-name'
 import * as simpleFunction from './simple-function'
 
 export default contractFactory(
-  { module: simpleFunction },
+  { module: simpleFunction, subjectName: 'simpleFunction' },
   {
-    simpleFunction: {
+    [SpecialFnName.SELF]: {
       terms: [
         {
           params: [1],
@@ -12,7 +13,7 @@ export default contractFactory(
         },
         {
           params: [11],
-          result: new Error('number larger the ten'),
+          result: new Error('number is greater than ten'),
         },
       ],
     },

@@ -1,4 +1,5 @@
 import { contractFactory } from '../contract/contractor-factory'
+import { SpecialFnName } from '../enum/special-fn-name'
 import { ContractJestMock } from '../types/index'
 
 const dummyJestMock: ContractJestMock = (_options) => {
@@ -8,7 +9,7 @@ const dummyJestMock: ContractJestMock = (_options) => {
 export default contractFactory(
   { module: require('./mock-jest-strategy'), subjectName: 'MockJestStrategy' },
   {
-    CONSTRUCTOR: {
+    [SpecialFnName.CONSTRUCTOR]: {
       terms: [
         {
           params: [],

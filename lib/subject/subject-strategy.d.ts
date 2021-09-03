@@ -1,6 +1,6 @@
 import { ContractTerm } from '../types';
 export declare type SubjectFromContract = {
-    subjectName?: string;
+    subjectName: string;
     module: any;
 };
 export interface SubjectStrategy {

@@ -1,8 +1,9 @@
+import { SpecialFnName } from '../enum/special-fn-name'
 import { ContractTerm } from '../types/index'
 import { SubjectFromContract, SubjectStrategy } from './subject-strategy'
 
 export class SubjectFunctionStrategy implements SubjectStrategy {
-  protected readonly _subjectName?: string
+  protected readonly _subjectName: string
   protected readonly _module: any
   protected readonly _fnName: string
 
@@ -23,6 +24,6 @@ export class SubjectFunctionStrategy implements SubjectStrategy {
   }
 
   public fn(): any {
-    return this._subjectName ? this._module[this._subjectName][this._fnName] : this._module[this._fnName]
+    return this._fnName === SpecialFnName.SELF ? this._module[this._subjectName] : this._module[this._subjectName][this._fnName]
   }
 }

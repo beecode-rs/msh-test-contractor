@@ -6,6 +6,6 @@ export const contractFactory = <
   S extends PropType<M, SN>,
   CFNS extends Partial<ContractFns<S>>
 >(
-  options: { module: M; subjectName?: SN; mock?: ContractMock },
+  options: { module: M; subjectName: SN; mock?: ContractMock },
   fns: CFNS
 ): Contract<M, SN, S> => ({ ...options, fns })

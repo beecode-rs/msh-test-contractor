@@ -3,13 +3,13 @@ import { AnyContract, ContractFunction, ContractMockRevertFn, PropType } from '.
 import { fnUtil } from '../util/fn-util'
 import { mockerService } from './mocker-service'
 
-export type MockerContractResult = {
-  spy: jest.SpyInstance
+export type MockerContractResult<SPY = jest.SpyInstance> = {
+  spy: SPY
   mockRestore: ContractMockRevertFn
 }
 
 export const mocker = {
-  contract: <C extends AnyContract>(contract: C): MockerContractResult => {
+  contract: <SPY = jest.SpyInstance, C extends AnyContract = any>(contract: C): MockerContractResult<SPY> => {
     const mockerStrategy = mockerService.strategyFromContract(contract)
     const spy = mockerStrategy.contractSpy()
     const mockRestore = (): void => mockerStrategy.mockRestore()

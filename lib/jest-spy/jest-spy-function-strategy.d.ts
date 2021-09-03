@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { ContractTerm } from '../types/index';
 import { JestSpyStrategy } from './jest-spy-strategy';
 export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
@@ -5,6 +6,6 @@ export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
     constructor({ terms }: {
         terms: ContractTerm[];
     });
-    mockImplementationFactory(): (...args: any[]) => any;
+    mockImplementationFactory(): jest.Mock;
 }
 //# sourceMappingURL=jest-spy-function-strategy.d.ts.map

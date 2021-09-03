@@ -1,9 +1,10 @@
 import { contractFactory } from '../contract/contractor-factory'
+import { SpecialFnName } from '../enum/special-fn-name'
 
 export default contractFactory(
   { module: require('./mock-jest-empty-strategy'), subjectName: 'MockJestEmptyStrategy' },
   {
-    CONSTRUCTOR: {
+    [SpecialFnName.CONSTRUCTOR]: {
       terms: [
         {
           params: [],

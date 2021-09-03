@@ -1,4 +1,5 @@
 import { contractFactory } from '../contract/contractor-factory'
+import { SpecialFnName } from '../enum/special-fn-name'
 import { mocker } from '../mocker/mocker'
 import { ContractMockRevertFns } from '../types/index'
 
@@ -11,18 +12,19 @@ const dummyModule = {
 const dummyModuleFunction = { a: (_a: string): string => _a }
 const dummySubjectName = 'dummySubject'
 const dummyFnName = 'a'
+const dummySelfFnName = SpecialFnName.SELF
 
 const dummyConstructorParamsFactory = (): any[] => {
   return [{ subjectFromContract: { module: dummyModule, subjectName: dummySubjectName }, fnName: dummyFnName }]
 }
 const dummyConstructorFnParamsFactory = (): any[] => {
-  return [{ subjectFromContract: { module: dummyModuleFunction }, fnName: dummyFnName }]
+  return [{ subjectFromContract: { module: dummyModuleFunction, subjectName: dummyFnName }, fnName: dummySelfFnName }]
 }
 
 const selfContract = contractFactory(
   { module: require('./subject-function-strategy'), subjectName: 'SubjectFunctionStrategy' },
   {
-    CONSTRUCTOR: {
+    [SpecialFnName.CONSTRUCTOR]: {
       terms: [
         {
           params: dummyConstructorParamsFactory(),
@@ -30,7 +32,7 @@ const selfContract = contractFactory(
         },
         {
           params: dummyConstructorFnParamsFactory(),
-          result: { _module: dummyModuleFunction, _fnName: dummyFnName },
+          result: { _subjectName: dummyFnName, _module: dummyModuleFunction, _fnName: dummySelfFnName },
         },
       ],
     },

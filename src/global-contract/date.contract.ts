@@ -6,7 +6,7 @@ import { ContractMockRevertFns } from '../types/index'
 const selfContract = contractFactory(
   { module: global, subjectName: 'Date' },
   {
-    CONSTRUCTOR: {
+    [SpecialFnName.CONSTRUCTOR]: {
       mock: {
         jest: (options?: { params?: any[] }): ContractMockRevertFns => {
           const realDate = Date.bind(global.Date)

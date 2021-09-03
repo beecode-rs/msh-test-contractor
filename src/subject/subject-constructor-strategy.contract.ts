@@ -1,4 +1,5 @@
 import { contractFactory } from '../contract/contractor-factory'
+import { SpecialFnName } from '../enum/special-fn-name'
 import { mocker } from '../mocker/mocker'
 import { ContractMockRevertFns } from '../types/index'
 
@@ -18,7 +19,7 @@ const dummyConstructorParamsFactory = (): any[] => {
 const selfContract = contractFactory(
   { module: require('./subject-constructor-strategy'), subjectName: 'SubjectConstructorStrategy' },
   {
-    CONSTRUCTOR: {
+    [SpecialFnName.CONSTRUCTOR]: {
       terms: [
         {
           params: dummyConstructorParamsFactory(),

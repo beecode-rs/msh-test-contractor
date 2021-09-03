@@ -17,7 +17,6 @@ export const subjectService = {
   }): SubjectStrategy => {
     const subjectFromContract = { module, subjectName } as SubjectFromContract
     if (fnUtil.isConstructor(fnName)) return new SubjectConstructorStrategy({ subjectFromContract })
-
     if (constructorParams) return new SubjectClassFunctionStrategy({ subjectFromContract, constructorParams, fnName })
     return new SubjectFunctionStrategy({ subjectFromContract, fnName })
   },

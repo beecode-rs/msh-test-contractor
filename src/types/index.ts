@@ -1,4 +1,6 @@
 /* istanbul ignore file */
+import { SpecialFnName } from '../enum/special-fn-name'
+
 export type PropType<T, P extends keyof T> = T[P]
 
 export type Contract<
@@ -7,7 +9,7 @@ export type Contract<
   SUBJECT extends PropType<MODULE, SUBJECT_NAME>
 > = {
   module: MODULE
-  subjectName?: SUBJECT_NAME
+  subjectName: SUBJECT_NAME
   mock?: ContractMock
   fns: ContractFns<SUBJECT>
 }
@@ -15,10 +17,8 @@ export type Contract<
 export type AnyContract = Contract<any, any, any>
 
 export type ContractFns<SUBJECT> = Partial<
-  { [key in Extract<keyof SUBJECT, string>]: ContractFunction } & {
-    CONSTRUCTOR: ContractFunction
-    [k: string]: ContractFunction
-  }
+  { [key in Extract<keyof SUBJECT, string>]: ContractFunction } &
+    { [key in SpecialFnName]: ContractFunction } & { [k: string]: ContractFunction }
 >
 
 export type ContractFunction = {
