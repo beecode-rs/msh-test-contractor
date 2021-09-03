@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.1...v1.3.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* update mocker ([dba1658](https://github.com/beecode-rs/msh-test-contractor/commit/dba165829f02d419c84ff270c8168b997334d121))
+
 ## [1.3.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.0...v1.3.1) (2021-09-02)
 
 
