@@ -6,7 +6,7 @@
     "src/**/*.ts"
   ],
   "exclude": [
-    ".base-frame-tm/**",
+    ".base-frame-tmp/**",
     ".idea/**",
     "lib/**",
     "node_modules/**",
