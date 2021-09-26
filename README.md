@@ -9,3 +9,13 @@
 <!-- toc -->
 
 <!-- tocstop -->
+
+## Idea
+
+Inspired by [J B Rainsberger Integrated Tests Are A Scam HD
+](https://www.youtube.com/watch?v=VDfX44fZoMc). This tool will try to make unit tests more reliable.  
+When writing unit tests your unit usually makes a call outside of it's boundaries, and we need to mock that call. Whit test-contractor we can create contract between those two units(provider/consumer). This contract defines the obligation of the function (provider) if the certain parameters are passed to it that it will return certain result. This contract is then used for mocking the external unit, and it's also used for data in testing the provider to confirm that the contract is valid.
+
+## Install
+
+`npm i @beecode/msh-test-contractor`
