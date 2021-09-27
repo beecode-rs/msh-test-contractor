@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import { AnyContract, ContractMockRevertFn, PropType } from '../types/index';
+import { AnyContract, ContractMockRevertFn, PropType } from '../types';
 export declare type MockerContractResult<SPY = jest.SpyInstance> = {
     spy: SPY;
     mockRestore: ContractMockRevertFn;

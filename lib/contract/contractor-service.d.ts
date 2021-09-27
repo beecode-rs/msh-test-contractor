@@ -1,4 +1,4 @@
-import { ContractTerm } from '../types/index';
+import { ContractTerm } from '../types';
 export declare const contractorService: {
     testDescription: ({ fnName }: {
         fnName: string;

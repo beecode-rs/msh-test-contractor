@@ -9,7 +9,7 @@ class MockEmptyStrategy implements MockStrategy {
 }
 class MockJestStrategy implements MockStrategy {
     #_restoreMockFn?: ContractMockRevertFns | undefined
-    #_jestMock?: ContractJestMock | undefined
+    #_mock?: ContractMock | undefined
     +mock(__0: { params?: any[] | undefined; }): void
     +restore(): void
 }

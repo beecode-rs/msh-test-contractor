@@ -1,8 +1,8 @@
 import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy'
-import { AnyContract } from '../types/index'
+import { AnyContract } from '../types'
 import { MockerStrategy } from './mocker-strategy'
 
-export type MockerJestObjectResult = { [k: string]: jest.Mock }
+export type MockerJestObjectResult = { [k: string]: jest.SpyInstance }
 
 export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObjectResult> {
   protected _spies: jest.SpyInstance[] = []
@@ -18,10 +18,14 @@ export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObject
   }
 
   protected _mockObject(): MockerJestObjectResult {
+    const { module, subjectName } = this._contract
+
     return Object.fromEntries(
       Object.entries(this._contract.fns).map(([fnName, ctFunc]) => {
-        const jestSpyFunction = new JestSpyFunctionStrategy({ terms: ctFunc!.terms })
-        return [fnName, jestSpyFunction.mockImplementationFactory()]
+        const jestSpyFunction = new JestSpyFunctionStrategy({ terms: ctFunc!.terms, name: `${subjectName}.${fnName}` })
+        const spy = jest.spyOn(module[subjectName], fnName).mockImplementation(jestSpyFunction.mockImplementationFactory())
+        this._spies.push(spy)
+        return [fnName, spy]
       })
     )
   }

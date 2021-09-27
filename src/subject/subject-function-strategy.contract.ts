@@ -1,7 +1,7 @@
 import { contractFactory } from '../contract/contractor-factory'
 import { SpecialFnName } from '../enum/special-fn-name'
 import { mocker } from '../mocker/mocker'
-import { ContractMockRevertFns } from '../types/index'
+import { ContractMockRevertFns } from '../types'
 
 const dummyModule = {
   dummySubject: {
@@ -51,10 +51,8 @@ const selfContract = contractFactory(
       ],
     },
     exec: {
-      mock: {
-        jest: (): ContractMockRevertFns => {
-          return [mocker.function(selfContract, 'fn').mockRestore]
-        },
+      mock: (): ContractMockRevertFns => {
+        return [mocker.function(selfContract, 'fn').mockRestore]
       },
       terms: [
         {

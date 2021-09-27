@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import { AnyContract } from '../types/index';
+import { AnyContract } from '../types';
 import { MockerStrategy } from './mocker-strategy';
 export declare class MockerJestFunctionStrategy implements MockerStrategy<jest.SpyInstance> {
     protected _contract: AnyContract;

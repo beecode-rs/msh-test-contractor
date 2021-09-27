@@ -1,8 +1,8 @@
 import { contractFactory } from '../contract/contractor-factory'
 import { SpecialFnName } from '../enum/special-fn-name'
-import { ContractJestMock } from '../types/index'
+import { ContractMock } from '../types'
 
-const dummyJestMock: ContractJestMock = (_options) => {
+const dummyJestMock: ContractMock = (_options) => {
   return []
 }
 
@@ -13,11 +13,11 @@ export default contractFactory(
       terms: [
         {
           params: [],
-          result: { _jestMock: undefined },
+          result: { _mock: undefined },
         },
         {
           params: [dummyJestMock],
-          result: { _jestMock: dummyJestMock },
+          result: { _mock: dummyJestMock },
         },
       ],
     },

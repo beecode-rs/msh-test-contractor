@@ -1,6 +1,6 @@
 import { contractFactory } from '../src/contract/contractor-factory'
 import { mocker } from '../src/mocker/mocker'
-import { ContractMockRevertFns } from '../src/types/index'
+import { ContractMockRevertFns } from '../src/types'
 import dummyClassContract from './dummy-class.contract'
 import loggerContract from './logger.contract'
 
@@ -8,10 +8,8 @@ export default contractFactory(
   {
     module: require('./dummy-function'),
     subjectName: 'dummyFunction',
-    mock: {
-      jest: (): ContractMockRevertFns => {
-        return [mocker.contract(loggerContract).mockRestore, mocker.contract(dummyClassContract).mockRestore]
-      },
+    mock: (): ContractMockRevertFns => {
+      return [mocker.contract(loggerContract).mockRestore, mocker.contract(dummyClassContract).mockRestore]
     },
   },
   {

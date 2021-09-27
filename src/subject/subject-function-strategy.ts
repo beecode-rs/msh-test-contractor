@@ -1,5 +1,5 @@
 import { SpecialFnName } from '../enum/special-fn-name'
-import { ContractTerm } from '../types/index'
+import { ContractTerm } from '../types'
 import { SubjectFromContract, SubjectStrategy } from './subject-strategy'
 
 export class SubjectFunctionStrategy implements SubjectStrategy {
@@ -20,7 +20,8 @@ export class SubjectFunctionStrategy implements SubjectStrategy {
   }
 
   public exec(term: ContractTerm): any {
-    return this.fn()(...term.params)
+    const func = this.fn()
+    return func(...term.params)
   }
 
   public fn(): any {

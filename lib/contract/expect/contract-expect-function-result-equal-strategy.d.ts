@@ -1,4 +1,4 @@
-import { ContractTerm } from '../../types/index';
+import { ContractTerm } from '../../types';
 import { ContractExpectStrategy } from './contract-expect-strategy';
 export declare class ContractExpectFunctionResultEqualStrategy implements ContractExpectStrategy {
     protected readonly _termResult: any;
@@ -6,6 +6,6 @@ export declare class ContractExpectFunctionResultEqualStrategy implements Contra
     constructor({ term }: {
         term: ContractTerm;
     });
-    test(fn: () => any): void;
+    test(fn: () => any): Promise<void>;
 }
 //# sourceMappingURL=contract-expect-function-result-equal-strategy.d.ts.map

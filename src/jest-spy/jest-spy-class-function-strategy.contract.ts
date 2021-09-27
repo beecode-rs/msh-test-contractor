@@ -1,6 +1,6 @@
 import { contractFactory } from '../contract/contractor-factory'
 import { SpecialFnName } from '../enum/special-fn-name'
-import { ContractTerm } from '../types/index'
+import { ContractTerm } from '../types'
 
 const dummyTerms: { terms: ContractTerm[]; mockClassParams: any[] } = {
   terms: [
@@ -23,11 +23,9 @@ const selfContract = contractFactory(
       ],
     },
     mockImplementationFactory: {
-      // mock: {
       //   // TODO need to mock jestSpyFunctionStrategy
-      //   jest: (): ContractMockRevertFns => {
+      // mock:(): ContractMockRevertFns => {
       //     return [mocker.contract(jestSpyFunctionStrategyContract)] // max call stack ??
-      //   },
       // },
       terms: [
         {

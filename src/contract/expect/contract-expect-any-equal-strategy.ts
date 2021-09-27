@@ -1,4 +1,5 @@
-import { ContractTerm } from '../../types/index'
+import { ContractTerm } from '../../types'
+import { objectUtil } from '../../util/object-util'
 import { ContractExpectStrategy } from './contract-expect-strategy'
 
 export class ContractExpectAnyEqualStrategy implements ContractExpectStrategy {
@@ -8,8 +9,8 @@ export class ContractExpectAnyEqualStrategy implements ContractExpectStrategy {
     this._termResult = term.result
   }
 
-  public test(fn: () => any): void {
-    const result = fn()
-    expect(result).toEqual(this._termResult)
+  public async test(fn: () => any): Promise<void> {
+    const result = await fn()
+    expect(objectUtil.stringifyOrNullUndefined(result)).toEqual(objectUtil.stringifyOrNullUndefined(this._termResult))
   }
 }

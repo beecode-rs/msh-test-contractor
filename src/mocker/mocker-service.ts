@@ -1,5 +1,5 @@
 import { SpecialFnName } from '../enum/special-fn-name'
-import { AnyContract } from '../types/index'
+import { AnyContract } from '../types'
 import { typeUtil } from '../util/type-util'
 import { MockerJestClassStrategy } from './mocker-jest-class-strategy'
 import { MockerJestFunctionStrategy } from './mocker-jest-function-strategy'

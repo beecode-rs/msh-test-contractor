@@ -1,7 +1,7 @@
 import { contractFactory } from '../src/contract/contractor-factory'
 import { SpecialFnName } from '../src/enum/special-fn-name'
 import { mocker } from '../src/mocker/mocker'
-import { ContractMockRevertFns } from '../src/types/index'
+import { ContractMockRevertFns } from '../src/types'
 import dummyFunctionContract from './dummy-function.contract'
 
 export default contractFactory(
@@ -34,10 +34,8 @@ export default contractFactory(
       ],
     },
     externalAdd: {
-      mock: {
-        jest: (): ContractMockRevertFns => {
-          return [mocker.contract(dummyFunctionContract).mockRestore]
-        },
+      mock: (): ContractMockRevertFns => {
+        return [mocker.contract(dummyFunctionContract).mockRestore]
       },
       terms: [
         {

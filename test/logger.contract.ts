@@ -1,16 +1,14 @@
 import { contractFactory } from '../src/contract/contractor-factory'
 import dateContract from '../src/global-contract/date.contract'
 import { mocker } from '../src/mocker/mocker'
-import { ContractMockRevertFns } from '../src/types/index'
+import { ContractMockRevertFns } from '../src/types'
 
 const selfContract = contractFactory(
   { module: require('./logger'), subjectName: 'logger' },
   {
     _message: {
-      mock: {
-        jest: (): ContractMockRevertFns => {
-          return [mocker.contract(dateContract).mockRestore]
-        },
+      mock: (): ContractMockRevertFns => {
+        return [mocker.contract(dateContract).mockRestore]
       },
       terms: [
         {
@@ -36,10 +34,8 @@ const selfContract = contractFactory(
       ],
     },
     debug: {
-      mock: {
-        jest: (): ContractMockRevertFns => {
-          return [mocker.function(selfContract, '_message').mockRestore]
-        },
+      mock: (): ContractMockRevertFns => {
+        return [mocker.function(selfContract, '_message').mockRestore]
       },
       terms: [
         {

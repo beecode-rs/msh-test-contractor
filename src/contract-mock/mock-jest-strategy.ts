@@ -1,13 +1,13 @@
-import { ContractJestMock, ContractMockRevertFns } from '../types/index'
+import { ContractMock, ContractMockRevertFns } from '../types'
 import { MockStrategy } from './mock-strategy'
 
 export class MockJestStrategy implements MockStrategy {
   protected _restoreMockFn?: ContractMockRevertFns
 
-  constructor(protected readonly _jestMock?: ContractJestMock) {}
+  constructor(protected readonly _mock?: ContractMock) {}
 
   public mock({ params }: { params?: any[] } = {}): void {
-    this._restoreMockFn = this._jestMock ? this._jestMock({ params }) : []
+    this._restoreMockFn = this._mock ? this._mock({ params }) : []
   }
 
   public restore(): void {

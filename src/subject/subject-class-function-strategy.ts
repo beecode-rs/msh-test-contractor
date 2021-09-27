@@ -1,4 +1,4 @@
-import { ContractTerm } from '../types/index'
+import { ContractTerm } from '../types'
 import { SubjectFromContract, SubjectStrategy } from './subject-strategy'
 
 export class SubjectClassFunctionStrategy implements SubjectStrategy {
@@ -24,9 +24,15 @@ export class SubjectClassFunctionStrategy implements SubjectStrategy {
   }
 
   public exec(term: ContractTerm): any {
-    return new (this.fn())(...this._constructorParams)[this._fnName](...term.params)
+    const obj = new (this.fn())(...this._constructorParams)
+    if (this._isGetter()) return obj[this._fnName]
+    return obj[this._fnName](...term.params)
   }
   public fn(): any {
     return this._module[this._subjectName]
+  }
+
+  protected _isGetter(): boolean {
+    return !!Object.getOwnPropertyDescriptor(this._module[this._subjectName].prototype, this._fnName)?.get
   }
 }

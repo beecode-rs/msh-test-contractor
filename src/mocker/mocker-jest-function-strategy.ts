@@ -1,4 +1,4 @@
-import { AnyContract } from '../types/index'
+import { AnyContract } from '../types'
 import { MockerStrategy } from './mocker-strategy'
 
 export class MockerJestFunctionStrategy implements MockerStrategy<jest.SpyInstance> {
@@ -11,7 +11,8 @@ export class MockerJestFunctionStrategy implements MockerStrategy<jest.SpyInstan
   }
 
   public contractSpy(): jest.SpyInstance {
-    this._spy = jest.spyOn(this._contract.module, this._contract.subjectName)
+    const { module, subjectName } = this._contract
+    this._spy = jest.spyOn(module, subjectName)
     return this._spy
   }
 }

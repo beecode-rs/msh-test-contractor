@@ -34,10 +34,7 @@ export type ContractTerm = {
 }
 
 // TODO define mock object
-export type ContractMock = {
-  jest?: ContractJestMock
-}
-export type ContractJestMock = (options?: { params?: any[] }) => ContractMockRevertFns
+export type ContractMock = (options?: { params?: any[] }) => ContractMockRevertFns
 
 export type ContractMockRevertFn = () => void
 export type ContractMockRevertFns = ContractMockRevertFn[]

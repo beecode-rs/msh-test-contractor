@@ -1,6 +1,6 @@
 import { contractMockService } from '../contract-mock/contract-mock-service'
 import { subjectService } from '../subject/subject-service'
-import { Contract, ContractFunction, PropType } from '../types/index'
+import { Contract, ContractFunction, PropType } from '../types'
 import { contractorService } from './contractor-service'
 import { contractExpectService } from './expect/contract-expect-service'
 
@@ -24,11 +24,11 @@ export const contractor = <
       terms.forEach((term) => {
         const subjectStrategy = subjectService.strategyFromContractFunction({ contract, fnName, term })
 
-        it(contractorService.testName({ term }), () => {
+        it(contractorService.testName({ term }), async () => {
           moduleMockStrategy.mock({ params: term.params })
           functionMockStrategy.mock({ params: term.params })
           const expectStrategy = contractExpectService.fromTerm({ term })
-          expectStrategy.test(() => subjectStrategy.exec(term))
+          await expectStrategy.test(() => subjectStrategy.exec(term))
           functionMockStrategy.restore()
           moduleMockStrategy.restore()
         })

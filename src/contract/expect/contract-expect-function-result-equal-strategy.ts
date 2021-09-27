@@ -1,4 +1,4 @@
-import { ContractTerm } from '../../types/index'
+import { ContractTerm } from '../../types'
 import { ContractExpectStrategy } from './contract-expect-strategy'
 
 export class ContractExpectFunctionResultEqualStrategy implements ContractExpectStrategy {
@@ -10,8 +10,8 @@ export class ContractExpectFunctionResultEqualStrategy implements ContractExpect
     this._termReturnFnParams = term.returnFnParams
   }
 
-  public test(fn: () => any): void {
+  public async test(fn: () => any): Promise<void> {
     const result = fn()(...this._termReturnFnParams)
-    expect(result).toEqual(this._termResult)
+    expect(await result).toEqual(this._termResult)
   }
 }

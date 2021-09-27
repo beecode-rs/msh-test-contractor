@@ -1,17 +1,13 @@
 import { contractFactory } from '../contract/contractor-factory'
 import { mocker } from '../mocker/mocker'
-import { ContractMockRevertFns } from '../types/index'
+import { ContractMockRevertFns } from '../types'
 
 const selfContract = contractFactory(
   { module: require('./type-util'), subjectName: 'typeUtil' },
   {
     isClass: {
-      mock: {
-        jest: (): ContractMockRevertFns => {
-          return [mocker.function(selfContract, 'isObject'), mocker.function(selfContract, 'isFunction')].map(
-            (f) => f.mockRestore
-          )
-        },
+      mock: (): ContractMockRevertFns => {
+        return [mocker.function(selfContract, 'isObject').mockRestore, mocker.function(selfContract, 'isFunction').mockRestore]
       },
       terms: [
         {

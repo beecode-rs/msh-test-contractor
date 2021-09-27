@@ -1,10 +1,12 @@
 /// <reference types="jest" />
-import { ContractTerm } from '../types/index';
+import { ContractTerm } from '../types';
 import { JestSpyStrategy } from './jest-spy-strategy';
 export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
     protected readonly _terms: ContractTerm[];
-    constructor({ terms }: {
+    protected readonly _name: string;
+    constructor({ terms, name }: {
         terms: ContractTerm[];
+        name: string;
     });
     mockImplementationFactory(): jest.Mock;
 }

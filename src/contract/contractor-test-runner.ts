@@ -1,4 +1,4 @@
-import { AnyContract } from '../types/index'
+import { AnyContract } from '../types'
 import { contractor } from './contractor'
 import { glob } from 'glob'
 import path from 'path'

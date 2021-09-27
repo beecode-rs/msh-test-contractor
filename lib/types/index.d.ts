@@ -24,10 +24,7 @@ export declare type ContractTerm = {
     constructorParams?: any[];
     returnFnParams?: any[];
 };
-export declare type ContractMock = {
-    jest?: ContractJestMock;
-};
-export declare type ContractJestMock = (options?: {
+export declare type ContractMock = (options?: {
     params?: any[];
 }) => ContractMockRevertFns;
 export declare type ContractMockRevertFn = () => void;

@@ -1,4 +1,4 @@
-import { ContractTerm } from '../types/index';
+import { ContractTerm } from '../types';
 import { SubjectFromContract, SubjectStrategy } from './subject-strategy';
 export declare class SubjectConstructorStrategy implements SubjectStrategy {
     protected readonly _module: any;

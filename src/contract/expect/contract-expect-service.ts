@@ -1,4 +1,4 @@
-import { ContractTerm } from '../../types/index'
+import { ContractTerm } from '../../types'
 import { ContractExpectAnyEqualStrategy } from './contract-expect-any-equal-strategy'
 import { ContractExpectFunctionResultEqualStrategy } from './contract-expect-function-result-equal-strategy'
 import { ContractExpectStrategy } from './contract-expect-strategy'

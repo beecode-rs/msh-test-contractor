@@ -1,4 +1,4 @@
-import { ContractTerm } from '../../types/index';
+import { ContractTerm } from '../../types';
 import { ContractExpectStrategy } from './contract-expect-strategy';
 export declare const contractExpectService: {
     fromTerm: ({ term }: {

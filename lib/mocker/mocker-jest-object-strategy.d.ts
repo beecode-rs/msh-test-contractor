@@ -1,8 +1,8 @@
 /// <reference types="jest" />
-import { AnyContract } from '../types/index';
+import { AnyContract } from '../types';
 import { MockerStrategy } from './mocker-strategy';
 export declare type MockerJestObjectResult = {
-    [k: string]: jest.Mock;
+    [k: string]: jest.SpyInstance;
 };
 export declare class MockerJestObjectStrategy implements MockerStrategy<MockerJestObjectResult> {
     protected _contract: AnyContract;

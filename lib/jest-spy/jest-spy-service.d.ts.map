@@ -1,1 +1,1 @@
-{"version":3,"file":"jest-spy-service.d.ts","sourceRoot":"","sources":["../../src/jest-spy/jest-spy-service.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,gBAAgB,CAAA;AAG7C,OAAO,EAAE,eAAe,EAAE,MAAM,qBAAqB,CAAA;AAErD,eAAO,MAAM,cAAc;;eACgC,YAAY,EAAE;;UAA8B,eAAe;CAMrH,CAAA"}
+{"version":3,"file":"jest-spy-service.d.ts","sourceRoot":"","sources":["../../src/jest-spy/jest-spy-service.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,UAAU,CAAA;AAGvC,OAAO,EAAE,eAAe,EAAE,MAAM,qBAAqB,CAAA;AAErD,eAAO,MAAM,cAAc;;eAMhB,YAAY,EAAE;;cAEf,MAAM;UACV,eAAe;CAMpB,CAAA"}

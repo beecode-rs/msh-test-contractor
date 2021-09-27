@@ -17,18 +17,18 @@ describe('jestSpyService', () => {
 
     it('should throw error if terms are empty array', () => {
       expect(() => {
-        jestSpyService.strategyFromTerms({ terms: [] })
+        jestSpyService.strategyFromTerms({ terms: [], name: 'TEST' })
       }).toThrow('Terms missing')
     })
 
     it('should return JestSpyFunctionStrategy if there is no constructorParams in params', () => {
-      jestSpyService.strategyFromTerms({ terms: [{} as any] })
+      jestSpyService.strategyFromTerms({ terms: [{} as any], name: 'TEST' })
       expect(spy_JestSpyFunctionStrategy).toHaveBeenCalledTimes(1)
       expect(spy_JestSpyClassFunctionStrategy).toHaveBeenCalledTimes(0)
     })
 
     it('should return JestSpyClassFunctionStrategy if there is constructorParams in params', () => {
-      jestSpyService.strategyFromTerms({ terms: [{ constructorParams: [] } as any] })
+      jestSpyService.strategyFromTerms({ terms: [{ constructorParams: [] } as any], name: 'TEST' })
       expect(spy_JestSpyFunctionStrategy).toHaveBeenCalledTimes(1)
       expect(spy_JestSpyClassFunctionStrategy).toHaveBeenCalledTimes(0)
     })
