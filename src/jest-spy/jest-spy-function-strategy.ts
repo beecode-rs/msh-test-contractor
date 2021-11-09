@@ -6,7 +6,8 @@ export class JestSpyFunctionStrategy implements JestSpyStrategy {
   protected readonly _terms: ContractTerm[]
   protected readonly _name: string
 
-  constructor({ terms, name }: { terms: ContractTerm[]; name: string }) {
+  constructor(params: { terms: ContractTerm[]; name: string }) {
+    const { terms, name } = params
     this._terms = terms
     this._name = name
   }

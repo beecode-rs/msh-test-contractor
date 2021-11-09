@@ -6,7 +6,8 @@ export class MockJestStrategy implements MockStrategy {
 
   constructor(protected readonly _mock?: ContractMock) {}
 
-  public mock({ params }: { params?: any[] } = {}): void {
+  public mock(mockParams: { params?: any[] } = {}): void {
+    const { params } = mockParams
     this._restoreMockFn = this._mock ? this._mock({ params }) : []
   }
 

@@ -7,15 +7,12 @@ import { SubjectFunctionStrategy } from './subject-function-strategy'
 import { SubjectFromContract, SubjectStrategy } from './subject-strategy'
 
 export const subjectService = {
-  strategyFromContractFunction: ({
-    contract: { module, subjectName, fns },
-    fnName,
-    term: { constructorParams },
-  }: {
-    contract: AnyContract
-    fnName: string
-    term: ContractTerm
-  }): SubjectStrategy => {
+  strategyFromContractFunction: (params: { contract: AnyContract; fnName: string; term: ContractTerm }): SubjectStrategy => {
+    const {
+      contract: { module, subjectName, fns },
+      fnName,
+      term: { constructorParams },
+    } = params
     const subjectFromContract = { module, subjectName } as SubjectFromContract
     if (fnUtil.isConstructor(fnName)) return new SubjectConstructorStrategy({ subjectFromContract })
     if (Object.keys(fns ?? {}).includes(SpecialFnName.CONSTRUCTOR)) {

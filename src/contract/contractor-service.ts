@@ -1,10 +1,14 @@
 import { ContractTerm } from '../types'
 
 export const contractorService = {
-  testDescription: ({ fnName }: { fnName: string }): string => {
+  testDescription: (params: { fnName: string }): string => {
+    const { fnName } = params
     return `${fnName} [contract]`
   },
-  testName: ({ term: { params, result } }: { term: ContractTerm }): string => {
-    return `input: ${JSON.stringify(params)}   output: ${JSON.stringify(result)}`
+  testName: (params: { term: ContractTerm }): string => {
+    const {
+      term: { params: termParams, result },
+    } = params
+    return `input: ${JSON.stringify(termParams)}   output: ${JSON.stringify(result)}`
   },
 }

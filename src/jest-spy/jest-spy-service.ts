@@ -4,15 +4,8 @@ import { JestSpyFunctionStrategy } from './jest-spy-function-strategy'
 import { JestSpyStrategy } from './jest-spy-strategy'
 
 export const jestSpyService = {
-  strategyFromTerms: ({
-    terms,
-    mockClassParams,
-    name,
-  }: {
-    terms: ContractTerm[]
-    mockClassParams?: any[]
-    name: string
-  }): JestSpyStrategy => {
+  strategyFromTerms: (params: { terms: ContractTerm[]; mockClassParams?: any[]; name: string }): JestSpyStrategy => {
+    const { terms, mockClassParams, name } = params
     if (terms.length === 0) throw new Error('Terms missing')
     const { constructorParams } = terms[0]
     if (mockClassParams && constructorParams) return new JestSpyClassFunctionStrategy({ terms, mockClassParams, name })

@@ -1,10 +1,11 @@
 import { ContractTerm } from '../../types'
-import { ContractExpectStrategy } from './contract-expect-strategy'
+import { ContractExpectStrategy } from './contract-expect-service'
 
 export class ContractExpectThrowErrorStrategy implements ContractExpectStrategy {
   protected readonly _termResult: any
 
-  constructor({ term }: { term: ContractTerm }) {
+  constructor(params: { term: ContractTerm }) {
+    const { term } = params
     this._termResult = term.result
   }
 

@@ -8,7 +8,8 @@ export class JestSpyClassFunctionStrategy implements JestSpyStrategy {
   protected readonly _mockClassParams: any[]
   protected readonly _name: string
 
-  constructor({ terms, mockClassParams, name }: { terms: ContractTerm[]; mockClassParams: any[]; name: string }) {
+  constructor(params: { terms: ContractTerm[]; mockClassParams: any[]; name: string }) {
+    const { terms, mockClassParams, name } = params
     this._terms = terms
     this._mockClassParams = mockClassParams
     this._name = name

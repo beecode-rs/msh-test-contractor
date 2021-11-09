@@ -1,0 +1,205 @@
+@startuml
+    folder "src" as src_b874d07 {
+      artifact "index.ts" as index_ts_e4daf83f {
+      }
+      folder "contract-mock" as contract_mock_13a4bfd {
+        object "contractMockService" as contract_mock_service_e032609e {
+          + strategyFromFunctionMock(mock?: ContractMock): MockStrategy
+        }
+        class "MockJestEmptyStrategy" as mock_jest_empty_strategy_6b75ebba {
+          + mock: void
+          + restore: void
+        }
+        class "MockJestStrategy" as mock_jest_strategy_110bab22 {
+          # _restoreMockFn: ContractMockRevertFns
+          constructor(protected readonly _mock?: ContractMock)
+          + mock(mockParams: { params?: any[] } = {}): void
+          + restore: void
+        }
+        interface "MockStrategy" as mock_strategy_f31055a7 {
+          + mock(options?: { params?: any[] }): void
+          + restore: void
+        }
+      }
+      folder "contract" as contract_a6abdc3a {
+        object "contractFactory" as contract_factory_8b8cd82a {
+        }
+        object "contractorService" as contractor_service_34db42c3 {
+          + testDescription(params: { fnName: string }): string
+          + testName(params: { term: ContractTerm }): string
+        }
+        object "contractorTestRunner" as contractor_test_runner_75ae1e95 {
+          # _file(fileLocation: string): void
+          + contract(contract: AnyContract): void
+          + dir(dirLocation: string): void
+          + file(fileLocation: string): void
+        }
+        object "contractor" as contractor_80423633 {
+        }
+        folder "expect" as expect_4653682a {
+          class "ContractExpectAnyEqualStrategy" as contract_expect_any_equal_strategy_dbfa3b00 {
+            # _termResult: any
+            constructor(params: { term: ContractTerm })
+            + test(fn: () => any): Promise<void>
+          }
+          class "ContractExpectFunctionResultEqualStrategy" as contract_expect_function_result_equal_strategy_d24fd2d0 {
+            # _termResult: any
+            # _termReturnFnParams: any
+            constructor(params: { term: ContractTerm })
+            + test(fn: () => any): Promise<void>
+          }
+          interface "ContractExpectStrategy" as contract_expect_strategy_eba579dc {
+            + test(fn: () => any): Promise<void>
+          }
+          object "contractExpectService" as contract_expect_service_eba579dc {
+            + fromTerm(params: { term: ContractTerm }): ContractExpectStrategy
+          }
+          class "ContractExpectThrowErrorStrategy" as contract_expect_throw_error_strategy_dec84594 {
+            # _termResult: any
+            constructor(params: { term: ContractTerm })
+            + test(fn: () => any): Promise<void>
+          }
+        }
+      }
+      folder "enum" as enum_1eea471b {
+        enum "SpecialFnName" as special_fn_name_af43c293 {
+          CONSTRUCTOR = 'CONSTRUCTOR'
+          SELF = 'SELF'
+        }
+      }
+      folder "jest-spy" as jest_spy_769e5e57 {
+        class "JestSpyClassFunctionStrategy" as jest_spy_class_function_strategy_1b508a74 {
+          # _mockClassParams: any[]
+          # _name: string
+          # _terms: ContractTerm[]
+          constructor(params: {\n terms: ContractTerm[];\n mockClassParams: any[];\n name: string \n})
+          + mockImplementationFactory: (...args: any[]) => any
+        }
+        class "JestSpyFunctionStrategy" as jest_spy_function_strategy_50822377 {
+          # _name: string
+          # _terms: ContractTerm[]
+          constructor(params: {\n terms: ContractTerm[];\n name: string \n})
+          + mockImplementationFactory: jest.Mock
+        }
+        object "jestSpyService" as jest_spy_service_6fc01de {
+          + strategyFromTerms(params: {\n terms: ContractTerm[];\n mockClassParams?: any[];\n name: string \n}): JestSpyStrategy
+        }
+        interface "JestSpyStrategy" as jest_spy_strategy_3b506218 {
+          + mockImplementationFactory: (...args: any[]) => any
+        }
+      }
+      folder "mocker" as mocker_baa6adb5 {
+        class "MockerJestClassStrategy" as mocker_jest_class_strategy_2fddb4de {
+          # _functionNames(classObject: any): string[]
+          # _mockClass(functionNames: string[]): (...args: any[]) => any
+          # _mockFunction(params: {\n terms: ContractTerm[];\n mockClassParams: any[];\n name: string \n}): (...args: any[]) => any
+          # _spy: jest.SpyInstance
+          constructor(protected _contract: AnyContract)
+          + contractSpy: jest.SpyInstance
+          + mockRestore: void
+        }
+        class "MockerJestFunctionStrategy" as mocker_jest_function_strategy_697630f2 {
+          # _spy: jest.SpyInstance
+          constructor(protected _contract: AnyContract)
+          + contractSpy: jest.SpyInstance
+          + mockRestore: void
+        }
+        class "MockerJestObjectStrategy" as mocker_jest_object_strategy_68212a45 {
+          # _mockObject: MockerJestObjectResult
+          # _spies: jest.SpyInstance[]
+          constructor(protected _contract: AnyContract)
+          + contractSpy: MockerJestObjectResult
+          + mockRestore: void
+        }
+        object "mockerService" as mocker_service_4cce6b9e {
+          + strategyFromContract(contract: AnyContract): MockerStrategy<any>
+        }
+        interface "MockerStrategy" as mocker_strategy_5ff94dd8 {
+          + mockRestore: void
+          + contractSpy: T
+        }
+        object "mocker" as mocker_a59a476e {
+          + contract(contract: C): MockerContractResult<SPY>
+          + function(contract: C,\n fnName: CFNK): MockerContractResult
+        }
+      }
+      folder "subject" as subject_26e44ef4 {
+        class "SubjectClassFunctionStrategy" as subject_class_function_strategy_b14fcaf4 {
+          # _constructorParams: any[]
+          # _fnName: string
+          # _isGetter: boolean
+          # _module: any
+          # _subjectName: string
+          constructor(params: {\n subjectFromContract: SubjectFromContract;\n constructorParams: any[];\n fnName: string \n})
+          + exec(term: ContractTerm): any
+          + fn: any
+        }
+        class "SubjectConstructorStrategy" as subject_constructor_strategy_bc4101fd {
+          # _module: any
+          # _subjectName: string
+          constructor(params: { subjectFromContract: SubjectFromContract })
+          + exec(term: ContractTerm): any
+          + fn: any
+        }
+        class "SubjectFunctionStrategy" as subject_function_strategy_44168ff7 {
+          # _fnName: string
+          # _module: any
+          # _subjectName: string
+          constructor(params: {\n subjectFromContract: SubjectFromContract;\n fnName: string \n})
+          + exec(term: ContractTerm): any
+          + fn: any
+        }
+        object "subjectService" as subject_service_7ba6575e {
+          + strategyFromContractFunction(params: {\n contract: AnyContract;\n fnName: string;\n term: ContractTerm \n}): SubjectStrategy
+        }
+        interface "SubjectStrategy" as subject_strategy_42eab098 {
+          + exec: (term: ContractTerm) => any
+          + fn: () => any
+        }
+      }
+    }
+  contract_mock_service_e032609e -up-> mock_jest_empty_strategy_6b75ebba
+  contract_mock_service_e032609e -up-> mock_jest_strategy_110bab22
+  contract_mock_service_e032609e -up-> mock_strategy_f31055a7
+  mock_jest_empty_strategy_6b75ebba .up.|> mock_strategy_f31055a7
+  mock_jest_strategy_110bab22 .up.|> mock_strategy_f31055a7
+  contractor_test_runner_75ae1e95 -up-> contractor_80423633
+  contractor_test_runner_75ae1e95 -up-> contractor_test_runner_75ae1e95
+  contractor_80423633 -up-> contract_mock_service_e032609e
+  contractor_80423633 -up-> subject_service_7ba6575e
+  contractor_80423633 -up-> contractor_service_34db42c3
+  contractor_80423633 -up-> contract_expect_service_eba579dc
+  contract_expect_any_equal_strategy_dbfa3b00 .up.|> contract_expect_strategy_eba579dc
+  contract_expect_function_result_equal_strategy_d24fd2d0 .up.|> contract_expect_strategy_eba579dc
+  contract_expect_service_eba579dc -up-> contract_expect_any_equal_strategy_dbfa3b00
+  contract_expect_service_eba579dc -up-> contract_expect_function_result_equal_strategy_d24fd2d0
+  contract_expect_service_eba579dc -up-> contract_expect_throw_error_strategy_dec84594
+  contract_expect_service_eba579dc -up-> contract_expect_strategy_eba579dc
+  contract_expect_throw_error_strategy_dec84594 .up.|> contract_expect_strategy_eba579dc
+  jest_spy_class_function_strategy_1b508a74 -up-> jest_spy_function_strategy_50822377
+  jest_spy_class_function_strategy_1b508a74 .up.|> jest_spy_strategy_3b506218
+  jest_spy_function_strategy_50822377 .up.|> jest_spy_strategy_3b506218
+  jest_spy_service_6fc01de -up-> jest_spy_class_function_strategy_1b508a74
+  jest_spy_service_6fc01de -up-> jest_spy_function_strategy_50822377
+  jest_spy_service_6fc01de -up-> jest_spy_strategy_3b506218
+  mocker_jest_class_strategy_2fddb4de -up-> jest_spy_function_strategy_50822377
+  mocker_jest_class_strategy_2fddb4de -up-> jest_spy_service_6fc01de
+  mocker_jest_class_strategy_2fddb4de .up.|> mocker_strategy_5ff94dd8
+  mocker_jest_function_strategy_697630f2 .up.|> mocker_strategy_5ff94dd8
+  mocker_jest_object_strategy_68212a45 -up-> jest_spy_function_strategy_50822377
+  mocker_jest_object_strategy_68212a45 .up.|> mocker_strategy_5ff94dd8
+  mocker_service_4cce6b9e -up-> mocker_jest_class_strategy_2fddb4de
+  mocker_service_4cce6b9e -up-> mocker_jest_function_strategy_697630f2
+  mocker_service_4cce6b9e -up-> mocker_jest_object_strategy_68212a45
+  mocker_service_4cce6b9e -up-> mocker_strategy_5ff94dd8
+  mocker_a59a476e -up-> jest_spy_function_strategy_50822377
+  mocker_a59a476e -up-> mocker_service_4cce6b9e
+  subject_class_function_strategy_b14fcaf4 .up.|> subject_strategy_42eab098
+  subject_constructor_strategy_bc4101fd .up.|> subject_strategy_42eab098
+  subject_function_strategy_44168ff7 .up.|> subject_strategy_42eab098
+  subject_service_7ba6575e -up-> special_fn_name_af43c293
+  subject_service_7ba6575e -up-> subject_class_function_strategy_b14fcaf4
+  subject_service_7ba6575e -up-> subject_constructor_strategy_bc4101fd
+  subject_service_7ba6575e -up-> subject_function_strategy_44168ff7
+  subject_service_7ba6575e -up-> subject_strategy_42eab098
+@enduml

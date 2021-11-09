@@ -5,7 +5,10 @@ export class SubjectConstructorStrategy implements SubjectStrategy {
   protected readonly _module: any
   protected readonly _subjectName: string
 
-  constructor({ subjectFromContract: { module, subjectName } }: { subjectFromContract: SubjectFromContract }) {
+  constructor(params: { subjectFromContract: SubjectFromContract }) {
+    const {
+      subjectFromContract: { module, subjectName },
+    } = params
     if (!subjectName) throw new Error('Subject name must be specified for class functions strategy')
     this._module = module
     this._subjectName = subjectName

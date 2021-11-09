@@ -54,15 +54,8 @@ export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance>
     }
   }
 
-  protected _mockFunction({
-    terms,
-    mockClassParams,
-    name,
-  }: {
-    terms: ContractTerm[]
-    mockClassParams: any[]
-    name: string
-  }): (...args: any[]) => any {
+  protected _mockFunction(params: { terms: ContractTerm[]; mockClassParams: any[]; name: string }): (...args: any[]) => any {
+    const { terms, mockClassParams, name } = params
     const jestSpyStrategy = jestSpyService.strategyFromTerms({ terms, mockClassParams, name })
     return jestSpyStrategy.mockImplementationFactory()
   }

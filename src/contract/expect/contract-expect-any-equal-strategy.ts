@@ -1,11 +1,12 @@
 import { ContractTerm } from '../../types'
 import { objectUtil } from '../../util/object-util'
-import { ContractExpectStrategy } from './contract-expect-strategy'
+import { ContractExpectStrategy } from './contract-expect-service'
 
 export class ContractExpectAnyEqualStrategy implements ContractExpectStrategy {
   protected readonly _termResult: any
 
-  constructor({ term }: { term: ContractTerm }) {
+  constructor(params: { term: ContractTerm }) {
+    const { term } = params
     this._termResult = term.result
   }
 

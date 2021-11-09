@@ -7,15 +7,12 @@ export class SubjectClassFunctionStrategy implements SubjectStrategy {
   protected readonly _constructorParams: any[]
   protected readonly _fnName: string
 
-  constructor({
-    subjectFromContract: { module, subjectName },
-    constructorParams,
-    fnName,
-  }: {
-    subjectFromContract: SubjectFromContract
-    constructorParams: any[]
-    fnName: string
-  }) {
+  constructor(params: { subjectFromContract: SubjectFromContract; constructorParams: any[]; fnName: string }) {
+    const {
+      subjectFromContract: { module, subjectName },
+      constructorParams,
+      fnName,
+    } = params
     this._module = module
     if (!subjectName) throw new Error('Subject name must be specified for class functions strategy')
     this._subjectName = subjectName
