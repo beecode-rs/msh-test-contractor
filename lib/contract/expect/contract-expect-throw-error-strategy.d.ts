@@ -1,8 +1,8 @@
 import { ContractTerm } from '../../types';
-import { ContractExpectStrategy } from './contract-expect-strategy';
+import { ContractExpectStrategy } from './contract-expect-service';
 export declare class ContractExpectThrowErrorStrategy implements ContractExpectStrategy {
     protected readonly _termResult: any;
-    constructor({ term }: {
+    constructor(params: {
         term: ContractTerm;
     });
     test(fn: () => any): Promise<void>;

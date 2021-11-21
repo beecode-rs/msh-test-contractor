@@ -9,7 +9,7 @@ export declare class MockerJestClassStrategy implements MockerStrategy<jest.SpyI
     contractSpy(): jest.SpyInstance;
     protected _functionNames(classObject: any): string[];
     protected _mockClass(functionNames: string[]): (...args: any[]) => any;
-    protected _mockFunction({ terms, mockClassParams, name, }: {
+    protected _mockFunction(params: {
         terms: ContractTerm[];
         mockClassParams: any[];
         name: string;

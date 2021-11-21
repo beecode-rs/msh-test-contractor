@@ -4,7 +4,7 @@ import { JestSpyStrategy } from './jest-spy-strategy';
 export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
     protected readonly _terms: ContractTerm[];
     protected readonly _name: string;
-    constructor({ terms, name }: {
+    constructor(params: {
         terms: ContractTerm[];
         name: string;
     });

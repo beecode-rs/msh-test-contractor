@@ -4,7 +4,7 @@ export declare class MockJestStrategy implements MockStrategy {
     protected readonly _mock?: ContractMock | undefined;
     protected _restoreMockFn?: ContractMockRevertFns;
     constructor(_mock?: ContractMock | undefined);
-    mock({ params }?: {
+    mock(mockParams?: {
         params?: any[];
     }): void;
     restore(): void;

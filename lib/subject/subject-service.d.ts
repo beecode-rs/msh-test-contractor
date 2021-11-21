@@ -1,7 +1,7 @@
 import { AnyContract, ContractTerm } from '../types';
 import { SubjectStrategy } from './subject-strategy';
 export declare const subjectService: {
-    strategyFromContractFunction: ({ contract: { module, subjectName, fns }, fnName, term: { constructorParams }, }: {
+    strategyFromContractFunction: (params: {
         contract: AnyContract;
         fnName: string;
         term: ContractTerm;

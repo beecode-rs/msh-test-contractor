@@ -4,7 +4,7 @@ export declare class SubjectFunctionStrategy implements SubjectStrategy {
     protected readonly _subjectName: string;
     protected readonly _module: any;
     protected readonly _fnName: string;
-    constructor({ subjectFromContract: { module, subjectName }, fnName, }: {
+    constructor(params: {
         subjectFromContract: SubjectFromContract;
         fnName: string;
     });

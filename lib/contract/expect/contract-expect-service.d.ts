@@ -1,7 +1,9 @@
 import { ContractTerm } from '../../types';
-import { ContractExpectStrategy } from './contract-expect-strategy';
+export interface ContractExpectStrategy {
+    test(fn: () => any): Promise<void>;
+}
 export declare const contractExpectService: {
-    fromTerm: ({ term }: {
+    fromTerm: (params: {
         term: ContractTerm;
     }) => ContractExpectStrategy;
 };

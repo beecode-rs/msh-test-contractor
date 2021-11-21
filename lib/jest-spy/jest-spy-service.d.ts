@@ -1,9 +1,9 @@
 import { ContractTerm } from '../types';
 import { JestSpyStrategy } from './jest-spy-strategy';
 export declare const jestSpyService: {
-    strategyFromTerms: ({ terms, mockClassParams, name, }: {
+    strategyFromTerms: (params: {
         terms: ContractTerm[];
-        mockClassParams?: any[] | undefined;
+        mockClassParams?: any[];
         name: string;
     }) => JestSpyStrategy;
 };

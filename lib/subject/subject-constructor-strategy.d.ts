@@ -3,7 +3,7 @@ import { SubjectFromContract, SubjectStrategy } from './subject-strategy';
 export declare class SubjectConstructorStrategy implements SubjectStrategy {
     protected readonly _module: any;
     protected readonly _subjectName: string;
-    constructor({ subjectFromContract: { module, subjectName } }: {
+    constructor(params: {
         subjectFromContract: SubjectFromContract;
     });
     exec(term: ContractTerm): any;

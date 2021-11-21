@@ -1,9 +1,9 @@
 import { ContractTerm } from '../types';
 export declare const contractorService: {
-    testDescription: ({ fnName }: {
+    testDescription: (params: {
         fnName: string;
     }) => string;
-    testName: ({ term: { params, result } }: {
+    testName: (params: {
         term: ContractTerm;
     }) => string;
 };
