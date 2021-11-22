@@ -1,53 +1,53 @@
-## [1.3.4](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.3...v1.3.4) (2021-11-21)
+## [0.3.4](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.3...v1.3.4) (2021-11-21)
 
 
 ### Bug Fixes
 
 * update packages ([ab6bf5f](https://github.com/beecode-rs/msh-test-contractor/commit/ab6bf5ffaff00a6f6f3df04933ad95cb6749fc43))
 
-## [1.3.3](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.2...v1.3.3) (2021-09-27)
+## [0.3.3](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.2...v1.3.3) (2021-09-27)
 
 
 ### Bug Fixes
 
 * improvement ([b3aeaa0](https://github.com/beecode-rs/msh-test-contractor/commit/b3aeaa0846342630c9a57fe4f70510be59c86869))
 
-## [1.3.2](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.1...v1.3.2) (2021-09-03)
+## [0.3.2](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.1...v1.3.2) (2021-09-03)
 
 
 ### Bug Fixes
 
 * update mocker ([dba1658](https://github.com/beecode-rs/msh-test-contractor/commit/dba165829f02d419c84ff270c8168b997334d121))
 
-## [1.3.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.0...v1.3.1) (2021-09-02)
+## [0.3.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.3.0...v1.3.1) (2021-09-02)
 
 
 ### Bug Fixes
 
 * update package ([e866393](https://github.com/beecode-rs/msh-test-contractor/commit/e866393e93b8570fbad810e7b480f46b6d363777))
 
-# [1.3.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.2.1...v1.3.0) (2021-09-02)
+# [0.3.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.2.1...v1.3.0) (2021-09-02)
 
 
 ### Features
 
 * add moduleMock, refactor contracts ([e900856](https://github.com/beecode-rs/msh-test-contractor/commit/e90085601cd187c5ed7c36e9f84c2d662eeec760))
 
-## [1.2.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.2.0...v1.2.1) (2021-08-31)
+## [0.2.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.2.0...v1.2.1) (2021-08-31)
 
 
 ### Bug Fixes
 
 * do not use .t.ts files ([7be43d7](https://github.com/beecode-rs/msh-test-contractor/commit/7be43d76d693c65bab7108826c66e54bdf20004e))
 
-# [1.2.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.1.0...v1.2.0) (2021-08-30)
+# [0.2.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.1.0...v1.2.0) (2021-08-30)
 
 
 ### Features
 
 * contract without subject ([ecd8b50](https://github.com/beecode-rs/msh-test-contractor/commit/ecd8b506dd61ee77de1c18034a089252063948c4))
 
-# [1.1.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.0.1...v1.1.0) (2021-08-30)
+# [0.1.0](https://github.com/beecode-rs/msh-test-contractor/compare/v1.0.1...v1.1.0) (2021-08-30)
 
 
 ### Bug Fixes
@@ -59,7 +59,7 @@
 
 * add expect to throw error ([5fcf7ef](https://github.com/beecode-rs/msh-test-contractor/commit/5fcf7ef4faa0b24bb268854986f6c68838a98475))
 
-## [1.0.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.0.0...v1.0.1) (2021-08-29)
+## [0.0.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.0.0...v1.0.1) (2021-08-29)
 
 
 ### Bug Fixes
