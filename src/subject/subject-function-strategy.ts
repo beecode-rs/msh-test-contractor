@@ -7,7 +7,7 @@ export class SubjectFunctionStrategy implements SubjectStrategy {
   protected readonly _module: any
   protected readonly _fnName: string
 
-  constructor(params: { subjectFromContract: SubjectFromContract; fnName: string }) {
+  public constructor(params: { subjectFromContract: SubjectFromContract; fnName: string }) {
     const {
       subjectFromContract: { module, subjectName },
       fnName,

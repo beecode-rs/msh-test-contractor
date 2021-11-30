@@ -12,7 +12,7 @@
         }
         class "MockJestStrategy" as mock_jest_strategy_110bab22 {
           # _restoreMockFn: ContractMockRevertFns
-          constructor(protected readonly _mock?: ContractMock)
+         + constructor(protected readonly _mock?: ContractMock)
           + mock(mockParams: { params?: any[] } = {}): void
           + restore: void
         }
@@ -39,13 +39,13 @@
         folder "expect" as expect_4653682a {
           class "ContractExpectAnyEqualStrategy" as contract_expect_any_equal_strategy_dbfa3b00 {
             # _termResult: any
-            constructor(params: { term: ContractTerm })
+           + constructor(params: { term: ContractTerm })
             + test(fn: () => any): Promise<void>
           }
           class "ContractExpectFunctionResultEqualStrategy" as contract_expect_function_result_equal_strategy_d24fd2d0 {
             # _termResult: any
             # _termReturnFnParams: any
-            constructor(params: { term: ContractTerm })
+           + constructor(params: { term: ContractTerm })
             + test(fn: () => any): Promise<void>
           }
           interface "ContractExpectStrategy" as contract_expect_strategy_eba579dc {
@@ -56,7 +56,7 @@
           }
           class "ContractExpectThrowErrorStrategy" as contract_expect_throw_error_strategy_dec84594 {
             # _termResult: any
-            constructor(params: { term: ContractTerm })
+           + constructor(params: { term: ContractTerm })
             + test(fn: () => any): Promise<void>
           }
         }
@@ -72,13 +72,13 @@
           # _mockClassParams: any[]
           # _name: string
           # _terms: ContractTerm[]
-          constructor(params: {\n terms: ContractTerm[];\n mockClassParams: any[];\n name: string \n})
+         + constructor(params: {\n terms: ContractTerm[];\n mockClassParams: any[];\n name: string \n})
           + mockImplementationFactory: (...args: any[]) => any
         }
         class "JestSpyFunctionStrategy" as jest_spy_function_strategy_50822377 {
           # _name: string
           # _terms: ContractTerm[]
-          constructor(params: {\n terms: ContractTerm[];\n name: string \n})
+         + constructor(params: {\n terms: ContractTerm[];\n name: string \n})
           + mockImplementationFactory: jest.Mock
         }
         object "jestSpyService" as jest_spy_service_6fc01de {
@@ -94,20 +94,20 @@
           # _mockClass(functionNames: string[]): (...args: any[]) => any
           # _mockFunction(params: {\n terms: ContractTerm[];\n mockClassParams: any[];\n name: string \n}): (...args: any[]) => any
           # _spy: jest.SpyInstance
-          constructor(protected _contract: AnyContract)
+         + constructor(protected _contract: AnyContract)
           + contractSpy: jest.SpyInstance
           + mockRestore: void
         }
         class "MockerJestFunctionStrategy" as mocker_jest_function_strategy_697630f2 {
           # _spy: jest.SpyInstance
-          constructor(protected _contract: AnyContract)
+         + constructor(protected _contract: AnyContract)
           + contractSpy: jest.SpyInstance
           + mockRestore: void
         }
         class "MockerJestObjectStrategy" as mocker_jest_object_strategy_68212a45 {
           # _mockObject: MockerJestObjectResult
           # _spies: jest.SpyInstance[]
-          constructor(protected _contract: AnyContract)
+         + constructor(protected _contract: AnyContract)
           + contractSpy: MockerJestObjectResult
           + mockRestore: void
         }
@@ -130,14 +130,14 @@
           # _isGetter: boolean
           # _module: any
           # _subjectName: string
-          constructor(params: {\n subjectFromContract: SubjectFromContract;\n constructorParams: any[];\n fnName: string \n})
+         + constructor(params: {\n subjectFromContract: SubjectFromContract;\n constructorParams: any[];\n fnName: string \n})
           + exec(term: ContractTerm): any
           + fn: any
         }
         class "SubjectConstructorStrategy" as subject_constructor_strategy_bc4101fd {
           # _module: any
           # _subjectName: string
-          constructor(params: { subjectFromContract: SubjectFromContract })
+         + constructor(params: { subjectFromContract: SubjectFromContract })
           + exec(term: ContractTerm): any
           + fn: any
         }
@@ -145,7 +145,7 @@
           # _fnName: string
           # _module: any
           # _subjectName: string
-          constructor(params: {\n subjectFromContract: SubjectFromContract;\n fnName: string \n})
+         + constructor(params: {\n subjectFromContract: SubjectFromContract;\n fnName: string \n})
           + exec(term: ContractTerm): any
           + fn: any
         }

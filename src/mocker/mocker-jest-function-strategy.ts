@@ -4,7 +4,7 @@ import { MockerStrategy } from './mocker-strategy'
 export class MockerJestFunctionStrategy implements MockerStrategy<jest.SpyInstance> {
   protected _spy?: jest.SpyInstance
 
-  constructor(protected _contract: AnyContract) {}
+  public constructor(protected _contract: AnyContract) {}
 
   public mockRestore(): void {
     if (this._spy) this._spy.mockRestore()
