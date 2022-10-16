@@ -60,6 +60,7 @@
   },
   "files": [
     "lib",
+    "src",
     "package-lock.json"
   ],
   "homepage": "https://github.com/beecode-rs/msh-test-contractor#readme",
