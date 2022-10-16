@@ -14,7 +14,7 @@
     }
   },
   "dependencies": {
-    "@beecode/msh-node-log": "2.2.2",
+    "@beecode/msh-node-log": "2.2.3",
     "deep-equal": "2.0.5",
     "dotenv": "16.0.0",
     "glob": "7.2.0"
