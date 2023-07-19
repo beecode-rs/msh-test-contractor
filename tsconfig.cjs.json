@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"composite": false,
+		"declarationDir": "./dist/types-cjs",
+		"module": "commonjs",
+		"outDir": "./dist/cjs"
+	},
+	"exclude": [
+		"./**/*.test.ts"
+	],
+	"extends": "./tsconfig.json"
+}

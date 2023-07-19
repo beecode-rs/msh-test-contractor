@@ -3,20 +3,19 @@ name: Alpha Deploy
 agent:
   machine:
     type: e1-standard-2
+    os_image: ubuntu2004
 
-  containers:
-    - name: main
-      image: 'registry.semaphoreci.com/node:14'
 blocks:
   - name: Deploy to Alpha
     task:
       secrets:
+        - name: mb-docker-hub
         - name: bc-git-secret
         - name: bc-npm-secret
-        - name: bc-msh-test-contractor-secret
       jobs:
         - name: Deploy
           commands:
+            - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
             - cache restore bc-msh-test-contractor-version-$SEMAPHORE_GIT_SHA
             - export $(cat version.txt)
             - rm version.txt
@@ -24,12 +23,7 @@ blocks:
             - git remote rm origin
             - git remote add origin https://$GH_USER:$GH_TOKEN@github.com/beecode-rs/msh-test-contractor.git
             - git checkout tags/v$VERSION -b tmp-alpha-branch
-            - npm ci
-            - npm run build
-            - npm run bump-version -- $VERSION-alpha
-            - git tag v$VERSION-alpha && git push origin --tags
-            - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
-            - npm config set unsafe-perm true
-            - npm publish --access public -tag alpha
+            - docker build -f ./resource/docker/Dockerfile -t bc-msh-test-contractor-deploy .
+            - docker run --rm -e CI bc-msh-test-contractor-deploy sh -c "npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN && npm run bump-version $VERSION-alpha && npm publish --access public -tag alpha && git tag v$VERSION-alpha && git push origin --tags"
     skip:
       when: branch != 'main'
