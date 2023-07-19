@@ -1,1 +1,0 @@
-{"version":3,"file":"mocker.d.ts","sourceRoot":"","sources":["../../src/mocker/mocker.ts"],"names":[],"mappings":";AACA,OAAO,EAAE,WAAW,EAAoB,oBAAoB,EAAE,QAAQ,EAAE,MAAM,UAAU,CAAA;AAIxF,oBAAY,oBAAoB,CAAC,GAAG,GAAG,IAAI,CAAC,WAAW,IAAI;IACzD,GAAG,EAAE,GAAG,CAAA;IACR,WAAW,EAAE,oBAAoB,CAAA;CAClC,CAAA;AAED,eAAO,MAAM,MAAM;;kIAUd,oBAAoB;CAkBxB,CAAA"}
