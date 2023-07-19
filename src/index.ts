@@ -1,3 +1,3 @@
-/* istanbul ignore file */
-export { contractor } from './contract/contractor'
-export { mocker } from './mocker/mocker'
+export { contractor } from '#/contract/contractor.js'
+
+export { mocker } from '#/mocker/mocker.js'
