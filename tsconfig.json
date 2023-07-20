@@ -1,24 +1,55 @@
 {
-  "compilerOptions": {
-    "alwaysStrict": true,
-    "declaration": true,
-    "declarationMap": true,
-    "esModuleInterop": true,
-    "lib": ["es2020"],
-    "module": "CommonJS",
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "./lib",
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "target": "es2017"
-  },
-  "exclude": ["./node_modules", "./lib", "./.idea", "./.semaphore", "./resource"],
-  "include": ["./src/**/*.ts", "./test/**/*.ts"]
+	"//": {
+		"noUncheckedIndexedAccess": true
+	},
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"alwaysStrict": true,
+		"baseUrl": "./",
+		"composite": true,
+		"declaration": true,
+		"declarationMap": true,
+		"emitDecoratorMetadata": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"inlineSourceMap": true,
+		"inlineSources": true,
+		"lib": [
+			"esnext"
+		],
+		"module": "ESNext",
+		"moduleResolution": "NodeNext",
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"outDir": "./dist/esm",
+		"paths": {
+			"#/*": [
+				"./src/*.ts"
+			]
+		},
+		"resolveJsonModule": true,
+		"rootDir": "./src",
+		"skipLibCheck": true,
+		"strict": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"target": "ESNext"
+	},
+	"exclude": [
+		"./**/*.test.ts",
+		"./**/__mocks__/*",
+		"./**/__snapshots__/*"
+	],
+	"include": [
+		"./src"
+	],
+	"references": [
+		{
+			"path": "../logger"
+		}
+	]
 }
