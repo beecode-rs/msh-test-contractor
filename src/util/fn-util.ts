@@ -1,7 +1,7 @@
-import { SpecialFnName } from '../enum/special-fn-name'
+import { SpecialFnName } from 'src/enum/special-fn-name'
 
 export const fnUtil = {
-  isConstructor: (fnName: string): boolean => {
-    return fnName === SpecialFnName.CONSTRUCTOR
-  },
+	isConstructor: (fnName: string): boolean => {
+		return fnName === SpecialFnName.CONSTRUCTOR
+	},
 }
