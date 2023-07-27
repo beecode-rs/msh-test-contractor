@@ -1,8 +1,8 @@
-import { contractFactory } from '#/contract/contractor-factory.js'
-import mockJestEmptyStrategyContract from '#/contract-mock/mock-jest-empty-strategy.contract.js'
-import mockJestStrategyContract from '#/contract-mock/mock-jest-strategy.contract.js'
-import { mocker } from '#/mocker/mocker.js'
-import { ContractMockRevertFns } from '#/types/index.js'
+import { contractFactory } from 'src/contract/contractor-factory'
+import mockJestEmptyStrategyContract from 'src/contract-mock/mock-jest-empty-strategy.contract'
+import mockJestStrategyContract from 'src/contract-mock/mock-jest-strategy.contract'
+import { mocker } from 'src/mocker/mocker'
+import { ContractMockRevertFns } from 'src/types'
 
 export default contractFactory(
 	{ module: require('./contract-mock-service.ts'), subjectName: 'contractMockService' },

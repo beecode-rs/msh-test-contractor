@@ -1,5 +1,5 @@
-import { contractFactory } from '#/contract/contractor-factory.js'
-import { SpecialFnName } from '#/enum/special-fn-name.js'
+import { contractFactory } from 'src/contract/contractor-factory'
+import { SpecialFnName } from 'src/enum/special-fn-name'
 
 export default contractFactory(
 	{ module: require('./mock-jest-empty-strategy'), subjectName: 'MockJestEmptyStrategy' },

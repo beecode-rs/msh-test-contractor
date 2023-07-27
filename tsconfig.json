@@ -18,16 +18,16 @@
 		"lib": [
 			"esnext"
 		],
-		"module": "ESNext",
+		"module": "CommonJS",
 		"moduleResolution": "NodeNext",
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"outDir": "./dist/esm",
+		"outDir": "./dist",
 		"paths": {
-			"#/*": [
+			"src/*": [
 				"./src/*"
 			]
 		},
@@ -41,6 +41,7 @@
 	},
 	"exclude": [
 		"./**/*.test.ts",
+		"./**/*.contract.ts",
 		"./**/__mocks__/*",
 		"./**/__snapshots__/*"
 	],

@@ -1,6 +1,6 @@
-import { contractFactory } from '#/contract/contractor-factory.js'
-import { SpecialFnName } from '#/enum/special-fn-name.js'
-import { ContractMock } from '#/types/index.js'
+import { contractFactory } from 'src/contract/contractor-factory'
+import { SpecialFnName } from 'src/enum/special-fn-name'
+import { ContractMock } from 'src/types'
 
 const dummyJestMock: ContractMock = (_options) => {
 	return []

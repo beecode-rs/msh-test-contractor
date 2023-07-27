@@ -9,7 +9,7 @@ export default {
 	transform: {},
 	preset: 'ts-jest/presets/default-esm',
 	moduleNameMapper: {
-		'^#\\/(.*)': '<rootDir>/src/$1.ts',
+		'^src\\/(.*)': '<rootDir>/src/$1.ts',
 	},
 	roots: ['<rootDir>/src'],
 	extensionsToTreatAsEsm: ['.ts'],

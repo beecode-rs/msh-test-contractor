@@ -1,6 +1,6 @@
-import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy.js'
-import { MockerStrategy } from '#/mocker/mocker-strategy.js'
-import { AnyContract } from '#/types/index.js'
+import { JestSpyFunctionStrategy } from 'src/jest-spy/jest-spy-function-strategy'
+import { MockerStrategy } from 'src/mocker/mocker-strategy'
+import { AnyContract } from 'src/types'
 
 export type MockerJestObjectResult = { [k: string]: jest.SpyInstance }
 

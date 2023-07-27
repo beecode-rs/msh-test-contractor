@@ -1,6 +1,6 @@
-import { SpecialFnName } from '#/enum/special-fn-name.js'
-import { SubjectFromContract, SubjectStrategy } from '#/subject/subject-strategy.js'
-import { ContractTerm } from '#/types/index.js'
+import { SpecialFnName } from 'src/enum/special-fn-name'
+import { SubjectFromContract, SubjectStrategy } from 'src/subject/subject-strategy'
+import { ContractTerm } from 'src/types'
 
 export class SubjectFunctionStrategy implements SubjectStrategy {
 	protected readonly _subjectName: string

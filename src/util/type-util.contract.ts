@@ -1,6 +1,6 @@
-import { contractFactory } from '#/contract/contractor-factory.js'
-import { mocker } from '#/mocker/mocker.js'
-import { ContractMockRevertFns } from '#/types/index.js'
+import { contractFactory } from 'src/contract/contractor-factory'
+import { mocker } from 'src/mocker/mocker'
+import { ContractMockRevertFns } from 'src/types'
 
 const selfContract = contractFactory(
 	{ module: require('.//src/util/type-util'), subjectName: 'typeUtil' },

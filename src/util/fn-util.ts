@@ -1,4 +1,4 @@
-import { SpecialFnName } from '#/enum/special-fn-name.js'
+import { SpecialFnName } from 'src/enum/special-fn-name'
 
 export const fnUtil = {
 	isConstructor: (fnName: string): boolean => {

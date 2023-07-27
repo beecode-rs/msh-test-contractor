@@ -13,45 +13,34 @@
 	},
 	"license": "mit",
 	"author": "Milos Bugarinovic <milos.bugarinovic@gmail.com> (https://milos.bugarinovic.com)",
-	"type": "module",
 	"exports": {
-		".": {
-			"import": "./dist/esm/index.js",
-			"require": "./dist/cjs/index.js"
-		},
-		"./*": {
-			"import": "./dist/esm/*",
-			"require": "./dist/cjs/*.js"
-		},
+		".": "./dist/index.js",
+		"./*": [
+			"./dist/*.js",
+			"./dist/*/index.js"
+		],
 		"./package.json": "./package.json"
 	},
-	"main": "./dist/cjs/index.js",
-	"module": "./dist/esm/index.js",
-	"types": "./dist/esm/*.d.ts",
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/*.d.ts",
 	"files": [
-		"./dist/cjs",
-		"./dist/esm"
+		"./dist"
 	],
 	"scripts": {
-		"alias": "concurrently -c auto 'npm:alias:*'",
-		"alias:cjs": "tsc-alias -p ./tsconfig.cjs.json",
-		"alias:esm": "tsc-alias -p ./tsconfig.esm.json",
-		"build": "concurrently -c auto 'npm:build:*'",
-		"build:cjs": "npm run clean:cjs && npm run tsc:cjs && npm run alias:cjs && npm run tsc-hybrid-lib-fix",
-		"build:esm": "npm run clean:esm && npm run tsc:esm && npm run alias:esm && npm run tsc-hybrid-lib-fix",
-		"clean": "concurrently -c auto 'npm:clean:*'",
-		"clean:cjs": "rimraf ./dist/cjs",
-		"clean:esm": "rimraf ./dist/esm",
+		"alias": "tsc-alias -p ./tsconfig.build.json",
+		"build": "npm run clean && npm run tsc && npm run alias",
+		"clean": "rimraf ./dist",
 		"doc": "concurrently -c auto 'npm:doc:*'",
 		"doc:api": "npx typedoc",
 		"doc:toc": "npx markdown-toc -i ./README.md",
 		"docker-build": "docker build -f ./resource/docker/Dockerfile -t bc-msh-test-contractor ./",
 		"docker-rmi": "docker rmi bc-msh-test-contractor",
-		"docker-run-package-lock-update": "docker run --rm -v ./:/usr/app/ milosbugarinovic/msh-lib-base:node18.15.0-alpine3.17 npm i --package-lock-only",
+		"docker-run-package-lock-update": "docker run --rm -v ./:/usr/app/ milosbugarinovic/msh-lib-base:node18.17.0-alpine3.18 npm i --package-lock-only",
 		"docker-run-sh": "docker run --rm -it bc-msh-test-contractor sh",
-		"initial-setup": "concurrently -c auto 'npm:initial-setup:*'",
-		"initial-setup:git-config": "git config include.path ./.git-config",
-		"initial-setup:husky": "npx husky install",
+		"init": "concurrently -c auto 'npm:init:*'",
+		"init:git-config": "git config include.path ./.git-config",
+		"init:husky": "npx husky install",
 		"jest": "NODE_OPTIONS=--experimental-vm-modules npx jest",
 		"lint": "npm run lint-prettier && npm run lint-eslint && npm run lint-json",
 		"lint-eslint": "eslint ./ --quiet",
@@ -71,24 +60,13 @@
 		"test:e2e": "TZ=utc npm run jest -- --config=./test/jest.config.js",
 		"test:int": "TZ=utc npm run jest -- --config=./jest.config.int.js",
 		"test:unit": "TZ=utc npm run jest -- --config=./jest.config.unit.js",
-		"tsc": "concurrently -c auto 'npm:tsc:*'",
-		"tsc-check": "npm run tsc:esm -- --noEmit",
-		"tsc-cleaner": "concurrently -c auto 'npm:tsc-cleaner:*'",
-		"tsc-cleaner-watch": "concurrently -c auto 'npm:tsc-cleaner-watch:*'",
-		"tsc-cleaner-watch:cjs": "npm run tsc-cleaner:cjs -- --watch",
-		"tsc-cleaner-watch:esm": "npm run tsc-cleaner:esm -- --watch",
-		"tsc-cleaner:cjs": "ts-cleaner --dist ./dist/cjs",
-		"tsc-cleaner:esm": "ts-cleaner --dist ./dist/esm",
-		"tsc-hybrid-lib-fix": "./resource/script/tsc/hybrid-lib-fix.sh",
-		"tsc-time": "npm run tsc:esm -- --diagnostics",
-		"tsc-watch": "concurrently -c auto 'npm:tsc-watch:*'",
-		"tsc-watch:cjs": "npm run tsc:cjs -- -w --preserveWatchOutput",
-		"tsc-watch:esm": "npm run tsc:esm -- -w --preserveWatchOutput",
-		"tsc:cjs": "tsc -p ./tsconfig.cjs.json",
-		"tsc:esm": "tsc -p ./tsconfig.esm.json",
-		"watch": "concurrently -c auto 'npm:watch:*'",
-		"watch:cjs": "npm run tsc-hybrid-lib-fix && concurrently -c auto -n build,clean,alias 'npm run tsc-watch:cjs' 'npm run tsc-cleaner-watch:cjs' 'npm run alias:cjs'",
-		"watch:esm": "npm run tsc-hybrid-lib-fix && concurrently -c auto -n build,clean,alias 'npm run tsc-watch:esm' 'npm run tsc-cleaner-watch:esm' 'npm run alias:esm'"
+		"tsc": "tsc -p ./tsconfig.build.json",
+		"tsc-check": "npm run tsc -- --noEmit",
+		"tsc-cleaner": "ts-cleaner --dist ./dist",
+		"tsc-cleaner-watch": "npm run tsc-cleaner -- --watch",
+		"tsc-time": "npm run tsc -- --diagnostics",
+		"tsc-watch": "npm run tsc -- -w --preserveWatchOutput",
+		"watch": "concurrently -c auto -n build,clean,alias 'npm run tsc-watch' 'npm run tsc-cleaner-watch' 'npm run alias'"
 	},
 	"commitlint": {
 		"extends": [

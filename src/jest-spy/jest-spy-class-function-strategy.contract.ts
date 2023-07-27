@@ -1,6 +1,6 @@
-import { contractFactory } from '#/contract/contractor-factory.js'
-import { SpecialFnName } from '#/enum/special-fn-name.js'
-import { ContractTerm } from '#/types/index.js'
+import { contractFactory } from 'src/contract/contractor-factory'
+import { SpecialFnName } from 'src/enum/special-fn-name'
+import { ContractTerm } from 'src/types'
 
 const dummyTerms: { terms: ContractTerm[]; mockClassParams: any[] } = {
 	mockClassParams: [1, 2],

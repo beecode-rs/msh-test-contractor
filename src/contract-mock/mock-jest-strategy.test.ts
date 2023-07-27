@@ -1,4 +1,4 @@
-import { MockJestStrategy } from '#/contract-mock/mock-jest-strategy.js'
+import { MockJestStrategy } from 'src/contract-mock/mock-jest-strategy'
 
 describe('MockJestStrategy', () => {
 	describe('mock', () => {

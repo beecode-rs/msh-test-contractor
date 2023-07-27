@@ -1,7 +1,7 @@
-import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy.js'
-import { mockerService } from '#/mocker/mocker-service.js'
-import { AnyContract, ContractFunction, ContractMockRevertFn, PropType } from '#/types/index.js'
-import { fnUtil } from '#/util/fn-util.js'
+import { JestSpyFunctionStrategy } from 'src/jest-spy/jest-spy-function-strategy'
+import { mockerService } from 'src/mocker/mocker-service'
+import { AnyContract, ContractFunction, ContractMockRevertFn, PropType } from 'src/types'
+import { fnUtil } from 'src/util/fn-util'
 
 export type MockerContractResult<SPY = jest.SpyInstance> = {
 	spy: SPY

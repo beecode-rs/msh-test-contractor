@@ -1,5 +1,5 @@
-import { MockerStrategy } from '#/mocker/mocker-strategy.js'
-import { AnyContract } from '#/types/index.js'
+import { MockerStrategy } from 'src/mocker/mocker-strategy'
+import { AnyContract } from 'src/types'
 
 export class MockerJestFunctionStrategy implements MockerStrategy<jest.SpyInstance> {
 	protected _spy?: jest.SpyInstance
