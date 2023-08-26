@@ -1,6 +1,7 @@
-import sharedConfig from './jest.config.js'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const sharedConfig = require('./jest.config.js')
 
-export default {
+module.exports = {
 	...sharedConfig,
 	testPathIgnorePatterns: [...sharedConfig.testPathIgnorePatterns, '/__tests__/'],
 }
