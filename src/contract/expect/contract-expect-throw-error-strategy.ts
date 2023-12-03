@@ -1,5 +1,5 @@
-import { ContractExpectStrategy } from 'src/contract/expect/contract-expect-service'
-import { ContractTerm } from 'src/types'
+import { ContractExpectStrategy } from '#/contract/expect/contract-expect-service'
+import { ContractTerm } from '#/types'
 
 export class ContractExpectThrowErrorStrategy implements ContractExpectStrategy {
 	protected readonly _termResult: any

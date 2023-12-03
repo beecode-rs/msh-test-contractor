@@ -1,6 +1,6 @@
-import { ContractExpectStrategy } from 'src/contract/expect/contract-expect-service'
-import { ContractTerm } from 'src/types'
-import { objectUtil } from 'src/util/object-util'
+import { ContractExpectStrategy } from '#/contract/expect/contract-expect-service'
+import { ContractTerm } from '#/types'
+import { objectUtil } from '#/util/object-util'
 
 export class ContractExpectAnyEqualStrategy implements ContractExpectStrategy {
 	protected readonly _termResult: any

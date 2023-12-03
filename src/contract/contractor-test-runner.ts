@@ -1,7 +1,8 @@
 import { glob } from 'glob'
 import path from 'path'
-import { contractor } from 'src/contract/contractor'
-import { AnyContract } from 'src/types'
+
+import { contractor } from '#/contract/contractor'
+import { AnyContract } from '#/types'
 
 export const contractorTestRunner = {
 	_file: (fileLocation: string): void => {

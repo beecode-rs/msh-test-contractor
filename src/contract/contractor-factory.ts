@@ -1,4 +1,4 @@
-import { Contract, ContractFns, ContractMock, PropType } from 'src/types'
+import { Contract, ContractFns, ContractMock, PropType } from '#/types'
 
 export const contractFactory = <
 	M,

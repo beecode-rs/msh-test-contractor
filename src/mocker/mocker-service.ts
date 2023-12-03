@@ -1,10 +1,10 @@
-import { SpecialFnName } from 'src/enum/special-fn-name'
-import { MockerJestClassStrategy } from 'src/mocker/mocker-jest-class-strategy'
-import { MockerJestFunctionStrategy } from 'src/mocker/mocker-jest-function-strategy'
-import { MockerJestObjectStrategy } from 'src/mocker/mocker-jest-object-strategy'
-import { MockerStrategy } from 'src/mocker/mocker-strategy'
-import { AnyContract } from 'src/types'
-import { typeUtil } from 'src/util/type-util'
+import { SpecialFnName } from '#/enum/special-fn-name'
+import { MockerJestClassStrategy } from '#/mocker/mocker-jest-class-strategy'
+import { MockerJestFunctionStrategy } from '#/mocker/mocker-jest-function-strategy'
+import { MockerJestObjectStrategy } from '#/mocker/mocker-jest-object-strategy'
+import { MockerStrategy } from '#/mocker/mocker-strategy'
+import { AnyContract } from '#/types'
+import { typeUtil } from '#/util/type-util'
 
 export const mockerService = {
 	strategyFromContract: (contract: AnyContract): MockerStrategy<any> => {

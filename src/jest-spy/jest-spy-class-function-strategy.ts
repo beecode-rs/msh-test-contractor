@@ -1,7 +1,8 @@
 import deepEqual from 'fast-deep-equal/es6'
-import { JestSpyFunctionStrategy } from 'src/jest-spy/jest-spy-function-strategy'
-import { JestSpyStrategy } from 'src/jest-spy/jest-spy-strategy'
-import { ContractTerm } from 'src/types'
+
+import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy'
+import { JestSpyStrategy } from '#/jest-spy/jest-spy-strategy'
+import { ContractTerm } from '#/types'
 
 export class JestSpyClassFunctionStrategy implements JestSpyStrategy {
 	protected readonly _terms: ContractTerm[]

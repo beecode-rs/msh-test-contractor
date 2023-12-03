@@ -1,7 +1,7 @@
-import { contractFactory } from 'src/contract/contractor-factory'
-import { SpecialFnName } from 'src/enum/special-fn-name'
-import { mocker } from 'src/mocker/mocker'
-import { ContractMockRevertFns } from 'src/types'
+import { contractFactory } from '#/contract/contractor-factory'
+import { SpecialFnName } from '#/enum/special-fn-name'
+import { mocker } from '#/mocker/mocker'
+import { ContractMockRevertFns } from '#/types'
 
 class DummyClass {
 	a(_a: string): string {

@@ -1,8 +1,8 @@
-import { contractorService } from 'src/contract/contractor-service'
-import { contractExpectService } from 'src/contract/expect/contract-expect-service'
-import { contractMockService } from 'src/contract-mock/contract-mock-service'
-import { subjectService } from 'src/subject/subject-service'
-import { Contract, ContractFunction, PropType } from 'src/types'
+import { contractorService } from '#/contract/contractor-service'
+import { contractExpectService } from '#/contract/expect/contract-expect-service'
+import { contractMockService } from '#/contract-mock/contract-mock-service'
+import { subjectService } from '#/subject/subject-service'
+import { Contract, ContractFunction, PropType } from '#/types'
 
 export const contractor = <
 	M,

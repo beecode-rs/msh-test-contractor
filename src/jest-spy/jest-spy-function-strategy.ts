@@ -1,6 +1,6 @@
-import { JestSpyStrategy } from 'src/jest-spy/jest-spy-strategy'
-import { ContractTerm } from 'src/types'
-import { objectUtil } from 'src/util/object-util'
+import { JestSpyStrategy } from '#/jest-spy/jest-spy-strategy'
+import { ContractTerm } from '#/types'
+import { objectUtil } from '#/util/object-util'
 
 export class JestSpyFunctionStrategy implements JestSpyStrategy {
 	protected readonly _terms: ContractTerm[]

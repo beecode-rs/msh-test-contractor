@@ -1,7 +1,7 @@
-import { ContractExpectAnyEqualStrategy } from 'src/contract/expect/contract-expect-any-equal-strategy'
-import { ContractExpectFunctionResultEqualStrategy } from 'src/contract/expect/contract-expect-function-result-equal-strategy'
-import { ContractExpectThrowErrorStrategy } from 'src/contract/expect/contract-expect-throw-error-strategy'
-import { ContractTerm } from 'src/types'
+import { ContractExpectAnyEqualStrategy } from '#/contract/expect/contract-expect-any-equal-strategy'
+import { ContractExpectFunctionResultEqualStrategy } from '#/contract/expect/contract-expect-function-result-equal-strategy'
+import { ContractExpectThrowErrorStrategy } from '#/contract/expect/contract-expect-throw-error-strategy'
+import { ContractTerm } from '#/types'
 
 export interface ContractExpectStrategy {
 	test(fn: () => any): Promise<void>
