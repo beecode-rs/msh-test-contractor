@@ -1,11 +1,15 @@
+import { jest } from '@jest/globals'
+
+import { JestSpyClassFunctionStrategy } from '#/jest-spy/jest-spy-class-function-strategy'
 import * as JestSpyClassFunctionStrategyModule from '#/jest-spy/jest-spy-class-function-strategy'
+import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy'
 import * as JestSpyFunctionStrategyModule from '#/jest-spy/jest-spy-function-strategy'
 import { jestSpyService } from '#/jest-spy/jest-spy-service'
 
 describe('jestSpyService', () => {
 	describe('strategyFromTerms', () => {
-		let spy_JestSpyFunctionStrategy: jest.SpyInstance
-		let spy_JestSpyClassFunctionStrategy: jest.SpyInstance
+		let spy_JestSpyFunctionStrategy: jest.SpiedClass<typeof JestSpyFunctionStrategy>
+		let spy_JestSpyClassFunctionStrategy: jest.SpiedClass<typeof JestSpyClassFunctionStrategy>
 		beforeEach(() => {
 			spy_JestSpyFunctionStrategy = jest.spyOn(JestSpyFunctionStrategyModule, 'JestSpyFunctionStrategy')
 			spy_JestSpyClassFunctionStrategy = jest.spyOn(JestSpyClassFunctionStrategyModule, 'JestSpyClassFunctionStrategy')
