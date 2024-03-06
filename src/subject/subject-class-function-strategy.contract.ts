@@ -1,12 +1,12 @@
-import { contractFactory } from '../contract/contractor-factory'
-import { SpecialFnName } from '../enum/special-fn-name'
-import { mocker } from '../mocker/mocker'
-import { ContractMockRevertFns } from '../types'
+import { contractFactory } from '#/contract/contractor-factory'
+import { SpecialFnName } from '#/enum/special-fn-name'
+import { mocker } from '#/mocker/mocker'
+import { ContractMockRevertFns } from '#/types'
 
 class DummyClass {
-  a(_a: string): string {
-    return _a
-  }
+	a(_a: string): string {
+		return _a
+	}
 }
 
 const dummyModule = { DummyClass }
@@ -15,54 +15,54 @@ const dummyFnName = 'a'
 const dummyConstructorParams: any[] = []
 
 const dummyConstructorParamsFactory = (): any[] => {
-  return [
-    {
-      subjectFromContract: { module: dummyModule, subjectName: dummySubjectName },
-      constructorParams: dummyConstructorParams,
-      fnName: dummyFnName,
-    },
-  ]
+	return [
+		{
+			constructorParams: dummyConstructorParams,
+			fnName: dummyFnName,
+			subjectFromContract: { module: dummyModule, subjectName: dummySubjectName },
+		},
+	]
 }
 
 const selfContract = contractFactory(
-  { module: require('./subject-class-function-strategy'), subjectName: 'SubjectClassFunctionStrategy' },
-  {
-    [SpecialFnName.CONSTRUCTOR]: {
-      terms: [
-        {
-          params: dummyConstructorParamsFactory(),
-          result: {
-            _subjectName: dummySubjectName,
-            _module: dummyModule,
-            _constructorParams: dummyConstructorParams,
-            _fnName: dummyFnName,
-          },
-        },
-      ],
-    },
-    fn: {
-      terms: [
-        {
-          constructorParams: dummyConstructorParamsFactory(),
-          params: [],
-          result: DummyClass,
-        },
-      ],
-    },
+	{ module: require('./subject-class-function-strategy'), subjectName: 'SubjectClassFunctionStrategy' },
+	{
+		[SpecialFnName.CONSTRUCTOR]: {
+			terms: [
+				{
+					params: dummyConstructorParamsFactory(),
+					result: {
+						_constructorParams: dummyConstructorParams,
+						_fnName: dummyFnName,
+						_module: dummyModule,
+						_subjectName: dummySubjectName,
+					},
+				},
+			],
+		},
+		exec: {
+			mock: (): ContractMockRevertFns => {
+				return [mocker.function(selfContract, 'fn').mockRestore]
+			},
+			terms: [
+				{
+					constructorParams: dummyConstructorParamsFactory(),
+					params: [{ params: ['testString'] }],
+					result: 'testString',
+				},
+			],
+		},
 
-    exec: {
-      mock: (): ContractMockRevertFns => {
-        return [mocker.function(selfContract, 'fn').mockRestore]
-      },
-      terms: [
-        {
-          constructorParams: dummyConstructorParamsFactory(),
-          params: [{ params: ['testString'] }],
-          result: 'testString',
-        },
-      ],
-    },
-  }
+		fn: {
+			terms: [
+				{
+					constructorParams: dummyConstructorParamsFactory(),
+					params: [],
+					result: DummyClass,
+				},
+			],
+		},
+	}
 )
 
 export default selfContract

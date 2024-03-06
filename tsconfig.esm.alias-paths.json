@@ -1,0 +1,12 @@
+{
+	"extends": "./tsconfig.esm.json",
+	"compilerOptions": {
+		"paths": {
+			"#": ["./src"],
+			"#/*": ["./src/*"]
+		}
+	},
+	"tsc-alias": {
+		"resolveFullPaths": true
+	}
+}
