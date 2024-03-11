@@ -5,10 +5,10 @@ import { contractor } from '#/contract/contractor'
 import { AnyContract } from '#/types'
 
 export const contractorTestRunner = {
-	_file: (fileLocation: string): void => {
+	_file: async (fileLocation: string): Promise<void> => {
 		const modulePath = path.join(process.cwd(), fileLocation)
 		// console.log('contractorTestRunner.dir params:', { fileLocation, modulePath, cwd: process.cwd(), __dirname }) // eslint-disable-line no-console
-		const contract = require(modulePath)
+		const contract = await import(modulePath)
 		contractorTestRunner.contract(contract.default as any)
 	},
 	contract: (contract: AnyContract): void => {
@@ -18,10 +18,14 @@ export const contractorTestRunner = {
 			})
 		})
 	},
-	dir: (dirLocation: string): void => {
-		describe(dirLocation, () => glob.sync(`${dirLocation}/**/*.contract.ts`).forEach(contractorTestRunner._file))
+	dir: async (dirLocation: string): Promise<void> => {
+		describe(dirLocation, () => {
+			Promise.all(glob.sync(`${dirLocation}/**/*.contract.ts`).map(contractorTestRunner._file))
+		})
 	},
 	file: (fileLocation: string): void => {
-		describe(fileLocation, () => contractorTestRunner._file(fileLocation))
+		describe(fileLocation, async () => {
+			await contractorTestRunner._file(fileLocation)
+		})
 	},
 }
