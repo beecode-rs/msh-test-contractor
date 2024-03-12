@@ -1,15 +1,17 @@
+import { jest } from '@jest/globals'
+
 import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy'
 import { mockerService } from '#/mocker/mocker-service'
 import { AnyContract, ContractFunction, ContractMockRevertFn, PropType } from '#/types'
 import { fnUtil } from '#/util/fn-util'
 
-export type MockerContractResult<SPY = jest.SpyInstance> = {
+export type MockerContractResult<SPY = jest.Spied<any>> = {
 	spy: SPY
 	mockRestore: ContractMockRevertFn
 }
 
 export const mocker = {
-	contract: <SPY = jest.SpyInstance, C extends AnyContract = any>(contract: C): MockerContractResult<SPY> => {
+	contract: <SPY = jest.Spied<any>, C extends AnyContract = any>(contract: C): MockerContractResult<SPY> => {
 		const mockerStrategy = mockerService.strategyFromContract(contract)
 		const spy = mockerStrategy.contractSpy()
 		const mockRestore = (): void => mockerStrategy.mockRestore()
@@ -26,8 +28,8 @@ export const mocker = {
 		const spy = fnUtil.isConstructor(fnName)
 			? jest.spyOn(module, subjectName)
 			: terms[0].constructorParams // if function belongs to class mock prototype
-			  ? jest.spyOn(module[subjectName].prototype, fnName)
-			  : jest.spyOn(module[subjectName], fnName)
+				? jest.spyOn(module[subjectName].prototype, fnName)
+				: jest.spyOn(module[subjectName], fnName)
 
 		if (!terms) {
 			throw new Error(`Terms not found in function ${fnName} for module ${subjectName}`)

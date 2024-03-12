@@ -1,11 +1,13 @@
+import { jest } from '@jest/globals'
+
 import { SpecialFnName } from '#/enum/special-fn-name'
 import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy'
 import { jestSpyService } from '#/jest-spy/jest-spy-service'
 import { MockerStrategy } from '#/mocker/mocker-strategy'
 import { AnyContract, ContractTerm } from '#/types'
 
-export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance> {
-	protected _spy?: jest.SpyInstance
+export class MockerJestClassStrategy implements MockerStrategy<jest.Spied<any>> {
+	protected _spy?: jest.Spied<any>
 
 	constructor(protected _contract: AnyContract) {}
 
@@ -15,7 +17,7 @@ export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance>
 		}
 	}
 
-	contractSpy(): jest.SpyInstance {
+	contractSpy(): jest.Spied<any> {
 		const { module, subjectName } = this._contract
 		const functionNames = this._functionNames(module[subjectName])
 		this._spy = jest.spyOn(module, subjectName)

@@ -1,11 +1,13 @@
+import { jest } from '@jest/globals'
+
 import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy'
 import { MockerStrategy } from '#/mocker/mocker-strategy'
 import { AnyContract } from '#/types'
 
-export type MockerJestObjectResult = { [k: string]: jest.SpyInstance }
+export type MockerJestObjectResult = { [k: string]: jest.Spied<any> }
 
 export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObjectResult> {
-	protected _spies: jest.SpyInstance[] = []
+	protected _spies: jest.Spied<any>[] = []
 
 	constructor(protected _contract: AnyContract) {}
 

@@ -1,3 +1,5 @@
+import { jest } from '@jest/globals'
+
 import { JestSpyStrategy } from '#/jest-spy/jest-spy-strategy'
 import { ContractTerm } from '#/types'
 import { objectUtil } from '#/util/object-util'
@@ -12,7 +14,7 @@ export class JestSpyFunctionStrategy implements JestSpyStrategy {
 		this._name = name
 	}
 
-	mockImplementationFactory(): jest.Mock {
+	mockImplementationFactory(): jest.Mock<any> {
 		const fakeImplementation = (...mockParams: any[]): any => {
 			const foundTerm = this._terms.find(
 				(term) => objectUtil.stringifyOrNullUndefined(term.params) === objectUtil.stringifyOrNullUndefined(mockParams)

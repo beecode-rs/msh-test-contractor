@@ -1,3 +1,5 @@
+import { describe, it } from '@jest/globals'
+
 import { contractorService } from '#/contract/contractor-service'
 import { contractExpectService } from '#/contract/expect/contract-expect-service'
 import { contractMockService } from '#/contract-mock/contract-mock-service'
