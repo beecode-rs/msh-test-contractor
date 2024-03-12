@@ -1,8 +1,0 @@
-{
-  "collectCoverage": true,
-  "collectCoverageFrom": ["src/**/*.ts", "!src/**/*.{contract,d}.ts"],
-  "preset": "ts-jest",
-  "roots": ["./src"],
-  "testEnvironment": "node",
-  "testPathIgnorePatterns": ["/node_modules/", "/test/"]
-}
