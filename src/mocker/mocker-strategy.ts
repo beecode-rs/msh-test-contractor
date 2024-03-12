@@ -1,4 +1,4 @@
 export interface MockerStrategy<T> {
-  mockRestore(): void
-  contractSpy(): T
+	mockRestore(): void
+	contractSpy(): T
 }
