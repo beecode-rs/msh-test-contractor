@@ -1,7 +1,7 @@
-import { MockJestEmptyStrategy } from '#/contract-mock/mock-jest-empty-strategy'
-import { MockJestStrategy } from '#/contract-mock/mock-jest-strategy'
-import { MockStrategy } from '#/contract-mock/mock-strategy'
-import { ContractMock } from '#/types'
+import { MockJestEmptyStrategy } from '#src/contract-mock/mock-jest-empty-strategy'
+import { MockJestStrategy } from '#src/contract-mock/mock-jest-strategy'
+import { MockStrategy } from '#src/contract-mock/mock-strategy'
+import { ContractMock } from '#src/types'
 
 export const contractMockService = {
 	strategyFromFunctionMock: (mock?: ContractMock): MockStrategy => {

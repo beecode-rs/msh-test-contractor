@@ -16,32 +16,37 @@
 	"author": "Milos Bugarinovic <milos.bugarinovic@gmail.com> (https://milos.bugarinovic.com)",
 	"exports": {
 		".": {
-			"import": "./dist/esm/index.js",
-			"require": "./dist/cjs/index.js"
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
 		},
 		"./*": {
-			"import": "./dist/esm/*.js",
-			"require": "./dist/cjs/*.js"
+			"import": [
+				"./dist/*.js",
+				"./dist/*/index.js"
+			],
+			"types": [
+				"./dist/*.d.ts",
+				"./dist/*/index.d.ts"
+			]
 		},
 		"./package.json": "./package.json"
 	},
-	"main": "./dist/cjs/index.js",
-	"module": "./dist/esm/index.js",
-	"types": "./dist/esm/index.d.ts",
+	"imports": {
+		"#src": "./src/index.js",
+		"#src/*": [
+			"./src/*.js",
+			"./src/*/index.js"
+		]
+	},
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"files": [
-		"./dist/cjs",
-		"./dist/esm"
+		"./dist"
 	],
 	"scripts": {
-		"alias": "concurrently -c auto 'npm:alias:*'",
-		"alias:cjs": "tsc-alias -p ./tsconfig.cjs.alias-paths.json",
-		"alias:esm": "tsc-alias -p ./tsconfig.esm.alias-paths.json",
-		"build": "concurrently -c auto 'npm:build:*'",
-		"build:cjs": "npm run clean:cjs && npm run tsc:cjs && npm run alias:cjs && npm run tsc-hybrid-lib-fix",
-		"build:esm": "npm run clean:esm && npm run tsc:esm && npm run alias:esm && npm run tsc-hybrid-lib-fix",
-		"clean": "concurrently -c auto 'npm:clean:*'",
-		"clean:cjs": "rimraf ./dist/cjs",
-		"clean:esm": "rimraf ./dist/esm",
+		"build": "npm run clean && npm run tsc",
+		"clean": "rimraf ./dist",
 		"doc": "concurrently -c auto 'npm:doc:*'",
 		"doc:api": "npx typedoc",
 		"doc:toc": "npx markdown-toc -i ./README.md",
@@ -52,7 +57,6 @@
 		"init": "concurrently -c auto 'npm:init:*'",
 		"init:git-config": "git config include.path ./.git-config",
 		"init:husky": "npx husky install",
-		"jest": "npx jest",
 		"lint": "npm run lint-prettier && npm run lint-eslint && npm run lint-json",
 		"lint-eslint": "eslint ./ --quiet",
 		"lint-eslint-fix": "npm run lint-eslint -- --fix",
@@ -68,27 +72,16 @@
 		"test": "concurrently -c auto 'npm:test:*'",
 		"test-coverage-unit": "npm run test:unit -- --coverage",
 		"test-coverage-unit-publish": "codecov",
-		"test:e2e": "TZ=utc npm run jest -- --config=./test/jest.config.mjs",
-		"test:int": "TZ=utc npm run jest -- --config=./jest.config.int.ts",
-		"test:unit": "TZ=utc npm run jest -- --config=./jest.config.unit.ts",
-		"tsc": "concurrently -c auto 'npm:tsc:*'",
-		"tsc-check": "npm run tsc:esm -- --noEmit",
-		"tsc-cleaner": "concurrently -c auto 'npm:tsc-cleaner:*'",
-		"tsc-cleaner-watch": "concurrently -c auto 'npm:tsc-cleaner-watch:*'",
-		"tsc-cleaner-watch:cjs": "npm run tsc-cleaner:cjs -- --watch",
-		"tsc-cleaner-watch:esm": "npm run tsc-cleaner:esm -- --watch",
-		"tsc-cleaner:cjs": "ts-cleaner --dist ./dist/cjs",
-		"tsc-cleaner:esm": "ts-cleaner --dist ./dist/esm",
-		"tsc-hybrid-lib-fix": "./resource/script/tsc/hybrid-lib-fix.sh",
-		"tsc-time": "npm run tsc:esm -- --diagnostics",
-		"tsc-watch": "concurrently -c auto 'npm:tsc-watch:*'",
-		"tsc-watch:cjs": "npm run tsc:cjs -- -w --preserveWatchOutput",
-		"tsc-watch:esm": "npm run tsc:esm -- -w --preserveWatchOutput",
-		"tsc:cjs": "tsc -p ./tsconfig.cjs.json",
-		"tsc:esm": "tsc -p ./tsconfig.esm.json",
-		"watch": "concurrently -c auto 'npm:watch:*'",
-		"watch:cjs": "npm run tsc-hybrid-lib-fix && concurrently -c auto -n build,clean,alias 'npm run tsc-watch:cjs' 'npm run tsc-cleaner-watch:cjs' 'npm run alias:cjs'",
-		"watch:esm": "npm run tsc-hybrid-lib-fix && concurrently -c auto -n build,clean,alias 'npm run tsc-watch:esm' 'npm run tsc-cleaner-watch:esm' 'npm run alias:esm'"
+		"test:e2e": "TZ=utc jest --config=./test/jest.config.js",
+		"test:int": "TZ=utc jest --config=./jest.config.int.ts",
+		"test:unit": "TZ=utc jest --config=./jest.config.unit.ts",
+		"tsc-check": "npm run tsc -- --noEmit",
+		"tsc-cleaner-watch": "npm run tsc-cleaner -- --watch",
+		"tsc-cleaner": "ts-cleaner --dist ./dist/esm",
+		"tsc-time": "npm run tsc -- --diagnostics",
+		"tsc-watch": "npm run tsc -- -w --preserveWatchOutput",
+		"tsc": "tsc -p ./tsconfig.json",
+		"watch": "concurrently -c auto -n build,clean 'npm run tsc-watch' 'npm run tsc-cleaner-watch'"
 	},
 	"commitlint": {
 		"extends": [
@@ -153,11 +146,10 @@
 		"ts-cleaner": "1.0.5",
 		"ts-jest": "29.1.2",
 		"ts-node": "10.9.2",
-		"tsc-alias": "1.8.8",
 		"tsc-watch": "6.0.4",
 		"typedoc": "0.25.12",
 		"typedoc-plugin-markdown": "3.17.1",
-		"typescript": "5.3.3"
+		"typescript": "5.4.2"
 	},
 	"engines": {
 		"node": ">=14",

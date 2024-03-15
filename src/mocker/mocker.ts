@@ -1,9 +1,9 @@
 import { jest } from '@jest/globals'
 
-import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy'
-import { mockerService } from '#/mocker/mocker-service'
-import { AnyContract, ContractFunction, ContractMockRevertFn, PropType } from '#/types'
-import { fnUtil } from '#/util/fn-util'
+import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
+import { mockerService } from '#src/mocker/mocker-service'
+import { AnyContract, ContractFunction, ContractMockRevertFn, PropType } from '#src/types'
+import { fnUtil } from '#src/util/fn-util'
 
 export type MockerContractResult<SPY = jest.Spied<any>> = {
 	spy: SPY

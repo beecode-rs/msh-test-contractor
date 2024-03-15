@@ -2,8 +2,8 @@ import { describe } from '@jest/globals'
 import { glob } from 'glob'
 import path from 'path'
 
-import { contractor } from '#/contract/contractor'
-import { AnyContract } from '#/types'
+import { contractor } from '#src/contract/contractor'
+import { AnyContract } from '#src/types'
 
 export const contractorTestRunner = {
 	_file: async (fileLocation: string): Promise<void> => {

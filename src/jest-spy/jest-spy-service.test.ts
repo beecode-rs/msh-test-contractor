@@ -1,10 +1,10 @@
 import { jest } from '@jest/globals'
 
-import { JestSpyClassFunctionStrategy } from '#/jest-spy/jest-spy-class-function-strategy'
-import * as JestSpyClassFunctionStrategyModule from '#/jest-spy/jest-spy-class-function-strategy'
-import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy'
-import * as JestSpyFunctionStrategyModule from '#/jest-spy/jest-spy-function-strategy'
-import { jestSpyService } from '#/jest-spy/jest-spy-service'
+import { JestSpyClassFunctionStrategy } from '#src/jest-spy/jest-spy-class-function-strategy'
+import * as JestSpyClassFunctionStrategyModule from '#src/jest-spy/jest-spy-class-function-strategy'
+import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
+import * as JestSpyFunctionStrategyModule from '#src/jest-spy/jest-spy-function-strategy'
+import { jestSpyService } from '#src/jest-spy/jest-spy-service'
 
 describe('jestSpyService', () => {
 	describe('strategyFromTerms', () => {

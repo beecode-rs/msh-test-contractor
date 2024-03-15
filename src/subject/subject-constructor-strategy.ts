@@ -1,5 +1,5 @@
-import { SubjectFromContract, SubjectStrategy } from '#/subject/subject-strategy'
-import { ContractTerm } from '#/types'
+import { SubjectFromContract, SubjectStrategy } from '#src/subject/subject-strategy'
+import { ContractTerm } from '#src/types'
 
 export class SubjectConstructorStrategy implements SubjectStrategy {
 	protected readonly _module: any

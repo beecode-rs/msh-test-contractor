@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals'
 
-import { MockerStrategy } from '#/mocker/mocker-strategy'
-import { AnyContract } from '#/types'
+import { MockerStrategy } from '#src/mocker/mocker-strategy'
+import { AnyContract } from '#src/types'
 
 export class MockerJestFunctionStrategy implements MockerStrategy<jest.SpiedFunction<any>> {
 	protected _spy?: jest.SpiedFunction<any>

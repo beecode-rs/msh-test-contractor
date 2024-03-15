@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals'
 
-import { ContractExpectStrategy } from '#/contract/expect/contract-expect-service'
-import { ContractTerm } from '#/types'
+import { ContractExpectStrategy } from '#src/contract/expect/contract-expect-service'
+import { ContractTerm } from '#src/types'
 
 export class ContractExpectFunctionResultEqualStrategy implements ContractExpectStrategy {
 	protected readonly _termResult: any

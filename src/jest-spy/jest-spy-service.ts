@@ -1,7 +1,7 @@
-import { JestSpyClassFunctionStrategy } from '#/jest-spy/jest-spy-class-function-strategy'
-import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy'
-import { JestSpyStrategy } from '#/jest-spy/jest-spy-strategy'
-import { ContractTerm } from '#/types'
+import { JestSpyClassFunctionStrategy } from '#src/jest-spy/jest-spy-class-function-strategy'
+import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
+import { JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy'
+import { ContractTerm } from '#src/types'
 
 export const jestSpyService = {
 	strategyFromTerms: (params: { terms: ContractTerm[]; mockClassParams?: any[]; name: string }): JestSpyStrategy => {

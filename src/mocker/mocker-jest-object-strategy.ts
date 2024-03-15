@@ -1,8 +1,8 @@
 import { jest } from '@jest/globals'
 
-import { JestSpyFunctionStrategy } from '#/jest-spy/jest-spy-function-strategy'
-import { MockerStrategy } from '#/mocker/mocker-strategy'
-import { AnyContract } from '#/types'
+import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
+import { MockerStrategy } from '#src/mocker/mocker-strategy'
+import { AnyContract } from '#src/types'
 
 export type MockerJestObjectResult = { [k: string]: jest.Spied<any> }
 
