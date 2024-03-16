@@ -1,9 +1,10 @@
 export default {
 	maxConcurrency: 1,
 
-	moduleFileExtensions: ['js', 'ts'],
 	setupFilesAfterEnv: ['jest-extended/all'],
-	transform: {},
+	transform: {
+		'^.+\\.js$': 'babel-jest',
+	},
 	preset: 'ts-jest/presets/default-esm',
 	// roots: ['<rootDir>'],
 	clearMocks: true,
