@@ -15,11 +15,10 @@
 		"forceConsistentCasingInFileNames": true,
 		"inlineSourceMap": true,
 		"inlineSources": true,
-		"lib": [
-			"ESNext"
-		],
+		"lib": ["ESNext"],
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
+		"noFallthroughCasesInSwitch": true,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
@@ -27,25 +26,18 @@
 		"noUnusedParameters": true,
 		"outDir": "./dist",
 		"paths": {
-			"#src": [
-				"./src/index.ts"
-			],
-			"#src/*": [
-				"./src/*.ts",
-				"./src/*/index.ts"
-			]
+			"#src": ["./src/index.ts"],
+			"#src/*": ["./src/*.ts", "./src/*/index.ts"]
 		},
+		"pretty": true,
 		"resolveJsonModule": true,
 		"rootDir": "./src",
 		"skipLibCheck": true,
 		"strict": true,
 		"strictFunctionTypes": true,
 		"strictNullChecks": true,
-		"target": "ESNext"
+		"target": "ESNext",
+		"traceResolution": false
 	},
-	"include": [
-		"./*.*",
-		"./src",
-		"./test"
-	]
+	"include": ["./*.*", "./src", "./test"]
 }

@@ -1,3 +1,5 @@
+import { jest } from '@jest/globals'
+
 import { contractFactory } from '#src/contract/contractor-factory'
 import { SpecialFnName } from '#src/enum/special-fn-name'
 import { mocker } from '#src/mocker/mocker'

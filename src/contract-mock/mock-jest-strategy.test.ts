@@ -1,3 +1,5 @@
+import { describe, expect, it, jest } from '@jest/globals'
+
 import { MockJestStrategy } from '#src/contract-mock/mock-jest-strategy'
 
 describe('MockJestStrategy', () => {
@@ -11,7 +13,7 @@ describe('MockJestStrategy', () => {
 
 		it('should call jest mock with params', () => {
 			const dummyJestMockResult = { test: 'test' }
-			const dummyJestMock = jest.fn().mockReturnValue(dummyJestMockResult)
+			const dummyJestMock = jest.fn<any>().mockReturnValue(dummyJestMockResult)
 			const strategy = new MockJestStrategy(dummyJestMock)
 			const params: any[] = []
 			strategy.mock({ params })
