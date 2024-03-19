@@ -10,7 +10,7 @@ process.env.TZ = 'utc'
  */
 // @ts-ignore
 //eslint-disable-next-line
-global.esmRequire = (metaUrl: string | URL, modulePath: string): any => {
+global.esmImportMocked = (metaUrl: string | URL, modulePath: string): any => {
 	const require = createRequire(metaUrl)
 
 	return require(modulePath)
