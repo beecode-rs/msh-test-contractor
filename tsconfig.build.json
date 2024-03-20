@@ -1,0 +1,12 @@
+{
+	"exclude": [
+		"./**/*.test.ts",
+		"./**/*.contract.ts",
+		"./**/__mocks__/*",
+		"./**/__snapshots__/*"
+	],
+	"extends": "./tsconfig.json",
+	"include": [
+		"./src"
+	]
+}

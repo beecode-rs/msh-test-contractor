@@ -1,3 +1,3 @@
 export interface JestSpyStrategy {
-  mockImplementationFactory(): (...args: any[]) => any
+	mockImplementationFactory(): (...args: any[]) => any
 }
