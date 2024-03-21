@@ -27,7 +27,7 @@ export const mocker = {
 
 		const spy = fnUtil.isConstructor(fnName)
 			? jest.spyOn(module, subjectName)
-			: terms[0].constructorParams // if function belongs to class mock prototype
+			: terms[0]?.constructorParams // if function belongs to class mock prototype
 				? jest.spyOn(module[subjectName].prototype, fnName)
 				: jest.spyOn(module[subjectName], fnName)
 
