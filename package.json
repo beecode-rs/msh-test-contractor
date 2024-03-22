@@ -52,7 +52,7 @@
 		"doc:toc": "npx markdown-toc -i ./README.md",
 		"docker-build": "docker build -f ./resource/docker/Dockerfile -t bc-msh-test-contractor ./",
 		"docker-rmi": "docker rmi bc-msh-test-contractor",
-		"docker-run-package-lock-update": "docker run --rm -v ./:/usr/app/ milosbugarinovic/msh-lib-base:node18.17.0-alpine3.18 npm i --package-lock-only",
+		"docker-run-package-lock-update": "docker run --rm -v ./:/usr/app/ milosbugarinovic/msh-lib-base:node20.11.1-alpine3.19 npm i --package-lock-only",
 		"docker-run-sh": "docker run --rm -it bc-msh-test-contractor sh",
 		"init": "concurrently -c auto 'npm:init:*'",
 		"init:git-config": "git config include.path ./.git-config",
