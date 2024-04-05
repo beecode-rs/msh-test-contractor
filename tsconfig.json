@@ -10,14 +10,12 @@
 		"declaration": true,
 		"declarationMap": true,
 		"emitDecoratorMetadata": true,
-		"esModuleInterop": true,
+		"esModuleInterop": false,
 		"experimentalDecorators": true,
 		"forceConsistentCasingInFileNames": true,
 		"inlineSourceMap": true,
 		"inlineSources": true,
-		"lib": [
-			"ESNext"
-		],
+		"lib": ["ESNext"],
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"noFallthroughCasesInSwitch": true,
@@ -38,9 +36,5 @@
 		"target": "ESNext",
 		"traceResolution": false
 	},
-	"include": [
-		"./*.*",
-		"./src",
-		"./test"
-	]
+	"include": ["./*.*", "./src", "./test"]
 }
