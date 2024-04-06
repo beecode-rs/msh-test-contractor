@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"outDir": "../../lib",
+		"paths": {
+			"#src/*": [
+				"./src/*"
+			]
+		},
+		"emitDeclarationOnly": true,
+	},
+	"extends": "./esm.json"
+}
