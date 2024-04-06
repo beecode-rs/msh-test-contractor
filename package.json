@@ -15,19 +15,20 @@
 	"author": "Milos Bugarinovic <milos.bugarinovic@gmail.com> (https://milos.bugarinovic.com)",
 	"type": "module",
 	"imports": {
-		"#src": "./src/index.ts",
+		"#src": "./src/index.js",
 		"#src/*": [
-			"./src/*.ts",
-			"./src/*/index.ts"
+			"./src/*.js",
+			"./src/*/index.js"
 		]
 	},
 	"exports": {
 		".": {
-			"default": "./dist/index.js",
+			"import": "./dist/index.js",
+			"require": "./lib/index.js",
 			"types": "./dist/index.d.ts"
 		},
 		"./*": {
-			"default": [
+			"import": [
 				"./dist/*.js",
 				"./dist/*/index.js"
 			],
@@ -36,17 +37,31 @@
 				"./dist/*/index.d.ts"
 			]
 		},
+		"./lib/*": {
+			"require": [
+				"./lib/*.js",
+				"./lib/*/index.js"
+			],
+			"types": [
+				"./lib/*.d.ts",
+				"./lib/*/index.d.ts"
+			]
+		},
 		"./package.json": "./package.json"
 	},
-	"main": "./dist/index.js",
+	"main": "./lib/index.js",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"files": [
-		"./dist"
+		"./dist",
+		"./lib"
 	],
 	"scripts": {
+		"babel": "npx babel --extensions .ts",
 		"build": "npm run clean && npm run tsc",
+		"build-cjs": "npm run clean-cjs && npm run tsc-cjs && npm run tsc-types && npm run tsc-types-alias && npm run fix-hybrid-lib-cjs",
 		"clean": "rimraf ./dist",
+		"clean-cjs": "rimraf ./lib",
 		"doc": "concurrently -c auto 'npm:doc:*'",
 		"doc:api": "npx typedoc",
 		"doc:toc": "npx markdown-toc -i ./README.md",
@@ -54,6 +69,7 @@
 		"docker-rmi": "docker rmi bc-msh-test-contractor",
 		"docker-run-package-lock-update": "docker run --rm -v ./:/usr/app/ milosbugarinovic/msh-lib-base:node20.11.1-alpine3.19 npm i --package-lock-only",
 		"docker-run-sh": "docker run --rm -it bc-msh-test-contractor sh",
+		"fix-hybrid-lib-cjs": "mkdir -p ./lib && echo '{\"type\": \"commonjs\"}' > ./lib/package.json",
 		"init": "concurrently -c auto 'npm:init:*'",
 		"init:git-config": "git config include.path ./.git-config",
 		"init:husky": "npx husky install",
@@ -79,11 +95,14 @@
 		"test:e2e": "npm run jest -- --config=./test/jest.config.ts",
 		"test:int": "npm run jest -- --config=./jest.config.int.ts",
 		"test:unit": "npm run jest -- --config=./jest.config.unit.ts",
-		"tsc": "tsc -p ./tsconfig.build.json",
+		"tsc": "tsc -p ./resource/tsconfig/esm.json",
 		"tsc-check": "npm run tsc -- --noEmit",
-		"tsc-cleaner": "ts-cleaner --dist ./dist/esm",
+		"tsc-cjs": "npm run babel -- --out-dir ./lib ./src",
+		"tsc-cleaner": "ts-cleaner --dist ./dist",
 		"tsc-cleaner-watch": "npm run tsc-cleaner -- --watch",
 		"tsc-time": "npm run tsc -- --diagnostics",
+		"tsc-types": "tsc -p ./resource/tsconfig/types.json",
+		"tsc-types-alias": "tsc-alias -p ./resource/tsconfig/types.json",
 		"tsc-watch": "npm run tsc -- -w --preserveWatchOutput",
 		"watch": "concurrently -c auto -n build,clean 'npm run tsc-watch' 'npm run tsc-cleaner-watch'"
 	},
@@ -113,6 +132,12 @@
 		"glob": "10.3.10"
 	},
 	"devDependencies": {
+		"@babel/cli": "7.24.1",
+		"@babel/core": "7.24.4",
+		"@babel/plugin-proposal-decorators": "7.24.1",
+		"@babel/plugin-transform-modules-commonjs": "7.24.1",
+		"@babel/preset-env": "7.24.4",
+		"@babel/preset-typescript": "7.24.1",
 		"@commitlint/cli": "19.2.1",
 		"@commitlint/config-conventional": "19.1.0",
 		"@commitlint/prompt": "19.2.0",
@@ -152,6 +177,7 @@
 		"ts-cleaner": "1.0.5",
 		"ts-jest": "29.1.2",
 		"ts-node": "10.9.2",
+		"tsc-alias": "1.8.8",
 		"tsc-watch": "6.0.4",
 		"typedoc": "0.25.12",
 		"typedoc-plugin-markdown": "3.17.1",

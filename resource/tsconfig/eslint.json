@@ -3,5 +3,5 @@
 		"rootDir": "./"
 	},
 	"exclude": [],
-	"extends": "./tsconfig.json"
+	"extends": "../../tsconfig.json"
 }

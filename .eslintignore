@@ -3,6 +3,7 @@
 /.semaphore
 /coverage
 /dist
+/lib
 /node_modules
 /resource
 /packages

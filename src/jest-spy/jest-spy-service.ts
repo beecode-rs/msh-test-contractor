@@ -9,7 +9,7 @@ export const jestSpyService = {
 		if (terms.length === 0) {
 			throw new Error('Terms missing')
 		}
-		const { constructorParams } = terms[0]
+		const [{ constructorParams } = { constructorParams: undefined }] = terms
 		if (mockClassParams && constructorParams) {
 			return new JestSpyClassFunctionStrategy({ mockClassParams, name, terms })
 		}

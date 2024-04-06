@@ -3,6 +3,7 @@
 /.base-frame-tmp
 /coverage
 /dist
+/lib
 /node_modules
 /packages
 /test/node_modules
