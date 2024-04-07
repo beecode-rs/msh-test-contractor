@@ -8,6 +8,7 @@ RUN chown node:node -R .
 
 USER node
 
-RUN npm ci       && \
-    npm run lint && \
-    npm run build
+RUN npm ci        && \
+    npm run lint  && \
+    npm run build && \
+    npm run build-cjs

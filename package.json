@@ -58,12 +58,12 @@
 	],
 	"scripts": {
 		"babel": "npx babel --extensions .ts",
-		"build": "npm run clean && npm run tsc",
+		"build": "npm run clean && npm run tsc && npm run tsc-esm-alias",
 		"build-cjs": "npm run clean-cjs && npm run tsc-cjs && npm run tsc-types && npm run tsc-types-alias && npm run fix-hybrid-lib-cjs",
 		"clean": "rimraf ./dist",
 		"clean-cjs": "rimraf ./lib",
 		"doc": "concurrently -c auto 'npm:doc:*'",
-		"doc:api": "npx typedoc",
+		"doc:api": "npx typedoc --tsconfig ./resource/tsconfig/esm.json",
 		"doc:toc": "npx markdown-toc -i ./README.md",
 		"docker-build": "docker build -f ./resource/docker/Dockerfile -t bc-msh-test-contractor ./",
 		"docker-rmi": "docker rmi bc-msh-test-contractor",
@@ -79,7 +79,7 @@
 		"lint-eslint-fix": "npm run lint-eslint -- --fix",
 		"lint-fix": "npm run lint-prettier-fix && npm run lint-eslint-fix && npm run lint-json-fix",
 		"lint-json": "npm run lint-json-fix -- -c",
-		"lint-json-fix": "jsonsort * .*.json '!./test/node_modules' '!./resource' '!**/.env*' -t",
+		"lint-json-fix": "jsonsort * .*.json '!./dist' '!./lib' '!./test/node_modules' '!./resource' '!**/.env*'  '!**/.gitignore' -t",
 		"lint-prettier": "prettier --check {**/*,*}.{js,jsx,ts,tsx}",
 		"lint-prettier-fix": "prettier --write {**/*,*}.{js,jsx,ts,tsx}",
 		"npm-bump-version": "npm --no-git-tag-version version",
@@ -100,6 +100,7 @@
 		"tsc-cjs": "npm run babel -- --out-dir ./lib ./src",
 		"tsc-cleaner": "ts-cleaner --dist ./dist",
 		"tsc-cleaner-watch": "npm run tsc-cleaner -- --watch",
+		"tsc-esm-alias": "tsc-alias -p ./resource/tsconfig/esm.json",
 		"tsc-time": "npm run tsc -- --diagnostics",
 		"tsc-types": "tsc -p ./resource/tsconfig/types.json",
 		"tsc-types-alias": "tsc-alias -p ./resource/tsconfig/types.json",
@@ -126,7 +127,7 @@
 		}
 	},
 	"dependencies": {
-		"@beecode/msh-logger": "0.2.1",
+		"@beecode/msh-logger": "1.0.1",
 		"dotenv": "16.4.5",
 		"fast-deep-equal": "3.1.3",
 		"glob": "10.3.10"

@@ -16,6 +16,7 @@
 			{
 				"assets": [
 					"dist/",
+					"lib/",
 					"package.json",
 					"package-lock.json",
 					"CHANGELOG.md"

@@ -1,0 +1,1 @@
+{"version":3,"file":"mock-jest-empty-strategy.d.ts","sourceRoot":"","sources":["../../src/contract-mock/mock-jest-empty-strategy.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,kCAAkC,CAAA;AAE/D,qBAAa,qBAAsB,YAAW,YAAY;IACzD,IAAI,IAAI,IAAI;IAIZ,OAAO,IAAI,IAAI;CAGf"}
