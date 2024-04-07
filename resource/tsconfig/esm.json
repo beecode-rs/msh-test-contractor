@@ -1,0 +1,15 @@
+{
+	"exclude": ["../../**/*.test.ts", "../../**/*.contract.ts", "../../**/__mocks__/*", "../../**/__tests__/*", "../../**/__snapshots__/*"],
+	"extends": "../../tsconfig.json",
+	"include": ["../../src"],
+	"compilerOptions": {
+		"paths": {
+			"#src/*": [
+				"./src/*"
+			]
+		}
+	},
+	"tsc-alias": {
+		"resolveFullPaths": true
+	}
+}

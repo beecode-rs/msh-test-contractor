@@ -1,11 +1,11 @@
-import { MockStrategy } from './mock-strategy'
+import { MockStrategy } from '#src/contract-mock/mock-strategy'
 
 export class MockJestEmptyStrategy implements MockStrategy {
-  public mock(): void {
-    // dummy call
-  }
+	mock(): void {
+		// dummy call
+	}
 
-  public restore(): void {
-    // dummy call
-  }
+	restore(): void {
+		// dummy call
+	}
 }
