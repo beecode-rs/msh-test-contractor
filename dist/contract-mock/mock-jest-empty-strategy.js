@@ -1,0 +1,9 @@
+export class MockJestEmptyStrategy {
+    mock() {
+        // dummy call
+    }
+    restore() {
+        // dummy call
+    }
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9jay1qZXN0LWVtcHR5LXN0cmF0ZWd5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2NvbnRyYWN0LW1vY2svbW9jay1qZXN0LWVtcHR5LXN0cmF0ZWd5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE1BQU0sT0FBTyxxQkFBcUI7SUFDakMsSUFBSTtRQUNILGFBQWE7SUFDZCxDQUFDO0lBRUQsT0FBTztRQUNOLGFBQWE7SUFDZCxDQUFDO0NBQ0QiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBNb2NrU3RyYXRlZ3kgfSBmcm9tICcjc3JjL2NvbnRyYWN0LW1vY2svbW9jay1zdHJhdGVneSdcblxuZXhwb3J0IGNsYXNzIE1vY2tKZXN0RW1wdHlTdHJhdGVneSBpbXBsZW1lbnRzIE1vY2tTdHJhdGVneSB7XG5cdG1vY2soKTogdm9pZCB7XG5cdFx0Ly8gZHVtbXkgY2FsbFxuXHR9XG5cblx0cmVzdG9yZSgpOiB2b2lkIHtcblx0XHQvLyBkdW1teSBjYWxsXG5cdH1cbn1cbiJdfQ==

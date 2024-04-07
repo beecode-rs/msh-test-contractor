@@ -1,62 +1,70 @@
-import { SpecialFnName } from '../enum/special-fn-name'
-import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy'
-import { jestSpyService } from '../jest-spy/jest-spy-service'
-import { AnyContract, ContractTerm } from '../types'
-import { MockerStrategy } from './mocker-strategy'
+import { jest } from '@jest/globals'
 
-export class MockerJestClassStrategy implements MockerStrategy<jest.SpyInstance> {
-  protected _spy?: jest.SpyInstance
+import { SpecialFnName } from '#src/enum/special-fn-name'
+import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
+import { jestSpyService } from '#src/jest-spy/jest-spy-service'
+import { MockerStrategy } from '#src/mocker/mocker-strategy'
+import { AnyContract, ContractTerm } from '#src/types'
 
-  constructor(protected _contract: AnyContract) {}
+export class MockerJestClassStrategy implements MockerStrategy<jest.Spied<any>> {
+	protected _spy?: jest.Spied<any>
 
-  public mockRestore(): void {
-    if (this._spy) this._spy.mockRestore()
-  }
+	constructor(protected _contract: AnyContract) {}
 
-  public contractSpy(): jest.SpyInstance {
-    const { module, subjectName } = this._contract
-    const functionNames = this._functionNames(module[subjectName])
-    this._spy = jest.spyOn(module, subjectName)
-    this._spy.mockImplementation(this._mockClass(functionNames))
-    return this._spy
-  }
+	mockRestore(): void {
+		if (this._spy) {
+			this._spy.mockRestore()
+		}
+	}
 
-  protected _functionNames(classObject: any): string[] {
-    return Object.getOwnPropertyNames(classObject.prototype).filter((fn) => fn !== 'constructor')
-  }
+	contractSpy(): jest.Spied<any> {
+		const { module, subjectName } = this._contract
+		const functionNames = this._functionNames(module[subjectName])
+		this._spy = jest.spyOn(module, subjectName)
+		this._spy.mockImplementation(this._mockClass(functionNames))
 
-  protected _mockClass(functionNames: string[]): (...args: any[]) => any {
-    const { fns, subjectName } = this._contract
+		return this._spy
+	}
 
-    return (...mockParams: any[]): any => {
-      const { [SpecialFnName.CONSTRUCTOR]: constructorFns, ...restFns } = fns
+	protected _functionNames(classObject: any): string[] {
+		return Object.getOwnPropertyNames(classObject.prototype).filter((fn) => fn !== 'constructor')
+	}
 
-      const objectWithMockedFunctions = Object.fromEntries(
-        functionNames.map((fnName) => {
-          const mockFn = jest.fn()
-          if (restFns[fnName]?.terms) {
-            const mockImpl = this._mockFunction({
-              terms: restFns[fnName]!.terms,
-              mockClassParams: mockParams,
-              name: `${subjectName}.${fnName}`,
-            })
-            mockFn.mockImplementation(mockImpl)
-          }
-          return [fnName, mockFn]
-        })
-      )
+	protected _mockClass(functionNames: string[]): (...args: any[]) => any {
+		const { fns, subjectName } = this._contract
 
-      const constructorJestSpy = new JestSpyFunctionStrategy({ terms: constructorFns!.terms, name: subjectName })
-      const constructorMockImplementation = constructorJestSpy.mockImplementationFactory()
+		return (...mockParams: any[]): any => {
+			const { [SpecialFnName.CONSTRUCTOR]: constructorFns, ...restFns } = fns
 
-      const constructorResultObject = constructorMockImplementation(...mockParams)
-      return { ...objectWithMockedFunctions, ...constructorResultObject }
-    }
-  }
+			const objectWithMockedFunctions = Object.fromEntries(
+				functionNames.map((fnName) => {
+					const mockFn = jest.fn()
+					if (restFns[fnName]?.terms) {
+						const mockImpl = this._mockFunction({
+							mockClassParams: mockParams,
+							name: `${subjectName}.${fnName}`,
+							terms: restFns[fnName]!.terms,
+						})
+						mockFn.mockImplementation(mockImpl)
+					}
 
-  protected _mockFunction(params: { terms: ContractTerm[]; mockClassParams: any[]; name: string }): (...args: any[]) => any {
-    const { terms, mockClassParams, name } = params
-    const jestSpyStrategy = jestSpyService.strategyFromTerms({ terms, mockClassParams, name })
-    return jestSpyStrategy.mockImplementationFactory()
-  }
+					return [fnName, mockFn]
+				})
+			)
+
+			const constructorJestSpy = new JestSpyFunctionStrategy({ name: subjectName, terms: constructorFns!.terms })
+			const constructorMockImplementation = constructorJestSpy.mockImplementationFactory()
+
+			const constructorResultObject = constructorMockImplementation(...mockParams)
+
+			return { ...objectWithMockedFunctions, ...constructorResultObject }
+		}
+	}
+
+	protected _mockFunction(params: { terms: ContractTerm[]; mockClassParams: any[]; name: string }): (...args: any[]) => any {
+		const { terms, mockClassParams, name } = params
+		const jestSpyStrategy = jestSpyService.strategyFromTerms({ mockClassParams, name, terms })
+
+		return jestSpyStrategy.mockImplementationFactory()
+	}
 }

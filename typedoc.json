@@ -1,0 +1,16 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"entryPoints": [
+		"./src/**/*.ts"
+	],
+	"exclude": [
+		"./node_modules/**/*",
+		"./**/*.test.ts"
+	],
+	"json": "./resource/doc/api/docs.json",
+	"out": "./resource/doc/api",
+	"plugin": [
+		"typedoc-plugin-markdown"
+	],
+	"readme": "none"
+}

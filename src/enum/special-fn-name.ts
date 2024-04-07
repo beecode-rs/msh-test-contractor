@@ -1,4 +1,4 @@
 export enum SpecialFnName {
-  CONSTRUCTOR = 'CONSTRUCTOR',
-  SELF = 'SELF',
+	CONSTRUCTOR = 'CONSTRUCTOR',
+	SELF = 'SELF',
 }

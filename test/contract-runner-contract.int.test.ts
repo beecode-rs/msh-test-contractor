@@ -7,5 +7,5 @@
 // contractorTestRunner.contract(dummyFunctionContract)
 // contractorTestRunner.contract(loggerContract)
 it('should placeholder', () => {
-  // dummy
+	// dummy
 })
