@@ -26,8 +26,8 @@ const selfContract = contractFactory(
 				{
 					constructorParams: [dummyTerms],
 					params: [],
-					result: dummyTerms.terms[0].result,
-					returnFnParams: dummyTerms.terms[0].params,
+					result: dummyTerms.terms[0]?.result,
+					returnFnParams: dummyTerms.terms[0]?.params,
 				},
 			],
 		},
