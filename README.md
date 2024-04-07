@@ -8,6 +8,9 @@
 
 <!-- toc -->
 
+- [Idea](#idea)
+- [Install](#install)
+
 <!-- tocstop -->
 
 ## Idea
