@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    assignees:
+      - "milosbugarinovic"
+    commit-message:
+      prefix: "fix"
+    ignore:
+      - dependency-name: "eslint"
+      - dependency-name: "eslint-config-prettier"

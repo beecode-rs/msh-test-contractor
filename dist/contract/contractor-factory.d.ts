@@ -1,4 +1,3 @@
-/// <reference types="node" resolution-mode="require"/>
 import { Contract, ContractMock, PropType } from '../types/index.js';
 export declare const contractFactory: <M, SN extends Extract<keyof M, string>, S extends PropType<M, SN>, CFNS extends Partial<Partial<{ [key in Extract<keyof S, string>]: import("../types/index.js").ContractFunction; } & {
     CONSTRUCTOR: import("../types/index.js").ContractFunction;
