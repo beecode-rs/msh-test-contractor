@@ -21,7 +21,7 @@ export const contractorTestRunner = {
 	},
 	dir: async (dirLocation: string): Promise<void> => {
 		describe(dirLocation, () => {
-			Promise.all(glob.sync(`${dirLocation}/**/*.contract.ts`).map(contractorTestRunner._file))
+			void Promise.all(glob.sync(`${dirLocation}/**/*.contract.ts`).map(contractorTestRunner._file))
 		})
 	},
 	file: (fileLocation: string): void => {
