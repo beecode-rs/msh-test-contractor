@@ -1,6 +1,6 @@
-import { jest } from '@jest/globals';
-import { JestSpyStrategy } from '../jest-spy/jest-spy-strategy.js';
-import { ContractTerm } from '../types/index.js';
+import { Mock } from 'vitest';
+import { JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy';
+import { ContractTerm } from '#src/types';
 export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
     protected readonly _terms: ContractTerm[];
     protected readonly _name: string;
@@ -8,6 +8,6 @@ export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
         terms: ContractTerm[];
         name: string;
     });
-    mockImplementationFactory(): jest.Mock<any>;
+    mockImplementationFactory(): Mock;
 }
 //# sourceMappingURL=jest-spy-function-strategy.d.ts.map

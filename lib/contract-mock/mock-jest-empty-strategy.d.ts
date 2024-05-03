@@ -1,4 +1,4 @@
-import { MockStrategy } from '../contract-mock/mock-strategy.js';
+import { MockStrategy } from '#src/contract-mock/mock-strategy';
 export declare class MockJestEmptyStrategy implements MockStrategy {
     mock(): void;
     restore(): void;

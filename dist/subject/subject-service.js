@@ -1,8 +1,8 @@
-import { SpecialFnName } from '../enum/special-fn-name.js';
-import { SubjectClassFunctionStrategy } from '../subject/subject-class-function-strategy.js';
-import { SubjectConstructorStrategy } from '../subject/subject-constructor-strategy.js';
-import { SubjectFunctionStrategy } from '../subject/subject-function-strategy.js';
-import { fnUtil } from '../util/fn-util.js';
+import { SpecialFnName } from '#src/enum/special-fn-name';
+import { SubjectClassFunctionStrategy } from '#src/subject/subject-class-function-strategy';
+import { SubjectConstructorStrategy } from '#src/subject/subject-constructor-strategy';
+import { SubjectFunctionStrategy } from '#src/subject/subject-function-strategy';
+import { fnUtil } from '#src/util/fn-util';
 export const subjectService = {
     strategyFromContractFunction: (params) => {
         const { contract: { module, subjectName, fns }, fnName, term: { constructorParams }, } = params;

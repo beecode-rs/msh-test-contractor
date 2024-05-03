@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"rootDir": "./src"
+	},
+	"exclude": [
+		"**/*.test.ts",
+		"**/*.contract.ts",
+		"**/__mocks__/*",
+		"**/__tests__/*",
+		"**/__snapshots__/*"
+	],
+	"extends": "./tsconfig.json",
+	"include": [
+		"src"
+	]
+}

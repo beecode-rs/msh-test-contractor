@@ -1,9 +1,9 @@
-import { MockStrategy } from '../contract-mock/mock-strategy.js';
-import { ContractMock, ContractMockRevertFns } from '../types/index.js';
+import { MockStrategy } from '#src/contract-mock/mock-strategy';
+import { ContractMockRevertFns } from '#src/types';
 export declare class MockJestStrategy implements MockStrategy {
-    protected readonly _mock?: ContractMock | undefined;
+    protected readonly _mock?: any;
     protected _restoreMockFn?: ContractMockRevertFns;
-    constructor(_mock?: ContractMock | undefined);
+    constructor(_mock?: any);
     mock(mockParams?: {
         params?: any[];
     }): void;

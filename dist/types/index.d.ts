@@ -1,4 +1,4 @@
-import { SpecialFnName } from '../enum/special-fn-name.js';
+import { SpecialFnName } from '#src/enum/special-fn-name';
 export type PropType<T, P extends keyof T> = T[P];
 export type Contract<MODULE, SUBJECT_NAME extends Extract<keyof MODULE, string>, SUBJECT extends PropType<MODULE, SUBJECT_NAME>> = {
     module: MODULE;

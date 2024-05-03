@@ -1,5 +1,5 @@
 import deepEqual from 'fast-deep-equal/es6';
-import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy.js';
+import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy';
 export class JestSpyClassFunctionStrategy {
     _terms;
     _mockClassParams;

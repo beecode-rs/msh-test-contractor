@@ -1,5 +1,5 @@
-import { SubjectFromContract, SubjectStrategy } from '../subject/subject-strategy.js';
-import { ContractTerm } from '../types/index.js';
+import { SubjectFromContract, SubjectStrategy } from '#src/subject/subject-strategy';
+import { ContractTerm } from '#src/types';
 export declare class SubjectFunctionStrategy implements SubjectStrategy {
     protected readonly _subjectName: string;
     protected readonly _module: any;

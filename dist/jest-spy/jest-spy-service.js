@@ -1,5 +1,5 @@
-import { JestSpyClassFunctionStrategy } from '../jest-spy/jest-spy-class-function-strategy.js';
-import { JestSpyFunctionStrategy } from '../jest-spy/jest-spy-function-strategy.js';
+import { JestSpyClassFunctionStrategy } from '#src/jest-spy/jest-spy-class-function-strategy';
+import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy';
 export const jestSpyService = {
     strategyFromTerms: (params) => {
         const { terms, mockClassParams, name } = params;

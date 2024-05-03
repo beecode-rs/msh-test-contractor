@@ -1,3 +1,4 @@
+import { it } from 'vitest'
 // import { contractorTestRunner } from '../src/contract/contractor-test-runner'
 // import dateContract from '../src/global-contract/date.contract'
 // import dummyFunctionContract from './dummy-function.contract'

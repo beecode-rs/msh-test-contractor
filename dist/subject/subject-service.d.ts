@@ -1,5 +1,5 @@
-import { SubjectStrategy } from '../subject/subject-strategy.js';
-import { AnyContract, ContractTerm } from '../types/index.js';
+import { SubjectStrategy } from '#src/subject/subject-strategy';
+import { AnyContract, ContractTerm } from '#src/types';
 export declare const subjectService: {
     strategyFromContractFunction: (params: {
         contract: AnyContract;

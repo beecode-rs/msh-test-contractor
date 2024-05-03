@@ -1,3 +1,3 @@
-export { contractor } from './contract/contractor.js';
-export { mocker } from './mocker/mocker.js';
+export { contractor } from '#src/contract/contractor';
+export { mocker } from '#src/mocker/mocker';
 //# sourceMappingURL=index.d.ts.map

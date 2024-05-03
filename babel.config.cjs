@@ -1,4 +1,4 @@
-const tsConfig = require('./resource/tsconfig/esm.json')
+const tsConfig = require('./tsconfig.build.json')
 
 module.exports = function (api) {
 	api.cache(true)

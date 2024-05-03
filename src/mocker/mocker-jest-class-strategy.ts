@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals'
+import { vi } from 'vitest'
 
 import { SpecialFnName } from '#src/enum/special-fn-name'
 import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
@@ -6,8 +6,8 @@ import { jestSpyService } from '#src/jest-spy/jest-spy-service'
 import { MockerStrategy } from '#src/mocker/mocker-strategy'
 import { AnyContract, ContractTerm } from '#src/types'
 
-export class MockerJestClassStrategy implements MockerStrategy<jest.Spied<any>> {
-	protected _spy?: jest.Spied<any>
+export class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
+	protected _spy?: vi.Spied<any>
 
 	constructor(protected _contract: AnyContract) {}
 
@@ -17,10 +17,10 @@ export class MockerJestClassStrategy implements MockerStrategy<jest.Spied<any>> 
 		}
 	}
 
-	contractSpy(): jest.Spied<any> {
+	contractSpy(): vi.Spied<any> {
 		const { module, subjectName } = this._contract
 		const functionNames = this._functionNames(module[subjectName])
-		this._spy = jest.spyOn(module, subjectName)
+		this._spy = vi.spyOn(module, subjectName)
 		this._spy.mockImplementation(this._mockClass(functionNames))
 
 		return this._spy
@@ -38,7 +38,7 @@ export class MockerJestClassStrategy implements MockerStrategy<jest.Spied<any>> 
 
 			const objectWithMockedFunctions = Object.fromEntries(
 				functionNames.map((fnName) => {
-					const mockFn = jest.fn()
+					const mockFn = vi.fn()
 					if (restFns[fnName]?.terms) {
 						const mockImpl = this._mockFunction({
 							mockClassParams: mockParams,

@@ -1,0 +1,22 @@
+{
+	"name": "test",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"imports": {
+		"#src": "./src/index.js",
+		"#src/*": [
+			"./src/*.js",
+			"./src/*/index.js"
+		]
+	},
+	"main": "jest.config.ts",
+	"scripts": {
+		"test": "vitest"
+	},
+	"dependencies": {
+		"@beecode/msh-test-contract": ".."
+	}
+}

@@ -1,5 +1,4 @@
-import { MockerStrategy } from '../mocker/mocker-strategy.js';
-import { AnyContract } from '../types/index.js';
+import { MockerStrategy } from '#src/mocker/mocker-strategy';
 export declare const mockerService: {
     strategyFromContract: (contract: AnyContract) => MockerStrategy<any>;
 };

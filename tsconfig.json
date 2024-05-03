@@ -27,18 +27,20 @@
 		"noUnusedParameters": true,
 		"outDir": "./dist",
 		"paths": {
+			"#packageJson": [
+				"./package.json"
+			],
 			"#src": [
-				"./src/index.ts"
+				"./src/index"
 			],
 			"#src/*": [
-				"./src/*.ts",
-				"./src/*/index.ts"
+				"./src/*"
 			]
 		},
 		"pretty": true,
 		"resolveJsonModule": true,
 		"resolvePackageJsonImports": true,
-		"rootDir": "./src",
+		"rootDir": "./",
 		"skipLibCheck": true,
 		"strict": true,
 		"strictFunctionTypes": true,

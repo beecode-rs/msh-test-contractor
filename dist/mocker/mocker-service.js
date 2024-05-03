@@ -1,8 +1,8 @@
-import { SpecialFnName } from '../enum/special-fn-name.js';
-import { MockerJestClassStrategy } from '../mocker/mocker-jest-class-strategy.js';
-import { MockerJestFunctionStrategy } from '../mocker/mocker-jest-function-strategy.js';
-import { MockerJestObjectStrategy } from '../mocker/mocker-jest-object-strategy.js';
-import { typeUtil } from '../util/type-util.js';
+import { SpecialFnName } from '#src/enum/special-fn-name';
+import { MockerJestClassStrategy } from '#src/mocker/mocker-jest-class-strategy';
+import { MockerJestFunctionStrategy } from '#src/mocker/mocker-jest-function-strategy';
+import { MockerJestObjectStrategy } from '#src/mocker/mocker-jest-object-strategy';
+import { typeUtil } from '#src/util/type-util';
 export const mockerService = {
     strategyFromContract: (contract) => {
         const { module, subjectName, fns } = contract;

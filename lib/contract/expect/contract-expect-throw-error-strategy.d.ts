@@ -1,5 +1,5 @@
-import { ContractExpectStrategy } from '../../contract/expect/contract-expect-service.js';
-import { ContractTerm } from '../../types/index.js';
+import { ContractExpectStrategy } from '#src/contract/expect/contract-expect-service';
+import { ContractTerm } from '#src/types';
 export declare class ContractExpectThrowErrorStrategy implements ContractExpectStrategy {
     protected readonly _termResult: any;
     constructor(params: {

@@ -1,5 +1,5 @@
-import { JestSpyStrategy } from '../jest-spy/jest-spy-strategy.js';
-import { ContractTerm } from '../types/index.js';
+import { JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy';
+import { ContractTerm } from '#src/types';
 export declare const jestSpyService: {
     strategyFromTerms: (params: {
         terms: ContractTerm[];
