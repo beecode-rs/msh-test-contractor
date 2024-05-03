@@ -6,7 +6,6 @@ export default defineConfig({
 	test: {
 		coverage: {
 			exclude: ['lib/**', ...coverageConfigDefaults.exclude],
-			provider: 'istanbul',
 		},
 		mockReset: true,
 		passWithNoTests: true,
