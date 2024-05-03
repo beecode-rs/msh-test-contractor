@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { JestSpyClassFunctionStrategy } from '#src/jest-spy/jest-spy-class-function-strategy'
 import * as JestSpyClassFunctionStrategyModule from '#src/jest-spy/jest-spy-class-function-strategy'
@@ -8,15 +8,11 @@ import { jestSpyService } from '#src/jest-spy/jest-spy-service'
 
 describe('jestSpyService', () => {
 	describe('strategyFromTerms', () => {
-		let spy_JestSpyFunctionStrategy: jest.SpiedClass<typeof JestSpyFunctionStrategy>
-		let spy_JestSpyClassFunctionStrategy: jest.SpiedClass<typeof JestSpyClassFunctionStrategy>
+		let spy_JestSpyFunctionStrategy: vi.SpiedClass<typeof JestSpyFunctionStrategy>
+		let spy_JestSpyClassFunctionStrategy: vi.SpiedClass<typeof JestSpyClassFunctionStrategy>
 		beforeEach(() => {
-			spy_JestSpyFunctionStrategy = jest.spyOn(JestSpyFunctionStrategyModule, 'JestSpyFunctionStrategy')
-			spy_JestSpyClassFunctionStrategy = jest.spyOn(JestSpyClassFunctionStrategyModule, 'JestSpyClassFunctionStrategy')
-		})
-
-		afterEach(() => {
-			jest.resetAllMocks()
+			spy_JestSpyFunctionStrategy = vi.spyOn(JestSpyFunctionStrategyModule, 'JestSpyFunctionStrategy')
+			spy_JestSpyClassFunctionStrategy = vi.spyOn(JestSpyClassFunctionStrategyModule, 'JestSpyClassFunctionStrategy')
 		})
 
 		it('should throw error if terms are empty array', () => {

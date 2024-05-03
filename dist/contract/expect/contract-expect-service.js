@@ -1,6 +1,6 @@
-import { ContractExpectAnyEqualStrategy } from '../../contract/expect/contract-expect-any-equal-strategy.js';
-import { ContractExpectFunctionResultEqualStrategy } from '../../contract/expect/contract-expect-function-result-equal-strategy.js';
-import { ContractExpectThrowErrorStrategy } from '../../contract/expect/contract-expect-throw-error-strategy.js';
+import { ContractExpectAnyEqualStrategy } from '#src/contract/expect/contract-expect-any-equal-strategy';
+import { ContractExpectFunctionResultEqualStrategy } from '#src/contract/expect/contract-expect-function-result-equal-strategy';
+import { ContractExpectThrowErrorStrategy } from '#src/contract/expect/contract-expect-throw-error-strategy';
 export const contractExpectService = {
     fromTerm: (params) => {
         const { term } = params;

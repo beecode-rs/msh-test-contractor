@@ -2,7 +2,7 @@ import { contractFactory } from '#src/contract/contractor-factory'
 import { SpecialFnName } from '#src/enum/special-fn-name'
 
 export default contractFactory(
-	{ module: require('./fn-util'), subjectName: 'fnUtil' },
+	{ module: require('./fn-util.js'), subjectName: 'fnUtil' },
 	{
 		isConstructor: {
 			terms: [
