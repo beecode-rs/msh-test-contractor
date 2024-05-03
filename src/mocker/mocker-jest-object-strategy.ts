@@ -1,13 +1,13 @@
-import { jest } from '@jest/globals'
+import { vi } from 'vitest'
 
 import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
 import { MockerStrategy } from '#src/mocker/mocker-strategy'
 import { AnyContract } from '#src/types'
 
-export type MockerJestObjectResult = { [k: string]: jest.Spied<any> }
+export type MockerJestObjectResult = { [k: string]: vi.Spied<any> }
 
 export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObjectResult> {
-	protected _spies: jest.Spied<any>[] = []
+	protected _spies: vi.Spied<any>[] = []
 
 	constructor(protected _contract: AnyContract) {}
 
@@ -25,7 +25,7 @@ export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObject
 		return Object.fromEntries(
 			Object.entries(this._contract.fns).map(([fnName, ctFunc]) => {
 				const jestSpyFunction = new JestSpyFunctionStrategy({ name: `${subjectName}.${fnName}`, terms: ctFunc!.terms })
-				const spy = jest.spyOn(module[subjectName], fnName).mockImplementation(jestSpyFunction.mockImplementationFactory())
+				const spy = vi.spyOn(module[subjectName], fnName).mockImplementation(jestSpyFunction.mockImplementationFactory())
 				this._spies.push(spy)
 
 				return [fnName, spy]

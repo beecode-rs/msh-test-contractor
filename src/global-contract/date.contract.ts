@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals'
+import { vi } from 'vitest'
 
 import { contractFactory } from '#src/contract/contractor-factory'
 import { SpecialFnName } from '#src/enum/special-fn-name'
@@ -14,7 +14,7 @@ const selfContract = contractFactory(
 
 				const mockedDate = new Date((options?.params ?? [])[0] ?? '2020-01-01')
 				const _Date = Date
-				global.Date = jest.fn(() => mockedDate) as any
+				global.Date = vi.fn(() => mockedDate) as any
 				global.Date.UTC = _Date.UTC
 				global.Date.parse = _Date.parse
 				global.Date.now = _Date.now

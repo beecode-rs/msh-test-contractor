@@ -1,4 +1,4 @@
-import { expect } from '@jest/globals'
+import { expect } from 'vitest'
 
 import { ContractExpectStrategy } from '#src/contract/expect/contract-expect-service'
 import { ContractTerm } from '#src/types'

@@ -1,17 +1,17 @@
-import { jest } from '@jest/globals'
+import { vi } from 'vitest'
 
 import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
 import { mockerService } from '#src/mocker/mocker-service'
 import { AnyContract, ContractFunction, ContractMockRevertFn, PropType } from '#src/types'
 import { fnUtil } from '#src/util/fn-util'
 
-export type MockerContractResult<SPY = jest.Spied<any>> = {
+export type MockerContractResult<SPY = vi.Spied<any>> = {
 	spy: SPY
 	mockRestore: ContractMockRevertFn
 }
 
 export const mocker = {
-	contract: <SPY = jest.Spied<any>, C extends AnyContract = any>(contract: C): MockerContractResult<SPY> => {
+	contract: <SPY = vi.Spied<any>, C extends AnyContract = any>(contract: C): MockerContractResult<SPY> => {
 		const mockerStrategy = mockerService.strategyFromContract(contract)
 		const spy = mockerStrategy.contractSpy()
 		const mockRestore = (): void => mockerStrategy.mockRestore()
@@ -26,10 +26,10 @@ export const mocker = {
 		const { terms } = fns[fnName]! as ContractFunction
 
 		const spy = fnUtil.isConstructor(fnName)
-			? jest.spyOn(module, subjectName)
+			? vi.spyOn(module, subjectName)
 			: terms[0]?.constructorParams // if function belongs to class mock prototype
-				? jest.spyOn(module[subjectName].prototype, fnName)
-				: jest.spyOn(module[subjectName], fnName)
+				? vi.spyOn(module[subjectName].prototype, fnName)
+				: vi.spyOn(module[subjectName], fnName)
 
 		if (!terms) {
 			throw new Error(`Terms not found in function ${fnName} for module ${subjectName}`)

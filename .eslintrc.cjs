@@ -19,7 +19,6 @@ module.exports = {
 	root: true,
 	env: {
 		es6: true,
-		'jest/globals': true,
 		node: true,
 	},
 	settings: {
@@ -42,13 +41,13 @@ module.exports = {
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'ESNext',
-		project: './resource/tsconfig/eslint.json',
+		project: './tsconfig.json',
 		sourceType: 'module',
 	},
-	plugins: ['@typescript-eslint', 'eslint-plugin-import', 'import', 'no-only-tests', 'no-loops', 'jest', 'sort-keys-fix'],
+	plugins: ['@typescript-eslint', 'eslint-plugin-import', 'import', 'no-only-tests', 'no-loops', 'sort-keys-fix'],
 	rules: {
 		'@typescript-eslint/no-floating-promises': ['error'],
-		// TODO TEMP DISABLE
+		// TODO TEMP DISABLED
 		'@typescript-eslint/no-explicit-any':'warn',
 		// ESLINT
 		// 'no-restricted-imports': [
@@ -124,11 +123,11 @@ module.exports = {
 		],
 
 		// JEST
-		'jest/no-disabled-tests': 'warn',
-		'jest/no-focused-tests': 'error',
-		'jest/no-identical-title': 'error',
-		'jest/prefer-to-have-length': 'warn',
-		'jest/valid-expect': 'error',
+		// 'jest/no-disabled-tests': 'warn',
+		// 'jest/no-focused-tests': 'error',
+		// 'jest/no-identical-title': 'error',
+		// 'jest/prefer-to-have-length': 'warn',
+		// 'jest/valid-expect': 'error',
 		'no-console': 'error',
 		'no-duplicate-imports': 'error',
 
