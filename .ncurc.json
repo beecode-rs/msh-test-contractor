@@ -1,6 +1,3 @@
 {
-	"reject": [
-		"eslint",
-		"eslint-config-prettier"
-	]
+	"reject": []
 }
