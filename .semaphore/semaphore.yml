@@ -50,7 +50,5 @@ blocks:
       when: branch != 'main'
 
 promotions:
-  - name: Alpha Deploy
-    pipeline_file: alpha.yml
-  - name: Production Deploy
-    pipeline_file: prod.yml
+  - name: Bump Version
+    pipeline_file: bump-version.yml

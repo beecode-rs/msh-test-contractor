@@ -1,0 +1,31 @@
+version: v1.0
+name: Test
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+
+blocks:
+  - name: Bump Version
+    task:
+      secrets:
+        - name: bc-git-secret
+        - name: bc-npm-secret
+      jobs:
+        - name: Build
+          commands:
+            - cache restore bc-msh-test-contractor-docker-image-$SEMAPHORE_GIT_SHA
+            - docker load -i bc-msh-test-contractor.tar
+            - touch version.txt
+            - sudo chown -R packer:packer version.txt
+            - docker run --rm -v ./version.txt:/usr/app/version.txt -e GH_TOKEN -e NPM_TOKEN -e GH_USER -e CI bc-msh-test-contractor npm run npm-semantic-release
+            - cat version.txt
+            - cache store bc-msh-test-contractor-version-$SEMAPHORE_GIT_SHA version.txt
+    skip:
+      when: branch != 'main'
+
+promotions:
+  - name: Alpha Deploy
+    pipeline_file: alpha.yml
+  - name: Production Deploy
+    pipeline_file: prod.yml
