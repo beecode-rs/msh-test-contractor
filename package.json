@@ -125,7 +125,7 @@
 		"@babel/preset-typescript": "7.24.1",
 		"@commitlint/cli": "19.3.0",
 		"@commitlint/config-conventional": "19.2.2",
-		"@commitlint/prompt": "19.3.0",
+		"@commitlint/prompt": "19.3.1",
 		"@types/deep-equal": "1.0.4",
 		"@types/glob": "8.1.0",
 		"@types/node": "20.12.10",
