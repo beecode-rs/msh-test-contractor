@@ -141,7 +141,7 @@
 		"source-map-support": "0.5.21",
 		"ts-cleaner": "1.0.5",
 		"ts-node": "10.9.2",
-		"tsc-alias": "1.8.8",
+		"tsc-alias": "1.8.10",
 		"tsc-watch": "6.2.0",
 		"typedoc": "0.25.13",
 		"typedoc-plugin-markdown": "4.0.1",
