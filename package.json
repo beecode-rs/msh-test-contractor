@@ -128,7 +128,7 @@
 		"@commitlint/prompt": "19.3.0",
 		"@types/deep-equal": "1.0.4",
 		"@types/glob": "8.1.0",
-		"@types/node": "20.12.10",
+		"@types/node": "20.14.11",
 		"@vitest/coverage-v8": "1.6.0",
 		"commitizen": "4.3.0",
 		"concurrently": "8.2.2",
