@@ -4,7 +4,7 @@ import { contractorService } from '#src/contract/contractor-service'
 import { contractExpectService } from '#src/contract/expect/contract-expect-service'
 import { contractMockService } from '#src/contract-mock/contract-mock-service'
 import { subjectService } from '#src/subject/subject-service'
-import { Contract, ContractFunction, PropType } from '#src/types'
+import { type Contract, type PropType } from '#src/types/index'
 
 export const contractor = <
 	M,
@@ -16,7 +16,7 @@ export const contractor = <
 	contract: C,
 	fnName: CFNK
 ): void => {
-	const { terms, mock } = contract.fns[fnName]! as ContractFunction
+	const { terms, mock } = contract.fns[fnName]!
 
 	const moduleMockStrategy = contractMockService.strategyFromFunctionMock(contract.mock)
 	const functionMockStrategy = contractMockService.strategyFromFunctionMock(mock)

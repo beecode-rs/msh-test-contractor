@@ -6,6 +6,7 @@ describe('MockJestStrategy', () => {
 	describe('mock', () => {
 		it('should set restoreMockFn to empty array if jestMock is not defined', () => {
 			const strategy = new MockJestStrategy()
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const params: any[] = []
 			strategy.mock({ params })
 			expect(strategy['_restoreMockFn']).toEqual([])
@@ -13,8 +14,10 @@ describe('MockJestStrategy', () => {
 
 		it('should call jest mock with params', () => {
 			const dummyJestMockResult = { test: 'test' }
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const dummyJestMock = vi.fn<any>().mockReturnValue(dummyJestMockResult)
 			const strategy = new MockJestStrategy(dummyJestMock)
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const params: any[] = []
 			strategy.mock({ params })
 			expect(strategy['_restoreMockFn']).toEqual(dummyJestMockResult)

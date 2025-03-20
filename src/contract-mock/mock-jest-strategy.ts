@@ -1,14 +1,18 @@
-import { MockStrategy } from '#src/contract-mock/mock-strategy'
-import { ContractMock, ContractMockRevertFns } from '#src/types'
+import { type MockStrategy } from '#src/contract-mock/mock-strategy'
+import { type ContractMock, type ContractMockRevertFns } from '#src/types/index'
 
 export class MockJestStrategy implements MockStrategy {
 	protected _restoreMockFn?: ContractMockRevertFns
 
 	constructor(protected readonly _mock?: ContractMock) {}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	mock(mockParams: { params?: any[] } = {}): void {
 		const { params } = mockParams
-		this._restoreMockFn = this._mock ? this._mock({ params }) : []
+		this._restoreMockFn = []
+		if (this._mock) {
+			this._restoreMockFn = this._mock({ params })
+		}
 	}
 
 	restore(): void {

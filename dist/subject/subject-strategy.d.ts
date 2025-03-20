@@ -1,4 +1,4 @@
-import { ContractTerm } from '#src/types';
+import { type ContractTerm } from '#src/types/index';
 export type SubjectFromContract = {
     subjectName: string;
     module: any;

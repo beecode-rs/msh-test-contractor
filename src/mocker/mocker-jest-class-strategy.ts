@@ -3,10 +3,12 @@ import { vi } from 'vitest'
 import { SpecialFnName } from '#src/enum/special-fn-name'
 import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
 import { jestSpyService } from '#src/jest-spy/jest-spy-service'
-import { MockerStrategy } from '#src/mocker/mocker-strategy'
-import { AnyContract, ContractTerm } from '#src/types'
+import { type MockerStrategy } from '#src/mocker/mocker-strategy'
+import { type AnyContract, type ContractTerm } from '#src/types/index'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected _spy?: vi.Spied<any>
 
 	constructor(protected _contract: AnyContract) {}
@@ -17,6 +19,7 @@ export class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
 		}
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	contractSpy(): vi.Spied<any> {
 		const { module, subjectName } = this._contract
 		const functionNames = this._functionNames(module[subjectName])
@@ -26,13 +29,16 @@ export class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
 		return this._spy
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected _functionNames(classObject: any): string[] {
 		return Object.getOwnPropertyNames(classObject.prototype).filter((fn) => fn !== 'constructor')
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected _mockClass(functionNames: string[]): (...args: any[]) => any {
 		const { fns, subjectName } = this._contract
 
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		return (...mockParams: any[]): any => {
 			const { [SpecialFnName.CONSTRUCTOR]: constructorFns, ...restFns } = fns
 
@@ -43,7 +49,7 @@ export class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
 						const mockImpl = this._mockFunction({
 							mockClassParams: mockParams,
 							name: `${subjectName}.${fnName}`,
-							terms: restFns[fnName]!.terms,
+							terms: restFns[fnName].terms,
 						})
 						mockFn.mockImplementation(mockImpl)
 					}
@@ -61,6 +67,7 @@ export class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
 		}
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected _mockFunction(params: { terms: ContractTerm[]; mockClassParams: any[]; name: string }): (...args: any[]) => any {
 		const { terms, mockClassParams, name } = params
 		const jestSpyStrategy = jestSpyService.strategyFromTerms({ mockClassParams, name, terms })

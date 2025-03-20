@@ -1,7 +1,7 @@
 import { contractFactory } from '#src/contract/contractor-factory'
 import { SpecialFnName } from '#src/enum/special-fn-name'
 import { mocker } from '#src/mocker/mocker'
-import { ContractMockRevertFns } from '#src/types'
+import { type ContractMockRevertFns } from '#src/types/index'
 
 class DummyClass {
 	a(_a: string): string {
@@ -12,8 +12,10 @@ class DummyClass {
 const dummyModule = { DummyClass }
 const dummySubjectName = 'DummyClass'
 const dummyFnName = 'a'
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const dummyConstructorParams: any[] = []
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const dummyConstructorParamsFactory = (): any[] => {
 	return [
 		{
@@ -25,6 +27,7 @@ const dummyConstructorParamsFactory = (): any[] => {
 }
 
 const selfContract = contractFactory(
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	{ module: require('./subject-class-function-strategy'), subjectName: 'SubjectClassFunctionStrategy' },
 	{
 		[SpecialFnName.CONSTRUCTOR]: {

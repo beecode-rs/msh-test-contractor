@@ -4,7 +4,7 @@ import { mocker } from '#src/mocker/mocker'
 import subjectClassFunctionStrategyContract from '#src/subject/subject-class-function-strategy.contract'
 import subjectConstructorStrategyContract from '#src/subject/subject-constructor-strategy.contract'
 import subjectFunctionStrategyContract from '#src/subject/subject-function-strategy.contract'
-import { ContractMockRevertFns } from '#src/types'
+import { type ContractMockRevertFns } from '#src/types/index'
 
 class DummyClass {
 	a(_a: string): string {
@@ -18,6 +18,7 @@ const dummyContract = {
 }
 
 export default contractFactory(
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	{ module: require('./subject-service'), subjectName: 'subjectService' },
 	{
 		strategyFromContractFunction: {

@@ -2,8 +2,8 @@ import { SpecialFnName } from '#src/enum/special-fn-name'
 import { SubjectClassFunctionStrategy } from '#src/subject/subject-class-function-strategy'
 import { SubjectConstructorStrategy } from '#src/subject/subject-constructor-strategy'
 import { SubjectFunctionStrategy } from '#src/subject/subject-function-strategy'
-import { SubjectFromContract, SubjectStrategy } from '#src/subject/subject-strategy'
-import { AnyContract, ContractTerm } from '#src/types'
+import { type SubjectFromContract, type SubjectStrategy } from '#src/subject/subject-strategy'
+import { type AnyContract, type ContractTerm } from '#src/types/index'
 import { fnUtil } from '#src/util/fn-util'
 
 export const subjectService = {

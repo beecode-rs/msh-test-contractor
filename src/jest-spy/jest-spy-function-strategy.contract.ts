@@ -1,6 +1,6 @@
 import { contractFactory } from '#src/contract/contractor-factory'
 import { SpecialFnName } from '#src/enum/special-fn-name'
-import { ContractTerm } from '#src/types'
+import { type ContractTerm } from '#src/types/index'
 
 const dummyTerms: { terms: ContractTerm[] } = {
 	terms: [
@@ -11,6 +11,7 @@ const dummyTerms: { terms: ContractTerm[] } = {
 }
 
 const selfContract = contractFactory(
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	{ module: require('./jest-spy-function-strategy'), subjectName: 'JestSpyFunctionStrategy' },
 	{
 		[SpecialFnName.CONSTRUCTOR]: {

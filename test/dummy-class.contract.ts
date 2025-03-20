@@ -2,9 +2,10 @@ import dummyFunctionContract from './dummy-function.contract'
 import { contractFactory } from '../src/contract/contractor-factory'
 import { SpecialFnName } from '../src/enum/special-fn-name'
 import { mocker } from '../src/mocker/mocker'
-import { ContractMockRevertFns } from '../src/types'
+import { type ContractMockRevertFns } from '../src/types'
 
 export default contractFactory(
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	{ module: require('./dummy-class'), subjectName: 'DummyClass' },
 	{
 		[SpecialFnName.CONSTRUCTOR]: {

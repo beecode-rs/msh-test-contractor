@@ -1,3 +1,4 @@
+import { type AnyContract } from '#src/types/index';
 export declare const contractorTestRunner: {
     _file: (fileLocation: string) => Promise<void>;
     contract: (contract: AnyContract) => void;

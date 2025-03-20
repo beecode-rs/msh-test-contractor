@@ -1,9 +1,10 @@
 import { ContractExpectAnyEqualStrategy } from '#src/contract/expect/contract-expect-any-equal-strategy'
 import { ContractExpectFunctionResultEqualStrategy } from '#src/contract/expect/contract-expect-function-result-equal-strategy'
 import { ContractExpectThrowErrorStrategy } from '#src/contract/expect/contract-expect-throw-error-strategy'
-import { ContractTerm } from '#src/types'
+import { type ContractTerm } from '#src/types/index'
 
 export interface ContractExpectStrategy {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	test(fn: () => any): Promise<void>
 }
 
