@@ -2,13 +2,14 @@ import dummyClassContract from './dummy-class.contract'
 import loggerContract from './logger.contract'
 import { contractFactory } from '../src/contract/contractor-factory'
 import { mocker } from '../src/mocker/mocker'
-import { ContractMockRevertFns } from '../src/types'
+import { type ContractMockRevertFns } from '../src/types'
 
 export default contractFactory(
 	{
 		mock: (): ContractMockRevertFns => {
 			return [mocker.contract(loggerContract).mockRestore, mocker.contract(dummyClassContract).mockRestore]
 		},
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
 		module: require('./dummy-function'),
 		subjectName: 'dummyFunction',
 	},

@@ -1,7 +1,8 @@
 import { contractFactory } from '#src/contract/contractor-factory'
 import { SpecialFnName } from '#src/enum/special-fn-name'
-import { ContractTerm } from '#src/types'
+import { type ContractTerm } from '#src/types/index'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const dummyTerms: { terms: ContractTerm[]; mockClassParams: any[] } = {
 	mockClassParams: [1, 2],
 	terms: [
@@ -12,6 +13,7 @@ const dummyTerms: { terms: ContractTerm[]; mockClassParams: any[] } = {
 }
 
 const selfContract = contractFactory(
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	{ module: require('./jest-spy-class-function-strategy'), subjectName: 'JestSpyClassFunctionStrategy' },
 	{
 		[SpecialFnName.CONSTRUCTOR]: {

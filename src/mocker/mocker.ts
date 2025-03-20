@@ -2,15 +2,17 @@ import { vi } from 'vitest'
 
 import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
 import { mockerService } from '#src/mocker/mocker-service'
-import { AnyContract, ContractFunction, ContractMockRevertFn, PropType } from '#src/types'
+import { type AnyContract, type ContractMockRevertFn, type PropType } from '#src/types/index'
 import { fnUtil } from '#src/util/fn-util'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type MockerContractResult<SPY = vi.Spied<any>> = {
 	spy: SPY
 	mockRestore: ContractMockRevertFn
 }
 
 export const mocker = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	contract: <SPY = vi.Spied<any>, C extends AnyContract = any>(contract: C): MockerContractResult<SPY> => {
 		const mockerStrategy = mockerService.strategyFromContract(contract)
 		const spy = mockerStrategy.contractSpy()
@@ -23,13 +25,15 @@ export const mocker = {
 		fnName: CFNK
 	): MockerContractResult => {
 		const { module, subjectName, fns } = contract
-		const { terms } = fns[fnName]! as ContractFunction
+		const { terms } = fns[fnName]!
 
-		const spy = fnUtil.isConstructor(fnName)
-			? vi.spyOn(module, subjectName)
-			: terms[0]?.constructorParams // if function belongs to class mock prototype
-				? vi.spyOn(module[subjectName].prototype, fnName)
-				: vi.spyOn(module[subjectName], fnName)
+		const spy = // eslint-disable-next-line no-ternary
+			fnUtil.isConstructor(fnName)
+				? vi.spyOn(module, subjectName)
+				: // eslint-disable-next-line no-ternary
+					terms[0]?.constructorParams // if function belongs to class mock prototype
+					? vi.spyOn(module[subjectName].prototype, fnName)
+					: vi.spyOn(module[subjectName], fnName)
 
 		if (!terms) {
 			throw new Error(`Terms not found in function ${fnName} for module ${subjectName}`)

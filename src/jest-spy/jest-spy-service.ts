@@ -1,9 +1,10 @@
 import { JestSpyClassFunctionStrategy } from '#src/jest-spy/jest-spy-class-function-strategy'
 import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
-import { JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy'
-import { ContractTerm } from '#src/types'
+import { type JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy'
+import { type ContractTerm } from '#src/types/index'
 
 export const jestSpyService = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	strategyFromTerms: (params: { terms: ContractTerm[]; mockClassParams?: any[]; name: string }): JestSpyStrategy => {
 		const { terms, mockClassParams, name } = params
 		if (terms.length === 0) {

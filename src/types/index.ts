@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import { SpecialFnName } from '#src/enum/special-fn-name'
+import { type SpecialFnName } from '#src/enum/special-fn-name'
 
 export type PropType<T, P extends keyof T> = T[P]
 
@@ -14,6 +14,7 @@ export type Contract<
 	fns: ContractFns<SUBJECT>
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyContract = Contract<any, any, any>
 
 export type ContractFns<SUBJECT> = Partial<
@@ -28,13 +29,18 @@ export type ContractFunction = {
 }
 
 export type ContractTerm = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	params: any[]
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	result: any
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	constructorParams?: any[]
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	returnFnParams?: any[]
 }
 
 // TODO define mock object
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ContractMock = (options?: { params?: any[] }) => ContractMockRevertFns
 
 export type ContractMockRevertFn = () => void

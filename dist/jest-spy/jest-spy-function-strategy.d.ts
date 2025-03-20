@@ -1,6 +1,6 @@
-import { Mock } from 'vitest';
-import { JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy';
-import { ContractTerm } from '#src/types';
+import { type Mock } from 'vitest';
+import { type JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy';
+import { type ContractTerm } from '#src/types/index';
 export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
     protected readonly _terms: ContractTerm[];
     protected readonly _name: string;

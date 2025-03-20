@@ -1,5 +1,5 @@
-import { ContractExpectStrategy } from '#src/contract/expect/contract-expect-service';
-import { ContractTerm } from '#src/types';
+import { type ContractExpectStrategy } from '#src/contract/expect/contract-expect-service';
+import { type ContractTerm } from '#src/types/index';
 export declare class ContractExpectFunctionResultEqualStrategy implements ContractExpectStrategy {
     protected readonly _termResult: any;
     protected readonly _termReturnFnParams: any;

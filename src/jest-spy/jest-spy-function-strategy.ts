@@ -1,7 +1,7 @@
-import { Mock, vi } from 'vitest'
+import { type Mock, vi } from 'vitest'
 
-import { JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy'
-import { ContractTerm } from '#src/types'
+import { type JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy'
+import { type ContractTerm } from '#src/types/index'
 import { objectUtil } from '#src/util/object-util'
 
 export class JestSpyFunctionStrategy implements JestSpyStrategy {
@@ -15,6 +15,7 @@ export class JestSpyFunctionStrategy implements JestSpyStrategy {
 	}
 
 	mockImplementationFactory(): Mock {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const fakeImplementation = (...mockParams: any[]): any => {
 			const foundTerm = this._terms.find(
 				(term) => objectUtil.stringifyOrNullUndefined(term.params) === objectUtil.stringifyOrNullUndefined(mockParams)

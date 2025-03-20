@@ -1,12 +1,14 @@
 import { vi } from 'vitest'
 
 import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
-import { MockerStrategy } from '#src/mocker/mocker-strategy'
-import { AnyContract } from '#src/types'
+import { type MockerStrategy } from '#src/mocker/mocker-strategy'
+import { type AnyContract } from '#src/types/index'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type MockerJestObjectResult = { [k: string]: vi.Spied<any> }
 
 export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObjectResult> {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected _spies: vi.Spied<any>[] = []
 
 	constructor(protected _contract: AnyContract) {}

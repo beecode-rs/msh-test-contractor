@@ -1,12 +1,15 @@
-import { SubjectFromContract, SubjectStrategy } from '#src/subject/subject-strategy'
-import { ContractTerm } from '#src/types'
+import { type SubjectFromContract, type SubjectStrategy } from '#src/subject/subject-strategy'
+import { type ContractTerm } from '#src/types/index'
 
 export class SubjectClassFunctionStrategy implements SubjectStrategy {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected readonly _module: any
 	protected readonly _subjectName: string
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected readonly _constructorParams: any[]
 	protected readonly _fnName: string
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	constructor(params: { subjectFromContract: SubjectFromContract; constructorParams: any[]; fnName: string }) {
 		const {
 			subjectFromContract: { module, subjectName },
@@ -22,6 +25,7 @@ export class SubjectClassFunctionStrategy implements SubjectStrategy {
 		this._fnName = fnName
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	exec(term: ContractTerm): any {
 		const obj = new (this.fn())(...this._constructorParams)
 		if (this._isGetter()) {
@@ -31,6 +35,7 @@ export class SubjectClassFunctionStrategy implements SubjectStrategy {
 		return obj[this._fnName](...term.params)
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	fn(): any {
 		return this._module[this._subjectName]
 	}

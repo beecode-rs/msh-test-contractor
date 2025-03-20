@@ -1,1 +1,1 @@
-{"version":3,"file":"mocker-service.d.ts","sourceRoot":"","sources":["../../src/mocker/mocker-service.ts"],"names":[],"mappings":"AAIA,OAAO,EAAE,cAAc,EAAE,MAAM,6BAA6B,CAAA;AAI5D,eAAO,MAAM,aAAa;qDACsB,eAAe,GAAG,CAAC;CAelE,CAAA"}
+{"version":3,"file":"mocker-service.d.ts","sourceRoot":"","sources":["../../src/mocker/mocker-service.ts"],"names":[],"mappings":"AAIA,OAAO,EAAE,KAAK,cAAc,EAAE,MAAM,6BAA6B,CAAA;AACjE,OAAO,EAAE,KAAK,WAAW,EAAE,MAAM,kBAAkB,CAAA;AAGnD,eAAO,MAAM,aAAa;qCAEQ,WAAW,KAAG,cAAc,CAAC,GAAG,CAAC;CAelE,CAAA"}

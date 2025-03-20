@@ -1,4 +1,4 @@
-import { ContractTerm } from '#src/types'
+import { type ContractTerm } from '#src/types/index'
 
 export const contractorService = {
 	testDescription: (params: { fnName: string }): string => {

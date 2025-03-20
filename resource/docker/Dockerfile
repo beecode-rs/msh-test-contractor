@@ -1,4 +1,4 @@
-FROM milosbugarinovic/msh-lib-base:node20.12.2-alpine3.19
+FROM milosbugarinovic/msh-lib-base:node22.14.0-alpine3.21
 
 USER root
 

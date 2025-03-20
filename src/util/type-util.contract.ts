@@ -1,8 +1,9 @@
 import { contractFactory } from '#src/contract/contractor-factory'
 import { mocker } from '#src/mocker/mocker'
-import { ContractMockRevertFns } from '#src/types'
+import { type ContractMockRevertFns } from '#src/types/index'
 
 const selfContract = contractFactory(
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	{ module: require('.//src/util/type-util'), subjectName: 'typeUtil' },
 	{
 		isClass: {

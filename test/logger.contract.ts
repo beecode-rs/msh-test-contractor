@@ -1,9 +1,10 @@
 import { contractFactory } from '../src/contract/contractor-factory'
 import dateContract from '../src/global-contract/date.contract'
 import { mocker } from '../src/mocker/mocker'
-import { ContractMockRevertFns } from '../src/types'
+import { type ContractMockRevertFns } from '../src/types'
 
 const selfContract = contractFactory(
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	{ module: require('./logger'), subjectName: 'logger' },
 	{
 		_message: {

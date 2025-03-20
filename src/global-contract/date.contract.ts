@@ -3,17 +3,19 @@ import { vi } from 'vitest'
 import { contractFactory } from '#src/contract/contractor-factory'
 import { SpecialFnName } from '#src/enum/special-fn-name'
 import { mocker } from '#src/mocker/mocker'
-import { ContractMockRevertFns } from '#src/types'
+import { type ContractMockRevertFns } from '#src/types/index'
 
 const selfContract = contractFactory(
 	{ module: global, subjectName: 'Date' },
 	{
 		[SpecialFnName.CONSTRUCTOR]: {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			mock: (options?: { params?: any[] }): ContractMockRevertFns => {
 				const realDate = Date.bind(global.Date)
 
 				const mockedDate = new Date((options?.params ?? [])[0] ?? '2020-01-01')
 				const _Date = Date
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				global.Date = vi.fn(() => mockedDate) as any
 				global.Date.UTC = _Date.UTC
 				global.Date.parse = _Date.parse
