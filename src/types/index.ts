@@ -18,9 +18,9 @@ export type Contract<
 export type AnyContract = Contract<any, any, any>
 
 export type ContractFns<SUBJECT> = Partial<
-	{ [key in Extract<keyof SUBJECT, string>]: ContractFunction } & { [key in SpecialFnName]: ContractFunction } & {
-		[k: string]: ContractFunction
-	}
+	Record<Extract<keyof SUBJECT, string>, ContractFunction> &
+		Record<SpecialFnName, ContractFunction> &
+		Record<string, ContractFunction>
 >
 
 export type ContractFunction = {

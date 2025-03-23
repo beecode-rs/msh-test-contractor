@@ -5,7 +5,7 @@ import { type MockerStrategy } from '#src/mocker/mocker-strategy'
 import { type AnyContract } from '#src/types/index'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type MockerJestObjectResult = { [k: string]: vi.Spied<any> }
+export type MockerJestObjectResult = Record<string, vi.Spied<any>>
 
 export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObjectResult> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,6 +26,7 @@ export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObject
 
 		return Object.fromEntries(
 			Object.entries(this._contract.fns).map(([fnName, ctFunc]) => {
+				// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 				const jestSpyFunction = new JestSpyFunctionStrategy({ name: `${subjectName}.${fnName}`, terms: ctFunc!.terms })
 				const spy = vi.spyOn(module[subjectName], fnName).mockImplementation(jestSpyFunction.mockImplementationFactory())
 				this._spies.push(spy)

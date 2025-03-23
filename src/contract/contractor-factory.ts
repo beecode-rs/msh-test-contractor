@@ -4,6 +4,7 @@ export const contractFactory = <
 	M,
 	SN extends Extract<keyof M, string>,
 	S extends PropType<M, SN>,
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 	CFNS extends Partial<ContractFns<S>>,
 >(
 	options: { module: M; subjectName: SN; mock?: ContractMock },
