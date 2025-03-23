@@ -12,14 +12,17 @@ export type MockerContractResult<SPY = vi.Spied<any>> = {
 }
 
 export const mocker = {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unnecessary-type-parameters
 	contract: <SPY = vi.Spied<any>, C extends AnyContract = any>(contract: C): MockerContractResult<SPY> => {
 		const mockerStrategy = mockerService.strategyFromContract(contract)
 		const spy = mockerStrategy.contractSpy()
-		const mockRestore = (): void => mockerStrategy.mockRestore()
+		const mockRestore = (): void => {
+			mockerStrategy.mockRestore()
+		}
 
 		return { mockRestore, spy }
 	},
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 	function: <C extends AnyContract, CFNK extends Extract<keyof PropType<C, 'fns'>, string>>(
 		contract: C,
 		fnName: CFNK
@@ -35,14 +38,19 @@ export const mocker = {
 					? vi.spyOn(module[subjectName].prototype, fnName)
 					: vi.spyOn(module[subjectName], fnName)
 
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (!terms) {
+			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 			throw new Error(`Terms not found in function ${fnName} for module ${subjectName}`)
 		}
 
+		// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 		const jestSpyFunction = new JestSpyFunctionStrategy({ name: `${subjectName}.${fnName}`, terms })
 		spy.mockImplementation(jestSpyFunction.mockImplementationFactory())
 
-		const mockRestore = (): void => spy.mockRestore()
+		const mockRestore = (): void => {
+			spy.mockRestore()
+		}
 
 		return { mockRestore, spy }
 	},

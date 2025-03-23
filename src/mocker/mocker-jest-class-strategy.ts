@@ -48,6 +48,7 @@ export class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
 					if (restFns[fnName]?.terms) {
 						const mockImpl = this._mockFunction({
 							mockClassParams: mockParams,
+							// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 							name: `${subjectName}.${fnName}`,
 							terms: restFns[fnName].terms,
 						})

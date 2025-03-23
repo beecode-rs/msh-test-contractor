@@ -1,8 +1,6 @@
 import { type MockerStrategy } from '#src/mocker/mocker-strategy';
 import { type AnyContract } from '#src/types/index';
-export type MockerJestObjectResult = {
-    [k: string]: vi.Spied<any>;
-};
+export type MockerJestObjectResult = Record<string, vi.Spied<any>>;
 export declare class MockerJestObjectStrategy implements MockerStrategy<MockerJestObjectResult> {
     protected _contract: AnyContract;
     protected _spies: vi.Spied<any>[];

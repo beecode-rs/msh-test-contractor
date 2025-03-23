@@ -18,6 +18,7 @@ export class DummyClass {
 	}
 
 	externalAdd(c: number): number {
+		// eslint-disable-next-line @typescript-eslint/restrict-plus-operands
 		return dummyFunction.add(this.__a, this.__b) + c
 	}
 }

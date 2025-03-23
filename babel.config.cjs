@@ -24,6 +24,6 @@ module.exports = function (api) {
 	return {
 		plugins,
 		presets,
-		ignore
+		ignore,
 	}
 }

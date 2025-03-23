@@ -41,7 +41,9 @@ describe('MockJestStrategy', () => {
 			const mockFnArr = [vi.fn(), vi.fn(), vi.fn()]
 			strategy['_restoreMockFn'] = mockFnArr
 			strategy.restore()
-			mockFnArr.forEach((fn) => expect(fn).toHaveBeenCalledTimes(1))
+			mockFnArr.forEach((fn) => {
+				expect(fn).toHaveBeenCalledTimes(1)
+			})
 		})
 	})
 })

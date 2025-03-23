@@ -17,7 +17,9 @@ export class MockJestStrategy implements MockStrategy {
 
 	restore(): void {
 		if (this._restoreMockFn) {
-			this._restoreMockFn.forEach((rf) => rf())
+			this._restoreMockFn.forEach((rf) => {
+				rf()
+			})
 		}
 	}
 }
