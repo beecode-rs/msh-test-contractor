@@ -1,6 +1,6 @@
 /.idea
 /!.idea/runConfigurations
-/.base-frame-tmp
+/.base-frame-template
 /coverage
 /node_modules
 /packages
