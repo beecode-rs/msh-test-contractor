@@ -3,7 +3,7 @@ import eslintNode from '@beecode/msh-config/src/eslint-config.mjs'
 export default [
 	{
 		ignores: [
-			'.base-frame-tmp',
+			'.base-frame-template',
 			'.idea',
 			'.semaphore',
 			'coverage',
