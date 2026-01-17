@@ -1,8 +1,8 @@
-import deepEqual from 'fast-deep-equal/es6'
+import deepEqual from 'fast-deep-equal'
 
+import { type ContractTerm } from '#src/types/index'
 import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
 import { type VitestSpyStrategy } from '#src/vitest-spy/vitest-spy-strategy'
-import { type ContractTerm } from '#src/types/index'
 
 export class VitestSpyClassFunctionStrategy implements VitestSpyStrategy {
 	protected readonly _terms: ContractTerm[]

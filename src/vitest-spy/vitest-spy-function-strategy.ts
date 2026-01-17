@@ -1,8 +1,8 @@
 import { type Mock, vi } from 'vitest'
 
-import { type VitestSpyStrategy } from '#src/vitest-spy/vitest-spy-strategy'
 import { type ContractTerm } from '#src/types/index'
 import { objectUtil } from '#src/util/object-util'
+import { type VitestSpyStrategy } from '#src/vitest-spy/vitest-spy-strategy'
 
 export class VitestSpyFunctionStrategy implements VitestSpyStrategy {
 	protected readonly _terms: ContractTerm[]

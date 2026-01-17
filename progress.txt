@@ -237,3 +237,37 @@
 - Pre-existing typecheck issues remain but are unrelated to the Jest→Vitest migration
 
 ---
+
+## Iteration 9 - US-009: Run full test suite and fix any failures
+- Fixed TypeScript build errors that were blocking `npm run build`
+- The "pre-existing" typecheck issues were actually fixable:
+  - `vi.Spied<any>` and `vi.SpiedFunction<any>` are NOT valid Vitest types
+  - Replaced with proper `MockInstance<any>` type imported from vitest
+  - Changed `fast-deep-equal/es6` to `fast-deep-equal` for NodeNext module resolution
+- Applied lint-fix to resolve import ordering issues caused by renaming
+
+### Files changed
+- `src/mocker/mocker-vitest-class-strategy.ts` (fixed vi.Spied → MockInstance, lint ordering)
+- `src/mocker/mocker-vitest-function-strategy.ts` (fixed vi.SpiedFunction → MockInstance)
+- `src/mocker/mocker-vitest-object-strategy.ts` (fixed vi.Spied → MockInstance, lint ordering)
+- `src/mocker/mocker.ts` (fixed vi.Spied → MockInstance, lint ordering)
+- `src/vitest-spy/vitest-spy-class-function-strategy.ts` (fixed fast-deep-equal import, lint ordering)
+- Multiple files via lint-fix (import ordering)
+- PRD.md (marked US-009 complete)
+- progress.txt (this entry)
+
+### Verification results
+- `npm run test:unit` - PASSED (10 tests)
+- `npm run test:int` - PASSED (no integration tests)
+- `npm run test:e2e` - PASSED (1 test)
+- `npm run build` - PASSED
+- `npm run lint` - PASSED
+- `npm run tsc-check` - PASSED
+
+### Learnings for future iterations
+- `vi.Spied` is NOT a valid Vitest type - use `MockInstance` instead
+- `fast-deep-equal/es6` doesn't have proper ESM exports for NodeNext - use base package instead
+- When fixing type errors, run lint-fix afterward as imports may need reordering
+- The "pre-existing typecheck issue" noted in earlier iterations was actually fixable
+
+---

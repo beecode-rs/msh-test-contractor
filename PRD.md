@@ -124,12 +124,17 @@ The `test-contractor` package is a contract-based testing framework that already
 **Description:** As a developer, I want to verify all tests pass after the migration.
 
 **Acceptance Criteria:**
-- [ ] Run `npm run test:unit` - all tests pass
-- [ ] Run `npm run test:int` - all tests pass
-- [ ] Run `npm run test:e2e` - all tests pass (or skip if not applicable)
-- [ ] Run `npm run build` - build succeeds
-- [ ] Run `npm run lint` - no linting errors
-- [ ] Typecheck passes
+- [x] Run `npm run test:unit` - all tests pass
+- [x] Run `npm run test:int` - all tests pass (no integration tests in project)
+- [x] Run `npm run test:e2e` - all tests pass
+- [x] Run `npm run build` - build succeeds
+- [x] Run `npm run lint` - no linting errors
+- [x] Typecheck passes
+
+**Fixes applied:**
+- Replaced invalid `vi.Spied<any>` and `vi.SpiedFunction<any>` types with proper `MockInstance<any>` from vitest
+- Changed `fast-deep-equal/es6` import to `fast-deep-equal` for NodeNext module resolution compatibility
+- Applied lint-fix to resolve import ordering issues
 
 ## Non-Goals
 

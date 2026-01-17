@@ -1,8 +1,8 @@
 import { SpecialFnName } from '#src/enum/special-fn-name'
+import { type MockerStrategy } from '#src/mocker/mocker-strategy'
 import { MockerVitestClassStrategy } from '#src/mocker/mocker-vitest-class-strategy'
 import { MockerVitestFunctionStrategy } from '#src/mocker/mocker-vitest-function-strategy'
 import { MockerVitestObjectStrategy } from '#src/mocker/mocker-vitest-object-strategy'
-import { type MockerStrategy } from '#src/mocker/mocker-strategy'
 import { type AnyContract } from '#src/types/index'
 import { typeUtil } from '#src/util/type-util'
 

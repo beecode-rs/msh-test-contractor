@@ -1,19 +1,19 @@
-import { vi } from 'vitest'
+import { type MockInstance, vi } from 'vitest'
 
-import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
 import { mockerService } from '#src/mocker/mocker-service'
 import { type AnyContract, type ContractMockRevertFn, type PropType } from '#src/types/index'
 import { fnUtil } from '#src/util/fn-util'
+import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type MockerContractResult<SPY = vi.Spied<any>> = {
+export type MockerContractResult<SPY = MockInstance<any>> = {
 	spy: SPY
 	mockRestore: ContractMockRevertFn
 }
 
 export const mocker = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unnecessary-type-parameters
-	contract: <SPY = vi.Spied<any>, C extends AnyContract = any>(contract: C): MockerContractResult<SPY> => {
+	contract: <SPY = MockInstance<any>, C extends AnyContract = any>(contract: C): MockerContractResult<SPY> => {
 		const mockerStrategy = mockerService.strategyFromContract(contract)
 		const spy = mockerStrategy.contractSpy()
 		const mockRestore = (): void => {

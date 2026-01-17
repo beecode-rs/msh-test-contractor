@@ -1,15 +1,15 @@
-import { vi } from 'vitest'
+import { type MockInstance, vi } from 'vitest'
 
 import { SpecialFnName } from '#src/enum/special-fn-name'
-import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
-import { vitestSpyService } from '#src/vitest-spy/vitest-spy-service'
 import { type MockerStrategy } from '#src/mocker/mocker-strategy'
 import { type AnyContract, type ContractTerm } from '#src/types/index'
+import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
+import { vitestSpyService } from '#src/vitest-spy/vitest-spy-service'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export class MockerVitestClassStrategy implements MockerStrategy<vi.Spied<any>> {
+export class MockerVitestClassStrategy implements MockerStrategy<MockInstance<any>> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected _spy?: vi.Spied<any>
+	protected _spy?: MockInstance<any>
 
 	constructor(protected _contract: AnyContract) {}
 
@@ -20,7 +20,7 @@ export class MockerVitestClassStrategy implements MockerStrategy<vi.Spied<any>> 
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	contractSpy(): vi.Spied<any> {
+	contractSpy(): MockInstance<any> {
 		const { module, subjectName } = this._contract
 		const functionNames = this._functionNames(module[subjectName])
 		this._spy = vi.spyOn(module, subjectName)

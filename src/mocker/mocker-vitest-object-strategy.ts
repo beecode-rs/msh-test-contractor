@@ -1,20 +1,22 @@
-import { vi } from 'vitest'
+import { type MockInstance, vi } from 'vitest'
 
-import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
 import { type MockerStrategy } from '#src/mocker/mocker-strategy'
 import { type AnyContract } from '#src/types/index'
+import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type MockerVitestObjectResult = Record<string, vi.Spied<any>>
+export type MockerVitestObjectResult = Record<string, MockInstance<any>>
 
 export class MockerVitestObjectStrategy implements MockerStrategy<MockerVitestObjectResult> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected _spies: vi.Spied<any>[] = []
+	protected _spies: MockInstance<any>[] = []
 
 	constructor(protected _contract: AnyContract) {}
 
 	mockRestore(): void {
-		this._spies.forEach((spy) => spy.mockRestore())
+		this._spies.forEach((spy) => {
+			spy.mockRestore()
+		})
 	}
 
 	contractSpy(): MockerVitestObjectResult {
