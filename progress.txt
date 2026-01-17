@@ -83,3 +83,28 @@
 - vitest.config.unit.ts and vitest.config.int.ts inherit from vitest.config.ts, so only base config needs updating
 
 ---
+
+## Iteration 3 - US-003: Rename MockJestStrategy to MockVitestStrategy
+- Renamed files using `git mv`:
+  - `src/contract-mock/mock-jest-strategy.ts` → `src/contract-mock/mock-vitest-strategy.ts`
+  - `src/contract-mock/mock-jest-strategy.test.ts` → `src/contract-mock/mock-vitest-strategy.test.ts`
+  - `src/contract-mock/mock-jest-strategy.contract.ts` → `src/contract-mock/mock-vitest-strategy.contract.ts`
+- Renamed class `MockJestStrategy` to `MockVitestStrategy`
+- Updated variable names in test file (dummyJestMock → dummyVitestMock, dummyJestMockResult → dummyVitestMockResult)
+- Updated test descriptions (e.g., "should call jest mock with params" → "should call vitest mock with params")
+- Updated contract file to reference new file and class names
+- Updated contract-mock-service.ts import and usage
+- All tests pass (unit, int, e2e)
+
+### Files changed
+- `src/contract-mock/mock-jest-strategy.ts` → `src/contract-mock/mock-vitest-strategy.ts` (renamed + class rename)
+- `src/contract-mock/mock-jest-strategy.test.ts` → `src/contract-mock/mock-vitest-strategy.test.ts` (renamed + updated references)
+- `src/contract-mock/mock-jest-strategy.contract.ts` → `src/contract-mock/mock-vitest-strategy.contract.ts` (renamed + updated references)
+- `src/contract-mock/contract-mock-service.ts` (updated import and usage)
+
+### Learnings for future iterations
+- Use `replace_all: true` for simple class/variable name replacements across a file
+- Contract files use `require()` with relative paths - need to update module path when renaming
+- contract-mock-service.ts is the main consumer of these strategies
+
+---

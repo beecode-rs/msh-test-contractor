@@ -1,7 +1,7 @@
 import { type MockStrategy } from '#src/contract-mock/mock-strategy'
 import { type ContractMock, type ContractMockRevertFns } from '#src/types/index'
 
-export class MockJestStrategy implements MockStrategy {
+export class MockVitestStrategy implements MockStrategy {
 	protected _restoreMockFn?: ContractMockRevertFns
 
 	constructor(protected readonly _mock?: ContractMock) {}
