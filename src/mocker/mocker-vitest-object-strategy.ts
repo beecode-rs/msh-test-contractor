@@ -5,9 +5,9 @@ import { type MockerStrategy } from '#src/mocker/mocker-strategy'
 import { type AnyContract } from '#src/types/index'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type MockerJestObjectResult = Record<string, vi.Spied<any>>
+export type MockerVitestObjectResult = Record<string, vi.Spied<any>>
 
-export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObjectResult> {
+export class MockerVitestObjectStrategy implements MockerStrategy<MockerVitestObjectResult> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected _spies: vi.Spied<any>[] = []
 
@@ -17,11 +17,11 @@ export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObject
 		this._spies.forEach((spy) => spy.mockRestore())
 	}
 
-	contractSpy(): MockerJestObjectResult {
+	contractSpy(): MockerVitestObjectResult {
 		return this._mockObject()
 	}
 
-	protected _mockObject(): MockerJestObjectResult {
+	protected _mockObject(): MockerVitestObjectResult {
 		const { module, subjectName } = this._contract
 
 		return Object.fromEntries(

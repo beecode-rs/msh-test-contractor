@@ -7,7 +7,7 @@ import { type MockerStrategy } from '#src/mocker/mocker-strategy'
 import { type AnyContract, type ContractTerm } from '#src/types/index'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
+export class MockerVitestClassStrategy implements MockerStrategy<vi.Spied<any>> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected _spy?: vi.Spied<any>
 

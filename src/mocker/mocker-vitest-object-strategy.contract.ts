@@ -5,7 +5,7 @@ const dummyContract = { dummy: 'contract' }
 
 export default contractFactory(
 	// eslint-disable-next-line @typescript-eslint/no-require-imports
-	{ module: require('./mocker-jest-object-strategy'), subjectName: 'MockerJestObjectStrategy' },
+	{ module: require('./mocker-vitest-object-strategy'), subjectName: 'MockerVitestObjectStrategy' },
 	{
 		[SpecialFnName.CONSTRUCTOR]: {
 			terms: [

@@ -4,7 +4,7 @@ import { type MockerStrategy } from '#src/mocker/mocker-strategy'
 import { type AnyContract } from '#src/types/index'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export class MockerJestFunctionStrategy implements MockerStrategy<vi.SpiedFunction<any>> {
+export class MockerVitestFunctionStrategy implements MockerStrategy<vi.SpiedFunction<any>> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected _spy?: vi.SpiedFunction<any>
 

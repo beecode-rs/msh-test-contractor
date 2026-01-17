@@ -168,3 +168,32 @@
 - Variable names using "jestSpy" pattern should also be updated to "vitestSpy" for consistency
 
 ---
+
+## Iteration 6 - US-006: Rename MockerJest strategies to MockerVitest
+- Renamed files using `git mv`:
+  - `src/mocker/mocker-jest-function-strategy.ts` → `src/mocker/mocker-vitest-function-strategy.ts`
+  - `src/mocker/mocker-jest-class-strategy.ts` → `src/mocker/mocker-vitest-class-strategy.ts`
+  - `src/mocker/mocker-jest-object-strategy.ts` → `src/mocker/mocker-vitest-object-strategy.ts`
+  - `src/mocker/mocker-jest-object-strategy.contract.ts` → `src/mocker/mocker-vitest-object-strategy.contract.ts`
+- Renamed classes:
+  - `MockerJestFunctionStrategy` → `MockerVitestFunctionStrategy`
+  - `MockerJestClassStrategy` → `MockerVitestClassStrategy`
+  - `MockerJestObjectStrategy` → `MockerVitestObjectStrategy`
+  - `MockerJestObjectResult` (type) → `MockerVitestObjectResult`
+- Updated contract file module path and subjectName
+- Updated mocker-service.ts imports and class instantiations
+- All tests pass (unit, int, e2e)
+
+### Files changed
+- `src/mocker/mocker-jest-function-strategy.ts` → `src/mocker/mocker-vitest-function-strategy.ts` (renamed + class rename)
+- `src/mocker/mocker-jest-class-strategy.ts` → `src/mocker/mocker-vitest-class-strategy.ts` (renamed + class rename)
+- `src/mocker/mocker-jest-object-strategy.ts` → `src/mocker/mocker-vitest-object-strategy.ts` (renamed + class rename + type rename)
+- `src/mocker/mocker-jest-object-strategy.contract.ts` → `src/mocker/mocker-vitest-object-strategy.contract.ts` (renamed + updated references)
+- `src/mocker/mocker-service.ts` (updated imports and class instantiations)
+
+### Learnings for future iterations
+- mocker-service.ts is the consumer of all mocker strategies
+- Only one contract file exists for mocker strategies (mocker-jest-object-strategy.contract.ts)
+- Types exported alongside classes (like MockerJestObjectResult) also need renaming
+
+---
