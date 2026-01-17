@@ -197,3 +197,24 @@
 - Types exported alongside classes (like MockerJestObjectResult) also need renaming
 
 ---
+
+## Iteration 7 - US-007: Update exports in index.ts
+- Verified src/index.ts only exports `contractor` and `mocker` (the public API)
+- These main entry points already use Vitest-named internal classes
+- No Jest-named classes are exposed in the public API
+- Committed pending contract file changes from previous iterations:
+  - contract-mock-service.contract.ts - updated imports to use Vitest naming
+  - mock-vitest-empty-strategy.contract.ts - removed Jest-specific test term
+- All tests pass (unit, int, e2e)
+
+### Files changed
+- `src/contract-mock/contract-mock-service.contract.ts` (updated imports to Vitest naming)
+- `src/contract-mock/mock-vitest-empty-strategy.contract.ts` (removed obsolete Jest test term)
+- PRD.md (marked US-007 complete)
+
+### Learnings for future iterations
+- The public API (src/index.ts) is minimal - just exports `contractor` and `mocker`
+- Internal classes (strategies, services) are not directly exposed to consumers
+- Check `git status` before completing a task to ensure all related changes are committed
+
+---

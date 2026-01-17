@@ -11,10 +11,6 @@ export default contractFactory(
 					params: [],
 					result: {},
 				},
-				{
-					params: [{ jest: [] }],
-					result: { _jestMock: undefined },
-				},
 			],
 		},
 	}
