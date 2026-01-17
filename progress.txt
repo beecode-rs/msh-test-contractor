@@ -58,3 +58,28 @@
 - Typecheck has pre-existing failures (not related to Jest naming)
 
 ---
+
+## Iteration 2 - US-002: Rename setup file from jest-setup to vitest-setup
+- Renamed all jest-setup files to vitest-setup:
+  - `src/__tests__/index-jest-setup.ts` → `src/__tests__/index-vitest-setup.ts`
+  - `src/index-jest-setup.ts` → `src/index-vitest-setup.ts`
+  - `test/index-jest-setup.ts` → `test/index-vitest-setup.ts`
+- Updated vitest config references:
+  - `vitest.config.ts` - updated setupFiles path
+  - `test/vitest.config.ts` - updated setupFiles path
+- All tests pass (unit, int, e2e)
+- Typecheck has pre-existing failures (not related to this change)
+
+### Files changed
+- `src/__tests__/index-jest-setup.ts` → `src/__tests__/index-vitest-setup.ts` (renamed)
+- `src/index-jest-setup.ts` → `src/index-vitest-setup.ts` (renamed)
+- `test/index-jest-setup.ts` → `test/index-vitest-setup.ts` (renamed)
+- `vitest.config.ts` (updated reference)
+- `test/vitest.config.ts` (updated reference)
+
+### Learnings for future iterations
+- Use `git mv` for renaming to preserve git history
+- There are 3 setup files that need renaming (src/__tests__, src/, test/)
+- vitest.config.unit.ts and vitest.config.int.ts inherit from vitest.config.ts, so only base config needs updating
+
+---

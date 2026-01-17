@@ -9,7 +9,7 @@ export default defineConfig({
 		},
 		mockReset: true,
 		passWithNoTests: true,
-		setupFiles: ['./src/__tests__/index-jest-setup.ts'],
+		setupFiles: ['./src/__tests__/index-vitest-setup.ts'],
 		watch: false,
 	},
 })
