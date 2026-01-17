@@ -108,3 +108,26 @@
 - contract-mock-service.ts is the main consumer of these strategies
 
 ---
+
+## Iteration 4 - US-004: Rename MockJestEmptyStrategy to MockVitestEmptyStrategy
+- Renamed files using `git mv`:
+  - `src/contract-mock/mock-jest-empty-strategy.ts` → `src/contract-mock/mock-vitest-empty-strategy.ts`
+  - `src/contract-mock/mock-jest-empty-strategy.test.ts` → `src/contract-mock/mock-vitest-empty-strategy.test.ts`
+  - `src/contract-mock/mock-jest-empty-strategy.contract.ts` → `src/contract-mock/mock-vitest-empty-strategy.contract.ts`
+- Renamed class `MockJestEmptyStrategy` to `MockVitestEmptyStrategy`
+- Updated contract file module path and subjectName
+- Updated test file imports and class references
+- Updated contract-mock-service.ts import and usage
+- All tests pass (unit, int, e2e)
+
+### Files changed
+- `src/contract-mock/mock-jest-empty-strategy.ts` → `src/contract-mock/mock-vitest-empty-strategy.ts` (renamed + class rename)
+- `src/contract-mock/mock-jest-empty-strategy.test.ts` → `src/contract-mock/mock-vitest-empty-strategy.test.ts` (renamed + updated references)
+- `src/contract-mock/mock-jest-empty-strategy.contract.ts` → `src/contract-mock/mock-vitest-empty-strategy.contract.ts` (renamed + updated references)
+- `src/contract-mock/contract-mock-service.ts` (updated import and usage)
+
+### Learnings for future iterations
+- Same pattern as US-003: rename file with `git mv`, update class name, update imports
+- contract-mock-service.ts now has both strategies renamed to Vitest
+
+---

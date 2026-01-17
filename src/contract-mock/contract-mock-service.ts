@@ -1,4 +1,4 @@
-import { MockJestEmptyStrategy } from '#src/contract-mock/mock-jest-empty-strategy'
+import { MockVitestEmptyStrategy } from '#src/contract-mock/mock-vitest-empty-strategy'
 import { MockVitestStrategy } from '#src/contract-mock/mock-vitest-strategy'
 import { type MockStrategy } from '#src/contract-mock/mock-strategy'
 import { type ContractMock } from '#src/types/index'
@@ -9,6 +9,6 @@ export const contractMockService = {
 			return new MockVitestStrategy(mock)
 		}
 
-		return new MockJestEmptyStrategy()
+		return new MockVitestEmptyStrategy()
 	},
 }

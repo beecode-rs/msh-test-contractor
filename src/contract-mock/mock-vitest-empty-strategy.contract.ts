@@ -3,7 +3,7 @@ import { SpecialFnName } from '#src/enum/special-fn-name'
 
 export default contractFactory(
 	// eslint-disable-next-line @typescript-eslint/no-require-imports
-	{ module: require('./mock-jest-empty-strategy'), subjectName: 'MockJestEmptyStrategy' },
+	{ module: require('./mock-vitest-empty-strategy'), subjectName: 'MockVitestEmptyStrategy' },
 	{
 		[SpecialFnName.CONSTRUCTOR]: {
 			terms: [
