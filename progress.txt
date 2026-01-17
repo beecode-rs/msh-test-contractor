@@ -131,3 +131,40 @@
 - contract-mock-service.ts now has both strategies renamed to Vitest
 
 ---
+
+## Iteration 5 - US-005: Rename JestSpyService and related classes
+- Renamed directory using `git mv src/jest-spy src/vitest-spy`
+- Renamed all files in the directory:
+  - `jest-spy-strategy.ts` → `vitest-spy-strategy.ts`
+  - `jest-spy-service.ts` → `vitest-spy-service.ts`
+  - `jest-spy-service.test.ts` → `vitest-spy-service.test.ts`
+  - `jest-spy-function-strategy.ts` → `vitest-spy-function-strategy.ts`
+  - `jest-spy-function-strategy.contract.ts` → `vitest-spy-function-strategy.contract.ts`
+  - `jest-spy-class-function-strategy.ts` → `vitest-spy-class-function-strategy.ts`
+  - `jest-spy-class-function-strategy.contract.ts` → `vitest-spy-class-function-strategy.contract.ts`
+- Renamed classes/interfaces:
+  - `JestSpyStrategy` → `VitestSpyStrategy`
+  - `jestSpyService` → `vitestSpyService`
+  - `JestSpyFunctionStrategy` → `VitestSpyFunctionStrategy`
+  - `JestSpyClassFunctionStrategy` → `VitestSpyClassFunctionStrategy`
+- Updated all imports in mocker files that depend on vitest-spy:
+  - `mocker-jest-class-strategy.ts` - updated imports and variable names
+  - `mocker-jest-object-strategy.ts` - updated imports and variable names
+  - `mocker.ts` - updated imports and variable names
+- Updated comment in `src/contract.test.ts`
+- All tests pass (unit, int, e2e)
+
+### Files changed
+- `src/jest-spy/` → `src/vitest-spy/` (directory renamed)
+- All 7 files in vitest-spy directory (renamed and content updated)
+- `src/mocker/mocker-jest-class-strategy.ts` (updated imports and variable names)
+- `src/mocker/mocker-jest-object-strategy.ts` (updated imports and variable names)
+- `src/mocker/mocker.ts` (updated imports and variable names)
+- `src/contract.test.ts` (updated comment)
+
+### Learnings for future iterations
+- Use `git mv` on directory first, then rename files within
+- Multiple external files depend on jest-spy: mocker.ts, mocker-jest-class-strategy.ts, mocker-jest-object-strategy.ts
+- Variable names using "jestSpy" pattern should also be updated to "vitestSpy" for consistency
+
+---

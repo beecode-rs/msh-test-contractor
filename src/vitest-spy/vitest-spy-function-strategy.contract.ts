@@ -12,7 +12,7 @@ const dummyTerms: { terms: ContractTerm[] } = {
 
 const selfContract = contractFactory(
 	// eslint-disable-next-line @typescript-eslint/no-require-imports
-	{ module: require('./jest-spy-function-strategy'), subjectName: 'JestSpyFunctionStrategy' },
+	{ module: require('./vitest-spy-function-strategy'), subjectName: 'VitestSpyFunctionStrategy' },
 	{
 		[SpecialFnName.CONSTRUCTOR]: {
 			terms: [

@@ -14,7 +14,7 @@ const dummyTerms: { terms: ContractTerm[]; mockClassParams: any[] } = {
 
 const selfContract = contractFactory(
 	// eslint-disable-next-line @typescript-eslint/no-require-imports
-	{ module: require('./jest-spy-class-function-strategy'), subjectName: 'JestSpyClassFunctionStrategy' },
+	{ module: require('./vitest-spy-class-function-strategy'), subjectName: 'VitestSpyClassFunctionStrategy' },
 	{
 		[SpecialFnName.CONSTRUCTOR]: {
 			terms: [
@@ -25,9 +25,9 @@ const selfContract = contractFactory(
 			],
 		},
 		mockImplementationFactory: {
-			//   // TODO need to mock jestSpyFunctionStrategy
+			//   // TODO need to mock vitestSpyFunctionStrategy
 			// mock:(): ContractMockRevertFns => {
-			//     return [mocker.contract(jestSpyFunctionStrategyContract)] // max call stack ??
+			//     return [mocker.contract(vitestSpyFunctionStrategyContract)] // max call stack ??
 			// },
 			terms: [
 				{

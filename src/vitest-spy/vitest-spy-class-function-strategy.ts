@@ -1,10 +1,10 @@
 import deepEqual from 'fast-deep-equal/es6'
 
-import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
-import { type JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy'
+import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
+import { type VitestSpyStrategy } from '#src/vitest-spy/vitest-spy-strategy'
 import { type ContractTerm } from '#src/types/index'
 
-export class JestSpyClassFunctionStrategy implements JestSpyStrategy {
+export class VitestSpyClassFunctionStrategy implements VitestSpyStrategy {
 	protected readonly _terms: ContractTerm[]
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected readonly _mockClassParams: any[]
@@ -24,9 +24,9 @@ export class JestSpyClassFunctionStrategy implements JestSpyStrategy {
 		return (...mockParams: any[]): any => {
 			const termByConstructorParams = this._terms.filter((term) => deepEqual(term.constructorParams, this._mockClassParams))
 
-			const jestSpy = new JestSpyFunctionStrategy({ name: this._name, terms: termByConstructorParams })
+			const vitestSpy = new VitestSpyFunctionStrategy({ name: this._name, terms: termByConstructorParams })
 
-			return jestSpy.mockImplementationFactory()(...mockParams)
+			return vitestSpy.mockImplementationFactory()(...mockParams)
 		}
 	}
 }

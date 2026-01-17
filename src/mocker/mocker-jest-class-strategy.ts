@@ -1,8 +1,8 @@
 import { vi } from 'vitest'
 
 import { SpecialFnName } from '#src/enum/special-fn-name'
-import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
-import { jestSpyService } from '#src/jest-spy/jest-spy-service'
+import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
+import { vitestSpyService } from '#src/vitest-spy/vitest-spy-service'
 import { type MockerStrategy } from '#src/mocker/mocker-strategy'
 import { type AnyContract, type ContractTerm } from '#src/types/index'
 
@@ -59,8 +59,8 @@ export class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
 				})
 			)
 
-			const constructorJestSpy = new JestSpyFunctionStrategy({ name: subjectName, terms: constructorFns!.terms })
-			const constructorMockImplementation = constructorJestSpy.mockImplementationFactory()
+			const constructorVitestSpy = new VitestSpyFunctionStrategy({ name: subjectName, terms: constructorFns!.terms })
+			const constructorMockImplementation = constructorVitestSpy.mockImplementationFactory()
 
 			const constructorResultObject = constructorMockImplementation(...mockParams)
 
@@ -71,8 +71,8 @@ export class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected _mockFunction(params: { terms: ContractTerm[]; mockClassParams: any[]; name: string }): (...args: any[]) => any {
 		const { terms, mockClassParams, name } = params
-		const jestSpyStrategy = jestSpyService.strategyFromTerms({ mockClassParams, name, terms })
+		const vitestSpyStrategy = vitestSpyService.strategyFromTerms({ mockClassParams, name, terms })
 
-		return jestSpyStrategy.mockImplementationFactory()
+		return vitestSpyStrategy.mockImplementationFactory()
 	}
 }

@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 
-import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
+import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
 import { mockerService } from '#src/mocker/mocker-service'
 import { type AnyContract, type ContractMockRevertFn, type PropType } from '#src/types/index'
 import { fnUtil } from '#src/util/fn-util'
@@ -45,8 +45,8 @@ export const mocker = {
 		}
 
 		// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-		const jestSpyFunction = new JestSpyFunctionStrategy({ name: `${subjectName}.${fnName}`, terms })
-		spy.mockImplementation(jestSpyFunction.mockImplementationFactory())
+		const vitestSpyFunction = new VitestSpyFunctionStrategy({ name: `${subjectName}.${fnName}`, terms })
+		spy.mockImplementation(vitestSpyFunction.mockImplementationFactory())
 
 		const mockRestore = (): void => {
 			spy.mockRestore()

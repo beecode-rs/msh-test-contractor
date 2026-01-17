@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 
-import { JestSpyFunctionStrategy } from '#src/jest-spy/jest-spy-function-strategy'
+import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
 import { type MockerStrategy } from '#src/mocker/mocker-strategy'
 import { type AnyContract } from '#src/types/index'
 
@@ -27,8 +27,8 @@ export class MockerJestObjectStrategy implements MockerStrategy<MockerJestObject
 		return Object.fromEntries(
 			Object.entries(this._contract.fns).map(([fnName, ctFunc]) => {
 				// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-				const jestSpyFunction = new JestSpyFunctionStrategy({ name: `${subjectName}.${fnName}`, terms: ctFunc!.terms })
-				const spy = vi.spyOn(module[subjectName], fnName).mockImplementation(jestSpyFunction.mockImplementationFactory())
+				const vitestSpyFunction = new VitestSpyFunctionStrategy({ name: `${subjectName}.${fnName}`, terms: ctFunc!.terms })
+				const spy = vi.spyOn(module[subjectName], fnName).mockImplementation(vitestSpyFunction.mockImplementationFactory())
 				this._spies.push(spy)
 
 				return [fnName, spy]
