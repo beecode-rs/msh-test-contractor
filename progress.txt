@@ -1,0 +1,60 @@
+# Progress Log
+
+## Learnings
+(Patterns discovered during implementation)
+
+- **Pre-existing typecheck issue**: The codebase uses `vi.Spied<any>` and other Vitest types in production code (mocker/*.ts), but tsconfig.build.json doesn't include vitest types. This causes `npm run tsc-check` to fail with "Cannot find namespace 'vi'" errors. This is NOT related to Jest naming - it's a pre-existing architecture issue.
+- **fast-deep-equal/es6 import issue**: Also pre-existing in jest-spy-class-function-strategy.ts
+- **Source files are in src/**: Only audit files in `src/` directory, not `dist/` or `lib/` (compiled output)
+- **Contract files**: `*.contract.ts` files also need to be renamed
+- **Test files**: `*.test.ts` files also need to be renamed
+
+---
+
+## Iteration 1 - US-001: Audit Jest references and dependencies
+
+### Files with "jest" in filename (source only)
+1. `src/__tests__/index-jest-setup.ts`
+2. `src/index-jest-setup.ts`
+3. `src/contract-mock/mock-jest-empty-strategy.ts`
+4. `src/contract-mock/mock-jest-empty-strategy.test.ts`
+5. `src/contract-mock/mock-jest-empty-strategy.contract.ts`
+6. `src/contract-mock/mock-jest-strategy.ts`
+7. `src/contract-mock/mock-jest-strategy.test.ts`
+8. `src/contract-mock/mock-jest-strategy.contract.ts`
+9. `src/jest-spy/jest-spy-strategy.ts`
+10. `src/jest-spy/jest-spy-service.ts`
+11. `src/jest-spy/jest-spy-service.test.ts`
+12. `src/jest-spy/jest-spy-function-strategy.ts`
+13. `src/jest-spy/jest-spy-function-strategy.contract.ts`
+14. `src/jest-spy/jest-spy-class-function-strategy.ts`
+15. `src/jest-spy/jest-spy-class-function-strategy.contract.ts`
+16. `src/mocker/mocker-jest-class-strategy.ts`
+17. `src/mocker/mocker-jest-function-strategy.ts`
+18. `src/mocker/mocker-jest-object-strategy.ts`
+19. `src/mocker/mocker-jest-object-strategy.contract.ts`
+20. `test/index-jest-setup.ts` (test directory)
+
+### Classes/Types with "Jest" in name
+1. `JestSpyStrategy` (interface) - jest-spy-strategy.ts
+2. `JestSpyFunctionStrategy` (class) - jest-spy-function-strategy.ts
+3. `JestSpyClassFunctionStrategy` (class) - jest-spy-class-function-strategy.ts
+4. `JestSpyService` - implied by jest-spy-service.ts
+5. `MockJestStrategy` (class) - mock-jest-strategy.ts
+6. `MockJestEmptyStrategy` (class) - mock-jest-empty-strategy.ts
+7. `MockerJestFunctionStrategy` (class) - mocker-jest-function-strategy.ts
+8. `MockerJestClassStrategy` (class) - mocker-jest-class-strategy.ts
+9. `MockerJestObjectStrategy` (class) - mocker-jest-object-strategy.ts
+10. `MockerJestObjectResult` (type) - mocker-jest-object-strategy.ts
+
+### Jest dependencies in package.json
+**NONE FOUND** - No Jest-related packages in dependencies or devDependencies
+
+### Files changed
+- progress.txt (this file)
+
+### Status
+- Audit complete
+- Typecheck has pre-existing failures (not related to Jest naming)
+
+---
