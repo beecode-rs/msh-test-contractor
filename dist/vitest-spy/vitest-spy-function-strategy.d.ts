@@ -1,7 +1,7 @@
 import { type Mock } from 'vitest';
-import { type JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy';
+import { type VitestSpyStrategy } from '#src/vitest-spy/vitest-spy-strategy';
 import { type ContractTerm } from '#src/types/index';
-export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
+export declare class VitestSpyFunctionStrategy implements VitestSpyStrategy {
     protected readonly _terms: ContractTerm[];
     protected readonly _name: string;
     constructor(params: {
@@ -10,4 +10,4 @@ export declare class JestSpyFunctionStrategy implements JestSpyStrategy {
     });
     mockImplementationFactory(): Mock;
 }
-//# sourceMappingURL=jest-spy-function-strategy.d.ts.map
+//# sourceMappingURL=vitest-spy-function-strategy.d.ts.map

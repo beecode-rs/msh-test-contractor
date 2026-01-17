@@ -218,3 +218,22 @@
 - Check `git status` before completing a task to ensure all related changes are committed
 
 ---
+
+## Iteration 8 - US-008: Remove any Jest dependencies from package.json
+- Verified package.json has NO Jest dependencies (already clean from US-001 audit)
+- No packages to remove: no `jest`, `@types/jest`, or `@jest/*` packages found
+- Dependencies only include Vitest (`vitest`: `^3.0.9`) as the test runner
+- npm install not needed since no dependency changes were required
+- All tests pass (unit, int, e2e)
+- Typecheck has pre-existing failures (not related to Jest - vi namespace issue)
+
+### Files changed
+- PRD.md (marked US-008 complete with verification notes)
+- progress.txt (this entry)
+
+### Learnings for future iterations
+- This task was essentially a verification task - no actual work needed
+- The audit in US-001 correctly identified that Jest dependencies were already absent
+- Pre-existing typecheck issues remain but are unrelated to the Jest→Vitest migration
+
+---

@@ -1,6 +1,6 @@
-import { type JestSpyStrategy } from '#src/jest-spy/jest-spy-strategy';
+import { type VitestSpyStrategy } from '#src/vitest-spy/vitest-spy-strategy';
 import { type ContractTerm } from '#src/types/index';
-export declare class JestSpyClassFunctionStrategy implements JestSpyStrategy {
+export declare class VitestSpyClassFunctionStrategy implements VitestSpyStrategy {
     protected readonly _terms: ContractTerm[];
     protected readonly _mockClassParams: any[];
     protected readonly _name: string;
@@ -11,4 +11,4 @@ export declare class JestSpyClassFunctionStrategy implements JestSpyStrategy {
     });
     mockImplementationFactory(): (...args: any[]) => any;
 }
-//# sourceMappingURL=jest-spy-class-function-strategy.d.ts.map
+//# sourceMappingURL=vitest-spy-class-function-strategy.d.ts.map

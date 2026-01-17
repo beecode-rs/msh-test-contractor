@@ -1,0 +1,1 @@
+{"version":3,"file":"mock-vitest-empty-strategy.d.ts","sourceRoot":"","sources":["../../src/contract-mock/mock-vitest-empty-strategy.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,YAAY,EAAE,MAAM,kCAAkC,CAAA;AAEpE,qBAAa,uBAAwB,YAAW,YAAY;IAC3D,IAAI,IAAI,IAAI;IAIZ,OAAO,IAAI,IAAI;CAGf"}

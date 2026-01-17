@@ -1,6 +1,6 @@
 import { type MockerStrategy } from '#src/mocker/mocker-strategy';
 import { type AnyContract, type ContractTerm } from '#src/types/index';
-export declare class MockerJestClassStrategy implements MockerStrategy<vi.Spied<any>> {
+export declare class MockerVitestClassStrategy implements MockerStrategy<vi.Spied<any>> {
     protected _contract: AnyContract;
     protected _spy?: vi.Spied<any>;
     constructor(_contract: AnyContract);
@@ -14,4 +14,4 @@ export declare class MockerJestClassStrategy implements MockerStrategy<vi.Spied<
         name: string;
     }): (...args: any[]) => any;
 }
-//# sourceMappingURL=mocker-jest-class-strategy.d.ts.map
+//# sourceMappingURL=mocker-vitest-class-strategy.d.ts.map
