@@ -4,6 +4,8 @@
 /coverage
 /node_modules
 /packages
+/resource/ai
 /test/node_modules
 /test/dist
 *.tsbuildinfo
+.history

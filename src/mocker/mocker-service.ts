@@ -1,8 +1,8 @@
 import { SpecialFnName } from '#src/enum/special-fn-name'
-import { MockerJestClassStrategy } from '#src/mocker/mocker-jest-class-strategy'
-import { MockerJestFunctionStrategy } from '#src/mocker/mocker-jest-function-strategy'
-import { MockerJestObjectStrategy } from '#src/mocker/mocker-jest-object-strategy'
 import { type MockerStrategy } from '#src/mocker/mocker-strategy'
+import { MockerVitestClassStrategy } from '#src/mocker/mocker-vitest-class-strategy'
+import { MockerVitestFunctionStrategy } from '#src/mocker/mocker-vitest-function-strategy'
+import { MockerVitestObjectStrategy } from '#src/mocker/mocker-vitest-object-strategy'
 import { type AnyContract } from '#src/types/index'
 import { typeUtil } from '#src/util/type-util'
 
@@ -13,13 +13,13 @@ export const mockerService = {
 		const subject = module[subjectName]
 		const { [SpecialFnName.SELF]: selfFunction } = fns
 		if (typeUtil.isFunction(subject) && selfFunction) {
-			return new MockerJestFunctionStrategy(contract)
+			return new MockerVitestFunctionStrategy(contract)
 		}
 		if (typeUtil.isClass(subject)) {
-			return new MockerJestClassStrategy(contract)
+			return new MockerVitestClassStrategy(contract)
 		}
 		if (typeUtil.isObject(subject)) {
-			return new MockerJestObjectStrategy(contract)
+			return new MockerVitestObjectStrategy(contract)
 		}
 		throw new Error('Unknown mocker')
 	},

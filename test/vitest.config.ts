@@ -6,7 +6,7 @@ export default defineConfig({
 	test: {
 		mockReset: true,
 		passWithNoTests: true,
-		setupFiles: ['./index-jest-setup.ts'],
+		setupFiles: ['./index-vitest-setup.ts'],
 		watch: false,
 	},
 })

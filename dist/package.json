@@ -1,0 +1,1 @@
+{"type": "module", "imports": {"#packageJson": "../package.json", "#src": "./index.js", "#src/*": "./*.js"}}
