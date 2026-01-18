@@ -36,7 +36,7 @@ describe('vitestSpyService', () => {
 
 		it('should return VitestSpyClassFunctionStrategy if there is constructorParams in params', () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			vitestSpyService.strategyFromTerms({ name: 'TEST', terms: [{ constructorParams: [] } as any], mockClassParams: [] })
+			vitestSpyService.strategyFromTerms({ mockClassParams: [], name: 'TEST', terms: [{ constructorParams: [] } as any] })
 			expect(VitestSpyFunctionStrategy).toHaveBeenCalledTimes(0)
 			expect(VitestSpyClassFunctionStrategy).toHaveBeenCalledTimes(1)
 		})
