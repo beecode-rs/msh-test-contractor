@@ -21,6 +21,7 @@ export default [
 			'eslint.config.js',
 			'babel.config.cjs',
 			'release.config.cjs',
+			'.history',
 		],
 	},
 	...eslintNode,

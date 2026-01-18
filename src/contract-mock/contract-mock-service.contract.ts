@@ -1,6 +1,6 @@
 import { contractFactory } from '#src/contract/contractor-factory'
-import mockJestEmptyStrategyContract from '#src/contract-mock/mock-jest-empty-strategy.contract'
-import mockJestStrategyContract from '#src/contract-mock/mock-jest-strategy.contract'
+import mockVitestEmptyStrategyContract from '#src/contract-mock/mock-vitest-empty-strategy.contract'
+import mockVitestStrategyContract from '#src/contract-mock/mock-vitest-strategy.contract'
 import { mocker } from '#src/mocker/mocker'
 import { type ContractMockRevertFns } from '#src/types/index'
 
@@ -10,7 +10,7 @@ export default contractFactory(
 	{
 		strategyFromFunctionMock: {
 			mock: (): ContractMockRevertFns => {
-				return [mocker.contract(mockJestStrategyContract), mocker.contract(mockJestEmptyStrategyContract)].map(
+				return [mocker.contract(mockVitestStrategyContract), mocker.contract(mockVitestEmptyStrategyContract)].map(
 					(f) => f.mockRestore
 				)
 			},
