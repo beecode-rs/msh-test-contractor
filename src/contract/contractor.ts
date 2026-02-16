@@ -37,7 +37,7 @@ export const contractor = <
 				})
 			})
 		} catch (err) {
-			console.error(`Error running test on contract:${String(contract.subjectName)}, fn:${fnName}`) // eslint-disable-line no-console
+			console.error(`Error running test on contract:${contract.subjectName}, fn:${fnName}`) // eslint-disable-line no-console
 			throw err
 		}
 	})
