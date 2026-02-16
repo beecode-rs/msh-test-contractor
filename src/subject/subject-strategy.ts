@@ -1,4 +1,4 @@
-import { type ContractTerm } from '#src/types/index'
+import { type ContractTerm } from '#src/types/index.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type SubjectFromContract = { subjectName: string; module: any }

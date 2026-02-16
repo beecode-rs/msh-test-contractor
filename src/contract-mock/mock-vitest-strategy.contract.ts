@@ -1,6 +1,6 @@
-import { contractFactory } from '#src/contract/contractor-factory'
-import { SpecialFnName } from '#src/enum/special-fn-name'
-import { type ContractMock } from '#src/types/index'
+import { contractFactory } from '#src/contract/contractor-factory.js'
+import { SpecialFnName } from '#src/enum/special-fn-name.js'
+import { type ContractMock } from '#src/types/index.js'
 
 const dummyVitestMock: ContractMock = (_options) => {
 	return []

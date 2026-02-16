@@ -1,3 +1,3 @@
-export { contractor } from '#src/contract/contractor'
+export { contractor } from '#src/contract/contractor.js'
 
-export { mocker } from '#src/mocker/mocker'
+export { mocker } from '#src/mocker/mocker.js'

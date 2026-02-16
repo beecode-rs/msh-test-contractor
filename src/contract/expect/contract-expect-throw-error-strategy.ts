@@ -1,7 +1,7 @@
 import { expect } from 'vitest'
 
-import { type ContractExpectStrategy } from '#src/contract/expect/contract-expect-service'
-import { type ContractTerm } from '#src/types/index'
+import { type ContractExpectStrategy } from '#src/contract/expect/contract-expect-service.js'
+import { type ContractTerm } from '#src/types/index.js'
 
 export class ContractExpectThrowErrorStrategy implements ContractExpectStrategy {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

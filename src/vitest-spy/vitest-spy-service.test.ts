@@ -1,19 +1,19 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { vitestSpyService } from '#src/vitest-spy/vitest-spy-service'
+import { vitestSpyService } from '#src/vitest-spy/vitest-spy-service.js'
 
 // Mock the strategy classes
-vi.mock('#src/vitest-spy/vitest-spy-function-strategy', () => ({
+vi.mock('#src/vitest-spy/vitest-spy-function-strategy.js', () => ({
 	VitestSpyFunctionStrategy: vi.fn(),
 }))
 
-vi.mock('#src/vitest-spy/vitest-spy-class-function-strategy', () => ({
+vi.mock('#src/vitest-spy/vitest-spy-class-function-strategy.js', () => ({
 	VitestSpyClassFunctionStrategy: vi.fn(),
 }))
 
 // Import after mocking to get the mocked versions
-const { VitestSpyFunctionStrategy } = await import('#src/vitest-spy/vitest-spy-function-strategy')
-const { VitestSpyClassFunctionStrategy } = await import('#src/vitest-spy/vitest-spy-class-function-strategy')
+const { VitestSpyFunctionStrategy } = await import('#src/vitest-spy/vitest-spy-function-strategy.js')
+const { VitestSpyClassFunctionStrategy } = await import('#src/vitest-spy/vitest-spy-class-function-strategy.js')
 
 describe('vitestSpyService', () => {
 	describe('strategyFromTerms', () => {

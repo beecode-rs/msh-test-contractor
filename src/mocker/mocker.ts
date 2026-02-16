@@ -1,9 +1,9 @@
 import { type MockInstance, vi } from 'vitest'
 
-import { mockerService } from '#src/mocker/mocker-service'
-import { type AnyContract, type ContractMockRevertFn, type PropType } from '#src/types/index'
-import { fnUtil } from '#src/util/fn-util'
-import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
+import { mockerService } from '#src/mocker/mocker-service.js'
+import { type AnyContract, type ContractMockRevertFn, type PropType } from '#src/types/index.js'
+import { fnUtil } from '#src/util/fn-util.js'
+import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type MockerContractResult<SPY = MockInstance<any>> = {

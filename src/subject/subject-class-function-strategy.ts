@@ -1,5 +1,5 @@
-import { type SubjectFromContract, type SubjectStrategy } from '#src/subject/subject-strategy'
-import { type ContractTerm } from '#src/types/index'
+import { type SubjectFromContract, type SubjectStrategy } from '#src/subject/subject-strategy.js'
+import { type ContractTerm } from '#src/types/index.js'
 
 export class SubjectClassFunctionStrategy implements SubjectStrategy {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

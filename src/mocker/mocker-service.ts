@@ -1,10 +1,10 @@
-import { SpecialFnName } from '#src/enum/special-fn-name'
-import { type MockerStrategy } from '#src/mocker/mocker-strategy'
-import { MockerVitestClassStrategy } from '#src/mocker/mocker-vitest-class-strategy'
-import { MockerVitestFunctionStrategy } from '#src/mocker/mocker-vitest-function-strategy'
-import { MockerVitestObjectStrategy } from '#src/mocker/mocker-vitest-object-strategy'
-import { type AnyContract } from '#src/types/index'
-import { typeUtil } from '#src/util/type-util'
+import { SpecialFnName } from '#src/enum/special-fn-name.js'
+import { type MockerStrategy } from '#src/mocker/mocker-strategy.js'
+import { MockerVitestClassStrategy } from '#src/mocker/mocker-vitest-class-strategy.js'
+import { MockerVitestFunctionStrategy } from '#src/mocker/mocker-vitest-function-strategy.js'
+import { MockerVitestObjectStrategy } from '#src/mocker/mocker-vitest-object-strategy.js'
+import { type AnyContract } from '#src/types/index.js'
+import { typeUtil } from '#src/util/type-util.js'
 
 export const mockerService = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

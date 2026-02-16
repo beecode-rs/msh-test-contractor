@@ -1,7 +1,7 @@
 import { type MockInstance, vi } from 'vitest'
 
-import { type MockerStrategy } from '#src/mocker/mocker-strategy'
-import { type AnyContract } from '#src/types/index'
+import { type MockerStrategy } from '#src/mocker/mocker-strategy.js'
+import { type AnyContract } from '#src/types/index.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class MockerVitestFunctionStrategy implements MockerStrategy<MockInstance<any>> {

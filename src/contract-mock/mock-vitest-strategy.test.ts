@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { MockVitestStrategy } from '#src/contract-mock/mock-vitest-strategy'
+import { MockVitestStrategy } from '#src/contract-mock/mock-vitest-strategy.js'
 
 describe('MockVitestStrategy', () => {
 	describe('mock', () => {

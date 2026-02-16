@@ -2,8 +2,8 @@ import { glob } from 'glob'
 import path from 'path'
 import { describe } from 'vitest'
 
-import { contractor } from '#src/contract/contractor'
-import { type AnyContract } from '#src/types/index'
+import { contractor } from '#src/contract/contractor.js'
+import { type AnyContract } from '#src/types/index.js'
 
 export const contractorTestRunner = {
 	_file: async (fileLocation: string): Promise<void> => {

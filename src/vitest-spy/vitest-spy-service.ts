@@ -1,7 +1,7 @@
-import { type ContractTerm } from '#src/types/index'
-import { VitestSpyClassFunctionStrategy } from '#src/vitest-spy/vitest-spy-class-function-strategy'
-import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
-import { type VitestSpyStrategy } from '#src/vitest-spy/vitest-spy-strategy'
+import { type ContractTerm } from '#src/types/index.js'
+import { VitestSpyClassFunctionStrategy } from '#src/vitest-spy/vitest-spy-class-function-strategy.js'
+import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy.js'
+import { type VitestSpyStrategy } from '#src/vitest-spy/vitest-spy-strategy.js'
 
 export const vitestSpyService = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

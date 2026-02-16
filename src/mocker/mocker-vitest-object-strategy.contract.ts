@@ -1,5 +1,5 @@
-import { contractFactory } from '#src/contract/contractor-factory'
-import { SpecialFnName } from '#src/enum/special-fn-name'
+import { contractFactory } from '#src/contract/contractor-factory.js'
+import { SpecialFnName } from '#src/enum/special-fn-name.js'
 
 const dummyContract = { dummy: 'contract' }
 

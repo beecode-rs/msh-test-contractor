@@ -1,6 +1,6 @@
-import { contractFactory } from '#src/contract/contractor-factory'
-import { SpecialFnName } from '#src/enum/special-fn-name'
-import { type ContractTerm } from '#src/types/index'
+import { contractFactory } from '#src/contract/contractor-factory.js'
+import { SpecialFnName } from '#src/enum/special-fn-name.js'
+import { type ContractTerm } from '#src/types/index.js'
 
 const dummyTerms: { terms: ContractTerm[] } = {
 	terms: [

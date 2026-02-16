@@ -1,6 +1,6 @@
-import { contractFactory } from '#src/contract/contractor-factory'
-import { mocker } from '#src/mocker/mocker'
-import { type ContractMockRevertFns } from '#src/types/index'
+import { contractFactory } from '#src/contract/contractor-factory.js'
+import { mocker } from '#src/mocker/mocker.js'
+import { type ContractMockRevertFns } from '#src/types/index.js'
 
 const selfContract = contractFactory(
 	// eslint-disable-next-line @typescript-eslint/no-require-imports

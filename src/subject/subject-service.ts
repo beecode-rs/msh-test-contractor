@@ -1,10 +1,10 @@
-import { SpecialFnName } from '#src/enum/special-fn-name'
-import { SubjectClassFunctionStrategy } from '#src/subject/subject-class-function-strategy'
-import { SubjectConstructorStrategy } from '#src/subject/subject-constructor-strategy'
-import { SubjectFunctionStrategy } from '#src/subject/subject-function-strategy'
-import { type SubjectFromContract, type SubjectStrategy } from '#src/subject/subject-strategy'
-import { type AnyContract, type ContractTerm } from '#src/types/index'
-import { fnUtil } from '#src/util/fn-util'
+import { SpecialFnName } from '#src/enum/special-fn-name.js'
+import { SubjectClassFunctionStrategy } from '#src/subject/subject-class-function-strategy.js'
+import { SubjectConstructorStrategy } from '#src/subject/subject-constructor-strategy.js'
+import { SubjectFunctionStrategy } from '#src/subject/subject-function-strategy.js'
+import { type SubjectFromContract, type SubjectStrategy } from '#src/subject/subject-strategy.js'
+import { type AnyContract, type ContractTerm } from '#src/types/index.js'
+import { fnUtil } from '#src/util/fn-util.js'
 
 export const subjectService = {
 	strategyFromContractFunction: (params: { contract: AnyContract; fnName: string; term: ContractTerm }): SubjectStrategy => {
