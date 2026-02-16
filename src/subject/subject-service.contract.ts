@@ -1,10 +1,10 @@
-import { contractFactory } from '#src/contract/contractor-factory'
-import { SpecialFnName } from '#src/enum/special-fn-name'
-import { mocker } from '#src/mocker/mocker'
-import subjectClassFunctionStrategyContract from '#src/subject/subject-class-function-strategy.contract'
-import subjectConstructorStrategyContract from '#src/subject/subject-constructor-strategy.contract'
-import subjectFunctionStrategyContract from '#src/subject/subject-function-strategy.contract'
-import { type ContractMockRevertFns } from '#src/types/index'
+import { contractFactory } from '#src/contract/contractor-factory.js'
+import { SpecialFnName } from '#src/enum/special-fn-name.js'
+import { mocker } from '#src/mocker/mocker.js'
+import subjectClassFunctionStrategyContract from '#src/subject/subject-class-function-strategy.contract.js'
+import subjectConstructorStrategyContract from '#src/subject/subject-constructor-strategy.contract.js'
+import subjectFunctionStrategyContract from '#src/subject/subject-function-strategy.contract.js'
+import { type ContractMockRevertFns } from '#src/types/index.js'
 
 class DummyClass {
 	a(_a: string): string {

@@ -1,8 +1,8 @@
 import { expect } from 'vitest'
 
-import { type ContractExpectStrategy } from '#src/contract/expect/contract-expect-service'
-import { type ContractTerm } from '#src/types/index'
-import { objectUtil } from '#src/util/object-util'
+import { type ContractExpectStrategy } from '#src/contract/expect/contract-expect-service.js'
+import { type ContractTerm } from '#src/types/index.js'
+import { objectUtil } from '#src/util/object-util.js'
 
 export class ContractExpectAnyEqualStrategy implements ContractExpectStrategy {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,5 +1,5 @@
-import { type MockStrategy } from '#src/contract-mock/mock-strategy'
-import { type ContractMock, type ContractMockRevertFns } from '#src/types/index'
+import { type MockStrategy } from '#src/contract-mock/mock-strategy.js'
+import { type ContractMock, type ContractMockRevertFns } from '#src/types/index.js'
 
 export class MockVitestStrategy implements MockStrategy {
 	protected _restoreMockFn?: ContractMockRevertFns

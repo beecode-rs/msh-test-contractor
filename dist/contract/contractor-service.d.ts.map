@@ -1,1 +1,0 @@
-{"version":3,"file":"contractor-service.d.ts","sourceRoot":"","sources":["../../src/contract/contractor-service.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,YAAY,EAAE,MAAM,kBAAkB,CAAA;AAEpD,eAAO,MAAM,iBAAiB;8BACH;QAAE,MAAM,EAAE,MAAM,CAAA;KAAE,KAAG,MAAM;uBAKlC;QAAE,IAAI,EAAE,YAAY,CAAA;KAAE,KAAG,MAAM;CAOlD,CAAA"}

@@ -1,7 +1,7 @@
-import { contractFactory } from '#src/contract/contractor-factory'
-import { SpecialFnName } from '#src/enum/special-fn-name'
-import { mocker } from '#src/mocker/mocker'
-import { type ContractMockRevertFns } from '#src/types/index'
+import { contractFactory } from '#src/contract/contractor-factory.js'
+import { SpecialFnName } from '#src/enum/special-fn-name.js'
+import { mocker } from '#src/mocker/mocker.js'
+import { type ContractMockRevertFns } from '#src/types/index.js'
 
 const dummyModule = {
 	dummySubject: {

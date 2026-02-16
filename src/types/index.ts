@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import { type SpecialFnName } from '#src/enum/special-fn-name'
+import { type SpecialFnName } from '#src/enum/special-fn-name.js'
 
 export type PropType<T, P extends keyof T> = T[P]
 

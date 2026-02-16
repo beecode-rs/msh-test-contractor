@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest'
 
-import { MockVitestEmptyStrategy } from '#src/contract-mock/mock-vitest-empty-strategy'
+import { MockVitestEmptyStrategy } from '#src/contract-mock/mock-vitest-empty-strategy.js'
 
 describe('MockVitestEmptyStrategy', () => {
 	describe('mock', () => {

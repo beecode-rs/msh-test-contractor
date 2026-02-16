@@ -1,7 +1,7 @@
-import { ContractExpectAnyEqualStrategy } from '#src/contract/expect/contract-expect-any-equal-strategy'
-import { ContractExpectFunctionResultEqualStrategy } from '#src/contract/expect/contract-expect-function-result-equal-strategy'
-import { ContractExpectThrowErrorStrategy } from '#src/contract/expect/contract-expect-throw-error-strategy'
-import { type ContractTerm } from '#src/types/index'
+import { ContractExpectAnyEqualStrategy } from '#src/contract/expect/contract-expect-any-equal-strategy.js'
+import { ContractExpectFunctionResultEqualStrategy } from '#src/contract/expect/contract-expect-function-result-equal-strategy.js'
+import { ContractExpectThrowErrorStrategy } from '#src/contract/expect/contract-expect-throw-error-strategy.js'
+import { type ContractTerm } from '#src/types/index.js'
 
 export interface ContractExpectStrategy {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

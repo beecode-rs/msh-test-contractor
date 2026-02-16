@@ -1,10 +1,10 @@
 import { describe, it } from 'vitest'
 
-import { contractorService } from '#src/contract/contractor-service'
-import { contractExpectService } from '#src/contract/expect/contract-expect-service'
-import { contractMockService } from '#src/contract-mock/contract-mock-service'
-import { subjectService } from '#src/subject/subject-service'
-import { type Contract, type PropType } from '#src/types/index'
+import { contractorService } from '#src/contract/contractor-service.js'
+import { contractExpectService } from '#src/contract/expect/contract-expect-service.js'
+import { contractMockService } from '#src/contract-mock/contract-mock-service.js'
+import { subjectService } from '#src/subject/subject-service.js'
+import { type Contract, type PropType } from '#src/types/index.js'
 
 export const contractor = <
 	M,
@@ -37,7 +37,7 @@ export const contractor = <
 				})
 			})
 		} catch (err) {
-			console.error(`Error running test on contract:${contract.subjectName}, fn:${fnName}`) // eslint-disable-line no-console
+			console.error(`Error running test on contract:${String(contract.subjectName)}, fn:${fnName}`) // eslint-disable-line no-console
 			throw err
 		}
 	})

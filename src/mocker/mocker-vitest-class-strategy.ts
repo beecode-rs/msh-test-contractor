@@ -1,10 +1,10 @@
 import { type MockInstance, vi } from 'vitest'
 
-import { SpecialFnName } from '#src/enum/special-fn-name'
-import { type MockerStrategy } from '#src/mocker/mocker-strategy'
-import { type AnyContract, type ContractTerm } from '#src/types/index'
-import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy'
-import { vitestSpyService } from '#src/vitest-spy/vitest-spy-service'
+import { SpecialFnName } from '#src/enum/special-fn-name.js'
+import { type MockerStrategy } from '#src/mocker/mocker-strategy.js'
+import { type AnyContract, type ContractTerm } from '#src/types/index.js'
+import { VitestSpyFunctionStrategy } from '#src/vitest-spy/vitest-spy-function-strategy.js'
+import { vitestSpyService } from '#src/vitest-spy/vitest-spy-service.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class MockerVitestClassStrategy implements MockerStrategy<MockInstance<any>> {
