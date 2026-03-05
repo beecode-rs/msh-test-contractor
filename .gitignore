@@ -11,3 +11,4 @@
 /test/dist
 *.tsbuildinfo
 .history
+tmp
