@@ -37,27 +37,27 @@ Add the `js-yaml` package as a dependency for YAML parsing.
 
 ---
 
-### Task 2: Create Custom YAML Types for Special Objects
+### Task 2: Create Special Object Parsers for YAML
 
 **Layer:** backend
 
 **Description:**
-Create custom YAML types for JavaScript objects that need special handling (Error, Promise, Date, RegExp) using js-yaml's Type system.
+Create parsers for JavaScript objects that need special handling (Error, Promise, Date, RegExp). These parse JavaScript-style syntax strings (e.g., `new Error("msg")`, `Promise.resolve(value)`) and convert them to real JS objects at runtime.
 
 **Changes:**
 - Create `src/yaml/types/` directory
-- Create `src/yaml/types/error-type.ts` - `!error` tag
-- Create `src/yaml/types/promise-type.ts` - `!resolve` and `!reject` tags
-- Create `src/yaml/types/date-type.ts` - `!date` tag
-- Create `src/yaml/types/regex-type.ts` - `!regex` tag
-- Create `src/yaml/types/index.ts` - exports all types and schema
+- Create `src/yaml/types/error-parser.ts` - parses `new Error("message")` syntax
+- Create `src/yaml/types/promise-parser.ts` - parses `Promise.resolve()` and `Promise.reject()` syntax
+- Create `src/yaml/types/date-parser.ts` - parses `new Date("2024-01-15")` syntax
+- Create `src/yaml/types/regex-parser.ts` - parses `new RegExp("pattern", "flags")` syntax
+- Create `src/yaml/types/index.ts` - exports all parsers and type guards
 
 **Verification:**
-- [ ] Unit test: `!error "message"` creates `new Error("message")`
-- [ ] Unit test: `!resolve { id: 1 }` creates `Promise.resolve({ id: 1 })`
-- [ ] Unit test: `!reject "failed"` creates `Promise.reject(new Error("failed"))`
-- [ ] Unit test: `!date "2024-01-15"` creates `new Date("2024-01-15")`
-- [ ] Unit test: `!regex "/^[a-z]+$/gi"` creates `new RegExp("^[a-z]+$", "gi")`
+- [ ] Unit test: `new Error("message")` string creates `Error` object
+- [ ] Unit test: `Promise.resolve({ id: 1 })` string creates resolved promise
+- [ ] Unit test: `Promise.reject(new Error("failed"))` string creates rejected promise
+- [ ] Unit test: `new Date("2024-01-15")` string creates `Date` object
+- [ ] Unit test: `new RegExp("^[a-z]+$", "gi")` string creates `RegExp` object
 - [ ] Typecheck passes
 - [ ] All tests pass
 
@@ -281,7 +281,7 @@ The story is complete when:
 - [ ] YAML parser component accepts file location and returns JS object
 - [ ] All `*.contract.ts` files converted to `*.contract.yaml`
 - [ ] All tests pass with YAML contracts
-- [ ] Custom YAML types (!error, !resolve, !reject, !date, !regex) work correctly
+- [ ] Special object parsers (new Error, Promise.resolve/reject, new Date, new RegExp) work correctly
 - [ ] Shorthand format `[params] => result` is supported
 - [ ] Test runner discovers and runs both TS and YAML contracts
 - [ ] Documentation is updated
@@ -299,10 +299,11 @@ The story is complete when:
 
 ### Design Decisions
 
-1. **Custom YAML Tags over TypeScript syntax**: Using `!error "msg"` instead of `new Error("msg")` because js-yaml's Type system creates real JS objects at runtime, eliminating the need for post-parse transformation.
+1. **JavaScript-style Syntax over Custom YAML Tags**: Using `new Error("msg")` instead of `!error "msg"` because it's more familiar to developers and easier to read. Strings are parsed after YAML loading to create real JS objects.
 
 2. **Hybrid Format Support**: The parser will support both:
    - Native YAML objects for complex data
+   - JavaScript-style strings for special objects (Error, Promise, Date, RegExp)
    - Shorthand strings for simple cases
 
 3. **Module Resolution at Runtime**: YAML files store module paths as strings, resolved to actual modules when loaded.
