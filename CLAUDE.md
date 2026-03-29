@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Clean TypeScript Skill
 
-This project uses the **clean-typescript** skill for Claude Code assistance. When working on this codebase, leverage the skill for creating services, strategies, unit tests with Vitest, and following established TypeScript patterns.
+This project uses the **clean-typescript** skill for Claude Code assistance. When working on this codebase, leverage the skill for creating services, strategies, unit tests with Vitest and best practices from skill.
 
 ## Commands
 
@@ -50,6 +50,7 @@ This is a contract-based testing library inspired by "Integrated Tests Are A Sca
 ### Core Concepts
 
 **Contract**: Defines the obligation of a function (provider) - given certain parameters, it returns a certain result. Contracts serve dual purpose:
+
 1. Generate reliable mocks for consumer tests
 2. Validate provider actually fulfills the contract
 
@@ -84,6 +85,7 @@ This is a contract-based testing library inspired by "Integrated Tests Are A Sca
 ### Strategy Pattern
 
 Extensively used throughout. Each domain (subject, mocker, mock, expect, spy) has:
+
 - A strategy interface defining the contract
 - Multiple strategy implementations for different scenarios
 - A service that selects the appropriate strategy
@@ -94,15 +96,15 @@ Extensively used throughout. Each domain (subject, mocker, mock, expect, spy) ha
 import { contractFactory } from '#src/contract/contractor-factory'
 
 export default contractFactory(
-  { module: require('./my-module.js'), subjectName: 'myFunction' },
-  {
-    functionName: {
-      terms: [
-        { params: ['input'], result: 'expected output' },
-      ],
-      mock: () => [/* revert functions */], // optional external mocks
-    },
-  }
+	{ module: require('./my-module.js'), subjectName: 'myFunction' },
+	{
+		functionName: {
+			terms: [{ params: ['input'], result: 'expected output' }],
+			mock: () => [
+				/* revert functions */
+			], // optional external mocks
+		},
+	}
 )
 ```
 
