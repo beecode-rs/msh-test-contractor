@@ -16,14 +16,12 @@ export type YamlContractModel = {
 	subjectName: string
 	subjectType: YamlContractSubjectType
 	module: string
+	mock?: string[]
 	fns: Record<string, YamlContractFunction>
 }
 
 export class YamlContractModelValidator {
-	protected readonly _validateTermArrayField = (params: {
-		fieldName: string
-		term: Record<string, unknown>
-	}): void => {
+	protected readonly _validateTermArrayField = (params: { fieldName: string; term: Record<string, unknown> }): void => {
 		if (params.fieldName in params.term && !Array.isArray(params.term[params.fieldName])) {
 			throw new Error(`YamlContractTerm.${params.fieldName} must be an array`)
 		}
@@ -89,10 +87,7 @@ export class YamlContractModelValidator {
 		return true
 	}
 
-	protected readonly _validateNonEmptyStringField = (params: {
-		fieldName: string
-		model: Record<string, unknown>
-	}): void => {
+	protected readonly _validateNonEmptyStringField = (params: { fieldName: string; model: Record<string, unknown> }): void => {
 		if (!(params.fieldName in params.model)) {
 			throw new Error(`YamlContractModel must have a "${params.fieldName}" field`)
 		}
@@ -124,6 +119,22 @@ export class YamlContractModelValidator {
 		return params.model.fns as Record<string, unknown>
 	}
 
+	protected readonly _validateMockField = (params: { model: Record<string, unknown> }): void => {
+		if (!('mock' in params.model)) {
+			return
+		}
+
+		if (!Array.isArray(params.model.mock)) {
+			throw new Error('YamlContractModel.mock must be an array')
+		}
+
+		params.model.mock.forEach((path: unknown, index: number) => {
+			if (typeof path !== 'string' || path.trim() === '') {
+				throw new Error(`YamlContractModel.mock[${String(index)}] must be a non-empty string`)
+			}
+		})
+	}
+
 	protected readonly _validateEachFunction = (params: { fns: Record<string, unknown> }): void => {
 		Object.entries(params.fns).forEach(([key, fn]) => {
 			try {
@@ -150,6 +161,7 @@ export class YamlContractModelValidator {
 		this._validateNonEmptyStringField({ fieldName: 'subjectName', model })
 		this._validateSubjectTypeField({ model })
 		this._validateNonEmptyStringField({ fieldName: 'module', model })
+		this._validateMockField({ model })
 		const fns = this._validateFnsField({ model })
 		this._validateEachFunction({ fns })
 

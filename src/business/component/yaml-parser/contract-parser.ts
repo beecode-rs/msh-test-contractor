@@ -25,6 +25,7 @@ type RawYamlContract = Record<string, unknown> & {
 	methods?: Record<string, RawYamlMethod>
 	constructor?: RawYamlMethod
 	subjectType?: 'function' | 'class'
+	mock?: string[]
 }
 
 export class YamlParserContract {
@@ -63,12 +64,18 @@ export class YamlParserContract {
 
 		const subjectType = this._resolveSubjectType(contract, rawObject)
 
-		return {
+		const result: YamlContractModel = {
 			fns,
 			module: contract.module ?? '',
 			subjectName: contract.subject ?? '',
 			subjectType,
 		}
+
+		if (contract.mock) {
+			result.mock = contract.mock
+		}
+
+		return result
 	}
 
 	protected async _readFileContent(params: { path: string }): Promise<string> {

@@ -1,5 +1,7 @@
 export { YamlParserContract } from './contract-parser.js'
 
+export { YamlParserContractLoader } from './contract-loader.js'
+
 export type {
 	YamlContractFunction,
 	YamlContractModel,

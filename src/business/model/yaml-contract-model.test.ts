@@ -84,7 +84,9 @@ describe('yaml-contract-model', () => {
 			})
 
 			it('should throw for array value', () => {
-				expect(() => validator.isYamlContractTerm([1, 2, 3])).toThrow('YamlContractTerm must have either "result" or "error" field')
+				expect(() => validator.isYamlContractTerm([1, 2, 3])).toThrow(
+					'YamlContractTerm must have either "result" or "error" field'
+				)
 			})
 
 			it('should throw when params is not an array', () => {
@@ -178,7 +180,9 @@ describe('yaml-contract-model', () => {
 			})
 
 			it('should throw when terms is not an array', () => {
-				expect(() => validator.isYamlContractFunction({ terms: 'not-array' })).toThrow('YamlContractFunction.terms must be an array')
+				expect(() => validator.isYamlContractFunction({ terms: 'not-array' })).toThrow(
+					'YamlContractFunction.terms must be an array'
+				)
 			})
 
 			it('should throw when terms contains invalid term', () => {
@@ -534,7 +538,9 @@ describe('yaml-contract-model', () => {
 		})
 
 		it('should provide clear error for wrong type', () => {
-			expect(() => validator.isYamlContractTerm({ params: 'wrong', result: 'test' })).toThrow('YamlContractTerm.params must be an array')
+			expect(() => validator.isYamlContractTerm({ params: 'wrong', result: 'test' })).toThrow(
+				'YamlContractTerm.params must be an array'
+			)
 		})
 	})
 })
