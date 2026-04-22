@@ -201,6 +201,134 @@ describe('yaml-contract-model', () => {
 		})
 	})
 
+	describe('function-level mock field', () => {
+		it('should return true for function with valid mock array', () => {
+			expect(
+				validator.isYamlContractFunction({
+					mock: ['./dep.contract.yaml'],
+					terms: [{ result: 'value' }],
+				})
+			).toBe(true)
+		})
+
+		it('should return true for function with multiple mock paths', () => {
+			expect(
+				validator.isYamlContractFunction({
+					mock: ['./dep1.contract.yaml', './dep2.contract.yaml'],
+					terms: [{ result: 'value' }],
+				})
+			).toBe(true)
+		})
+
+		it('should return true for function without mock field', () => {
+			expect(
+				validator.isYamlContractFunction({
+					terms: [{ result: 'value' }],
+				})
+			).toBe(true)
+		})
+
+		it('should throw when mock is not an array', () => {
+			expect(() =>
+				validator.isYamlContractFunction({
+					mock: 'not-array',
+					terms: [{ result: 'value' }],
+				})
+			).toThrow('YamlContractFunction.mock must be an array')
+		})
+
+		it('should throw when mock contains non-string', () => {
+			expect(() =>
+				validator.isYamlContractFunction({
+					mock: [123],
+					terms: [{ result: 'value' }],
+				})
+			).toThrow('YamlContractFunction.mock[0] must be a non-empty string')
+		})
+
+		it('should throw when mock contains empty string', () => {
+			expect(() =>
+				validator.isYamlContractFunction({
+					mock: [''],
+					terms: [{ result: 'value' }],
+				})
+			).toThrow('YamlContractFunction.mock[0] must be a non-empty string')
+		})
+
+		it('should throw when mock contains whitespace-only string', () => {
+			expect(() =>
+				validator.isYamlContractFunction({
+					mock: ['   '],
+					terms: [{ result: 'value' }],
+				})
+			).toThrow('YamlContractFunction.mock[0] must be a non-empty string')
+		})
+	})
+
+	describe('function-level mockFunction field', () => {
+		it('should return true for function with valid mockFunction array', () => {
+			expect(
+				validator.isYamlContractFunction({
+					mockFunction: ['_message'],
+					terms: [{ result: 'value' }],
+				})
+			).toBe(true)
+		})
+
+		it('should return true for function with multiple mockFunction names', () => {
+			expect(
+				validator.isYamlContractFunction({
+					mockFunction: ['helper1', 'helper2'],
+					terms: [{ result: 'value' }],
+				})
+			).toBe(true)
+		})
+
+		it('should return true for function without mockFunction field', () => {
+			expect(
+				validator.isYamlContractFunction({
+					terms: [{ result: 'value' }],
+				})
+			).toBe(true)
+		})
+
+		it('should throw when mockFunction is not an array', () => {
+			expect(() =>
+				validator.isYamlContractFunction({
+					mockFunction: 'not-array',
+					terms: [{ result: 'value' }],
+				})
+			).toThrow('YamlContractFunction.mockFunction must be an array')
+		})
+
+		it('should throw when mockFunction contains non-string', () => {
+			expect(() =>
+				validator.isYamlContractFunction({
+					mockFunction: [123],
+					terms: [{ result: 'value' }],
+				})
+			).toThrow('YamlContractFunction.mockFunction[0] must be a non-empty string')
+		})
+
+		it('should throw when mockFunction contains empty string', () => {
+			expect(() =>
+				validator.isYamlContractFunction({
+					mockFunction: [''],
+					terms: [{ result: 'value' }],
+				})
+			).toThrow('YamlContractFunction.mockFunction[0] must be a non-empty string')
+		})
+
+		it('should throw when mockFunction contains whitespace-only string', () => {
+			expect(() =>
+				validator.isYamlContractFunction({
+					mockFunction: ['   '],
+					terms: [{ result: 'value' }],
+				})
+			).toThrow('YamlContractFunction.mockFunction[0] must be a non-empty string')
+		})
+	})
+
 	describe('isYamlContractModel', () => {
 		describe('valid structures', () => {
 			it('should return true for minimal valid model with function subjectType', () => {

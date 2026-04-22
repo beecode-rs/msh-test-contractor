@@ -36,7 +36,7 @@ describe('YamlParserContractLoader', () => {
 		it('with class-type YAML contract (has constructor) produces valid Contract', async () => {
 			const definition = {
 				fns: {
-					constructor: {
+					CONSTRUCTOR: {
 						terms: [{ params: ['initialValue'], result: undefined }],
 					},
 					doSomething: {
@@ -54,9 +54,9 @@ describe('YamlParserContractLoader', () => {
 			})
 
 			expect(result.subjectName).toBe('MyClass')
-			expect(result.fns).toHaveProperty('constructor')
+			expect(result.fns).toHaveProperty('CONSTRUCTOR')
 			expect(result.fns).toHaveProperty('doSomething')
-			expect((result.fns as Record<string, { terms: unknown[] }>)['constructor']?.terms).toHaveLength(1)
+			expect((result.fns as Record<string, { terms: unknown[] }>)['CONSTRUCTOR']?.terms).toHaveLength(1)
 			expect(result.fns.doSomething?.terms).toHaveLength(1)
 		})
 
@@ -197,7 +197,7 @@ describe('YamlParserContractLoader', () => {
 		it('passes through constructorParams when present', async () => {
 			const definition = {
 				fns: {
-					constructor: {
+					CONSTRUCTOR: {
 						terms: [{ constructorParams: [10], params: [5], result: 15 }],
 					},
 				},
@@ -211,7 +211,7 @@ describe('YamlParserContractLoader', () => {
 				modulePath: '/test/ctor.contract.yaml',
 			})
 
-			const ctorFn = (result.fns as Record<string, { terms: { constructorParams?: unknown[] }[] }>)['constructor']
+			const ctorFn = (result.fns as Record<string, { terms: { constructorParams?: unknown[] }[] }>)['CONSTRUCTOR']
 			expect(ctorFn?.terms[0]?.constructorParams).toEqual([10])
 		})
 
@@ -501,6 +501,300 @@ describe('YamlParserContractLoader', () => {
 			expect(loader['_yamlParserContract'].parseFile).toHaveBeenCalledTimes(1)
 
 			vi.restoreAllMocks()
+		})
+	})
+
+	describe('per-function mock loading', () => {
+		it('loads mock for individual function', async () => {
+			const depDefinition = {
+				fns: {
+					default: {
+						terms: [{ params: ['x', 'y'], result: 'x/y' }],
+					},
+				},
+				module: 'node:path',
+				subjectName: 'join',
+				subjectType: 'function' as const,
+			}
+
+			const mockRestore = vi.fn()
+			vi.spyOn(loader['_yamlParserContract'], 'parseFile').mockResolvedValue(depDefinition)
+			vi.spyOn(mocker, 'contract').mockReturnValue({ mockRestore, spy: vi.fn() })
+
+			const definition = {
+				fns: {
+					doWork: {
+						mock: ['./dep.contract.yaml'],
+						terms: [{ params: ['a'], result: 'b' }],
+					},
+					simple: {
+						terms: [{ params: [], result: 'ok' }],
+					},
+				},
+				module: 'node:path',
+				subjectName: 'myFunc',
+				subjectType: 'function' as const,
+			}
+
+			const result = await loader.createFromDefinition({
+				definition,
+				modulePath: '/test/main.contract.yaml',
+			})
+
+			expect(result.fns.doWork).toHaveProperty('mock')
+			expect(typeof result.fns.doWork?.mock).toBe('function')
+			expect(result.fns.simple).not.toHaveProperty('mock')
+
+			const restores = result.fns.doWork?.mock!()
+			expect(restores).toHaveLength(1)
+			restores[0]!()
+			expect(mockRestore).toHaveBeenCalled()
+
+			vi.restoreAllMocks()
+		})
+
+		it('loads multiple mocks for individual function', async () => {
+			const dep1Definition = {
+				fns: { default: { terms: [{ params: ['a'], result: 'b' }] } },
+				module: 'node:path',
+				subjectName: 'fn1',
+				subjectType: 'function' as const,
+			}
+			const dep2Definition = {
+				fns: { default: { terms: [{ params: ['c'], result: 'd' }] } },
+				module: 'node:path',
+				subjectName: 'fn2',
+				subjectType: 'function' as const,
+			}
+
+			const mockRestore1 = vi.fn()
+			const mockRestore2 = vi.fn()
+			const parseFileSpy = vi.spyOn(loader['_yamlParserContract'], 'parseFile')
+			parseFileSpy.mockResolvedValueOnce(dep1Definition)
+			parseFileSpy.mockResolvedValueOnce(dep2Definition)
+			const mockerSpy = vi.spyOn(mocker, 'contract')
+			mockerSpy.mockReturnValueOnce({ mockRestore: mockRestore1, spy: vi.fn() })
+			mockerSpy.mockReturnValueOnce({ mockRestore: mockRestore2, spy: vi.fn() })
+
+			const definition = {
+				fns: {
+					doWork: {
+						mock: ['./dep1.contract.yaml', './dep2.contract.yaml'],
+						terms: [{ params: [], result: 'ok' }],
+					},
+				},
+				module: 'node:path',
+				subjectName: 'myFunc',
+				subjectType: 'function' as const,
+			}
+
+			const result = await loader.createFromDefinition({
+				definition,
+				modulePath: '/test/main.contract.yaml',
+			})
+
+			const restores = result.fns.doWork?.mock!()
+			expect(restores).toHaveLength(2)
+			restores[0]!()
+			restores[1]!()
+			expect(mockRestore1).toHaveBeenCalled()
+			expect(mockRestore2).toHaveBeenCalled()
+
+			vi.restoreAllMocks()
+		})
+
+		it('circular per-function mock reference throws error', async () => {
+			const selfPath = '/test/circular.contract.yaml'
+			const definition = {
+				fns: {
+					doWork: {
+						mock: ['./circular.contract.yaml'],
+						terms: [{ params: [], result: 'test' }],
+					},
+				},
+				module: 'node:path',
+				subjectName: 'myFunc',
+				subjectType: 'function' as const,
+			}
+
+			vi.spyOn(loader['_yamlParserContract'], 'parseFile').mockResolvedValue(definition)
+
+			await expect(
+				loader.createFromDefinition({
+					definition,
+					modulePath: selfPath,
+				})
+			).rejects.toThrow(`Circular mock reference detected: ${resolve(selfPath)}`)
+
+			vi.restoreAllMocks()
+		})
+
+		describe('mockFunction (intra-contract)', () => {
+			it('creates mocker.function mock for referenced function', async () => {
+				const mockRestore = vi.fn()
+				const mockerFunctionSpy = vi.spyOn(mocker, 'function').mockReturnValue({ mockRestore, spy: vi.fn() })
+
+				const definition = {
+					fns: {
+						_message: {
+							terms: [{ params: ['type', 'msg'], result: 'type:msg' }],
+						},
+						debug: {
+							mockFunction: ['_message'],
+							terms: [{ params: ['msg'], result: 'DEBUG:msg' }],
+						},
+					},
+					module: 'node:path',
+					subjectName: 'logger',
+					subjectType: 'function' as const,
+				}
+
+				const result = await loader.createFromDefinition({
+					definition,
+					modulePath: '/test/logger.contract.yaml',
+				})
+
+				expect(result.fns.debug).toHaveProperty('mock')
+				expect(typeof result.fns.debug?.mock).toBe('function')
+
+				const restores = result.fns.debug?.mock!()
+				expect(restores).toHaveLength(1)
+				expect(mockerFunctionSpy).toHaveBeenCalledWith(result, '_message')
+
+				restores[0]!()
+				expect(mockRestore).toHaveBeenCalled()
+
+				vi.restoreAllMocks()
+			})
+
+			it('creates mocks for multiple referenced functions', async () => {
+				const mockRestore1 = vi.fn()
+				const mockRestore2 = vi.fn()
+				const mockerFunctionSpy = vi.spyOn(mocker, 'function')
+				mockerFunctionSpy.mockReturnValueOnce({ mockRestore: mockRestore1, spy: vi.fn() })
+				mockerFunctionSpy.mockReturnValueOnce({ mockRestore: mockRestore2, spy: vi.fn() })
+
+				const definition = {
+					fns: {
+						complex: {
+							mockFunction: ['helper1', 'helper2'],
+							terms: [{ params: [], result: 'ab' }],
+						},
+						helper1: {
+							terms: [{ params: [], result: 'a' }],
+						},
+						helper2: {
+							terms: [{ params: [], result: 'b' }],
+						},
+					},
+					module: 'node:path',
+					subjectName: 'myFunc',
+					subjectType: 'function' as const,
+				}
+
+				const result = await loader.createFromDefinition({
+					definition,
+					modulePath: '/test/multi.contract.yaml',
+				})
+
+				const restores = result.fns.complex?.mock!()
+				expect(restores).toHaveLength(2)
+				expect(mockerFunctionSpy).toHaveBeenCalledWith(result, 'helper1')
+				expect(mockerFunctionSpy).toHaveBeenCalledWith(result, 'helper2')
+
+				restores[0]!()
+				restores[1]!()
+				expect(mockRestore1).toHaveBeenCalled()
+				expect(mockRestore2).toHaveBeenCalled()
+
+				vi.restoreAllMocks()
+			})
+
+			it('function without mockFunction has no mock property', async () => {
+				const definition = {
+					fns: {
+						simple: {
+							terms: [{ params: [1], result: 1 }],
+						},
+					},
+					module: 'node:path',
+					subjectName: 'myFunc',
+					subjectType: 'function' as const,
+				}
+
+				const result = await loader.createFromDefinition({
+					definition,
+					modulePath: '/test/simple.contract.yaml',
+				})
+
+				expect(result.fns.simple).not.toHaveProperty('mock')
+			})
+
+			it('throws when function tries to mock itself', async () => {
+				const definition = {
+					fns: {
+						debug: {
+							mockFunction: ['debug'],
+							terms: [{ params: [], result: 'test' }],
+						},
+					},
+					module: 'node:path',
+					subjectName: 'myFunc',
+					subjectType: 'function' as const,
+				}
+
+				await expect(
+					loader.createFromDefinition({
+						definition,
+						modulePath: '/test/self-mock.contract.yaml',
+					})
+				).rejects.toThrow('Function "debug" cannot mock itself via mockFunction')
+			})
+
+			it('combines existing mock with mockFunction mocks', async () => {
+				const depDefinition = {
+					fns: { default: { terms: [{ params: ['x'], result: 'y' }] } },
+					module: 'node:path',
+					subjectName: 'dep',
+					subjectType: 'function' as const,
+				}
+
+				const contractMockRestore = vi.fn()
+				const fnMockRestore = vi.fn()
+				vi.spyOn(loader['_yamlParserContract'], 'parseFile').mockResolvedValue(depDefinition)
+				vi.spyOn(mocker, 'contract').mockReturnValue({ mockRestore: contractMockRestore, spy: vi.fn() })
+				vi.spyOn(mocker, 'function').mockReturnValue({ mockRestore: fnMockRestore, spy: vi.fn() })
+
+				const definition = {
+					fns: {
+						complex: {
+							mock: ['./dep.contract.yaml'],
+							mockFunction: ['internal'],
+							terms: [{ params: [], result: 'done' }],
+						},
+						internal: {
+							terms: [{ params: [], result: 'ok' }],
+						},
+					},
+					module: 'node:path',
+					subjectName: 'myFunc',
+					subjectType: 'function' as const,
+				}
+
+				const result = await loader.createFromDefinition({
+					definition,
+					modulePath: '/test/combined.contract.yaml',
+				})
+
+				const restores = result.fns.complex?.mock!()
+				expect(restores).toHaveLength(2)
+				restores[0]!()
+				restores[1]!()
+				expect(contractMockRestore).toHaveBeenCalled()
+				expect(fnMockRestore).toHaveBeenCalled()
+
+				vi.restoreAllMocks()
+			})
 		})
 	})
 })

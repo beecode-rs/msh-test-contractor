@@ -20,11 +20,15 @@ export class VitestSpyClassFunctionStrategy implements VitestSpyStrategy {
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	mockImplementationFactory(): (...args: any[]) => any {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		return (...mockParams: any[]): any => {
-			const termByConstructorParams = this._terms.filter((term) => deepEqual(term.constructorParams, this._mockClassParams))
+		const terms = this._terms
+		const mockClassParams = this._mockClassParams
+		const name = this._name
 
-			const vitestSpy = new VitestSpyFunctionStrategy({ name: this._name, terms: termByConstructorParams })
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		return function (...mockParams: any[]): any {
+			const termByConstructorParams = terms.filter((term) => deepEqual(term.constructorParams, mockClassParams))
+
+			const vitestSpy = new VitestSpyFunctionStrategy({ name, terms: termByConstructorParams })
 
 			return vitestSpy.mockImplementationFactory()(...mockParams)
 		}

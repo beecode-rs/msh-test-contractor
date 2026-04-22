@@ -15,13 +15,16 @@ export class VitestSpyFunctionStrategy implements VitestSpyStrategy {
 	}
 
 	mockImplementationFactory(): Mock {
+		const terms = this._terms
+		const name = this._name
+
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const fakeImplementation = (...mockParams: any[]): any => {
-			const foundTerm = this._terms.find(
+		const fakeImplementation = function (...mockParams: any[]): any {
+			const foundTerm = terms.find(
 				(term) => objectUtil.stringifyOrNullUndefined(term.params) === objectUtil.stringifyOrNullUndefined(mockParams)
 			)
 			if (!foundTerm) {
-				throw new Error(`Unknown contract ${this._name} for params ${JSON.stringify(mockParams)}`)
+				throw new Error(`Unknown contract ${name} for params ${JSON.stringify(mockParams)}`)
 			}
 
 			return foundTerm.result

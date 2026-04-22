@@ -1,0 +1,11 @@
+subject: contractMockService
+module: ./contract-mock-service.js
+subjectType: function
+methods:
+  strategyFromFunctionMock:
+    mock:
+      - ./mock-vitest-strategy.contract.yaml
+      - ./mock-vitest-empty-strategy.contract.yaml
+    terms:
+      - params: []
+        result: {}

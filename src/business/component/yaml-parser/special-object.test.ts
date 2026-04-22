@@ -181,6 +181,55 @@ describe('special-object', () => {
 			})
 		})
 
+		describe('function parsing', () => {
+			it('parses __fn__ and returns a no-op function', () => {
+				const result = service.parse({ value: '__fn__' })
+
+				expect(typeof result).toBe('function')
+				const callResult = (result as () => unknown)()
+				expect(callResult).toBeUndefined()
+			})
+
+			it('parses __fn_identity__ and returns an identity function', () => {
+				const result = service.parse({ value: '__fn_identity__' })
+
+				expect(typeof result).toBe('function')
+				expect((result as (a: unknown) => unknown)('test')).toBe('test')
+				expect((result as (a: unknown) => unknown)(42)).toBe(42)
+				expect((result as (a: unknown) => unknown)(null)).toBeNull()
+			})
+
+			it('returns string unchanged if it starts with __fn but is not a valid pattern', () => {
+				expect(service.parse({ value: '__fn_other__' })).toBe('__fn_other__')
+				expect(service.parse({ value: '__fn__extra' })).toBe('__fn__extra')
+			})
+		})
+
+		describe('class reference parsing', () => {
+			it('parses __class_ref:Date__ and returns Date class', () => {
+				const result = service.parse({ value: '__class_ref:Date__' })
+
+				expect(typeof result).toBe('function')
+				expect(result).toBe(Date)
+			})
+
+			it('parses __class_ref:Error__ and returns Error class', () => {
+				const result = service.parse({ value: '__class_ref:Error__' })
+
+				expect(typeof result).toBe('function')
+				expect(result).toBe(Error)
+			})
+
+			it('returns string unchanged for unknown class', () => {
+				expect(service.parse({ value: '__class_ref:NonExistentClass__' })).toBe('__class_ref:NonExistentClass__')
+			})
+
+			it('returns string unchanged if pattern does not match', () => {
+				expect(service.parse({ value: '__class_ref:__' })).toBe('__class_ref:__')
+				expect(service.parse({ value: '__class_ref:123__' })).toBe('__class_ref:123__')
+			})
+		})
+
 		describe('regular values pass through unchanged', () => {
 			it('returns regular string unchanged', () => {
 				expect(service.parse({ value: 'hello world' })).toBe('hello world')

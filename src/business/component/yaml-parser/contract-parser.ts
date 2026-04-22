@@ -8,15 +8,20 @@ import * as yaml from 'js-yaml'
 import { readFile } from 'node:fs/promises'
 
 import type { YamlContractFunction, YamlContractModel, YamlContractTerm } from '#src/business/model/yaml-contract-model.js'
+import { SpecialFnName } from '#src/enum/special-fn-name.js'
 
 type RawYamlTerm = {
 	params?: unknown[]
 	result?: unknown
 	error?: unknown
+	constructorParams?: unknown[]
+	returnFnParams?: unknown[]
 }
 
 type RawYamlMethod = {
 	terms?: RawYamlTerm[]
+	mock?: string[]
+	mockFunction?: string[]
 }
 
 type RawYamlContract = Record<string, unknown> & {
@@ -59,7 +64,7 @@ export class YamlParserContract {
 		const fns = this._methodsToContractFunctions(contract.methods)
 
 		if (Object.hasOwn(rawObject, 'constructor')) {
-			fns['constructor'] = this._methodToContractFunction(contract.constructor!)
+			fns[SpecialFnName.CONSTRUCTOR] = this._methodToContractFunction(contract.constructor!)
 		}
 
 		const subjectType = this._resolveSubjectType(contract, rawObject)
@@ -126,14 +131,35 @@ export class YamlParserContract {
 		}
 
 		return Object.fromEntries(
-			Object.entries(methods).map(([methodName, method]) => [methodName, this._methodToContractFunction(method)])
+			Object.entries(methods).map(([methodName, method]) => [
+				this._resolveFnKey(methodName),
+				this._methodToContractFunction(method),
+			])
 		)
 	}
 
+	protected _resolveFnKey(key: string): string {
+		if (key === '__self__') {
+			return SpecialFnName.SELF
+		}
+
+		return key
+	}
+
 	protected _methodToContractFunction(method: RawYamlMethod): YamlContractFunction {
-		return {
+		const result: YamlContractFunction = {
 			terms: this._rawTermsToContractTerms(method.terms),
 		}
+
+		if (method.mock) {
+			result.mock = method.mock
+		}
+
+		if (method.mockFunction) {
+			result.mockFunction = method.mockFunction
+		}
+
+		return result
 	}
 
 	protected _rawTermsToContractTerms(terms: RawYamlTerm[] | undefined): YamlContractTerm[] {
@@ -229,6 +255,14 @@ export class YamlParserContract {
 
 		if (term.error !== undefined) {
 			transformed.error = this._parseSpecialObjectsRecursively(term.error)
+		}
+
+		if (term.constructorParams !== undefined) {
+			transformed.constructorParams = this._parseSpecialObjectsRecursively(term.constructorParams) as unknown[]
+		}
+
+		if (term.returnFnParams !== undefined) {
+			transformed.returnFnParams = this._parseSpecialObjectsRecursively(term.returnFnParams) as unknown[]
 		}
 
 		return transformed

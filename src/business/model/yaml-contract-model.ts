@@ -10,6 +10,8 @@ export type YamlContractTerm = {
 
 export type YamlContractFunction = {
 	terms: YamlContractTerm[]
+	mock?: string[]
+	mockFunction?: string[]
 }
 
 export type YamlContractModel = {
@@ -83,8 +85,42 @@ export class YamlContractModelValidator {
 
 		this._validateTermsArray({ fn })
 		this._validateEachTerm({ terms: fn.terms as unknown[] })
+		this._validateFunctionMockField({ fn })
+		this._validateFunctionMockFunctionField({ fn })
 
 		return true
+	}
+
+	protected readonly _validateFunctionMockField = (params: { fn: Record<string, unknown> }): void => {
+		if (!('mock' in params.fn)) {
+			return
+		}
+
+		if (!Array.isArray(params.fn.mock)) {
+			throw new Error('YamlContractFunction.mock must be an array')
+		}
+
+		params.fn.mock.forEach((path: unknown, index: number) => {
+			if (typeof path !== 'string' || path.trim() === '') {
+				throw new Error(`YamlContractFunction.mock[${String(index)}] must be a non-empty string`)
+			}
+		})
+	}
+
+	protected readonly _validateFunctionMockFunctionField = (params: { fn: Record<string, unknown> }): void => {
+		if (!('mockFunction' in params.fn)) {
+			return
+		}
+
+		if (!Array.isArray(params.fn.mockFunction)) {
+			throw new Error('YamlContractFunction.mockFunction must be an array')
+		}
+
+		params.fn.mockFunction.forEach((name: unknown, index: number) => {
+			if (typeof name !== 'string' || name.trim() === '') {
+				throw new Error(`YamlContractFunction.mockFunction[${String(index)}] must be a non-empty string`)
+			}
+		})
 	}
 
 	protected readonly _validateNonEmptyStringField = (params: { fieldName: string; model: Record<string, unknown> }): void => {

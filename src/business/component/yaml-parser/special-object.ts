@@ -31,6 +31,40 @@ export class YamlParserSpecialObject {
 		return this._yamlParserRegex.parse({ value })
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+	protected _tryParseFunction(value: string): Function | undefined {
+		if (value === '__fn__') {
+			return function () {
+				return undefined
+			}
+		}
+
+		if (value === '__fn_identity__') {
+			return function (a: unknown): unknown {
+				return a
+			}
+		}
+
+		return undefined
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+	protected _tryParseClassRef(value: string): Function | undefined {
+		const match = /^__class_ref:(\w+)__$/.exec(value)
+		if (!match) {
+			return undefined
+		}
+
+		const className = match[1]!
+		const globalObj = globalThis as Record<string, unknown>
+
+		if (className in globalObj && typeof globalObj[className] === 'function') {
+			return globalObj[className]
+		}
+
+		return undefined
+	}
+
 	protected _parseSpecialObjectFromString(value: string): unknown {
 		const error = this._tryParseError(value)
 		if (error !== undefined) {
@@ -52,7 +86,31 @@ export class YamlParserSpecialObject {
 			return regex
 		}
 
+		const fn = this._tryParseFunction(value)
+		if (fn !== undefined) {
+			return fn
+		}
+
+		const classRef = this._tryParseClassRef(value)
+		if (classRef !== undefined) {
+			return classRef
+		}
+
+		const importRef = this._tryParseImport(value)
+		if (importRef !== undefined) {
+			return importRef
+		}
+
 		return value
+	}
+
+	protected _tryParseImport(value: string): { __yaml_import__: { path: string; property: string } } | undefined {
+		const match = /^__import__:([^:]+):(.+)$/.exec(value)
+		if (!match) {
+			return undefined
+		}
+
+		return { __yaml_import__: { path: match[1]!, property: match[2]! } }
 	}
 
 	parse(params: { value: unknown }): unknown {

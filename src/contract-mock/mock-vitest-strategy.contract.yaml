@@ -1,0 +1,9 @@
+subject: MockVitestStrategy
+module: ./mock-vitest-strategy.js
+subjectType: class
+constructor:
+  terms:
+    - params: []
+      result: {}
+    - params: [__fn__]
+      result: {}

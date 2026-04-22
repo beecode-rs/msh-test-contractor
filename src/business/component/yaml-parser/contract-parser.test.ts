@@ -62,7 +62,7 @@ methods:
 				expect(result.fns.default?.terms[0]?.result).toBe(3)
 			})
 
-			it('handles constructor field by moving to fns.constructor', () => {
+			it('handles constructor field by moving to fns.CONSTRUCTOR', () => {
 				const yamlString = `
 subject: MyClass
 module: ./my-module.js
@@ -72,9 +72,55 @@ constructor:
 `
 				const result = yamlParserContract.parseString({ yaml: yamlString })
 
-				expect(result.fns).toHaveProperty('constructor')
-				expect(result.fns.constructor.terms).toHaveLength(1)
-				expect(result.fns.constructor.terms[0].params).toEqual(['initialValue'])
+				expect(result.fns).toHaveProperty('CONSTRUCTOR')
+				expect(result.fns.CONSTRUCTOR!.terms).toHaveLength(1)
+				expect(result.fns.CONSTRUCTOR!.terms[0]!.params).toEqual(['initialValue'])
+			})
+
+			it('maps __self__ method key to SELF', () => {
+				const yamlString = `
+subject: myFunction
+module: ./my-module.js
+subjectType: function
+methods:
+  __self__:
+    terms:
+      - params: [1]
+        result: 1
+`
+				const result = yamlParserContract.parseString({ yaml: yamlString })
+
+				expect(result.fns).toHaveProperty('SELF')
+				expect(result.fns).not.toHaveProperty('__self__')
+				expect(result.fns.SELF!.terms).toHaveLength(1)
+				expect(result.fns.SELF!.terms[0]!.params).toEqual([1])
+				expect(result.fns.SELF!.terms[0]!.result).toBe(1)
+			})
+
+			it('maps both CONSTRUCTOR and __self__ keys correctly', () => {
+				const yamlString = `
+subject: MyService
+module: ./my-service.js
+constructor:
+  terms:
+    - params: []
+methods:
+  __self__:
+    terms:
+      - params: [1]
+        result: 1
+  regularMethod:
+    terms:
+      - params: [2]
+        result: 2
+`
+				const result = yamlParserContract.parseString({ yaml: yamlString })
+
+				expect(result.fns).toHaveProperty('CONSTRUCTOR')
+				expect(result.fns).toHaveProperty('SELF')
+				expect(result.fns).toHaveProperty('regularMethod')
+				expect(result.fns).not.toHaveProperty('constructor')
+				expect(result.fns).not.toHaveProperty('__self__')
 			})
 
 			it('maps module field correctly', () => {
@@ -105,8 +151,8 @@ methods:
 `
 				const result = yamlParserContract.parseString({ yaml: yamlString })
 
-				expect(result.fns.add.terms).toHaveLength(2)
-				expect(result.fns.subtract.terms).toHaveLength(1)
+				expect(result.fns.add!.terms).toHaveLength(2)
+				expect(result.fns.subtract!.terms).toHaveLength(1)
 			})
 
 			it('transforms term fields (params, result, error)', () => {
@@ -374,9 +420,9 @@ constructor:
 `
 					const result = yamlParserContract.parseString({ yaml: yamlString })
 
-					expect(result.fns.constructor.terms[0].constructorParams).toEqual([10])
-					expect(result.fns.constructor.terms[0].params).toEqual([5])
-					expect(result.fns.constructor.terms[0].result).toBe(15)
+					expect(result.fns.CONSTRUCTOR.terms[0].constructorParams).toEqual([10])
+					expect(result.fns.CONSTRUCTOR.terms[0].params).toEqual([5])
+					expect(result.fns.CONSTRUCTOR.terms[0].result).toBe(15)
 				})
 
 				it('converts shorthand with object result', () => {
@@ -515,7 +561,7 @@ methods:
 				const result = yamlParserContract.parseString({ yaml: yamlString })
 
 				expect(result.subjectType).toBe('class')
-				expect(result.fns).toHaveProperty('constructor')
+				expect(result.fns).toHaveProperty('CONSTRUCTOR')
 				expect(result.fns).toHaveProperty('process')
 			})
 		})
@@ -610,7 +656,7 @@ constructor:
 			const result = await yamlParserContract.parseFile({ path: filePath })
 
 			expect(result.subjectType).toBe('class')
-			expect(result.fns.constructor.terms).toHaveLength(1)
+			expect(result.fns.CONSTRUCTOR!.terms).toHaveLength(1)
 		})
 
 		it('throws descriptive error for file not found', async () => {
@@ -676,6 +722,147 @@ methods:
 			// The implementation expects terms to be an array
 			// Note: This throws a generic TypeError - could be improved with better validation
 			expect(() => yamlParserContract.parseString({ yaml: yamlString })).toThrow()
+		})
+	})
+
+	describe('per-function mock', () => {
+		it('parses mock field on a method', () => {
+			const yamlString = `
+subject: myFunc
+module: ./my-module.js
+methods:
+  doWork:
+    mock:
+      - ./dep.contract.yaml
+    terms:
+      - params: [1]
+        result: 2
+`
+			const result = yamlParserContract.parseString({ yaml: yamlString })
+
+			expect(result.fns.doWork!.mock).toEqual(['./dep.contract.yaml'])
+			expect(result.fns.doWork!.terms).toHaveLength(1)
+		})
+
+		it('parses mock field with multiple paths', () => {
+			const yamlString = `
+subject: myFunc
+module: ./my-module.js
+methods:
+  doWork:
+    mock:
+      - ./dep1.contract.yaml
+      - ./dep2.contract.yaml
+    terms:
+      - params: []
+        result: ok
+`
+			const result = yamlParserContract.parseString({ yaml: yamlString })
+
+			expect(result.fns.doWork!.mock).toEqual(['./dep1.contract.yaml', './dep2.contract.yaml'])
+		})
+
+		it('method without mock field has no mock property', () => {
+			const yamlString = `
+subject: myFunc
+module: ./my-module.js
+methods:
+  simple:
+    terms:
+      - params: [1]
+        result: 1
+`
+			const result = yamlParserContract.parseString({ yaml: yamlString })
+
+			expect(result.fns.simple!.mock).toBeUndefined()
+		})
+
+		it('parses mock on constructor', () => {
+			const yamlString = `
+subject: MyClass
+module: ./my-module.js
+constructor:
+  mock:
+    - ./dep.contract.yaml
+  terms:
+    - params: []
+      result: {}
+`
+			const result = yamlParserContract.parseString({ yaml: yamlString })
+
+			expect(result.fns.CONSTRUCTOR!.mock).toEqual(['./dep.contract.yaml'])
+		})
+		describe('mockFunction (intra-contract)', () => {
+			it('parses mockFunction field on a method', () => {
+				const yamlString = `
+subject: myFunc
+module: ./my-module.js
+methods:
+  debug:
+    mockFunction:
+      - _message
+    terms:
+      - params: ['test']
+        result: ok
+`
+				const result = yamlParserContract.parseString({ yaml: yamlString })
+
+				expect(result.fns.debug!.mockFunction).toEqual(['_message'])
+				expect(result.fns.debug!.terms).toHaveLength(1)
+			})
+
+			it('parses mockFunction field with multiple function names', () => {
+				const yamlString = `
+subject: myFunc
+module: ./my-module.js
+methods:
+  complex:
+    mockFunction:
+      - helper1
+      - helper2
+    terms:
+      - params: []
+        result: ok
+`
+				const result = yamlParserContract.parseString({ yaml: yamlString })
+
+				expect(result.fns.complex!.mockFunction).toEqual(['helper1', 'helper2'])
+			})
+
+			it('method without mockFunction has no mockFunction property', () => {
+				const yamlString = `
+subject: myFunc
+module: ./my-module.js
+methods:
+  simple:
+    terms:
+      - params: [1]
+        result: 1
+`
+				const result = yamlParserContract.parseString({ yaml: yamlString })
+
+				expect(result.fns.simple!.mockFunction).toBeUndefined()
+			})
+
+			it('parses both mock and mockFunction on same method', () => {
+				const yamlString = `
+subject: myFunc
+module: ./my-module.js
+methods:
+  complex:
+    mock:
+      - ./dep.contract.yaml
+    mockFunction:
+      - _internal
+    terms:
+      - params: []
+        result: ok
+`
+				const result = yamlParserContract.parseString({ yaml: yamlString })
+
+				expect(result.fns.complex!.mock).toEqual(['./dep.contract.yaml'])
+				expect(result.fns.complex!.mockFunction).toEqual(['_internal'])
+			})
 		})
 	})
 })

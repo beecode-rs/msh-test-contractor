@@ -1,0 +1,36 @@
+subject: subjectService
+module: ./subject-service.js
+subjectType: function
+methods:
+  strategyFromContractFunction:
+    terms:
+      - params:
+          - contract:
+              module: {}
+              subjectName: 'DummyClass'
+            fnName: 'CONSTRUCTOR'
+            term: {}
+        result:
+          _module: {}
+          _subjectName: 'DummyClass'
+      - params:
+          - contract:
+              module: {}
+              subjectName: 'DummyClass'
+            fnName: 'a'
+            term:
+              constructorParams: []
+        result:
+          _fnName: 'a'
+          _module: {}
+          _subjectName: 'DummyClass'
+      - params:
+          - contract:
+              module: {}
+              subjectName: 'DummyClass'
+            fnName: 'a'
+            term: {}
+        result:
+          _fnName: 'a'
+          _module: {}
+          _subjectName: 'DummyClass'
