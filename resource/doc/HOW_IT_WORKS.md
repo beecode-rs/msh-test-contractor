@@ -20,26 +20,26 @@ Traditional mocks are brittle because they're manually configured and can drift 
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                     Contract Definition                              │
-│                    (*.contract.ts files)                            │
+│                     Contract Definition                             │
+│              (*.contract.ts and *.contract.yaml files)              │
 └───────────────────────────┬─────────────────────────────────────────┘
                             │
                             ▼
 ┌─────────────────────────────────────────────────────────────────────┐
-│                   contractorTestRunner                               │
+│                   contractorTestRunner                              │
 │              (Discovers & runs contracts)                           │
 └───────────────────────────┬─────────────────────────────────────────┘
                             │
                             ▼
 ┌─────────────────────────────────────────────────────────────────────┐
-│                       contractor                                     │
+│                       contractor                                    │
 │                 (Main test executor)                                │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │  1. SubjectService    → Select execution strategy           │   │
-│  │  2. ContractMockService → Apply external mocks              │   │
-│  │  3. mocker            → Create contract spy                 │   │
-│  │  4. ContractExpectService → Assert results                  │   │
-│  └─────────────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │  1. SubjectService    → Select execution strategy           │    │
+│  │  2. ContractMockService → Apply external mocks              │    │
+│  │  3. mocker            → Create contract spy                 │    │
+│  │  4. ContractExpectService → Assert results                  │    │
+│  └─────────────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -49,7 +49,7 @@ Traditional mocks are brittle because they're manually configured and can drift 
 
 ### Contract
 
-A **Contract** defines the obligation of a function (provider) - given certain parameters, it returns a certain result.
+A **Contract** defines the obligation of a function (provider) - given certain parameters, it returns a certain result. Contracts can be defined in either TypeScript (`.contract.ts`) or YAML (`.contract.yaml`) format.
 
 ```typescript
 interface Contract<M, SN, S> {
@@ -73,6 +73,26 @@ interface ContractTerm {
 }
 ```
 
+### YAML Contract Format
+
+Contracts can also be defined in YAML files (`*.contract.yaml`). The YAML format is the **preferred** way to define contracts — it's more concise and readable than the TypeScript format.
+
+```yaml
+# Function contract example
+subject: myFunction
+module: ./my-module.js
+subjectType: function
+methods:
+  __self__:           # __self__ means the function itself
+    terms:
+      - params: [1]
+        result: 1
+      - params: [11]
+        error: number is greater than ten
+```
+
+For full YAML syntax and field reference, see `CLAUDE.md` and the proposal docs in `resource/doc/yaml-contracts/`.
+
 ---
 
 ## Module Structure
@@ -82,7 +102,7 @@ src/
 ├── contract/                    # Core contract execution
 │   ├── contractor.ts            # Main test runner
 │   ├── contractor-factory.ts    # Contract creation factory
-│   ├── contractor-test-runner.ts # Discovers *.contract.ts files
+│   ├── contractor-test-runner.ts # Discovers *.contract.ts and *.contract.yaml files
 │   ├── contractor-service.ts    # Test naming utilities
 │   └── expect/                  # Assertion strategies
 │       ├── contract-expect-service.ts
@@ -160,8 +180,8 @@ The library heavily uses the **Strategy Pattern** for flexibility:
 contractorTestRunner.dir('./src')
 ```
 
-- Scans directory for `*.contract.ts` files using glob
-- Loads each contract file
+- Scans directory for `*.contract.ts` and `*.contract.yaml` files using glob
+- Loads each contract file (TypeScript contracts via import, YAML contracts via parser)
 - Schedules tests for each function/term
 
 ### 2. Contract Execution
