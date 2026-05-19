@@ -1,0 +1,29 @@
+subject: dummyFunction
+module: ./dummy-function.js
+subjectType: function
+mock:
+  - ./logger.contract.yaml
+  - ./dummy-class.contract.yaml
+methods:
+  add:
+    terms:
+      - params: [1, 2]
+        result: 3
+  callClass:
+    terms:
+      - params: [1, 2, 3]
+        result: 6
+  callClassMultiFun:
+    terms:
+      - params: [1, 2, 3, 1]
+        result: 8
+  errorIfMoreThenTen:
+    terms:
+      - params: [1]
+        result: 1
+      - params: [11]
+        error: 'More then 10'
+  sub:
+    terms:
+      - params: [1, 2]
+        result: -1

@@ -1,0 +1,30 @@
+subject: SubjectClassFunctionStrategy
+module: ./subject-class-function-strategy.js
+subjectType: class
+constructor:
+  terms:
+    - params:
+        - constructorParams: []
+          fnName: 'a'
+          subjectFromContract:
+            module:
+              DummyClass: __import__:./__fixtures__/test-data.js:DummyClass
+            subjectName: 'DummyClass'
+      result:
+        _constructorParams: []
+        _fnName: 'a'
+        _module:
+          DummyClass: __import__:./__fixtures__/test-data.js:DummyClass
+        _subjectName: 'DummyClass'
+methods:
+  fn:
+    terms:
+      - constructorParams:
+          - constructorParams: []
+            fnName: 'a'
+            subjectFromContract:
+              module:
+                DummyClass: __import__:./__fixtures__/test-data.js:DummyClass
+              subjectName: 'DummyClass'
+        params: []
+        result: __import__:./__fixtures__/test-data.js:DummyClass

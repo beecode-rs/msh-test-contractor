@@ -1,0 +1,25 @@
+subject: DummyClass
+module: ./dummy-class.js
+subjectType: class
+constructor:
+  terms:
+    - params: [1, 2]
+      result: { __a: 1, __b: 2 }
+methods:
+  add:
+    terms:
+      - constructorParams: [1, 2]
+        params: [3]
+        result: 6
+  externalAdd:
+    mock:
+      - ./dummy-function.contract.yaml
+    terms:
+      - constructorParams: [1, 2]
+        params: [3]
+        result: 6
+  sub:
+    terms:
+      - constructorParams: [1, 2]
+        params: [1]
+        result: 2

@@ -1,0 +1,64 @@
+subject: calculator
+module: ./calculator.js
+subjectType: function
+methods:
+  add:
+    terms:
+      - params: [1, 2]
+        result: 3
+      - params: [0, 0]
+        result: 0
+      - params: [-1, 5]
+        result: 4
+      - params: [100, 200]
+        result: 300
+  subtract:
+    terms:
+      - params: [5, 3]
+        result: 2
+      - params: [0, 0]
+        result: 0
+      - params: [3, 5]
+        result: -2
+      - params: [100, 50]
+        result: 50
+  multiply:
+    terms:
+      - params: [2, 3]
+        result: 6
+      - params: [0, 5]
+        result: 0
+      - params: [-2, 3]
+        result: -6
+      - params: [10, 10]
+        result: 100
+      - params: [1, 1]
+        result: 1
+      - params: [1, 2]
+        result: 2
+      - params: [6, 4]
+        result: 24
+      - params: [24, 5]
+        result: 120
+      - params: [120, 6]
+        result: 720
+      - params: [720, 7]
+        result: 5040
+      - params: [5040, 8]
+        result: 40320
+      - params: [40320, 9]
+        result: 362880
+      - params: [362880, 10]
+        result: 3628800
+  divide:
+    terms:
+      - params: [10, 2]
+        result: 5
+      - params: [0, 5]
+        result: 0
+      - params: [15, 3]
+        result: 5
+      - params: [7, 2]
+        result: 3.5
+      - params: [10, 0]
+        error: Division by zero

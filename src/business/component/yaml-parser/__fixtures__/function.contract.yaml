@@ -1,0 +1,14 @@
+subject: join
+module: node:path
+subjectType: function
+methods:
+  default:
+    terms:
+      - params:
+          - a
+          - b
+        result: a/b
+      - params:
+          - x
+          - y
+        result: x/y

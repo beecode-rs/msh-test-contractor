@@ -1,0 +1,71 @@
+subject: SubjectFunctionStrategy
+module: ./subject-function-strategy.js
+subjectType: class
+constructor:
+  terms:
+    - params:
+        - fnName: 'a'
+          subjectFromContract:
+            module:
+              dummySubject:
+                a: __import__:./__fixtures__/test-data.js:dummyModule.dummySubject.a
+            subjectName: 'dummySubject'
+      result:
+        _fnName: 'a'
+        _module:
+          dummySubject:
+            a: __import__:./__fixtures__/test-data.js:dummyModule.dummySubject.a
+        _subjectName: 'dummySubject'
+    - params:
+        - fnName: 'SELF'
+          subjectFromContract:
+            module:
+              a: __import__:./__fixtures__/test-data.js:dummyModuleFunction.a
+            subjectName: 'a'
+      result:
+        _fnName: 'SELF'
+        _module:
+          a: __import__:./__fixtures__/test-data.js:dummyModuleFunction.a
+        _subjectName: 'a'
+methods:
+  exec:
+    mockFunction: [fn]
+    terms:
+      - constructorParams:
+          - fnName: 'a'
+            subjectFromContract:
+              module:
+                dummySubject:
+                  a: __import__:./__fixtures__/test-data.js:dummyModule.dummySubject.a
+              subjectName: 'dummySubject'
+        params:
+          - params: ['testParam']
+        result: 'testParam'
+      - constructorParams:
+          - fnName: 'SELF'
+            subjectFromContract:
+              module:
+                a: __import__:./__fixtures__/test-data.js:dummyModuleFunction.a
+              subjectName: 'a'
+        params:
+          - params: ['testParam']
+        result: 'testParam'
+  fn:
+    terms:
+      - constructorParams:
+          - fnName: 'a'
+            subjectFromContract:
+              module:
+                dummySubject:
+                  a: __import__:./__fixtures__/test-data.js:dummyModule.dummySubject.a
+              subjectName: 'dummySubject'
+        params: []
+        result: __import__:./__fixtures__/test-data.js:dummyModule.dummySubject.a
+      - constructorParams:
+          - fnName: 'SELF'
+            subjectFromContract:
+              module:
+                a: __import__:./__fixtures__/test-data.js:dummyModuleFunction.a
+              subjectName: 'a'
+        params: []
+        result: __import__:./__fixtures__/test-data.js:dummyModuleFunction.a

@@ -1,0 +1,9 @@
+subject: resolve
+module: node:path
+subjectType: function
+methods:
+  default:
+    terms:
+      - params:
+          - ./x
+        result: /some/x

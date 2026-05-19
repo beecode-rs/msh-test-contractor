@@ -1,0 +1,35 @@
+subject: SubjectConstructorStrategy
+module: ./subject-constructor-strategy.js
+subjectType: class
+constructor:
+  terms:
+    - params:
+        - subjectFromContract:
+            module:
+              DummyClass: __import__:./__fixtures__/test-data.js:DummyClass
+            subjectName: 'DummyClass'
+      result:
+        _module:
+          DummyClass: __import__:./__fixtures__/test-data.js:DummyClass
+        _subjectName: 'DummyClass'
+methods:
+  exec:
+    mockFunction: [fn]
+    terms:
+      - constructorParams:
+          - subjectFromContract:
+              module:
+                DummyClass: __import__:./__fixtures__/test-data.js:DummyClass
+              subjectName: 'DummyClass'
+        params:
+          - params: []
+        result: {}
+  fn:
+    terms:
+      - constructorParams:
+          - subjectFromContract:
+              module:
+                DummyClass: __import__:./__fixtures__/test-data.js:DummyClass
+              subjectName: 'DummyClass'
+        params: []
+        result: __import__:./__fixtures__/test-data.js:DummyClass
