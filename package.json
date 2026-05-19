@@ -78,7 +78,7 @@
 		"test": "concurrently -c auto 'npm:test:*'",
 		"test-coverage-unit": "npm run test:unit -- --coverage",
 		"test-coverage-unit-publish": "codecov",
-		"test:e2e": "cd test && npm run test",
+		"test:examples": "cd test-examples && npm run test",
 		"test:int": "vitest --config=./vitest.config.int.ts",
 		"test:unit": "vitest --config=./vitest.config.unit.ts",
 		"tsc": "tsc -p tsconfig.build.json",

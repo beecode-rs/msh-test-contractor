@@ -15,7 +15,7 @@ npm run build
 # Build (CommonJS to lib/)
 npm run build-cjs
 
-# Run all tests (unit + integration + e2e)
+# Run all tests (unit + integration + examples)
 npm run test
 
 # Run only unit tests
@@ -23,6 +23,9 @@ npm run test:unit
 
 # Run only integration tests
 npm run test:int
+
+# Run test examples
+npm run test:examples
 
 # Run a single test file
 npx vitest run src/path/to/file.test.ts
@@ -94,7 +97,7 @@ Extensively used throughout. Each domain (subject, mocker, mock, expect, spy) ha
 ### Contract File Structure (YAML — preferred)
 
 ```yaml
-# Function contract — test/simple-function.contract.yaml
+# Function contract — test-examples/samples/simple-function.contract.yaml
 subject: simpleFunction
 module: ./simple-function.js
 subjectType: function
@@ -108,7 +111,7 @@ methods:
 ```
 
 ```yaml
-# Class contract — test/dummy-class.contract.yaml
+# Class contract — test-examples/samples/dummy-class.contract.yaml
 subject: DummyClass
 module: ./dummy-class.js
 subjectType: class
@@ -125,7 +128,7 @@ methods:
 ```
 
 ```yaml
-# Contract with mocks — test/dummy-function.contract.yaml
+# Contract with mocks — test-examples/samples/dummy-function.contract.yaml
 subject: dummyFunction
 module: ./dummy-function.js
 subjectType: function
@@ -146,7 +149,7 @@ methods:
 ```
 
 ```yaml
-# Method with mockFunction — test/logger.contract.yaml
+# Method with mockFunction — test-examples/samples/logger.contract.yaml
 methods:
   _message:
     mock:

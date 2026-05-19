@@ -6,7 +6,7 @@ export default defineConfig({
 	test: {
 		mockReset: true,
 		passWithNoTests: true,
-		setupFiles: ['./index-vitest-setup.ts'],
+		setupFiles: [new URL('./index-vitest-setup.ts', import.meta.url).pathname],
 		watch: false,
 	},
 })

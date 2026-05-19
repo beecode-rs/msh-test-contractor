@@ -24,7 +24,10 @@ export class VitestSpyFunctionStrategy implements VitestSpyStrategy {
 				(term) => objectUtil.stringifyOrNullUndefined(term.params) === objectUtil.stringifyOrNullUndefined(mockParams)
 			)
 			if (!foundTerm) {
-				throw new Error(`Unknown contract ${name} for params ${JSON.stringify(mockParams)}`)
+				const paramsYaml = JSON.stringify(mockParams)
+				throw new Error(
+					`Missing mock term for '${name}' called with params: ${paramsYaml}\n\nAdd this term to the contract YAML:\n\n      - params: ${paramsYaml}\n        result: <expected_value>`
+				)
 			}
 
 			return foundTerm.result
