@@ -1,4 +1,4 @@
-import { type ICalculator, Calculator } from './calculator.js'
+import { Calculator, type ICalculator } from './calculator.js'
 
 export class FactorialCalculator {
 	protected readonly _calc: ICalculator
