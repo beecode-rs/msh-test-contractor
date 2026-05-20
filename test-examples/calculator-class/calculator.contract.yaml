@@ -1,0 +1,36 @@
+subject: Calculator
+module: ./calculator.js
+subjectType: class
+constructor:
+  terms:
+    - params: []
+      result: {}
+methods:
+  add:
+    terms:
+      - constructorParams: []
+        params: [2, 3]
+        result: 5
+      - constructorParams: []
+        params: [0, 0]
+        result: 0
+      - constructorParams: []
+        params: [-1, 5]
+        result: 4
+  multiply:
+    terms:
+      - constructorParams: []
+        params: [1, 1]
+        result: 1
+      - constructorParams: []
+        params: [1, 2]
+        result: 2
+      - constructorParams: []
+        params: [2, 3]
+        result: 6
+      - constructorParams: []
+        params: [6, 4]
+        result: 24
+      - constructorParams: []
+        params: [24, 5]
+        result: 120

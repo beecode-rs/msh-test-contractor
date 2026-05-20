@@ -1,0 +1,25 @@
+subject: FactorialCalculator
+module: ./factorial-calculator.js
+subjectType: class
+mock:
+  - ./calculator.contract.yaml
+constructor:
+  terms: []
+methods:
+  factorial:
+    terms:
+      - constructorParams: []
+        params: [0]
+        result: 1
+      - constructorParams: []
+        params: [1]
+        result: 1
+      - constructorParams: []
+        params: [3]
+        result: 6
+      - constructorParams: []
+        params: [5]
+        result: 120
+      - constructorParams: []
+        params: [-1]
+        error: Negative numbers not supported
