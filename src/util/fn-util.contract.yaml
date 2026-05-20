@@ -1,0 +1,10 @@
+subject: fnUtil
+module: ./fn-util.js
+subjectType: function
+methods:
+  isConstructor:
+    terms:
+      - params: ['someFnName']
+        result: false
+      - params: ['CONSTRUCTOR']
+        result: true

@@ -1,0 +1,20 @@
+subject: factorialCalculator
+module: ./factorial-calculator.js
+subjectType: function
+mock:
+  - ./calculator.contract.yaml
+methods:
+  factorial:
+    terms:
+      - params: [0]
+        result: 1
+      - params: [1]
+        result: 1
+      - params: [5]
+        result: 120
+      - params: [10]
+        result: 3628800
+      - params: [3]
+        result: 6
+      - params: [-1]
+        error: Negative numbers not supported

@@ -1,0 +1,8 @@
+subject: join
+module: node:path
+subjectType: function
+methods:
+  default:
+    terms:
+      - params: []
+        error: Something went wrong

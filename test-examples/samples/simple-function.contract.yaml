@@ -1,0 +1,10 @@
+subject: simpleFunction
+module: ./simple-function.js
+subjectType: function
+methods:
+  __self__:
+    terms:
+      - params: [1]
+        result: 1
+      - params: [11]
+        error: number is greater than ten

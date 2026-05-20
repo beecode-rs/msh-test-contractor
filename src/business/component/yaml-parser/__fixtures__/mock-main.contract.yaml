@@ -1,0 +1,12 @@
+subject: join
+module: node:path
+subjectType: function
+mock:
+  - ./mock-dep.contract.yaml
+methods:
+  default:
+    terms:
+      - params:
+          - a
+          - b
+        result: a/b

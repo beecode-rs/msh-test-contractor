@@ -37,16 +37,17 @@ export class MockerVitestClassStrategy implements MockerStrategy<MockInstance<an
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected _mockClass(functionNames: string[]): (...args: any[]) => any {
 		const { fns, subjectName } = this._contract
+		const mockFunction = this._mockFunction.bind(this)
 
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		return (...mockParams: any[]): any => {
+		return function (this: any, ...mockParams: any[]): any {
 			const { [SpecialFnName.CONSTRUCTOR]: constructorFns, ...restFns } = fns
 
 			const objectWithMockedFunctions = Object.fromEntries(
 				functionNames.map((fnName) => {
 					const mockFn = vi.fn()
 					if (restFns[fnName]?.terms) {
-						const mockImpl = this._mockFunction({
+						const mockImpl = mockFunction({
 							mockClassParams: mockParams,
 							// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 							name: `${subjectName}.${fnName}`,

@@ -1,0 +1,27 @@
+subject: typeUtil
+module: ./type-util.js
+subjectType: function
+methods:
+  isClass:
+    mockFunction: [isObject, isFunction]
+    terms:
+      - params: [__class_ref:Date__]
+        result: true
+      - params: [{}]
+        result: false
+  isFunction:
+    terms:
+      - params: [__class_ref:Date__]
+        result: true
+      - params: [{}]
+        result: false
+      - params: [__fn__]
+        result: true
+  isObject:
+    terms:
+      - params: [__class_ref:Date__]
+        result: true
+      - params: [{}]
+        result: true
+      - params: [1]
+        result: false

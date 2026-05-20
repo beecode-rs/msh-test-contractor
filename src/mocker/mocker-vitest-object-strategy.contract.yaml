@@ -1,0 +1,11 @@
+subject: MockerVitestObjectStrategy
+module: ./mocker-vitest-object-strategy.js
+subjectType: class
+constructor:
+  terms:
+    - params:
+        - dummy: contract
+      result:
+        _contract:
+          dummy: contract
+        _spies: []

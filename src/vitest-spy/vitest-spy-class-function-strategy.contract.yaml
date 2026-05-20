@@ -1,0 +1,47 @@
+subject: VitestSpyClassFunctionStrategy
+module: ./vitest-spy-class-function-strategy.js
+subjectType: class
+constructor:
+  terms:
+    - params:
+        - terms:
+            - constructorParams: [1, 2]
+              params: [1, 2, 3]
+              result: 6
+            - constructorParams: [1, 2]
+              params: [2, 3, 4]
+              result: 7
+            - constructorParams: [1, 2]
+              params: [3, 4, 5]
+              result: 8
+          mockClassParams: [1, 2]
+      result:
+        _mockClassParams: [1, 2]
+        _terms:
+          - constructorParams: [1, 2]
+            params: [1, 2, 3]
+            result: 6
+          - constructorParams: [1, 2]
+            params: [2, 3, 4]
+            result: 7
+          - constructorParams: [1, 2]
+            params: [3, 4, 5]
+            result: 8
+methods:
+  mockImplementationFactory:
+    terms:
+      - constructorParams:
+          - terms:
+              - constructorParams: [1, 2]
+                params: [1, 2, 3]
+                result: 6
+              - constructorParams: [1, 2]
+                params: [2, 3, 4]
+                result: 7
+              - constructorParams: [1, 2]
+                params: [3, 4, 5]
+                result: 8
+            mockClassParams: [1, 2]
+        params: []
+        result: 7
+        returnFnParams: [2, 3, 4]
