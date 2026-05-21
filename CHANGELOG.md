@@ -1,3 +1,29 @@
+# [0.4.0](https://github.com/beecode-rs/msh-test-contractor/compare/v0.3.9...v0.4.0) (2026-05-21)
+
+
+### Bug Fixes
+
+* correct module path in contractFactory configuration ([5c17b93](https://github.com/beecode-rs/msh-test-contractor/commit/5c17b937276b79a8087e4017b2ff4896fd5ded35))
+* refactor ESLint configuration and update dependencies ([0e26b62](https://github.com/beecode-rs/msh-test-contractor/commit/0e26b62bbd047aa77f4a711606997364e9e06bf9))
+* remove build artifacts from version control ([0bc20e5](https://github.com/beecode-rs/msh-test-contractor/commit/0bc20e52cabac5764343641f01bbc289aefbe7df))
+* update Node.js version, add Prettier configuration, and refactor type imports ([b0127d2](https://github.com/beecode-rs/msh-test-contractor/commit/b0127d2f7bb7eaa8bdfc8365e57921934955c1a3))
+* update package dependencies to latest versions ([103b89d](https://github.com/beecode-rs/msh-test-contractor/commit/103b89d118dbff5b5d160e4512a3ee78bbc4c7ba))
+* update package dependencies to latest versions ([83ff3ad](https://github.com/beecode-rs/msh-test-contractor/commit/83ff3ad93e04ce82a61920aaad48c433f8ac5657))
+* update package.json ([fd9ea9b](https://github.com/beecode-rs/msh-test-contractor/commit/fd9ea9b1bb8953b871bd2a8e21d45bee3ffe80c7))
+* update package.json ([#8](https://github.com/beecode-rs/msh-test-contractor/issues/8)) ([ec5ca92](https://github.com/beecode-rs/msh-test-contractor/commit/ec5ca92a78668a12ea019fe413990154c4e049a4))
+* update package.json, esmodule remove alias, use vitest instead of jest ([#15](https://github.com/beecode-rs/msh-test-contractor/issues/15)) ([679dc68](https://github.com/beecode-rs/msh-test-contractor/commit/679dc68c4c354f4af051f4807cf317add4c32423))
+* update package.json, use shared config for eslint and prettier ([94a3330](https://github.com/beecode-rs/msh-test-contractor/commit/94a33308628f582a96b320816af7ad933279655a))
+* update packages.json ([7b151f1](https://github.com/beecode-rs/msh-test-contractor/commit/7b151f14cc53d33992f2c59430e897ff4b409e89))
+* use dynamic user in chown command ([a7b33d1](https://github.com/beecode-rs/msh-test-contractor/commit/a7b33d1dfe26f769c7c0ef75a5202e9031749310))
+
+
+### Features
+
+* add shared semantic release config ([34f5c7f](https://github.com/beecode-rs/msh-test-contractor/commit/34f5c7fd1cc5a15664029ebabe21ec7669b96152))
+* add YAML contract format support with parser, validator, and loader ([#71](https://github.com/beecode-rs/msh-test-contractor/issues/71)) ([1d04ca4](https://github.com/beecode-rs/msh-test-contractor/commit/1d04ca47efdce25004c884e9d4b217e06407183e))
+* es modules and commonjs build ([eb6a82b](https://github.com/beecode-rs/msh-test-contractor/commit/eb6a82bd3b5b8df2f8e2a54ddfff674f5c4eadae))
+* replace jest with vitest ([#66](https://github.com/beecode-rs/msh-test-contractor/issues/66)) ([404c785](https://github.com/beecode-rs/msh-test-contractor/commit/404c7852e87a2b8c0f32155f12d323a6fb0ab757))
+
 ## [0.3.9](https://github.com/beecode-rs/msh-test-contractor/compare/v0.3.8...v0.3.9) (2022-10-16)
 
 
