@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/beecode-rs/msh-test-contractor/compare/v0.4.0...v0.4.1) (2026-05-21)
+
+
+### Bug Fixes
+
+* repository url prefix ([4cd7a96](https://github.com/beecode-rs/msh-test-contractor/commit/4cd7a9662464e33571c49528bf1f5f1170df98fb))
+
 # [0.4.0](https://github.com/beecode-rs/msh-test-contractor/compare/v0.3.9...v0.4.0) (2026-05-21)
 
 
