@@ -9,7 +9,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/beecode-rs/msh-test-contractor.git"
+		"url": "git+https://github.com/beecode-rs/msh-test-contractor.git"
 	},
 	"license": "mit",
 	"author": "Milos Bugarinovic <milos.bugarinovic@gmail.com> (https://milos.bugarinovic.com)",
