@@ -215,9 +215,17 @@ export class YamlParserContractLoader {
 
 				const relativePath = match[1]!
 				const absolutePath = resolve(dirname(params.modulePath), relativePath)
-				const mod = await import(absolutePath)
+				let mod: unknown
+				try {
+					mod = await import(absolutePath)
+				} catch (error) {
+					const message = this._getErrorMessage({ error })
+					throw new Error(
+						`Failed to import mock "${importPath}" (referenced from contract "${params.modulePath}"): ${message}`
+					)
+				}
 
-				if (typeof mod.default !== 'function') {
+				if (typeof (mod as Record<string, unknown>).default !== 'function') {
 					throw new Error(`Import mock module "${importPath}" must export a default function`)
 				}
 
@@ -242,7 +250,8 @@ export class YamlParserContractLoader {
 			return await import(specifier)
 		} catch (error) {
 			const message = this._getErrorMessage({ error })
-			throw new Error(`Failed to resolve module "${params.moduleSpecifier}": ${message}`)
+			const contractContext = params.modulePath ? ` (referenced from contract "${params.modulePath}")` : ''
+			throw new Error(`Failed to resolve module "${params.moduleSpecifier}"${contractContext}: ${message}`)
 		}
 	}
 

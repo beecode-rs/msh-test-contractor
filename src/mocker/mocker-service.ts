@@ -9,8 +9,8 @@ import { typeUtil } from '#src/util/type-util.js'
 export const mockerService = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	strategyFromContract: (contract: AnyContract): MockerStrategy<any> => {
-		const { module, subjectName, fns } = contract
-		const subject = module[subjectName]
+		const { module, subjectName, fns } = contract // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+		const subject = module[subjectName] // eslint-disable-line @typescript-eslint/no-unsafe-assignment,  @typescript-eslint/no-unsafe-member-access
 		const { [SpecialFnName.SELF]: selfFunction } = fns
 		if (typeUtil.isFunction(subject) && selfFunction) {
 			return new MockerVitestFunctionStrategy(contract)
