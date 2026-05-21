@@ -22,8 +22,7 @@ export const mocker = {
 
 		return { mockRestore, spy }
 	},
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
-	function: <C extends AnyContract, CFNK extends Extract<keyof PropType<C, 'fns'>, string>>(
+	function: <C extends AnyContract, CFNK extends Extract<keyof PropType<C, 'fns'>, string>>( // eslint-disable-line @typescript-eslint/no-unnecessary-type-parameters
 		contract: C,
 		fnName: CFNK
 	): MockerContractResult => {
@@ -40,12 +39,10 @@ export const mocker = {
 
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (!terms) {
-			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-			throw new Error(`Terms not found in function ${fnName} for module ${subjectName}`)
+			throw new Error(`Terms not found in function ${fnName} for module ${subjectName}`) // eslint-disable-line @typescript-eslint/restrict-template-expressions
 		}
 
-		// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-		const vitestSpyFunction = new VitestSpyFunctionStrategy({ name: `${subjectName}.${fnName}`, terms })
+		const vitestSpyFunction = new VitestSpyFunctionStrategy({ name: `${subjectName}.${fnName}`, terms }) // eslint-disable-line @typescript-eslint/restrict-template-expressions
 		spy.mockImplementation(vitestSpyFunction.mockImplementationFactory())
 
 		const mockRestore = (): void => {

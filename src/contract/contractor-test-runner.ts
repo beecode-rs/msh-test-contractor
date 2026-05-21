@@ -17,8 +17,7 @@ export const contractorTestRunner = {
 	contract: (contract: AnyContract): void => {
 		describe(contract.subjectName, () => {
 			Object.keys(contract.fns).forEach((fnName: string) => {
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				contractor(contract as any, fnName)
+				contractor(contract as any, fnName) // eslint-disable-line @typescript-eslint/no-explicit-any
 			})
 		})
 	},

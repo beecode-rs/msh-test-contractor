@@ -6,8 +6,7 @@ import { type VitestSpyStrategy } from '#src/vitest-spy/vitest-spy-strategy.js'
 
 export class VitestSpyClassFunctionStrategy implements VitestSpyStrategy {
 	protected readonly _terms: ContractTerm[]
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected readonly _mockClassParams: any[]
+	protected readonly _mockClassParams: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
 	protected readonly _name: string
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

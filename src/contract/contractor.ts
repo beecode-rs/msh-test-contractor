@@ -11,8 +11,7 @@ export const contractor = <
 	SN extends Extract<keyof M, string>,
 	S extends PropType<M, SN>,
 	C extends Contract<M, SN, S>,
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
-	CFNK extends Extract<keyof PropType<C, 'fns'>, string>,
+	CFNK extends Extract<keyof PropType<C, 'fns'>, string>, // eslint-disable-line @typescript-eslint/no-unnecessary-type-parameters
 >(
 	contract: C,
 	fnName: CFNK

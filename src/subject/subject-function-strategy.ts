@@ -4,8 +4,7 @@ import { type ContractTerm } from '#src/types/index.js'
 
 export class SubjectFunctionStrategy implements SubjectStrategy {
 	protected readonly _subjectName: string
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected readonly _module: any
+	protected readonly _module: any // eslint-disable-line @typescript-eslint/no-explicit-any
 	protected readonly _fnName: string
 
 	constructor(params: { subjectFromContract: SubjectFromContract; fnName: string }) {

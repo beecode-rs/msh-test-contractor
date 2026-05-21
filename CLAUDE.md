@@ -68,7 +68,7 @@ This is a contract-based testing library inspired by "Integrated Tests Are A Sca
 
 - `src/mocker/` - Mock generation from contracts
   - `mocker.ts` - Entry point with `mocker.contract()` and `mocker.function()`
-  - Strategies: `MockerJestClassStrategy`, `MockerJestFunctionStrategy`, `MockerJestObjectStrategy`
+  - Strategies: `MockerVitestClassStrategy`, `MockerVitestFunctionStrategy`, `MockerVitestObjectStrategy`
 
 - `src/subject/` - Subject execution strategies
   - `SubjectFunctionStrategy` - For plain function subjects
@@ -76,7 +76,7 @@ This is a contract-based testing library inspired by "Integrated Tests Are A Sca
   - `SubjectConstructorStrategy` - For class constructor subjects
 
 - `src/contract-mock/` - Mock injection during contract tests
-- `src/jest-spy/` - Vitest spy implementations
+- `src/vitest-spy/` - Vitest spy implementations
 - `src/contract/expect/` - Assertion strategies for contract terms
 
 ### File Naming Conventions

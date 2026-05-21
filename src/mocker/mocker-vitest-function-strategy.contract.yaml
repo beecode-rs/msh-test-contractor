@@ -1,0 +1,29 @@
+subject: MockerVitestFunctionStrategy
+module: ./mocker-vitest-function-strategy.js
+subjectType: class
+constructor:
+  terms:
+    - params:
+        - module: fakeModule
+          subjectName: fakeFunction
+      result:
+        _contract:
+          module: fakeModule
+          subjectName: fakeFunction
+    - params:
+        - module: anotherModule
+          subjectName: someMethod
+          fns:
+            someMethod:
+              terms:
+                - params: [1]
+                  result: 1
+      result:
+        _contract:
+          module: anotherModule
+          subjectName: someMethod
+          fns:
+            someMethod:
+              terms:
+                - params: [1]
+                  result: 1

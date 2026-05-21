@@ -6,19 +6,16 @@ describe('MockVitestStrategy', () => {
 	describe('mock', () => {
 		it('should set restoreMockFn to empty array if vitestMock is not defined', () => {
 			const strategy = new MockVitestStrategy()
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const params: any[] = []
+			const params: any[] = [] // eslint-disable-line @typescript-eslint/no-explicit-any
 			strategy.mock({ params })
 			expect(strategy['_restoreMockFn']).toEqual([])
 		})
 
 		it('should call vitest mock with params', () => {
 			const dummyVitestMockResult = { test: 'test' }
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const dummyVitestMock = vi.fn<any>().mockReturnValue(dummyVitestMockResult)
+			const dummyVitestMock = vi.fn<any>().mockReturnValue(dummyVitestMockResult) // eslint-disable-line @typescript-eslint/no-explicit-any
 			const strategy = new MockVitestStrategy(dummyVitestMock)
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const params: any[] = []
+			const params: any[] = [] // eslint-disable-line @typescript-eslint/no-explicit-any
 			strategy.mock({ params })
 			expect(strategy['_restoreMockFn']).toEqual(dummyVitestMockResult)
 			expect(dummyVitestMock).toHaveBeenCalledTimes(1)

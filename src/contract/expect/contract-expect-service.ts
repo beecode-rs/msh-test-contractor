@@ -4,8 +4,7 @@ import { ContractExpectThrowErrorStrategy } from '#src/contract/expect/contract-
 import { type ContractTerm } from '#src/types/index.js'
 
 export interface ContractExpectStrategy {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	test(fn: () => any): Promise<void>
+	test(fn: () => any): Promise<void> // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export const contractExpectService = {

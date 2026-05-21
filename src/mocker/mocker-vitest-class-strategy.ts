@@ -8,8 +8,7 @@ import { vitestSpyService } from '#src/vitest-spy/vitest-spy-service.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class MockerVitestClassStrategy implements MockerStrategy<MockInstance<any>> {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected _spy?: MockInstance<any>
+	protected _spy?: MockInstance<any> // eslint-disable-line @typescript-eslint/no-explicit-any
 
 	constructor(protected _contract: AnyContract) {}
 
@@ -49,8 +48,7 @@ export class MockerVitestClassStrategy implements MockerStrategy<MockInstance<an
 					if (restFns[fnName]?.terms) {
 						const mockImpl = mockFunction({
 							mockClassParams: mockParams,
-							// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-							name: `${subjectName}.${fnName}`,
+							name: `${subjectName}.${fnName}`, // eslint-disable-line @typescript-eslint/restrict-template-expressions
 							terms: restFns[fnName].terms,
 						})
 						mockFn.mockImplementation(mockImpl)

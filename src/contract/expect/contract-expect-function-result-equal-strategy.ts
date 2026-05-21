@@ -4,10 +4,8 @@ import { type ContractExpectStrategy } from '#src/contract/expect/contract-expec
 import { type ContractTerm } from '#src/types/index.js'
 
 export class ContractExpectFunctionResultEqualStrategy implements ContractExpectStrategy {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected readonly _termResult: any
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected readonly _termReturnFnParams: any
+	protected readonly _termResult: any // eslint-disable-line @typescript-eslint/no-explicit-any
+	protected readonly _termReturnFnParams: any // eslint-disable-line @typescript-eslint/no-explicit-any
 
 	constructor(params: { term: ContractTerm }) {
 		const { term } = params

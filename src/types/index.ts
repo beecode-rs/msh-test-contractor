@@ -14,8 +14,7 @@ export type Contract<
 	fns: ContractFns<SUBJECT>
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AnyContract = Contract<any, any, any>
+export type AnyContract = Contract<any, any, any> // eslint-disable-line @typescript-eslint/no-explicit-any
 
 export type ContractFns<SUBJECT> = Partial<
 	Record<Extract<keyof SUBJECT, string>, ContractFunction> &
@@ -29,19 +28,14 @@ export type ContractFunction = {
 }
 
 export type ContractTerm = {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	params: any[]
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	result: any
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	constructorParams?: any[]
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	returnFnParams?: any[]
+	params: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
+	result: any // eslint-disable-line @typescript-eslint/no-explicit-any
+	constructorParams?: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
+	returnFnParams?: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 // TODO define mock object
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ContractMock = (options?: { params?: any[] }) => ContractMockRevertFns
+export type ContractMock = (options?: { params?: any[] }) => ContractMockRevertFns // eslint-disable-line @typescript-eslint/no-explicit-any
 
 export type ContractMockRevertFn = () => void
 

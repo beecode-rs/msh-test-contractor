@@ -5,8 +5,7 @@ import { type AnyContract } from '#src/types/index.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class MockerVitestFunctionStrategy implements MockerStrategy<MockInstance<any>> {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected _spy?: MockInstance<any>
+	protected _spy?: MockInstance<any> // eslint-disable-line @typescript-eslint/no-explicit-any
 
 	constructor(protected _contract: AnyContract) {}
 
