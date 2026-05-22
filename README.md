@@ -1,15 +1,23 @@
+<table>
+  <tr>
+    <td><img src="resource/image/logo-test-contractor.png" alt="msh-test-contractor logo" width="200" /></td>
+    <td valign="top">
+
+[![NPM](https://nodei.co/npm/@beecode/msh-test-contractor.png)](https://nodei.co/npm/@beecode/msh-test-contractor)  
 [![Build Status](https://beecode.semaphoreci.com/badges/msh-test-contractor/branches/main.svg?style=shields)](https://beecode.semaphoreci.com/projects/msh-test-contractor)
 [![codecov](https://codecov.io/gh/beecode-rs/msh-test-contractor/branch/main/graph/badge.svg?token=wOOqEekQfv)](https://codecov.io/gh/beecode-rs/msh-test-contractor)
-[![GitHub license](https://img.shields.io/github/license/beecode-rs/msh-test-contractor)](https://github.com/beecode-rs/msh-test-contractor/blob/main/LICENSE)  
-[![NPM](https://nodei.co/npm/@beecode/msh-test-contractor.png)](https://nodei.co/npm/@beecode/msh-test-contractor)
+[![GitHub license](https://img.shields.io/github/license/beecode-rs/msh-test-contractor)](https://github.com/beecode-rs/msh-test-contractor/blob/main/LICENSE)
 
+  </tr>
+</table>
 
 # msh-test-contractor
 
 <!-- toc -->
 
-- [Idea](#idea)
-- [Install](#install)
+- [msh-test-contractor](#msh-test-contractor)
+	- [Idea](#idea)
+	- [Install](#install)
 
 <!-- tocstop -->
 
