@@ -7,14 +7,14 @@ import { subjectService } from '#src/subject/subject-service.js'
 import { type Contract, type PropType } from '#src/types/index.js'
 
 export const contractor = <
-	M,
-	SN extends Extract<keyof M, string>,
-	S extends PropType<M, SN>,
-	C extends Contract<M, SN, S>,
-	CFNK extends Extract<keyof PropType<C, 'fns'>, string>, // eslint-disable-line @typescript-eslint/no-unnecessary-type-parameters
+	TModule,
+	TSubjectName extends Extract<keyof TModule, string>,
+	TSubject extends PropType<TModule, TSubjectName>,
+	TContract extends Contract<TModule, TSubjectName, TSubject>,
+	TContractFnName extends Extract<keyof PropType<TContract, 'fns'>, string>, // eslint-disable-line @typescript-eslint/no-unnecessary-type-parameters
 >(
-	contract: C,
-	fnName: CFNK
+	contract: TContract,
+	fnName: TContractFnName
 ): void => {
 	const { terms, mock } = contract.fns[fnName]!
 
