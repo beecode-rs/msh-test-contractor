@@ -1,0 +1,49 @@
+subject: mockerService
+module: ./mocker-service.js
+subjectType: function
+methods:
+  strategyFromContract:
+    terms:
+      - params:
+          - module:
+              myObj:
+                key: value
+            subjectName: myObj
+            fns: {}
+        result:
+          _contract:
+            fns: {}
+            module:
+              myObj:
+                key: value
+            subjectName: myObj
+          _spies: []
+      - params:
+          - module:
+              myObj: {}
+            subjectName: myObj
+            fns: {}
+        result:
+          _contract:
+            fns: {}
+            module:
+              myObj: {}
+            subjectName: myObj
+          _spies: []
+      - params:
+          - module:
+              name: John
+            subjectName: name
+            fns: {}
+        error: Unknown mocker
+      - params:
+          - module: {}
+            subjectName: missing
+            fns: {}
+        error: Unknown mocker
+      - params:
+          - module:
+              count: 42
+            subjectName: count
+            fns: {}
+        error: Unknown mocker

@@ -2,8 +2,7 @@ import { type SubjectFromContract, type SubjectStrategy } from '#src/subject/sub
 import { type ContractTerm } from '#src/types/index.js'
 
 export class SubjectConstructorStrategy implements SubjectStrategy {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected readonly _module: any
+	protected readonly _module: any // eslint-disable-line @typescript-eslint/no-explicit-any
 	protected readonly _subjectName: string
 
 	constructor(params: { subjectFromContract: SubjectFromContract }) {

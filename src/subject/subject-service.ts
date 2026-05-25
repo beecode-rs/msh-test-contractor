@@ -20,8 +20,7 @@ export const subjectService = {
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (Object.keys(fns ?? {}).includes(SpecialFnName.CONSTRUCTOR)) {
 			if (!constructorParams) {
-				// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-				throw new Error(`Missing constructorParams in contract: ${subjectName}.${fnName}`)
+				throw new Error(`Missing constructorParams in contract: ${subjectName}.${fnName}`) // eslint-disable-line @typescript-eslint/restrict-template-expressions
 			}
 
 			return new SubjectClassFunctionStrategy({ constructorParams, fnName, subjectFromContract })

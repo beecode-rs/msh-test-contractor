@@ -1,4 +1,3 @@
 export interface VitestSpyStrategy {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	mockImplementationFactory(): (...args: any[]) => any
+	mockImplementationFactory(): (...args: any[]) => any // eslint-disable-line @typescript-eslint/no-explicit-any
 }

@@ -1,0 +1,34 @@
+subject: ContractExpectThrowErrorStrategy
+module: ./contract-expect-throw-error-strategy.js
+subjectType: class
+constructor:
+  terms:
+    - params:
+        - term:
+            params: []
+            result: new Error("test error")
+      result:
+        _termResult: new Error("test error")
+methods:
+  test:
+    terms:
+      # One: function throws with exact matching message
+      - constructorParams:
+          - term:
+              params: []
+              result: new Error("test error")
+        params:
+          - __import__:./__fixtures__/throw-fn.js:throwTestError
+
+      # Many: function throws with message containing expected substring
+      - constructorParams:
+          - term:
+              params: []
+              result: new Error("validation")
+        params:
+          - __import__:./__fixtures__/throw-fn.js:throwValidationFailed
+
+      # Oops: function does not throw — inner assertion fails
+      # NOTE: Cannot test via contract YAML because the subject's test() is async;
+      # its failures are rejected promises, not synchronous throws that the
+      # ThrowError strategy can catch. Covered by .test.ts instead.

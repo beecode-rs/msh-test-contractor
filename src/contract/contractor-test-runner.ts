@@ -8,17 +8,30 @@ import { type AnyContract } from '#src/types/index.js'
 
 const yamlLoader = new YamlParserContractLoader()
 
+const getErrorMessage = (error: unknown): string => {
+	if (error instanceof Error) {
+		return error.message
+	}
+
+	return String(error)
+}
+
 export const contractorTestRunner = {
 	_file: async (fileLocation: string): Promise<void> => {
 		const absolutePath = path.join(process.cwd(), fileLocation)
-		const contract = await yamlLoader.load({ path: absolutePath })
+		let contract: AnyContract
+		try {
+			contract = await yamlLoader.load({ path: absolutePath })
+		} catch (error) {
+			throw new Error(`Failed to load contract file "${fileLocation}": ${getErrorMessage(error)}`)
+		}
 		contractorTestRunner.contract(contract)
 	},
 	contract: (contract: AnyContract): void => {
 		describe(contract.subjectName, () => {
+			// eslint-disable-line @typescript-eslint/no-unsafe-argument
 			Object.keys(contract.fns).forEach((fnName: string) => {
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				contractor(contract as any, fnName)
+				contractor(contract as any, fnName) // eslint-disable-line @typescript-eslint/no-explicit-any
 			})
 		})
 	},

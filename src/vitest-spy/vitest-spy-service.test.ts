@@ -28,15 +28,13 @@ describe('vitestSpyService', () => {
 		})
 
 		it('should return VitestSpyFunctionStrategy if there is no constructorParams in params', () => {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			vitestSpyService.strategyFromTerms({ name: 'TEST', terms: [{} as any] })
+			vitestSpyService.strategyFromTerms({ name: 'TEST', terms: [{} as any] }) // eslint-disable-line @typescript-eslint/no-explicit-any
 			expect(VitestSpyFunctionStrategy).toHaveBeenCalledTimes(1)
 			expect(VitestSpyClassFunctionStrategy).toHaveBeenCalledTimes(0)
 		})
 
 		it('should return VitestSpyClassFunctionStrategy if there is constructorParams in params', () => {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			vitestSpyService.strategyFromTerms({ mockClassParams: [], name: 'TEST', terms: [{ constructorParams: [] } as any] })
+			vitestSpyService.strategyFromTerms({ mockClassParams: [], name: 'TEST', terms: [{ constructorParams: [] } as any] }) // eslint-disable-line @typescript-eslint/no-explicit-any
 			expect(VitestSpyFunctionStrategy).toHaveBeenCalledTimes(0)
 			expect(VitestSpyClassFunctionStrategy).toHaveBeenCalledTimes(1)
 		})

@@ -1,5 +1,4 @@
 export interface MockStrategy {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	mock(options?: { params?: any[] }): void
+	mock(options?: { params?: any[] }): void // eslint-disable-line @typescript-eslint/no-explicit-any
 	restore(): void
 }

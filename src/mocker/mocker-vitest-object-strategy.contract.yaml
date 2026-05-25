@@ -9,3 +9,47 @@ constructor:
         _contract:
           dummy: contract
         _spies: []
+    - params:
+        - module: someModule
+          subjectName: someObject
+          fns:
+            methodA:
+              terms:
+                - params: [1]
+                  result: 1
+      result:
+        _contract:
+          module: someModule
+          subjectName: someObject
+          fns:
+            methodA:
+              terms:
+                - params: [1]
+                  result: 1
+        _spies: []
+    - params:
+        - module: anotherModule
+          subjectName: anotherObject
+          fns:
+            methodA:
+              terms:
+                - params: [1]
+                  result: 1
+            methodB:
+              terms:
+                - params: [2]
+                  result: 2
+      result:
+        _contract:
+          module: anotherModule
+          subjectName: anotherObject
+          fns:
+            methodA:
+              terms:
+                - params: [1]
+                  result: 1
+            methodB:
+              terms:
+                - params: [2]
+                  result: 2
+        _spies: []
