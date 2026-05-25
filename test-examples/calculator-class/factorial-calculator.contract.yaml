@@ -23,3 +23,6 @@ methods:
       - constructorParams: []
         params: [-1]
         error: Negative numbers not supported
+      - constructorParams: []
+        params: [10]
+        result: 3628800

@@ -34,3 +34,18 @@ methods:
       - constructorParams: []
         params: [24, 5]
         result: 120
+      - constructorParams: []
+        params: [120, 6]
+        result: 720
+      - constructorParams: []
+        params: [720, 7]
+        result: 5040
+      - constructorParams: []
+        params: [5040, 8]
+        result: 40320
+      - constructorParams: []
+        params: [40320, 9]
+        result: 362880
+      - constructorParams: []
+        params: [362880, 10]
+        result: 3628800
