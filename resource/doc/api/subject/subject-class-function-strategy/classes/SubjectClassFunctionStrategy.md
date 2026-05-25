@@ -6,7 +6,7 @@
 
 # Class: SubjectClassFunctionStrategy
 
-Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:4](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/subject/subject-class-function-strategy.ts#L4)
+Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:4](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-class-function-strategy.ts#L4)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/test-contractor/src/subject/subject-class-function-strateg
 
 > **new SubjectClassFunctionStrategy**(`params`): `SubjectClassFunctionStrategy`
 
-Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:13](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/subject/subject-class-function-strategy.ts#L13)
+Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-class-function-strategy.ts#L11)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [packages/test-contractor/src/subject/subject-class-function-strateg
 
 > `protected` `readonly` **\_constructorParams**: `any`[]
 
-Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/subject/subject-class-function-strategy.ts#L9)
+Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-class-function-strategy.ts#L7)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/test-contractor/src/subject/subject-class-function-strateg
 
 > `protected` `readonly` **\_fnName**: `string`
 
-Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/subject/subject-class-function-strategy.ts#L10)
+Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-class-function-strategy.ts#L8)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [packages/test-contractor/src/subject/subject-class-function-strateg
 
 > `protected` `readonly` **\_module**: `any`
 
-Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/subject/subject-class-function-strategy.ts#L6)
+Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:5](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-class-function-strategy.ts#L5)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [packages/test-contractor/src/subject/subject-class-function-strateg
 
 > `protected` `readonly` **\_subjectName**: `string`
 
-Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/subject/subject-class-function-strategy.ts#L7)
+Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-class-function-strategy.ts#L6)
 
 ## Methods
 
@@ -78,7 +78,7 @@ Defined in: [packages/test-contractor/src/subject/subject-class-function-strateg
 
 > `protected` **\_isGetter**(): `boolean`
 
-Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:43](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/subject/subject-class-function-strategy.ts#L43)
+Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:41](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-class-function-strategy.ts#L41)
 
 #### Returns
 
@@ -90,7 +90,7 @@ Defined in: [packages/test-contractor/src/subject/subject-class-function-strateg
 
 > **exec**(`term`): `any`
 
-Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:29](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/subject/subject-class-function-strategy.ts#L29)
+Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:27](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-class-function-strategy.ts#L27)
 
 #### Parameters
 
@@ -112,7 +112,7 @@ Defined in: [packages/test-contractor/src/subject/subject-class-function-strateg
 
 > **fn**(): `any`
 
-Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:39](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/subject/subject-class-function-strategy.ts#L39)
+Defined in: [packages/test-contractor/src/subject/subject-class-function-strategy.ts:37](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-class-function-strategy.ts#L37)
 
 #### Returns
 

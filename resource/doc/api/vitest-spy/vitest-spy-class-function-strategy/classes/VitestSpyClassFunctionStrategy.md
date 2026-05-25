@@ -6,7 +6,7 @@
 
 # Class: VitestSpyClassFunctionStrategy
 
-Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/vitest-spy/vitest-spy-class-function-strategy.ts#L7)
+Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/vitest-spy/vitest-spy-class-function-strategy.ts#L7)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-s
 
 > **new VitestSpyClassFunctionStrategy**(`params`): `VitestSpyClassFunctionStrategy`
 
-Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:14](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/vitest-spy/vitest-spy-class-function-strategy.ts#L14)
+Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:13](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/vitest-spy/vitest-spy-class-function-strategy.ts#L13)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-s
 
 > `protected` `readonly` **\_mockClassParams**: `any`[]
 
-Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/vitest-spy/vitest-spy-class-function-strategy.ts#L10)
+Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/vitest-spy/vitest-spy-class-function-strategy.ts#L9)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-s
 
 > `protected` `readonly` **\_name**: `string`
 
-Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/vitest-spy/vitest-spy-class-function-strategy.ts#L11)
+Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/vitest-spy/vitest-spy-class-function-strategy.ts#L10)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-s
 
 > `protected` `readonly` **\_terms**: [`ContractTerm`](../../../types/type-aliases/ContractTerm.md)[]
 
-Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/vitest-spy/vitest-spy-class-function-strategy.ts#L8)
+Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/vitest-spy/vitest-spy-class-function-strategy.ts#L8)
 
 ## Methods
 
@@ -70,7 +70,7 @@ Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-s
 
 > **mockImplementationFactory**(): (...`args`) => `any`
 
-Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:22](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/vitest-spy/vitest-spy-class-function-strategy.ts#L22)
+Defined in: [packages/test-contractor/src/vitest-spy/vitest-spy-class-function-strategy.ts:21](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/vitest-spy/vitest-spy-class-function-strategy.ts#L21)
 
 #### Returns
 

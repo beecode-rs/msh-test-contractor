@@ -6,7 +6,7 @@
 
 # Class: MockerVitestFunctionStrategy
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/mocker/mocker-vitest-function-strategy.ts#L7)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-function-strategy.ts#L7)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy
 
 > **new MockerVitestFunctionStrategy**(`_contract`): `MockerVitestFunctionStrategy`
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/mocker/mocker-vitest-function-strategy.ts#L11)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-function-strategy.ts#L10)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy
 
 > `protected` **\_contract**: [`AnyContract`](../../../types/type-aliases/AnyContract.md)
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/mocker/mocker-vitest-function-strategy.ts#L11)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-function-strategy.ts#L10)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy
 
 > `protected` `optional` **\_spy**: `MockInstance`\<`any`\>
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/mocker/mocker-vitest-function-strategy.ts#L9)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-function-strategy.ts#L8)
 
 ## Methods
 
@@ -52,7 +52,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy
 
 > **contractSpy**(): `MockInstance`\<`any`\>
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:20](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/mocker/mocker-vitest-function-strategy.ts#L20)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:19](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-function-strategy.ts#L19)
 
 #### Returns
 
@@ -68,7 +68,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy
 
 > **mockRestore**(): `void`
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:13](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/mocker/mocker-vitest-function-strategy.ts#L13)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-function-strategy.ts:12](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-function-strategy.ts#L12)
 
 #### Returns
 

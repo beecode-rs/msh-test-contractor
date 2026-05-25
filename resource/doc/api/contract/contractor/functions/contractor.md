@@ -6,41 +6,41 @@
 
 # Function: contractor()
 
-> **contractor**\<`M`, `SN`, `S`, `C`, `CFNK`\>(`contract`, `fnName`): `void`
+> **contractor**\<`TModule`, `TSubjectName`, `TSubject`, `TContract`, `TContractFnName`\>(`contract`, `fnName`): `void`
 
-Defined in: [packages/test-contractor/src/contract/contractor.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/contract/contractor.ts#L9)
+Defined in: [packages/test-contractor/src/contract/contractor.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract/contractor.ts#L9)
 
 ## Type Parameters
 
-### M
+### TModule
 
-`M`
+`TModule`
 
-### SN
+### TSubjectName
 
-`SN` *extends* `string`
+`TSubjectName` *extends* `string`
 
-### S
+### TSubject
 
-`S`
+`TSubject`
 
-### C
+### TContract
 
-`C` *extends* [`Contract`](../../../types/type-aliases/Contract.md)\<`M`, `SN`, `S`\>
+`TContract` *extends* [`Contract`](../../../types/type-aliases/Contract.md)\<`TModule`, `TSubjectName`, `TSubject`\>
 
-### CFNK
+### TContractFnName
 
-`CFNK` *extends* `string`
+`TContractFnName` *extends* `string`
 
 ## Parameters
 
 ### contract
 
-`C`
+`TContract`
 
 ### fnName
 
-`CFNK`
+`TContractFnName`
 
 ## Returns
 

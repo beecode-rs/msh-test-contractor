@@ -4,17 +4,17 @@
 
 [@beecode/msh-test-contractor](../../../README.md) / [mocker/mocker](../README.md) / MockerContractResult
 
-# Type Alias: MockerContractResult\<SPY\>
+# Type Alias: MockerContractResult\<SPY_INSTANCE\>
 
-> **MockerContractResult**\<`SPY`\> = `object`
+> **MockerContractResult**\<`SPY_INSTANCE`\> = `object`
 
-Defined in: [packages/test-contractor/src/mocker/mocker.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/mocker/mocker.ts#L9)
+Defined in: [packages/test-contractor/src/mocker/mocker.ts:12](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker.ts#L12)
 
 ## Type Parameters
 
-### SPY
+### SPY_INSTANCE
 
-`SPY` = `MockInstance`\<`any`\>
+`SPY_INSTANCE` = `MockInstance`\<`any`\>
 
 ## Properties
 
@@ -22,12 +22,12 @@ Defined in: [packages/test-contractor/src/mocker/mocker.ts:9](https://github.com
 
 > **mockRestore**: [`ContractMockRevertFn`](../../../types/type-aliases/ContractMockRevertFn.md)
 
-Defined in: [packages/test-contractor/src/mocker/mocker.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/mocker/mocker.ts#L11)
+Defined in: [packages/test-contractor/src/mocker/mocker.ts:14](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker.ts#L14)
 
 ***
 
 ### spy
 
-> **spy**: `SPY`
+> **spy**: `SPY_INSTANCE`
 
-Defined in: [packages/test-contractor/src/mocker/mocker.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/mocker/mocker.ts#L10)
+Defined in: [packages/test-contractor/src/mocker/mocker.ts:13](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker.ts#L13)

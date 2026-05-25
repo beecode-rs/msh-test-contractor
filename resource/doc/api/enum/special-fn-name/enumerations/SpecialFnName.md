@@ -6,7 +6,7 @@
 
 # Enumeration: SpecialFnName
 
-Defined in: [packages/test-contractor/src/enum/special-fn-name.ts:1](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/enum/special-fn-name.ts#L1)
+Defined in: [packages/test-contractor/src/enum/special-fn-name.ts:1](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/enum/special-fn-name.ts#L1)
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: [packages/test-contractor/src/enum/special-fn-name.ts:1](https://git
 
 > **CONSTRUCTOR**: `"CONSTRUCTOR"`
 
-Defined in: [packages/test-contractor/src/enum/special-fn-name.ts:2](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/enum/special-fn-name.ts#L2)
+Defined in: [packages/test-contractor/src/enum/special-fn-name.ts:2](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/enum/special-fn-name.ts#L2)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [packages/test-contractor/src/enum/special-fn-name.ts:2](https://git
 
 > **SELF**: `"SELF"`
 
-Defined in: [packages/test-contractor/src/enum/special-fn-name.ts:3](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/enum/special-fn-name.ts#L3)
+Defined in: [packages/test-contractor/src/enum/special-fn-name.ts:3](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/enum/special-fn-name.ts#L3)

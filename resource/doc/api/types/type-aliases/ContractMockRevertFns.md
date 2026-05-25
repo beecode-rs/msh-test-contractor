@@ -8,4 +8,4 @@
 
 > **ContractMockRevertFns** = [`ContractMockRevertFn`](ContractMockRevertFn.md)[]
 
-Defined in: [packages/test-contractor/src/types/index.ts:48](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/types/index.ts#L48)
+Defined in: [packages/test-contractor/src/types/index.ts:42](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L42)

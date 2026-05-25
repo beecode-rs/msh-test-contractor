@@ -8,57 +8,57 @@
 
 > `const` **mocker**: `object`
 
-Defined in: [packages/test-contractor/src/mocker/mocker.ts:14](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/mocker/mocker.ts#L14)
+Defined in: [packages/test-contractor/src/mocker/mocker.ts:17](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker.ts#L17)
 
 ## Type Declaration
 
 ### contract()
 
-> **contract**: \<`SPY`, `C`\>(`contract`) => [`MockerContractResult`](../type-aliases/MockerContractResult.md)\<`SPY`\>
+> **contract**: \<`SPY_INSTANCE`, `CONTRACT`\>(`contract`) => [`MockerContractResult`](../type-aliases/MockerContractResult.md)\<`SPY_INSTANCE`\>
 
 #### Type Parameters
 
-##### SPY
+##### SPY_INSTANCE
 
-`SPY` = `MockInstance`\<`any`\>
+`SPY_INSTANCE` = `MockInstance`\<`any`\>
 
-##### C
+##### CONTRACT
 
-`C` *extends* [`AnyContract`](../../../types/type-aliases/AnyContract.md) = `any`
+`CONTRACT` *extends* [`AnyContract`](../../../types/type-aliases/AnyContract.md) = `any`
 
 #### Parameters
 
 ##### contract
 
-`C`
+`CONTRACT`
 
 #### Returns
 
-[`MockerContractResult`](../type-aliases/MockerContractResult.md)\<`SPY`\>
+[`MockerContractResult`](../type-aliases/MockerContractResult.md)\<`SPY_INSTANCE`\>
 
 ### function()
 
-> **function**: \<`C`, `CFNK`\>(`contract`, `fnName`) => [`MockerContractResult`](../type-aliases/MockerContractResult.md)
+> **function**: \<`CONTRACT`, `CONTRACT_FN_KEY`\>(`contract`, `fnName`) => [`MockerContractResult`](../type-aliases/MockerContractResult.md)
 
 #### Type Parameters
 
-##### C
+##### CONTRACT
 
-`C` *extends* [`AnyContract`](../../../types/type-aliases/AnyContract.md)
+`CONTRACT` *extends* [`AnyContract`](../../../types/type-aliases/AnyContract.md)
 
-##### CFNK
+##### CONTRACT_FN_KEY
 
-`CFNK` *extends* `string`
+`CONTRACT_FN_KEY` *extends* `string`
 
 #### Parameters
 
 ##### contract
 
-`C`
+`CONTRACT`
 
 ##### fnName
 
-`CFNK`
+`CONTRACT_FN_KEY`
 
 #### Returns
 

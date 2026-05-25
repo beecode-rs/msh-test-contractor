@@ -15,9 +15,8 @@
 
 <!-- toc -->
 
-- [msh-test-contractor](#msh-test-contractor)
-	- [Idea](#idea)
-	- [Install](#install)
+- [Idea](#idea)
+- [Install](#install)
 
 <!-- tocstop -->
 

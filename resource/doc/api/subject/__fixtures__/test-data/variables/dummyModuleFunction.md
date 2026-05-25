@@ -8,7 +8,7 @@
 
 > `const` **dummyModuleFunction**: `object`
 
-Defined in: [packages/test-contractor/src/subject/\_\_fixtures\_\_/test-data.ts:13](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/subject/__fixtures__/test-data.ts#L13)
+Defined in: [packages/test-contractor/src/subject/\_\_fixtures\_\_/test-data.ts:13](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/__fixtures__/test-data.ts#L13)
 
 ## Type Declaration
 

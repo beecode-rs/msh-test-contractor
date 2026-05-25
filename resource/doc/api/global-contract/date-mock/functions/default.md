@@ -8,7 +8,7 @@
 
 > **default**(`options?`): [`ContractMockRevertFns`](../../../types/type-aliases/ContractMockRevertFns.md)
 
-Defined in: [packages/test-contractor/src/global-contract/date-mock.ts:5](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/global-contract/date-mock.ts#L5)
+Defined in: [packages/test-contractor/src/global-contract/date-mock.ts:5](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/global-contract/date-mock.ts#L5)
 
 ## Parameters
 

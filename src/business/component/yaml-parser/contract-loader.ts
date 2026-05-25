@@ -225,11 +225,11 @@ export class YamlParserContractLoader {
 					)
 				}
 
-				if (typeof (mod as Record<string, unknown>).default !== 'function') {
+				if (typeof (mod as { default: unknown }).default !== 'function') {
 					throw new Error(`Import mock module "${importPath}" must export a default function`)
 				}
 
-				return [...acc, mod.default as ContractMock]
+				return [...acc, (mod as { default: ContractMock }).default]
 			},
 			Promise.resolve([] as ContractMock[])
 		)

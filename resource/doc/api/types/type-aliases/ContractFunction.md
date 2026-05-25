@@ -8,7 +8,7 @@
 
 > **ContractFunction** = `object`
 
-Defined in: [packages/test-contractor/src/types/index.ts:26](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/types/index.ts#L26)
+Defined in: [packages/test-contractor/src/types/index.ts:25](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L25)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [packages/test-contractor/src/types/index.ts:26](https://github.com/
 
 > `optional` **mock**: [`ContractMock`](ContractMock.md)
 
-Defined in: [packages/test-contractor/src/types/index.ts:28](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/types/index.ts#L28)
+Defined in: [packages/test-contractor/src/types/index.ts:27](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L27)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [packages/test-contractor/src/types/index.ts:28](https://github.com/
 
 > **terms**: [`ContractTerm`](ContractTerm.md)[]
 
-Defined in: [packages/test-contractor/src/types/index.ts:27](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/types/index.ts#L27)
+Defined in: [packages/test-contractor/src/types/index.ts:26](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L26)

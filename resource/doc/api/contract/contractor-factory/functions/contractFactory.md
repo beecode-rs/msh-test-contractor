@@ -6,27 +6,27 @@
 
 # Function: contractFactory()
 
-> **contractFactory**\<`M`, `SN`, `S`, `CFNS`\>(`options`, `fns`): [`Contract`](../../../types/type-aliases/Contract.md)\<`M`, `SN`, `S`\>
+> **contractFactory**\<`TModule`, `TSubjectName`, `TSubject`, `TContractFns`\>(`options`, `fns`): [`Contract`](../../../types/type-aliases/Contract.md)\<`TModule`, `TSubjectName`, `TSubject`\>
 
-Defined in: [packages/test-contractor/src/contract/contractor-factory.ts:3](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/contract/contractor-factory.ts#L3)
+Defined in: [packages/test-contractor/src/contract/contractor-factory.ts:3](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract/contractor-factory.ts#L3)
 
 ## Type Parameters
 
-### M
+### TModule
 
-`M`
+`TModule`
 
-### SN
+### TSubjectName
 
-`SN` *extends* `string`
+`TSubjectName` *extends* `string`
 
-### S
+### TSubject
 
-`S`
+`TSubject`
 
-### CFNS
+### TContractFns
 
-`CFNS` *extends* `Partial`\<`Partial`\<`Record`\<`Extract`\<keyof `S`, `string`\>, [`ContractFunction`](../../../types/type-aliases/ContractFunction.md)\> & `Record`\<[`SpecialFnName`](../../../enum/special-fn-name/enumerations/SpecialFnName.md), [`ContractFunction`](../../../types/type-aliases/ContractFunction.md)\> & `Record`\<`string`, [`ContractFunction`](../../../types/type-aliases/ContractFunction.md)\>\>\>
+`TContractFns` *extends* `Partial`\<`Partial`\<`Record`\<`Extract`\<keyof `TSubject`, `string`\>, [`ContractFunction`](../../../types/type-aliases/ContractFunction.md)\> & `Record`\<[`SpecialFnName`](../../../enum/special-fn-name/enumerations/SpecialFnName.md), [`ContractFunction`](../../../types/type-aliases/ContractFunction.md)\> & `Record`\<`string`, [`ContractFunction`](../../../types/type-aliases/ContractFunction.md)\>\>\>
 
 ## Parameters
 
@@ -38,16 +38,16 @@ Defined in: [packages/test-contractor/src/contract/contractor-factory.ts:3](http
 
 #### module
 
-`M`
+`TModule`
 
 #### subjectName
 
-`SN`
+`TSubjectName`
 
 ### fns
 
-`CFNS`
+`TContractFns`
 
 ## Returns
 
-[`Contract`](../../../types/type-aliases/Contract.md)\<`M`, `SN`, `S`\>
+[`Contract`](../../../types/type-aliases/Contract.md)\<`TModule`, `TSubjectName`, `TSubject`\>

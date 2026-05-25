@@ -6,7 +6,7 @@
 
 # Class: YamlParserSpecialObject
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L6)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L6)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > **new YamlParserSpecialObject**(`_yamlParserError`, `_yamlParserPromise`, `_yamlParserDate`, `_yamlParserRegex`): `YamlParserSpecialObject`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L7)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L7)
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` `readonly` **\_yamlParserDate**: [`YamlParserDate`](../../date/classes/YamlParserDate.md)
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L10)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L10)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` `readonly` **\_yamlParserError**: [`YamlParserError`](../../error/classes/YamlParserError.md)
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L8)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L8)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` `readonly` **\_yamlParserPromise**: [`YamlParserPromise`](../../promise/classes/YamlParserPromise.md)
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L9)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L9)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` `readonly` **\_yamlParserRegex**: [`YamlParserRegex`](../../regex/classes/YamlParserRegex.md)
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L11)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L11)
 
 ## Methods
 
@@ -76,7 +76,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` **\_isStringValue**(`value`): `value is string`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:14](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L14)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:14](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L14)
 
 #### Parameters
 
@@ -94,7 +94,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` **\_parseSpecialObjectFromString**(`value`): `unknown`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:68](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L68)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:68](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L68)
 
 #### Parameters
 
@@ -112,7 +112,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` **\_tryParseClassRef**(`value`): `Function` \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:52](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L52)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:52](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L52)
 
 #### Parameters
 
@@ -130,7 +130,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` **\_tryParseDate**(`value`): `Date` \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:26](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L26)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:26](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L26)
 
 #### Parameters
 
@@ -148,7 +148,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` **\_tryParseError**(`value`): `Error` \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:18](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L18)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:18](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L18)
 
 #### Parameters
 
@@ -166,7 +166,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` **\_tryParseFunction**(`value`): `Function` \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:35](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L35)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:35](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L35)
 
 #### Parameters
 
@@ -184,7 +184,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` **\_tryParseImport**(`value`): \{ `__yaml_import__`: \{ `path`: `string`; `property`: `string`; \}; \} \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:107](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L107)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:107](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L107)
 
 #### Parameters
 
@@ -202,7 +202,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` **\_tryParsePromise**(`value`): `Promise`\<`unknown`\> \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:22](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L22)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:22](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L22)
 
 #### Parameters
 
@@ -220,7 +220,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > `protected` **\_tryParseRegex**(`value`): `RegExp` \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:30](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L30)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:30](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L30)
 
 #### Parameters
 
@@ -238,7 +238,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/special
 
 > **parse**(`params`): `unknown`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:116](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/special-object.ts#L116)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/special-object.ts:116](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/special-object.ts#L116)
 
 #### Parameters
 

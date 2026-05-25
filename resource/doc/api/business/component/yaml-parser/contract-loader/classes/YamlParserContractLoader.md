@@ -6,7 +6,7 @@
 
 # Class: YamlParserContractLoader
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L8)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L8)
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` `readonly` **\_yamlParserContract**: [`YamlParserContract`](../../contract-parser/classes/YamlParserContract.md)
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L9)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L9)
 
 ## Methods
 
@@ -32,7 +32,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_attachMockFunctionMocks**(`params`): `void`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:127](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L127)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:127](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L127)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_attachPerFunctionMocks**(`params`): `Promise`\<`void`\>
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:75](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L75)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:75](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L75)
 
 #### Parameters
 
@@ -88,7 +88,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_errorToResult**(`params`): `Error`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:384](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L384)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:390](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L390)
 
 #### Parameters
 
@@ -108,7 +108,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_getErrorMessage**(`params`): `string`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:249](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L249)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:258](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L258)
 
 #### Parameters
 
@@ -128,7 +128,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_isImportPlaceholder**(`value`): `value is { __yaml_import__: { path: string; property: string } }`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:319](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L319)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:328](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L328)
 
 #### Parameters
 
@@ -146,7 +146,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_isPlainObject**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:313](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L313)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:322](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L322)
 
 #### Parameters
 
@@ -164,7 +164,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_loadImportMocks**(`params`): `Promise`\<[`ContractMock`](../../../../../types/type-aliases/ContractMock.md)[]\>
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:207](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L207)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:207](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L207)
 
 #### Parameters
 
@@ -188,7 +188,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_loadMockContracts**(`params`): `Promise`\<[`AnyContract`](../../../../../types/type-aliases/AnyContract.md)[]\>
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:159](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L159)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:159](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L159)
 
 #### Parameters
 
@@ -216,7 +216,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_resolveImport**(`params`): `Promise`\<`unknown`\>
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:328](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L328)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:337](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L337)
 
 #### Parameters
 
@@ -252,7 +252,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_resolveImportPlaceholders**(`params`): `Promise`\<`void`\>
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:257](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L257)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:266](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L266)
 
 #### Parameters
 
@@ -276,7 +276,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_resolveModule**(`params`): `Promise`\<`unknown`\>
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:230](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L230)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:238](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L238)
 
 #### Parameters
 
@@ -300,7 +300,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_resolveResult**(`params`): `unknown`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:374](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L374)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:380](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L380)
 
 #### Parameters
 
@@ -320,7 +320,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_resolveValueDeep**(`params`): `Promise`\<`unknown`\>
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:288](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L288)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:297](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L297)
 
 #### Parameters
 
@@ -344,7 +344,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_transformFns**(`params`): `Record`\<`string`, [`ContractFunction`](../../../../../types/type-aliases/ContractFunction.md)\>
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:346](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L346)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:355](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L355)
 
 #### Parameters
 
@@ -364,7 +364,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_transformTerm**(`params`): [`ContractTerm`](../../../../../types/type-aliases/ContractTerm.md)
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:356](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L356)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:365](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L365)
 
 #### Parameters
 
@@ -384,7 +384,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > `protected` **\_transformTerms**(`params`): [`ContractTerm`](../../../../../types/type-aliases/ContractTerm.md)[]
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:352](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L352)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:361](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L361)
 
 #### Parameters
 
@@ -404,7 +404,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > **createFromDefinition**(`params`): `Promise`\<[`AnyContract`](../../../../../types/type-aliases/AnyContract.md)\>
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:19](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L19)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:19](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L19)
 
 #### Parameters
 
@@ -432,7 +432,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/contrac
 
 > **load**(`params`): `Promise`\<[`AnyContract`](../../../../../types/type-aliases/AnyContract.md)\>
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/f661ea0ed34fe03f2af13d922c3b29fbc8bdb727/src/business/component/yaml-parser/contract-loader.ts#L11)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/contract-loader.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/contract-loader.ts#L11)
 
 #### Parameters
 
