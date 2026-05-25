@@ -1,3 +1,10 @@
+## [0.4.2](https://github.com/beecode-rs/msh-test-contractor/compare/v0.4.1...v0.4.2) (2026-05-25)
+
+
+### Bug Fixes
+
+* default constructorParams to empty array ([#72](https://github.com/beecode-rs/msh-test-contractor/issues/72)) ([fe6a551](https://github.com/beecode-rs/msh-test-contractor/commit/fe6a5515a948f030cf0d073499c90f3f62c57cf3))
+
 ## [0.4.1](https://github.com/beecode-rs/msh-test-contractor/compare/v0.4.0...v0.4.1) (2026-05-21)
 
 
