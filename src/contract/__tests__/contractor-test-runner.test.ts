@@ -60,12 +60,10 @@ describe('contractorTestRunner', () => {
 		})
 
 		it('throws with error message when load fails with Error instance', async () => {
-			const loadSpy = vi
-				.spyOn(YamlParserContractLoader.prototype, 'load')
-				.mockRejectedValue(new Error('yaml parse error'))
+			const loadSpy = vi.spyOn(YamlParserContractLoader.prototype, 'load').mockRejectedValue(new Error('yaml parse error'))
 
 			await expect(contractorTestRunner._file('./nonexistent.yaml')).rejects.toThrow(
-				'Failed to load contract file "./nonexistent.yaml": yaml parse error',
+				'Failed to load contract file "./nonexistent.yaml": yaml parse error'
 			)
 
 			loadSpy.mockRestore()
@@ -75,7 +73,7 @@ describe('contractorTestRunner', () => {
 			const loadSpy = vi.spyOn(YamlParserContractLoader.prototype, 'load').mockRejectedValue('string error')
 
 			await expect(contractorTestRunner._file('./nonexistent.yaml')).rejects.toThrow(
-				'Failed to load contract file "./nonexistent.yaml": string error',
+				'Failed to load contract file "./nonexistent.yaml": string error'
 			)
 
 			loadSpy.mockRestore()
@@ -85,7 +83,7 @@ describe('contractorTestRunner', () => {
 			const loadSpy = vi.spyOn(YamlParserContractLoader.prototype, 'load').mockRejectedValue(404)
 
 			await expect(contractorTestRunner._file('./nonexistent.yaml')).rejects.toThrow(
-				'Failed to load contract file "./nonexistent.yaml": 404',
+				'Failed to load contract file "./nonexistent.yaml": 404'
 			)
 
 			loadSpy.mockRestore()
@@ -95,7 +93,7 @@ describe('contractorTestRunner', () => {
 	describe('contract', () => {
 		const calledFns: string[] = []
 		const mockContract = {
-			fns: { add: { terms: [] }, subtract: { terms: [] }, multiply: { terms: [] } },
+			fns: { add: { terms: [] }, multiply: { terms: [] }, subtract: { terms: [] } },
 			module: {},
 			subjectName: 'testSubject',
 		}
@@ -106,7 +104,7 @@ describe('contractorTestRunner', () => {
 		contractorTestRunner.contract(mockContract as any) // eslint-disable-line @typescript-eslint/no-explicit-any
 
 		it('calls contractor for each function name in contract', () => {
-			expect(calledFns).toEqual(['add', 'subtract', 'multiply'])
+			expect(calledFns.sort()).toEqual(['add', 'multiply', 'subtract'])
 		})
 	})
 
@@ -114,7 +112,8 @@ describe('contractorTestRunner', () => {
 		it('processes all discovered contract files sequentially', async () => {
 			const processedFiles: string[] = []
 			const globSpy = vi.spyOn(glob, 'sync').mockReturnValue(['file1.yaml', 'file2.yaml', 'file3.yaml'])
-			const fileSpy = vi.spyOn(contractorTestRunner, '_file').mockImplementation(async (file) => {
+			// eslint-disable-next-line @typescript-eslint/require-await
+			const fileSpy = vi.spyOn(contractorTestRunner, '_file').mockImplementation(async (file: string) => {
 				processedFiles.push(file)
 			})
 

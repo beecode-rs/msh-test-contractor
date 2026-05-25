@@ -6,7 +6,7 @@
 
 # Class: YamlParserPromise
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L6)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L6)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > **new YamlParserPromise**(`_yamlParserError`): `YamlParserPromise`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L7)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L7)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` `readonly` **\_yamlParserError**: [`YamlParserError`](../../error/classes/YamlParserError.md)
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L7)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L7)
 
 ## Methods
 
@@ -40,7 +40,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_convertToRejectionError**(`value`): `Error`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:119](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L119)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:119](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L119)
 
 #### Parameters
 
@@ -58,7 +58,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_extractInnerValueFromMatch**(`match`): `string` \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:21](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L21)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:21](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L21)
 
 #### Parameters
 
@@ -76,7 +76,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_isBooleanLiteral**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:33](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L33)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:33](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L33)
 
 #### Parameters
 
@@ -94,7 +94,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_isEmptyOrUndefined**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:25](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L25)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:25](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L25)
 
 #### Parameters
 
@@ -112,7 +112,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_isErrorConstructor**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:49](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L49)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:49](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L49)
 
 #### Parameters
 
@@ -130,7 +130,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_isJsonObjectOrArray**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:45](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L45)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:45](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L45)
 
 #### Parameters
 
@@ -148,7 +148,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_isNullLiteral**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:29](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L29)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:29](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L29)
 
 #### Parameters
 
@@ -166,7 +166,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_isNumericValue**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:37](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L37)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:37](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L37)
 
 #### Parameters
 
@@ -184,7 +184,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_isQuotedString**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:41](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L41)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:41](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L41)
 
 #### Parameters
 
@@ -202,7 +202,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_isRejectPatternMatch**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:17](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L17)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:17](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L17)
 
 #### Parameters
 
@@ -220,7 +220,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_isResolvePatternMatch**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:13](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L13)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:13](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L13)
 
 #### Parameters
 
@@ -238,7 +238,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_isStringValue**(`value`): `value is string`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L9)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L9)
 
 #### Parameters
 
@@ -256,7 +256,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_parseBooleanLiteral**(`value`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:61](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L61)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:61](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L61)
 
 #### Parameters
 
@@ -274,7 +274,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_parseEmptyOrUndefined**(): `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:53](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L53)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:53](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L53)
 
 #### Returns
 
@@ -286,7 +286,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_parseJsonLikeValue**(`value`): `unknown`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:73](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L73)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:73](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L73)
 
 #### Parameters
 
@@ -304,7 +304,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_parseNullLiteral**(): `null`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:57](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L57)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:57](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L57)
 
 #### Returns
 
@@ -316,7 +316,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_parseNumericValue**(`value`): `number`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:65](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L65)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:65](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L65)
 
 #### Parameters
 
@@ -334,7 +334,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_parsePromiseReject**(`match`): `Promise`\<`unknown`\> \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:127](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L127)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:127](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L127)
 
 #### Parameters
 
@@ -352,7 +352,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_parsePromiseResolve**(`match`): `Promise`\<`unknown`\> \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:139](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L139)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:139](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L139)
 
 #### Parameters
 
@@ -370,7 +370,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_parseQuotedString**(`value`): `string`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:69](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L69)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:69](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L69)
 
 #### Parameters
 
@@ -388,7 +388,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > `protected` **\_parseValueString**(`valueStr`): `unknown`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:83](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L83)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:83](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L83)
 
 #### Parameters
 
@@ -406,7 +406,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > **isRejectString**(`params`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:150](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L150)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:150](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L150)
 
 #### Parameters
 
@@ -426,7 +426,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > **isResolveString**(`params`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:160](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L160)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:160](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L160)
 
 #### Parameters
 
@@ -446,7 +446,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > **isString**(`params`): `boolean`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:170](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L170)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:170](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L170)
 
 #### Parameters
 
@@ -466,7 +466,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > **parse**(`params`): `Promise`\<`unknown`\> \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:176](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L176)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:176](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L176)
 
 #### Parameters
 
@@ -486,7 +486,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > **parseReject**(`params`): `Promise`\<`unknown`\> \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:187](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L187)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:187](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L187)
 
 #### Parameters
 
@@ -506,7 +506,7 @@ Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise
 
 > **parseResolve**(`params`): `Promise`\<`unknown`\> \| `undefined`
 
-Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:202](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/business/component/yaml-parser/promise.ts#L202)
+Defined in: [packages/test-contractor/src/business/component/yaml-parser/promise.ts:202](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/business/component/yaml-parser/promise.ts#L202)
 
 #### Parameters
 

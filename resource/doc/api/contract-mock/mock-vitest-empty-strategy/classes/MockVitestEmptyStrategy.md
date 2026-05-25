@@ -6,7 +6,7 @@
 
 # Class: MockVitestEmptyStrategy
 
-Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-empty-strategy.ts:3](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract-mock/mock-vitest-empty-strategy.ts#L3)
+Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-empty-strategy.ts:3](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/contract-mock/mock-vitest-empty-strategy.ts#L3)
 
 ## Implements
 
@@ -28,7 +28,7 @@ Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-empty-strate
 
 > **mock**(): `void`
 
-Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-empty-strategy.ts:4](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract-mock/mock-vitest-empty-strategy.ts#L4)
+Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-empty-strategy.ts:4](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/contract-mock/mock-vitest-empty-strategy.ts#L4)
 
 #### Returns
 
@@ -44,7 +44,7 @@ Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-empty-strate
 
 > **restore**(): `void`
 
-Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-empty-strategy.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract-mock/mock-vitest-empty-strategy.ts#L8)
+Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-empty-strategy.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/contract-mock/mock-vitest-empty-strategy.ts#L8)
 
 #### Returns
 

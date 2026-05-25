@@ -6,7 +6,7 @@
 
 # Class: MockerVitestObjectStrategy
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-object-strategy.ts#L9)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:9](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/mocker/mocker-vitest-object-strategy.ts#L9)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.t
 
 > **new MockerVitestObjectStrategy**(`_contract`): `MockerVitestObjectStrategy`
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:12](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-object-strategy.ts#L12)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:12](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/mocker/mocker-vitest-object-strategy.ts#L12)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.t
 
 > `protected` **\_contract**: [`AnyContract`](../../../types/type-aliases/AnyContract.md)
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:12](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-object-strategy.ts#L12)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:12](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/mocker/mocker-vitest-object-strategy.ts#L12)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.t
 
 > `protected` **\_spies**: `MockInstance`\<`any`\>[] = `[]`
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-object-strategy.ts#L10)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/mocker/mocker-vitest-object-strategy.ts#L10)
 
 ## Methods
 
@@ -52,7 +52,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.t
 
 > `protected` **\_mockObject**(): [`MockerVitestObjectResult`](../type-aliases/MockerVitestObjectResult.md)
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:24](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-object-strategy.ts#L24)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:24](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/mocker/mocker-vitest-object-strategy.ts#L24)
 
 #### Returns
 
@@ -64,7 +64,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.t
 
 > **contractSpy**(): [`MockerVitestObjectResult`](../type-aliases/MockerVitestObjectResult.md)
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:20](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-object-strategy.ts#L20)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:20](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/mocker/mocker-vitest-object-strategy.ts#L20)
 
 #### Returns
 
@@ -80,7 +80,7 @@ Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.t
 
 > **mockRestore**(): `void`
 
-Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:14](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/mocker/mocker-vitest-object-strategy.ts#L14)
+Defined in: [packages/test-contractor/src/mocker/mocker-vitest-object-strategy.ts:14](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/mocker/mocker-vitest-object-strategy.ts#L14)
 
 #### Returns
 

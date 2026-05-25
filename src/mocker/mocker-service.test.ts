@@ -11,7 +11,7 @@ import { type AnyContract } from '#src/types/index.js'
 describe('mockerService', () => {
 	describe('strategyFromContract', () => {
 		it('should return MockerVitestFunctionStrategy for function subject with SELF in fns', () => {
-			const myFunc = () => {
+			const myFunc = (): string => {
 				return 'test'
 			}
 			const contract = {
@@ -24,6 +24,7 @@ describe('mockerService', () => {
 		})
 
 		it('should return MockerVitestClassStrategy for class subject', () => {
+			// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 			class MyClass {}
 			const contract = {
 				fns: {},
@@ -35,7 +36,7 @@ describe('mockerService', () => {
 		})
 
 		it('should return MockerVitestClassStrategy for function subject without SELF in fns', () => {
-			const myFunc = () => {
+			const myFunc = (): string => {
 				return 'test'
 			}
 			const contract = {

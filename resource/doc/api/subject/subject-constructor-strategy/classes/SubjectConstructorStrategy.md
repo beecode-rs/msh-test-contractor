@@ -6,7 +6,7 @@
 
 # Class: SubjectConstructorStrategy
 
-Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:4](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-constructor-strategy.ts#L4)
+Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:4](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/subject-constructor-strategy.ts#L4)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.t
 
 > **new SubjectConstructorStrategy**(`params`): `SubjectConstructorStrategy`
 
-Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-constructor-strategy.ts#L8)
+Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/subject-constructor-strategy.ts#L8)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.t
 
 > `protected` `readonly` **\_module**: `any`
 
-Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:5](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-constructor-strategy.ts#L5)
+Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:5](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/subject-constructor-strategy.ts#L5)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.t
 
 > `protected` `readonly` **\_subjectName**: `string`
 
-Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-constructor-strategy.ts#L6)
+Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/subject-constructor-strategy.ts#L6)
 
 ## Methods
 
@@ -54,7 +54,7 @@ Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.t
 
 > **exec**(`term`): `any`
 
-Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:20](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-constructor-strategy.ts#L20)
+Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:20](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/subject-constructor-strategy.ts#L20)
 
 #### Parameters
 
@@ -76,7 +76,7 @@ Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.t
 
 > **fn**(): `any`
 
-Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:25](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-constructor-strategy.ts#L25)
+Defined in: [packages/test-contractor/src/subject/subject-constructor-strategy.ts:25](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/subject-constructor-strategy.ts#L25)
 
 #### Returns
 

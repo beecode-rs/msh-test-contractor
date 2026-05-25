@@ -28,8 +28,8 @@ export const contractorTestRunner = {
 		contractorTestRunner.contract(contract)
 	},
 	contract: (contract: AnyContract): void => {
-
-		describe(contract.subjectName, () => { // eslint-disable-line @typescript-eslint/no-unsafe-argument
+		describe(contract.subjectName, () => {
+			// eslint-disable-line @typescript-eslint/no-unsafe-argument
 			Object.keys(contract.fns).forEach((fnName: string) => {
 				contractor(contract as any, fnName) // eslint-disable-line @typescript-eslint/no-explicit-any
 			})

@@ -8,7 +8,7 @@
 
 > **Contract**\<`MODULE`, `SUBJECT_NAME`, `SUBJECT`\> = `object`
 
-Defined in: [packages/test-contractor/src/types/index.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L6)
+Defined in: [packages/test-contractor/src/types/index.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/types/index.ts#L6)
 
 ## Type Parameters
 
@@ -30,7 +30,7 @@ Defined in: [packages/test-contractor/src/types/index.ts:6](https://github.com/b
 
 > **fns**: [`ContractFns`](ContractFns.md)\<`SUBJECT`\>
 
-Defined in: [packages/test-contractor/src/types/index.ts:14](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L14)
+Defined in: [packages/test-contractor/src/types/index.ts:14](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/types/index.ts#L14)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/test-contractor/src/types/index.ts:14](https://github.com/
 
 > `optional` **mock**: [`ContractMock`](ContractMock.md)
 
-Defined in: [packages/test-contractor/src/types/index.ts:13](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L13)
+Defined in: [packages/test-contractor/src/types/index.ts:13](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/types/index.ts#L13)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/test-contractor/src/types/index.ts:13](https://github.com/
 
 > **module**: `MODULE`
 
-Defined in: [packages/test-contractor/src/types/index.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L11)
+Defined in: [packages/test-contractor/src/types/index.ts:11](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/types/index.ts#L11)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [packages/test-contractor/src/types/index.ts:11](https://github.com/
 
 > **subjectName**: `SUBJECT_NAME`
 
-Defined in: [packages/test-contractor/src/types/index.ts:12](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L12)
+Defined in: [packages/test-contractor/src/types/index.ts:12](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/types/index.ts#L12)

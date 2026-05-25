@@ -6,7 +6,7 @@
 
 # Interface: SubjectStrategy
 
-Defined in: [packages/test-contractor/src/subject/subject-strategy.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-strategy.ts#L6)
+Defined in: [packages/test-contractor/src/subject/subject-strategy.ts:6](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/subject-strategy.ts#L6)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/test-contractor/src/subject/subject-strategy.ts:6](https:/
 
 > **exec**: (`term`) => `any`
 
-Defined in: [packages/test-contractor/src/subject/subject-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-strategy.ts#L7)
+Defined in: [packages/test-contractor/src/subject/subject-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/subject-strategy.ts#L7)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/test-contractor/src/subject/subject-strategy.ts:7](https:/
 
 > **fn**: () => `any`
 
-Defined in: [packages/test-contractor/src/subject/subject-strategy.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/subject-strategy.ts#L8)
+Defined in: [packages/test-contractor/src/subject/subject-strategy.ts:8](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/subject-strategy.ts#L8)
 
 #### Returns
 

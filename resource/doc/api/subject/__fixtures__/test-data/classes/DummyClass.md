@@ -6,7 +6,7 @@
 
 # Class: DummyClass
 
-Defined in: [packages/test-contractor/src/subject/\_\_fixtures\_\_/test-data.ts:1](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/__fixtures__/test-data.ts#L1)
+Defined in: [packages/test-contractor/src/subject/\_\_fixtures\_\_/test-data.ts:1](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/__fixtures__/test-data.ts#L1)
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: [packages/test-contractor/src/subject/\_\_fixtures\_\_/test-data.ts:
 
 > **a**(`_a`): `string`
 
-Defined in: [packages/test-contractor/src/subject/\_\_fixtures\_\_/test-data.ts:2](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/subject/__fixtures__/test-data.ts#L2)
+Defined in: [packages/test-contractor/src/subject/\_\_fixtures\_\_/test-data.ts:2](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/subject/__fixtures__/test-data.ts#L2)
 
 #### Parameters
 

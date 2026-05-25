@@ -8,7 +8,7 @@
 
 > **ContractTerm** = `object`
 
-Defined in: [packages/test-contractor/src/types/index.ts:30](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L30)
+Defined in: [packages/test-contractor/src/types/index.ts:30](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/types/index.ts#L30)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [packages/test-contractor/src/types/index.ts:30](https://github.com/
 
 > `optional` **constructorParams**: `any`[]
 
-Defined in: [packages/test-contractor/src/types/index.ts:33](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L33)
+Defined in: [packages/test-contractor/src/types/index.ts:33](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/types/index.ts#L33)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [packages/test-contractor/src/types/index.ts:33](https://github.com/
 
 > **params**: `any`[]
 
-Defined in: [packages/test-contractor/src/types/index.ts:31](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L31)
+Defined in: [packages/test-contractor/src/types/index.ts:31](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/types/index.ts#L31)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [packages/test-contractor/src/types/index.ts:31](https://github.com/
 
 > **result**: `any`
 
-Defined in: [packages/test-contractor/src/types/index.ts:32](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L32)
+Defined in: [packages/test-contractor/src/types/index.ts:32](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/types/index.ts#L32)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [packages/test-contractor/src/types/index.ts:32](https://github.com/
 
 > `optional` **returnFnParams**: `any`[]
 
-Defined in: [packages/test-contractor/src/types/index.ts:34](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/types/index.ts#L34)
+Defined in: [packages/test-contractor/src/types/index.ts:34](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/types/index.ts#L34)

@@ -220,9 +220,7 @@ export class YamlParserContractLoader {
 					mod = await import(absolutePath)
 				} catch (error) {
 					const message = this._getErrorMessage({ error })
-					throw new Error(
-						`Failed to import mock "${importPath}" (referenced from contract "${params.modulePath}"): ${message}`
-					)
+					throw new Error(`Failed to import mock "${importPath}" (referenced from contract "${params.modulePath}"): ${message}`)
 				}
 
 				if (typeof (mod as { default: unknown }).default !== 'function') {
@@ -250,7 +248,10 @@ export class YamlParserContractLoader {
 			return await import(specifier)
 		} catch (error) {
 			const message = this._getErrorMessage({ error })
-			const contractContext = params.modulePath ? ` (referenced from contract "${params.modulePath}")` : ''
+			let contractContext = ''
+			if (params.modulePath) {
+				contractContext = ` (referenced from contract "${params.modulePath}")`
+			}
 			throw new Error(`Failed to resolve module "${params.moduleSpecifier}"${contractContext}: ${message}`)
 		}
 	}
@@ -365,8 +366,8 @@ export class YamlParserContractLoader {
 	protected _transformTerm(params: { term: YamlContractTerm }): ContractTerm {
 		const { term } = params
 		const transformed: ContractTerm = {
-			params: term.params ?? [],
 			constructorParams: term.constructorParams ?? [],
+			params: term.params ?? [],
 			result: this._resolveResult({ term }),
 		}
 

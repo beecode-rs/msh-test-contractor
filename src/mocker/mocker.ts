@@ -16,7 +16,9 @@ export type MockerContractResult<SPY_INSTANCE = MockInstance<any>> = {
 
 export const mocker = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unnecessary-type-parameters
-	contract: <SPY_INSTANCE = MockInstance<any>, CONTRACT extends AnyContract = any>(contract: CONTRACT): MockerContractResult<SPY_INSTANCE> => {
+	contract: <SPY_INSTANCE = MockInstance<any>, CONTRACT extends AnyContract = any>(
+		contract: CONTRACT
+	): MockerContractResult<SPY_INSTANCE> => {
 		const mockerStrategy = mockerService.strategyFromContract(contract)
 		const spy = mockerStrategy.contractSpy()
 		const mockRestore = (): void => {

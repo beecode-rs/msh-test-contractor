@@ -6,7 +6,7 @@
 
 # Class: MockVitestStrategy
 
-Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:4](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract-mock/mock-vitest-strategy.ts#L4)
+Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:4](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/contract-mock/mock-vitest-strategy.ts#L4)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:
 
 > **new MockVitestStrategy**(`_mock?`): `MockVitestStrategy`
 
-Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract-mock/mock-vitest-strategy.ts#L7)
+Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/contract-mock/mock-vitest-strategy.ts#L7)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:
 
 > `protected` `readonly` `optional` **\_mock**: [`ContractMock`](../../../types/type-aliases/ContractMock.md)
 
-Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract-mock/mock-vitest-strategy.ts#L7)
+Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:7](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/contract-mock/mock-vitest-strategy.ts#L7)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:
 
 > `protected` `optional` **\_restoreMockFn**: [`ContractMockRevertFns`](../../../types/type-aliases/ContractMockRevertFns.md)
 
-Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:5](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract-mock/mock-vitest-strategy.ts#L5)
+Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:5](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/contract-mock/mock-vitest-strategy.ts#L5)
 
 ## Methods
 
@@ -52,7 +52,7 @@ Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:
 
 > **mock**(`mockParams?`): `void`
 
-Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract-mock/mock-vitest-strategy.ts#L10)
+Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:10](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/contract-mock/mock-vitest-strategy.ts#L10)
 
 #### Parameters
 
@@ -76,7 +76,7 @@ Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:
 
 > **restore**(): `void`
 
-Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:18](https://github.com/beecode-rs/msh-test-contractor/blob/e458d63f47fa80aa3927f987026fdadedc41f47f/src/contract-mock/mock-vitest-strategy.ts#L18)
+Defined in: [packages/test-contractor/src/contract-mock/mock-vitest-strategy.ts:18](https://github.com/beecode-rs/msh-test-contractor/blob/68899e59ef95bd895f2ce2d11004dff7ce2c5f37/src/contract-mock/mock-vitest-strategy.ts#L18)
 
 #### Returns
 
