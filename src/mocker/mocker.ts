@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type MockInstance, vi } from 'vitest'
 
+import { SpecialFnName } from '#src/enum/special-fn-name.js'
 import { mockerService } from '#src/mocker/mocker-service.js'
 import { type AnyContract, type ContractMockRevertFn, type PropType } from '#src/types/index.js'
 import { fnUtil } from '#src/util/fn-util.js'
@@ -35,7 +36,7 @@ export const mocker = {
 			if (fnUtil.isConstructor(fnName)) {
 				return vi.spyOn(module, subjectName)
 			}
-			if (terms[0]?.constructorParams) {
+			if (SpecialFnName.CONSTRUCTOR in fns) {
 				return vi.spyOn(module[subjectName].prototype, fnName)
 			}
 

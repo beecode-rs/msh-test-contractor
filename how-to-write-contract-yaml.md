@@ -461,8 +461,7 @@ methods:
 
 ```typescript
 // pattern-util.ts
-export const createPattern = (source: string, flags: string): RegExp =>
-	new RegExp(source, flags)
+export const createPattern = (source: string, flags: string): RegExp => new RegExp(source, flags)
 ```
 
 ```yaml
@@ -630,11 +629,11 @@ Supports dot-notation for nested properties: `__import__:./module.js:obj.nested.
 
 ## Special Module Paths
 
-| Module value | Resolves to |
-|---|---|
-| `./my-module.js` | Relative file import |
-| `node:path` | Node.js built-in module |
-| `global` | Global scope (`globalThis`) |
+| Module value     | Resolves to                 |
+| ---------------- | --------------------------- |
+| `./my-module.js` | Relative file import        |
+| `node:path`      | Node.js built-in module     |
+| `global`         | Global scope (`globalThis`) |
 
 ```typescript
 // (no file needed — node:path is a built-in)
@@ -687,10 +686,14 @@ const mock: ContractMock = () => {
 	globalThis.Date = class MockDate extends OriginalDate {
 		constructor(...args: unknown[]) {
 			if (args.length === 0) return new OriginalDate('2020-01-01')
-			return new OriginalDate(...args as [string])
+			return new OriginalDate(...(args as [string]))
 		}
 	}
-	return [() => { globalThis.Date = OriginalDate }]
+	return [
+		() => {
+			globalThis.Date = OriginalDate
+		},
+	]
 }
 export default mock
 ```
@@ -712,8 +715,7 @@ methods:
   toISOString:
     mockFunction: [CONSTRUCTOR]
     terms:
-      - constructorParams: []
-        params: []
+      - params: []
         result: '2020-01-01T00:00:00.000Z'
 ```
 
@@ -729,10 +731,10 @@ For quick one-liner terms, use the arrow syntax:
 methods:
   __self__:
     terms:
-      - "[1, 2] => 3"
-      - "[0, 0] => 0"
+      - '[1, 2] => 3'
+      - '[0, 0] => 0'
       # with constructor params
-      - "([10]); [5] => 15"
+      - '([10]); [5] => 15'
 ```
 
 Format: `[params] => result` or `([constructorParams]); [params] => result`.
@@ -745,44 +747,44 @@ Values inside brackets are parsed as JSON arrays. The result is parsed as JSON.
 
 ### Contract-Level Fields
 
-| Field | Required | Description |
-|---|---|---|
-| `subject` | yes | Exported function or class name |
-| `module` | yes | Import path (`./file.js`, `node:path`, `global`) |
-| `subjectType` | yes | `function` or `class` |
-| `mock` | no | List of contract paths or `__import__:` mocks |
-| `constructor` | class | Constructor term definitions |
-| `methods` | yes | Map of method names to terms |
+| Field         | Required | Description                                      |
+| ------------- | -------- | ------------------------------------------------ |
+| `subject`     | yes      | Exported function or class name                  |
+| `module`      | yes      | Import path (`./file.js`, `node:path`, `global`) |
+| `subjectType` | yes      | `function` or `class`                            |
+| `mock`        | no       | List of contract paths or `__import__:` mocks    |
+| `constructor` | class    | Constructor term definitions                     |
+| `methods`     | yes      | Map of method names to terms                     |
 
 ### Method-Level Fields
 
-| Field | Required | Description |
-|---|---|---|
-| `terms` | yes | Array of test cases |
-| `mock` | no | Contract paths to mock for this method only |
-| `mockFunction` | no | Internal method names to mock |
+| Field          | Required | Description                                 |
+| -------------- | -------- | ------------------------------------------- |
+| `terms`        | yes      | Array of test cases                         |
+| `mock`         | no       | Contract paths to mock for this method only |
+| `mockFunction` | no       | Internal method names to mock               |
 
 ### Term Fields
 
-| Field | Required | Description |
-|---|---|---|
-| `params` | yes | Arguments passed to the function/method |
-| `result` | one of | Expected return value |
-| `error` | one of | Expected thrown error message |
-| `constructorParams` | class | Constructor args to instantiate the class |
-| `returnFnParams` | no | Expected params for a returned function |
+| Field               | Required | Description                               |
+| ------------------- | -------- | ----------------------------------------- |
+| `params`            | yes      | Arguments passed to the function/method   |
+| `result`            | one of   | Expected return value                     |
+| `error`             | one of   | Expected thrown error message             |
+| `constructorParams` | class    | Constructor args to instantiate the class |
+| `returnFnParams`    | no       | Expected params for a returned function   |
 
 ### Special Object Syntax
 
-| Syntax | Resolves to |
-|---|---|
-| `new Error("msg")` | `Error` instance |
-| `new Error("msg", { name: "Custom" })` | `Error` with custom `.name` |
-| `new Date("2024-01-15")` | `Date` instance |
-| `new RegExp("pattern", "flags")` | `RegExp` instance |
-| `Promise.resolve(value)` | Resolved promise (awaited by runner) |
-| `Promise.reject(new Error("msg"))` | Rejected promise (caught by runner) |
-| `__fn__` | No-op function: `() => undefined` |
-| `__fn_identity__` | Identity function: `(a) => a` |
-| `__class_ref:Date__` | Class constructor from global scope |
-| `__import__:./path.js:exportName` | Dynamically imported value |
+| Syntax                                 | Resolves to                          |
+| -------------------------------------- | ------------------------------------ |
+| `new Error("msg")`                     | `Error` instance                     |
+| `new Error("msg", { name: "Custom" })` | `Error` with custom `.name`          |
+| `new Date("2024-01-15")`               | `Date` instance                      |
+| `new RegExp("pattern", "flags")`       | `RegExp` instance                    |
+| `Promise.resolve(value)`               | Resolved promise (awaited by runner) |
+| `Promise.reject(new Error("msg"))`     | Rejected promise (caught by runner)  |
+| `__fn__`                               | No-op function: `() => undefined`    |
+| `__fn_identity__`                      | Identity function: `(a) => a`        |
+| `__class_ref:Date__`                   | Class constructor from global scope  |
+| `__import__:./path.js:exportName`      | Dynamically imported value           |

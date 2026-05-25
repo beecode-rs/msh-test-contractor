@@ -252,7 +252,7 @@ describe('YamlParserContractLoader', () => {
 				modulePath: '/test/omit-optional.contract.yaml',
 			})
 
-			expect(result.fns.default?.terms[0]).not.toHaveProperty('constructorParams')
+			expect(result.fns.default?.terms[0]).toHaveProperty('constructorParams', [])
 			expect(result.fns.default?.terms[0]).not.toHaveProperty('returnFnParams')
 		})
 	})

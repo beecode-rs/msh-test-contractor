@@ -366,11 +366,8 @@ export class YamlParserContractLoader {
 		const { term } = params
 		const transformed: ContractTerm = {
 			params: term.params ?? [],
+			constructorParams: term.constructorParams ?? [],
 			result: this._resolveResult({ term }),
-		}
-
-		if (term.constructorParams !== undefined) {
-			transformed.constructorParams = term.constructorParams
 		}
 
 		if (term.returnFnParams !== undefined) {

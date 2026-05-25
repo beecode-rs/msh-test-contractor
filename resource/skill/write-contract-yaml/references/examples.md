@@ -330,7 +330,6 @@ methods:
   toISOString:
     mockFunction: [CONSTRUCTOR]
     terms:
-      - constructorParams: []
-        params: []
+      - params: []
         result: '2020-01-01T00:00:00.000Z'
 ```
