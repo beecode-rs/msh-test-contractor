@@ -1,4 +1,17 @@
 /**
+ * ⚠️ HISTORICAL SPIKE — This file is a design exploration, not production code.
+ *
+ * This demo explores three approaches to parsing special JavaScript objects
+ * from YAML. The actual implementation chose Option 2 (post-parse transformation)
+ * using regex matching in src/business/component/yaml-parser/special-object.ts
+ * and its delegates (error.ts, promise.ts, date.ts, regex.ts).
+ *
+ * Option 1 (custom YAML tags via js-yaml) was NOT adopted.
+ *
+ * Kept for reference only.
+ */
+
+/**
  * YAML to JavaScript Object Demo
  *
  * This demonstrates how to parse YAML and get real JavaScript objects

@@ -21,7 +21,7 @@ Traditional mocks are brittle because they're manually configured and can drift 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     Contract Definition                             │
-│              (*.contract.ts and *.contract.yaml files)              │
+│                    (*.contract.yaml files)                          │
 └───────────────────────────┬─────────────────────────────────────────┘
                             │
                             ▼
@@ -33,7 +33,7 @@ Traditional mocks are brittle because they're manually configured and can drift 
                             ▼
 ┌─────────────────────────────────────────────────────────────────────┐
 │                       contractor                                    │
-│                 (Main test executor)                                │
+│              (Per-function test executor)                           │
 │  ┌─────────────────────────────────────────────────────────────┐    │
 │  │  1. SubjectService    → Select execution strategy           │    │
 │  │  2. ContractMockService → Apply external mocks              │    │
@@ -52,11 +52,11 @@ Traditional mocks are brittle because they're manually configured and can drift 
 A **Contract** defines the obligation of a function (provider) - given certain parameters, it returns a certain result. Contracts can be defined in either TypeScript (`.contract.ts`) or YAML (`.contract.yaml`) format.
 
 ```typescript
-interface Contract<M, SN, S> {
-	module: M           // The module containing the subject
-	subjectName: SN     // Name of the function/class to test
-	mock?: ContractMock // Optional external mock setup
-	fns: ContractFns<S> // Function definitions with terms
+interface Contract<MODULE, SUBJECT_NAME, SUBJECT> {
+	module: MODULE              // The module containing the subject
+	subjectName: SUBJECT_NAME   // Name of the function/class to test
+	mock?: ContractMock         // Optional external mock setup
+	fns: ContractFns<SUBJECT>   // Function definitions with terms
 }
 ```
 
@@ -99,10 +99,11 @@ For full YAML syntax and field reference, see `CLAUDE.md` and the proposal docs 
 
 ```
 src/
+├── index.ts                     # Package entry point
 ├── contract/                    # Core contract execution
-│   ├── contractor.ts            # Main test runner
+│   ├── contractor.ts            # Per-function test executor
 │   ├── contractor-factory.ts    # Contract creation factory
-│   ├── contractor-test-runner.ts # Discovers *.contract.ts and *.contract.yaml files
+│   ├── contractor-test-runner.ts # Discovers *.contract.yaml files
 │   ├── contractor-service.ts    # Test naming utilities
 │   └── expect/                  # Assertion strategies
 │       ├── contract-expect-service.ts
@@ -113,28 +114,54 @@ src/
 ├── mocker/                      # Mock generation from contracts
 │   ├── mocker.ts                # Entry point: mocker.contract(), mocker.function()
 │   ├── mocker-service.ts        # Strategy selector
+│   ├── mocker-strategy.ts       # MockerStrategy interface
 │   ├── mocker-vitest-function-strategy.ts
 │   ├── mocker-vitest-class-strategy.ts
 │   └── mocker-vitest-object-strategy.ts
 │
 ├── subject/                     # Subject execution strategies
 │   ├── subject-service.ts       # Strategy selector
+│   ├── subject-strategy.ts      # SubjectStrategy interface
 │   ├── subject-function-strategy.ts
 │   ├── subject-class-function-strategy.ts
 │   └── subject-constructor-strategy.ts
 │
 ├── contract-mock/               # External mock injection
 │   ├── contract-mock-service.ts
+│   ├── mock-strategy.ts         # MockStrategy interface
 │   ├── mock-vitest-strategy.ts
 │   └── mock-vitest-empty-strategy.ts
 │
 ├── vitest-spy/                  # Spy implementations
 │   ├── vitest-spy-service.ts
+│   ├── vitest-spy-strategy.ts   # VitestSpyStrategy interface
 │   ├── vitest-spy-function-strategy.ts
 │   └── vitest-spy-class-function-strategy.ts
 │
+├── business/                    # YAML contract support
+│   ├── component/yaml-parser/   # YAML parsing components
+│   │   ├── contract-parser.ts   # YAML to model parser
+│   │   ├── contract-loader.ts   # Contract file loader
+│   │   ├── shorthand-parser.ts  # Shorthand "[params] => result" syntax
+│   │   ├── special-object.ts    # Special object resolver
+│   │   ├── error.ts             # Error string parsing
+│   │   ├── promise.ts           # Promise string parsing
+│   │   ├── date.ts              # Date string parsing
+│   │   └── regex.ts             # Regex string parsing
+│   └── model/
+│       └── yaml-contract-model.ts # YAML contract type definitions
+│
+├── global-contract/             # Shared test fixtures
+│   └── date-mock.ts             # Date mock for contracts
+│
+├── util/                        # Utility functions
+│   ├── fn-util.ts               # Function utilities
+│   ├── object-util.ts           # Object utilities
+│   └── type-util.ts             # Type utilities
+│
 ├── types/                       # TypeScript definitions
-│   └── index.ts
+│   ├── index.ts                 # Contract type definitions
+│   └── global.d.ts              # Global type declarations
 │
 └── enum/                        # Enums
     └── special-fn-name.ts       # CONSTRUCTOR, SELF
@@ -180,8 +207,8 @@ The library heavily uses the **Strategy Pattern** for flexibility:
 contractorTestRunner.dir('./src')
 ```
 
-- Scans directory for `*.contract.ts` and `*.contract.yaml` files using glob
-- Loads each contract file (TypeScript contracts via import, YAML contracts via parser)
+- Scans directory for `*.contract.yaml` files using glob
+- Loads each YAML contract file via parser
 - Schedules tests for each function/term
 
 ### 2. Contract Execution
@@ -348,7 +375,7 @@ mockRestore() // Restores original implementation
 When using contracts with external mocks, restore functions are collected:
 
 ```typescript
-mock: (): ContractMockRevertFns => {
+mock: (options?: { params?: any[] }): ContractMockRevertFns => {
 	return [
 		mocker.contract(dep1Contract).mockRestore,
 		mocker.contract(dep2Contract).mockRestore,

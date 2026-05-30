@@ -1,241 +1,359 @@
-# YAML to JSON Conversion Proposal
+# YAML Contract Format Reference
 
 ## Overview
 
-This proposal defines how to convert the user-friendly YAML contract format into a JSON structure compatible with the existing `test-contractor` library.
+YAML contract files (`.contract.yaml`) are the user-facing format for defining contracts. They are parsed at runtime into the internal `YamlContractModel`, then loaded into the `AnyContract` type used by the test runner. This document describes the YAML format, the internal model, and how conversion works.
 
 ---
 
 ## Architecture
 
 ```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────────┐
-│ *.contract.yaml │ ──► │  YAML Parser     │ ──► │  Contract JSON      │
-│ (User writes)   │     │  (transforms)    │     │  (Library uses)     │
-└─────────────────┘     └──────────────────┘     └─────────────────────┘
+┌─────────────────────┐     ┌─────────────────────────┐     ┌──────────────────────┐
+│ *.contract.yaml     │ ──► │  YamlParserContract     │ ──► │  YamlContractModel   │
+│ (User writes)       │     │  (contract-parser.ts)   │     │  (yaml-contract-     │
+└─────────────────────┘     └─────────────────────────┘     │   model.ts)          │
+                                                            └──────────────────────┘
+                                                                     │
+                                                            ┌────────▼─────────────┐
+                                                            │ YamlParserContract-  │
+                                                            │ Loader               │
+                                                            │ (contract-loader.ts) │
+                                                            │ resolves modules,    │
+                                                            │ loads mocks, creates │
+                                                            │ AnyContract          │
+                                                            └──────────────────────┘
+                                                                     │
+                                                            ┌────────▼─────────────┐
+                                                            │  contractorTest-     │
+                                                            │  Runner.dir()        │
+                                                            │  discovers & runs    │
+                                                            │  *.contract.yaml     │
+                                                            └──────────────────────┘
+```
+
+### Implementation Location
+
+```
+src/business/
+├── model/
+│   └── yaml-contract-model.ts           # YamlContractModel type + validator
+└── component/yaml-parser/
+    ├── contract-parser.ts                # YAML → YamlContractModel parsing
+    ├── contract-loader.ts                # File loading, module resolution, mock loading
+    ├── shorthand-parser.ts               # Shorthand "=> " syntax parsing
+    ├── special-object.ts                 # Dispatches special type parsing
+    ├── error.ts                          # new Error("...") regex parsing
+    ├── promise.ts                        # Promise.resolve/reject regex parsing
+    ├── date.ts                           # new Date("...") regex parsing
+    ├── regex.ts                          # new RegExp("...") regex parsing
+    └── index.ts                          # Public exports
 ```
 
 ---
 
-## Source YAML Format (User-Facing)
+## YAML Contract Format (User-Facing)
+
+### Function Contract
 
 ```yaml
-module: ./my-service
-subject: MyService
-subjectType: class
-
-mocks:
-  - ./dependency.contract.yaml
-
-constructor:
-  - params: ["config-string"]
-    result: {}
-
+subject: simpleFunction
+module: ./simple-function.js
+subjectType: function
 methods:
-  findById:
+  __self__:                              # __self__ references the function itself
     terms:
       - params: [1]
-        result: { id: 1, name: "John" }
-      - params: [999]
-        result: null
+        result: 1
+      - params: [11]
+        error: number is greater than ten
 ```
 
----
-
-## Target JSON Format (Library-Facing)
-
-The JSON format must align with the existing TypeScript types:
-
-```typescript
-// From src/types/index.ts
-type Contract = {
-  module: MODULE           // The actual module (resolved at runtime)
-  subjectName: string      // Name of the function/class
-  mock?: ContractMock      // Module-level mock function
-  fns: ContractFns<SUBJECT> // Functions to test
-}
-
-type ContractFunction = {
-  terms: ContractTerm[]
-  mock?: ContractMock
-}
-
-type ContractTerm = {
-  params: any[]
-  result: any
-  constructorParams?: any[]
-  returnFnParams?: any[]
-}
-```
-
-### JSON Output Structure
-
-```json
-{
-  "module": "./my-service",
-  "subjectName": "MyService",
-  "subjectType": "class",
-  "mocks": ["./dependency.contract.yaml"],
-  "fns": {
-    "constructor": {
-      "terms": [
-        {
-          "params": ["config-string"],
-          "result": {}
-        }
-      ]
-    },
-    "findById": {
-      "terms": [
-        {
-          "params": [1],
-          "result": { "id": 1, "name": "John" }
-        },
-        {
-          "params": [999],
-          "result": null
-        }
-      ]
-    }
-  }
-}
-```
-
----
-
-## Field Mapping
-
-| YAML Field | JSON Field | Notes |
-|------------|------------|-------|
-| `module` | `module` | Direct copy (path resolved at runtime) |
-| `subject` | `subjectName` | Renamed for clarity |
-| `subjectType` | `subjectType` | Added for strategy selection |
-| `mocks` | `mocks` | Array of mock contract paths |
-| `constructor` | `fns.constructor` | Moved into `fns` object |
-| `terms` (top-level) | `fns.default` | For function subjects |
-| `methods` | `fns.*` | Each method becomes a key in `fns` |
-
----
-
-## Conversion Rules
-
-### 1. Shorthand String Parsing
-
-Convert shorthand strings to structured objects:
+### Class Contract
 
 ```yaml
-# YAML (shorthand)
-terms:
-  - "[1, 2] => 3"
-  - "([db-config]); [userId] => user"
+subject: DummyClass
+module: ./dummy-class.js
+subjectType: class
+constructor:
+  terms:
+    - params: [1, 2]
+      result: { __a: 1, __b: 2 }
+methods:
+  add:
+    terms:
+      - constructorParams: [1, 2]
+        params: [3]
+        result: 6
+  externalAdd:
+    mock:
+      - ./dummy-function.contract.yaml
+    terms:
+      - constructorParams: [1, 2]
+        params: [3]
+        result: 6
 ```
 
-```json
-// JSON
-{
-  "terms": [
-    { "params": [1, 2], "result": 3 },
-    { "constructorParams": ["db-config"], "params": ["userId"], "result": "user" }
-  ]
+### Function Contract with Mocks
+
+```yaml
+subject: dummyFunction
+module: ./dummy-function.js
+subjectType: function
+mock:
+  - ./logger.contract.yaml
+  - ./dummy-class.contract.yaml
+methods:
+  add:
+    terms:
+      - params: [1, 2]
+        result: 3
+  errorIfMoreThenTen:
+    terms:
+      - params: [1]
+        result: 1
+      - params: [11]
+        error: 'More then 10'
+```
+
+### Contract with Mocked Internal Methods
+
+```yaml
+subject: logger
+module: ./logger.js
+subjectType: function
+methods:
+  _message:
+    mock:
+      - ./date-mock.yaml
+    terms:
+      - params: ['type', 'test-message']
+        result: '2020-01-01T00:00:00.000Z:TYPE:test-message'
+  debug:
+    mockFunction: [_message]             # mock _message within same subject
+    terms:
+      - params: ['test-message']
+        result: '2020-01-01T00:00:00.000Z:DEBUG:test-message'
+```
+
+---
+
+## YAML Field Reference
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `subject` | yes | Name of the exported function/class |
+| `module` | yes | Relative path to the JS module (or `global`) |
+| `subjectType` | inferred | `function` or `class`. Inferred if omitted. |
+| `mock` | no | List of contract YAML paths to use as module-level mocks |
+| `constructor` | class only | Object with `terms` array for constructor tests |
+| `methods` | yes | Map of method names to function definitions |
+
+### Method Definition Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `terms` | yes | Array of test cases (input/output pairs) |
+| `mock` | no | List of contract YAML paths to use as per-method mocks |
+| `mockFunction` | no | List of internal method names to mock within same subject |
+
+### Term Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `params` | yes | Input parameters array |
+| `result` | one of | Expected return value |
+| `error` | one of | Expected thrown error (string or object) |
+| `constructorParams` | class | Constructor arguments for class method calls |
+| `returnFnParams` | no | Parameters for functions returned by the subject |
+
+### Special Method Names
+
+| Name | Meaning |
+|------|---------|
+| `__self__` | For function subjects, references the function itself (maps to `SELF` internally) |
+| `CONSTRUCTOR` | Internal name for constructor terms (used in `mockFunction`) |
+
+---
+
+## Internal Model (YamlContractModel)
+
+Defined in `src/business/model/yaml-contract-model.ts`:
+
+```typescript
+export type YamlContractSubjectType = 'function' | 'class'
+
+export type YamlContractTerm = {
+  params?: unknown[]
+  result?: unknown
+  error?: unknown
+  constructorParams?: unknown[]
+  returnFnParams?: unknown[]
+}
+
+export type YamlContractFunction = {
+  terms: YamlContractTerm[]
+  mock?: string[]
+  mockFunction?: string[]
+}
+
+export type YamlContractModel = {
+  subjectName: string
+  subjectType: YamlContractSubjectType
+  module: string
+  mock?: string[]
+  fns: Record<string, YamlContractFunction>
 }
 ```
 
-**Regex Patterns:**
-```typescript
-// With constructor: "([ctorParams]); [params] => result"
-const WITH_CTOR = /^\(([^)]*)\);\s*\[([^\]]*)\]\s*=>\s*(.+)$/
+The model is validated by `YamlContractModelValidator` which enforces:
+- Every term must have either `result` or `error` (not both)
+- `params`, `constructorParams`, and `returnFnParams` must be arrays when present
+- `mock` and `mockFunction` arrays must contain non-empty strings
+- `subjectName`, `module` must be non-empty strings
+- `subjectType` must be `'function'` or `'class'`
+- `fns` must be an object with valid `YamlContractFunction` values
 
-// Basic: "[params] => result"
-const BASIC = /^\[([^\]]*)\]\s*=>\s*(.+)$/
-```
+---
 
-### 2. Special Type Parsing
+## Field Mapping: YAML to Model
 
-Parse TypeScript-style special types:
+| YAML Field | Model Field | Transformation |
+|------------|-------------|----------------|
+| `subject` | `subjectName` | Direct copy |
+| `module` | `module` | Direct copy (path resolved at load time) |
+| `subjectType` | `subjectType` | Inferred if omitted |
+| `mock` | `mock` | Direct copy (singular, not plural) |
+| `constructor` | `fns.CONSTRUCTOR` | Moved into `fns` object with key `CONSTRUCTOR` |
+| `methods.__self__` | `fns.SELF` | `__self__` maps to `SELF` |
+| `methods.<name>` | `fns.<name>` | Key names preserved as-is |
+
+### Subject Type Inference
+
+When `subjectType` is not explicitly set:
+- `'class'` if a `constructor` section is present
+- `'function'` otherwise
+
+---
+
+## Special Type Parsing (Post-Parse Regex)
+
+The implementation does **not** use custom js-yaml tags. Instead, string values are checked against regex patterns after standard YAML parsing. This happens recursively on all term fields (`params`, `result`, `error`, `constructorParams`, `returnFnParams`).
+
+### Error
 
 ```yaml
-# YAML
 result: new Error("Something went wrong")
+```
+
+Pattern: `/^new Error\(\s*(['"`])(.*?)\1\s*(?:,\s*(\{[^}]+\}))?\s*\)$/`
+
+Supports an optional options object for setting `error.name`:
+```yaml
+result: new Error("message", { name: "TypeError" })
+```
+
+### Date
+
+```yaml
+result: new Date("2020-01-01")
+```
+
+Pattern: `/^new Date\(\s*(['"`])(.*?)\1\s*\)$/`
+
+### RegExp
+
+```yaml
+result: new RegExp("pattern", "flags")
+```
+
+Pattern: `/^new RegExp\(\s*(['"`])(.*?)\1\s*(?:,\s*(['"`])(.*?)\3\s*)?\)$/`
+
+### Promise
+
+```yaml
 result: Promise.resolve({ id: 1 })
+result: Promise.resolve("hello")
 result: Promise.reject(new Error("Not found"))
 ```
 
-```json
-// JSON (preserved as strings for runtime parsing)
-{
-  "result": { "__type": "Error", "message": "Something went wrong" },
-  "result": { "__type": "PromiseResolve", "value": { "id": 1 } },
-  "result": { "__type": "PromiseReject", "error": { "__type": "Error", "message": "Not found" } }
-}
-```
+Patterns:
+- `/^Promise\.resolve\((.*)\)$/s`
+- `/^Promise\.reject\((.*)\)$/s`
 
-### 3. Subject Type Inference
+The inner value of `Promise.resolve`/`Promise.reject` is parsed as JSON-like (handles primitives, quoted strings, objects, arrays). `Promise.reject` with `new Error(...)` delegates to the error parser.
 
-If not explicitly set:
-- `class` - if `methods` or `constructor` defined
-- `function` - if only top-level `terms` defined
+### Special Markers
 
-### 4. Method to Fns Mapping
+| Marker | Result |
+|--------|--------|
+| `__fn__` | No-op function: `function () { return undefined }` |
+| `__fn_identity__` | Identity function: `function (a) { return a }` |
+| `__class_ref:ClassName__` | Constructor from `globalThis` (e.g. `__class_ref:Date__`) |
+| `__import__:modulePath:property` | Dynamic import placeholder, resolved at load time |
+
+The `__import__` marker is resolved by `YamlParserContractLoader` (not the parser). The loader imports the module and extracts the property using dot-notation paths (e.g., `__import__:./utils.js:helpers.formatDate`).
+
+---
+
+## Shorthand Syntax Parsing
+
+Shorthand terms use a single-key object where the value is a string with `=>` arrow syntax:
 
 ```yaml
-# YAML
-methods:
-  findById:
-    mocks: [...]
-    setup: "..."
-    terms: [...]
+terms:
+  - myMethod: "[1, 2] => 3"
+  - add: "([1, 2]); [3] => 6"            # with constructorParams
 ```
 
-```json
-// JSON
-{
-  "fns": {
-    "findById": {
-      "mocks": [...],
-      "setup": "...",
-      "terms": [...]
-    }
-  }
-}
+Parsed by `ShorthandParser` using these patterns:
+- Basic: `[params] => result`
+- With constructor: `(constructorParams); [params] => result`
+
+The `=>` is found at depth 0 (outside brackets, braces, and strings). Both `params` and `constructorParams` must be valid JSON arrays. The `result` must be valid JSON.
+
+Converted to:
+```typescript
+{ params: [1, 2], result: 3 }
+{ constructorParams: [1, 2], params: [3], result: 6 }
 ```
 
 ---
 
-## Extended JSON Schema
+## Conversion Flow
 
-To support all YAML features, the JSON format extends the base types:
+### 1. Parse (contract-parser.ts)
 
-```typescript
-// Extended ContractTerm
-type JsonContractTerm = {
-  params: any[]
-  result: any
-  constructorParams?: any[]
-  returnFnParams?: any[]
-  setup?: string           // NEW: Setup function code
-  timeout?: number         // NEW: Test timeout
-  skip?: boolean | string  // NEW: Skip flag
-  only?: boolean           // NEW: Run only this term
-}
+`YamlParserContract.parseString` reads the raw YAML and produces a `YamlContractModel`:
 
-// Extended ContractFunction
-type JsonContractFunction = {
-  terms: JsonContractTerm[]
-  mock?: ContractMock
-  mocks?: string[]         // NEW: Mock contract paths
-  setup?: string           // NEW: Method-level setup
-}
+1. Load YAML via `js-yaml`
+2. Map `subject` to `subjectName`
+3. Move `constructor.terms` into `fns.CONSTRUCTOR`
+4. Map `methods` entries to `fns`, converting `__self__` to `SELF`
+5. Infer `subjectType` if not set
+6. Recursively apply special object parsing on all term values
+7. Parse shorthand terms (single-key objects with `=>` strings)
 
-// Extended Contract
-type JsonContract = {
-  module: string           // Path (resolved at runtime)
-  subjectName: string
-  subjectType?: 'class' | 'function' | 'constant'
-  mock?: ContractMock
-  mocks?: string[]         // NEW: Mock contract paths
-  fns: Record<string, JsonContractFunction>
-}
-```
+### 2. Load (contract-loader.ts)
+
+`YamlParserContractLoader.load` takes a parsed model and produces an `AnyContract`:
+
+1. Resolve `module` path to actual module via dynamic import
+2. Load mock contracts from `mock` paths (with circular reference detection)
+3. Attach per-method mocks from `fn.mock` paths
+4. Set up `mockFunction` mocks (mocking internal methods within same subject)
+5. Resolve `__import__` placeholders in term values
+6. Transform `YamlContractTerm` to `ContractTerm` (error field becomes result)
+7. Return an `AnyContract` ready for the test runner
+
+### 3. Run (contractor-test-runner.ts)
+
+`contractorTestRunner.dir('./path')` discovers and executes contracts:
+
+1. Glob for `**/*.contract.yaml` files (excluding `__fixtures__`)
+2. For each file, load via `YamlParserContractLoader`
+3. Wrap in a `describe` block named after `subjectName`
+4. Run `contractor(contract, fnName)` for each function
 
 ---
 
@@ -244,228 +362,127 @@ type JsonContract = {
 ### Input: YAML Contract
 
 ```yaml
-$schema: https://example.com/schemas/contract-v1.json
-module: ./services/user-service
-subject: UserService
-subjectType: class
-
-mocks:
-  - ./repositories/user-repo.contract.yaml
-  - ./services/email.contract.yaml
-
-constructor:
-  - params:
-      - db: mock-db
-        logger: mock-logger
-    result: {}
-
+subject: dummyFunction
+module: ./dummy-function.js
+subjectType: function
+mock:
+  - ./logger.contract.yaml
+  - ./dummy-class.contract.yaml
 methods:
-  findById:
+  add:
+    terms:
+      - params: [1, 2]
+        result: 3
+  callClass:
+    terms:
+      - params: [1, 2, 3]
+        result: 6
+  errorIfMoreThenTen:
     terms:
       - params: [1]
-        result:
-          id: 1
-          name: John
-          email: john@example.com
-      - params: [999]
-        result: null
-      - params: [-1]
-        result: new Error("Invalid ID")
-
-  create:
-    mocks:
-      - ./validators/user-validator.contract.yaml
-    terms:
-      - params:
-          - name: John
-            email: john@example.com
-        result:
-          id: 1
-          name: John
-          created: true
-      - params:
-          - name: ""
-        result: new Error("Name required")
-
-  sendWelcomeEmail:
-    terms:
-      - params: [1]
-        result: Promise.resolve({ sent: true, messageId: "msg-abc123" })
+        result: 1
+      - params: [11]
+        error: 'More then 10'
 ```
 
-### Output: JSON Contract
+### Intermediate: YamlContractModel
 
 ```json
 {
-  "$schema": "https://example.com/schemas/contract-v1.json",
-  "module": "./services/user-service",
-  "subjectName": "UserService",
-  "subjectType": "class",
-  "mocks": [
-    "./repositories/user-repo.contract.yaml",
-    "./services/email.contract.yaml"
-  ],
+  "subjectName": "dummyFunction",
+  "subjectType": "function",
+  "module": "./dummy-function.js",
+  "mock": ["./logger.contract.yaml", "./dummy-class.contract.yaml"],
   "fns": {
-    "constructor": {
+    "add": {
       "terms": [
-        {
-          "params": [{ "db": "mock-db", "logger": "mock-logger" }],
-          "result": {}
-        }
+        { "params": [1, 2], "result": 3 }
       ]
     },
-    "findById": {
+    "callClass": {
       "terms": [
-        {
-          "params": [1],
-          "result": { "id": 1, "name": "John", "email": "john@example.com" }
-        },
-        {
-          "params": [999],
-          "result": null
-        },
-        {
-          "params": [-1],
-          "result": { "__type": "Error", "message": "Invalid ID" }
-        }
+        { "params": [1, 2, 3], "result": 6 }
       ]
     },
-    "create": {
-      "mocks": ["./validators/user-validator.contract.yaml"],
+    "errorIfMoreThenTen": {
       "terms": [
-        {
-          "params": [{ "name": "John", "email": "john@example.com" }],
-          "result": { "id": 1, "name": "John", "created": true }
-        },
-        {
-          "params": [{ "name": "" }],
-          "result": { "__type": "Error", "message": "Name required" }
-        }
-      ]
-    },
-    "sendWelcomeEmail": {
-      "terms": [
-        {
-          "params": [1],
-          "result": {
-            "__type": "PromiseResolve",
-            "value": { "sent": true, "messageId": "msg-abc123" }
-          }
-        }
+        { "params": [1], "result": 1 },
+        { "params": [11], "error": "More then 10" }
       ]
     }
   }
 }
 ```
 
----
+### Output: AnyContract (at runtime)
 
-## Implementation Components
+The loader resolves the module, loads mocks, and converts error terms. Error values are transformed: the `error` field is removed and the Error object becomes the `result`:
 
-### 1. YAML Parser Module (`src/parser/`)
-
-```
-src/parser/
-├── index.ts                    # Main export
-├── yaml-parser.ts              # YAML file reader
-├── shorthand-parser.ts         # Shorthand string parsing
-├── special-type-parser.ts      # Error/Promise parsing
-└── contract-transformer.ts     # YAML -> JSON transformation
-```
-
-### 2. Parser Interface
-
-```typescript
-interface YamlContractParser {
-  // Parse YAML file to JSON contract
-  parseFile(path: string): Promise<JsonContract>
-
-  // Parse YAML string to JSON contract
-  parseString(yaml: string): JsonContract
-
-  // Parse multiple YAML files (for mocks resolution)
-  parseFiles(paths: string[]): Promise<JsonContract[]>
+```json
+{
+  "module": "[resolved module object]",
+  "subjectName": "dummyFunction",
+  "mock": "[function that sets up mocks and returns revert functions]",
+  "fns": {
+    "add": {
+      "terms": [
+        { "constructorParams": [], "params": [1, 2], "result": 3 }
+      ]
+    },
+    "callClass": {
+      "terms": [
+        { "constructorParams": [], "params": [1, 2, 3], "result": 6 }
+      ]
+    },
+    "errorIfMoreThenTen": {
+      "terms": [
+        { "constructorParams": [], "params": [1], "result": 1 },
+        { "constructorParams": [], "params": [11], "result": "[Error: More then 10]" }
+      ]
+    }
+  }
 }
 ```
 
-### 3. Integration with Existing Library
-
-```typescript
-// New entry point for YAML-based testing
-import { yamlContractor } from 'test-contractor/yaml'
-
-// Auto-discovers and runs *.contract.yaml files
-yamlContractor.testDir('./src')
-
-// Or parse individual files
-const contract = await yamlContractor.parse('./user.contract.yaml')
-contractor(contract, 'findById')
-```
+Key differences from the intermediate model:
+- `module` is the actual imported module object, not a string path
+- `mock` is a function (not an array of paths)
+- `error` from terms is converted to `result` as an Error instance
+- `constructorParams` defaults to `[]` when not specified
+- Per-function `mock` entries become mock setup functions
 
 ---
 
-## Special Type Encoding
-
-### Error Objects
+## Test Runner API
 
 ```typescript
-// YAML
-result: new Error("Message")
+import { contractorTestRunner } from 'test-contractor'
 
-// JSON encoding
-{ "__type": "Error", "message": "Message" }
+// Discover and run all *.contract.yaml in a directory
+await contractorTestRunner.dir('./src')
 
-// Runtime decoding
-if (result.__type === 'Error') {
-  return new Error(result.message)
-}
+// Run a specific contract file
+contractorTestRunner.file('./src/my-service.contract.yaml')
+
+// Run an already-loaded contract
+contractorTestRunner.contract(myAnyContract)
 ```
 
-### Promise Objects
-
-```typescript
-// YAML - Resolve
-result: Promise.resolve({ id: 1 })
-
-// JSON encoding
-{ "__type": "PromiseResolve", "value": { "id": 1 } }
-
-// YAML - Reject
-result: Promise.reject(new Error("Failed"))
-
-// JSON encoding
-{ "__type": "PromiseReject", "error": { "__type": "Error", "message": "Failed" } }
-
-// Runtime decoding
-if (result.__type === 'PromiseResolve') {
-  return Promise.resolve(result.value)
-}
-if (result.__type === 'PromiseReject') {
-  return Promise.reject(new Error(result.error.message))
-}
-```
+The `dir()` method uses glob to find `**/*.contract.yaml` files (excluding `__fixtures__` directories) and runs each one sequentially.
 
 ---
 
 ## Summary
 
-| Aspect | YAML (Source) | JSON (Target) |
-|--------|---------------|---------------|
-| **Purpose** | Human-friendly authoring | Machine-readable, library-compatible |
-| **Format** | Flexible (shorthand/native/block) | Structured JSON object |
-| **Module** | Path string | Path string (resolved at runtime) |
-| **Subject** | `subject` field | `subjectName` field |
-| **Methods** | `methods` object | `fns` object |
-| **Constructor** | `constructor` array | `fns.constructor` |
-| **Special Types** | TypeScript syntax | Encoded with `__type` marker |
-| **Shorthand** | `"[a, b] => c"` | `{ params: [a, b], result: c }` |
-
----
-
-## Next Steps
-
-1. **Implement YAML Parser** - Create `src/parser/` module
-2. **Add Special Type Handling** - Error and Promise encoding/decoding
-3. **Create JSON Schema** - Validate JSON output structure
-4. **Update Test Runner** - Support `*.contract.yaml` discovery
-5. **Add CLI Command** - `npx test-contractor yaml-to-json ./contract.yaml`
+| Aspect | YAML (Source) | Model (Intermediate) | AnyContract (Runtime) |
+|--------|---------------|----------------------|-----------------------|
+| **Purpose** | Human authoring | Validated data structure | Test execution |
+| **Module** | Path string | Path string | Resolved module object |
+| **Subject** | `subject` field | `subjectName` field | `subjectName` field |
+| **Methods** | `methods` object | `fns` object | `fns` object |
+| **Constructor** | `constructor` section | `fns.CONSTRUCTOR` | `fns.CONSTRUCTOR` |
+| **Self** | `methods.__self__` | `fns.SELF` | `fns.SELF` |
+| **Errors** | `error:` field on term | `error` field preserved | Converted to Error in `result` |
+| **Special types** | TypeScript-like strings | Parsed to real objects | Real objects |
+| **Mocks** | `mock:` (singular) | `mock: string[]` | `mock: ContractMock` function |
+| **Mock functions** | `mockFunction: [name]` | `mockFunction: string[]` | Resolved to internal mocks |

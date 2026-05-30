@@ -1,4 +1,8 @@
- 	# Contract YAML Format - Final Proposal
+# Contract YAML Format - Implementation Reference
+
+This document describes the YAML contract format as it is currently implemented in `test-contractor`. It covers the file structure, all supported fields, special value markers, and the internal representation.
+
+---
 
 ## Overview
 
@@ -67,32 +71,6 @@ terms:
     result:
       created: true
       userId: 123
-
-  # Multiple params: string + object + array
-  - params:
-      - "admin@example.com"  # simple string (admin email)
-      - action: create       # complex action config
-        scope: user
-        permissions:
-          - read
-          - write
-      - ["log", "audit"]     # simple array (tags)
-    result:
-      authorized: true
-
-  # Constructor + method params: both mixed types
-  - constructorParams:
-      - "production"         # simple string (environment)
-      - retries: 3           # complex config object
-        timeout: 5000
-    params:
-      - 42                   # simple number (resourceId)
-      - include:
-          - metadata
-          - relations
-        exclude: ["internal"]
-    result:
-      resource: found
 ```
 
 ### 3. Block Scalar Format
@@ -155,42 +133,6 @@ terms:
         profile:
           name: John
           avatar: null
-
-  # Multiple params: simple + complex (mixed formats)
-  - params:
-      - 123                        # simple (native)
-      - |                          # complex (block scalar JSON)
-        { "name": "John", "settings": { "theme": "dark" } }
-    result: "ok"
-
-  # Simple string + native object + simple array
-  - params:
-      - "user@example.com"         # simple string
-      - role: admin                # complex object (native)
-        permissions:
-          - read
-          - write
-          - delete
-      - ["tag1", "tag2"]           # simple array
-    result:
-      invited: true
-
-  # Constructor (mixed) + params (mixed)
-  - constructorParams:
-      - "dev"                      # simple environment
-      - host: localhost            # complex db config
-        port: 5432
-        ssl: true
-    params:
-      - 42                         # simple id
-      - fields:                    # complex query options
-          - id
-          - name
-          - email
-        filters:
-          status: active
-    result:
-      data: loaded
 ```
 
 ---
@@ -198,52 +140,48 @@ terms:
 ## Complete Schema
 
 ```yaml
-$schema: https://your-domain.com/schemas/contract-v1.json
-
-# Module path (required)
+# Module path (required) - relative path to JS module, or 'global' for globalThis
 module: ./my-service
 
-# Subject name: class, function, or constant (required)
+# Subject name: class or function exported from the module (required)
 subject: MyService
 
-# Optional: Subject type
-# - class (default if methods defined)
-# - function (default if only terms)
-# - constant
+# Subject type (required): 'function' or 'class'
+# Inferred automatically: 'class' if constructor field exists, 'function' otherwise
 subjectType: class
 
-# Optional: Mock contracts to load
-mocks:
+# Optional: Mock contracts to load at the contract level
+mock:
   - ./dependency.contract.yaml
   - ./another.contract.yaml
 
-# Optional: Constructor terms
+# Optional: Constructor terms (for class subjects only)
 constructor:
   - params: [config-string]
     result: {}
 
-  - constructorParams: [db-connection]
-    params: [options]
+  - params: [db-connection, options]
     result:
       connected: true
 
-# Optional: Terms for function subjects
-terms:
-  - "[input] => output"
-
-# Optional: Methods for class subjects
+# Required: Methods map
+# For function subjects, use __self__ to test the function itself
 methods:
+  # Function subject: test the function directly
+  __self__:
+    terms:
+      - params: [1]
+        result: 1
+
+  # Class method
   methodName:
-    # Optional: Method-specific mocks
-    mocks:
+    # Optional: Method-specific mock contracts
+    mock:
       - ./service.contract.yaml
 
-    # Optional: Setup function to run before terms
-    setup: |
-      (ctx) => {
-        ctx.db = createTestDb()
-        return () => ctx.db.close()
-      }
+    # Optional: Internal method names to mock within same subject
+    mockFunction:
+      - _internalHelper
 
     # Required: Test terms
     terms:
@@ -253,127 +191,274 @@ methods:
     terms:
       - params: [1, 2]
         result: 3
+      - params: [-1]
+        error: Invalid input
 ```
+
+### Field Reference
+
+| Field | Level | Required | Description |
+|-------|-------|----------|-------------|
+| `module` | contract | yes | Relative path to JS module, or `global` |
+| `subject` | contract | yes | Name of the exported function/class (mapped to `subjectName` internally) |
+| `subjectType` | contract | auto | `function` or `class`. Auto-inferred from presence of `constructor` |
+| `mock` | contract | no | List of contract YAML paths to use as mocks |
+| `constructor` | contract | no | Constructor term definitions (class subjects). Stored internally as `fns.CONSTRUCTOR` |
+| `methods` | contract | yes | Map of method names to term definitions. Stored internally as `fns` |
+| `methods.__self__` | methods | - | For function subjects, references the function itself. Stored internally as `fns.SELF` |
+| `mock` | method | no | List of contract YAML paths to use as mocks for this specific method |
+| `mockFunction` | method | no | List of internal method names to mock within the same subject |
+| `terms` | method | yes | Array of test terms (input/output cases) |
+| Term: `params` | term | no | Input parameters array |
+| Term: `result` | term | one of | Expected return value |
+| Term: `error` | term | one of | Expected thrown error (string or object) |
+| Term: `constructorParams` | term | no | Constructor args for class method calls |
+| Term: `returnFnParams` | term | no | Parameters to call the returned function with |
 
 ---
 
-## Custom YAML Tags (Runtime Objects)
+## Special Value Markers (Post-Parse String Transformation)
 
-To get real JavaScript objects at runtime (not just JSON strings), we use **custom YAML tags** with `js-yaml`:
+The parser recognizes TypeScript-style string patterns and transforms them into real JavaScript objects after YAML parsing. This is done by `special-object.ts`, which delegates to dedicated parsers. The transformation is recursive -- it applies to all string values in params, result, error, constructorParams, and returnFnParams, including within nested objects and arrays.
 
-### Available Tags
+### Special Object Parsers
 
-| Tag | YAML Example | JavaScript Result |
-|-----|--------------|-------------------|
-| `!error` | `!error "Message"` | `new Error("Message")` |
-| `!resolve` | `!resolve { id: 1 }` | `Promise.resolve({ id: 1 })` |
-| `!reject` | `!reject "Failed"` | `Promise.reject(new Error("Failed"))` |
-| `!date` | `!date "2024-01-15"` | `new Date("2024-01-15")` |
-| `!regex` | `!regex "/^[a-z]+$/gi"` | `new RegExp("^[a-z]+$", "gi")` |
+| String Pattern | JavaScript Result | Parser |
+|----------------|-------------------|--------|
+| `new Error("message")` | `Error` instance | `error.ts` |
+| `new Error("message", { name: "CustomName" })` | `Error` with custom `.name` | `error.ts` |
+| `Promise.resolve(value)` | Resolved `Promise` | `promise.ts` |
+| `Promise.reject(new Error("msg"))` | Rejected `Promise` | `promise.ts` |
+| `new Date("2024-01-15")` | `Date` instance | `date.ts` |
+| `new RegExp("pattern", "flags")` | `RegExp` instance | `regex.ts` |
 
-### Usage Example
+### Marker Tokens
+
+| Token | JavaScript Result |
+|-------|-------------------|
+| `__fn__` | No-op function: `() => {}` |
+| `__fn_identity__` | Identity function: `(x) => x` |
+| `__class_ref:ClassName__` | Class reference from `globalThis` (e.g. `__class_ref:Date__` -> `Date`) |
+| `__import__:modulePath:propertyName__` | Dynamically imported property (resolved at load time) |
+
+### Error Pattern
+
+```
+new Error("message")
+new Error('message')
+new Error("message", { name: "CustomErrorName" })
+```
+
+The error parser uses the regex `/^new Error\(\s*(['"`])(.*?)\1\s*(?:,\s*(\{[^}]+\}))?\s*\)$/` and supports:
+- Single, double, or backtick quotes
+- Optional second argument with a `name` property for custom error names
+
+### Promise Pattern
+
+```
+Promise.resolve(42)
+Promise.resolve("hello")
+Promise.resolve(null)
+Promise.resolve(undefined)
+Promise.resolve({ id: 1, name: "test" })
+Promise.reject(new Error("failed"))
+Promise.reject("error reason")
+```
+
+The promise parser uses:
+- Resolve: `/^Promise\.resolve\((.*)\)$/s`
+- Reject: `/^Promise\.reject\((.*)\)$/s`
+
+Inner values are parsed as JSON-like (unquoted object keys are supported, single quotes are converted to double quotes).
+
+### Date Pattern
+
+```
+new Date("2024-01-15")
+new Date("2024-01-15T10:30:00Z")
+new Date('2024-06-20')
+```
+
+Regex: `/^new Date\(\s*(['"`])(.*?)\1\s*\)$/`
+
+Invalid dates are silently ignored (the string is left unchanged).
+
+### RegExp Pattern
+
+```
+new RegExp("^[a-z]+$")
+new RegExp("^[a-z]+$", "gi")
+new RegExp('^test$', 'i')
+```
+
+Regex: `/^new RegExp\(\s*(['"`])(.*?)\1\s*(?:,\s*(['"`])(.*?)\3\s*)?\)$/`
+
+Invalid regular expressions are silently ignored (the string is left unchanged).
+
+### Usage in YAML
+
+Special values can appear anywhere a string value is expected. They are quoted in YAML to ensure the parser receives them as strings for post-parse transformation:
 
 ```yaml
 terms:
-  # Returns real Error object
+  # Error as result
   - params: [-1]
-    result: !error "Invalid ID"
+    result: 'new Error("Invalid ID")'
 
-  # Returns real Promise
+  # Error as thrown error
+  - params: [-1]
+    error: 'new Error("Invalid ID")'
+
+  # Resolved promise as result
   - params: [1]
-    result: !resolve { id: 1, name: "John" }
+    result: 'Promise.resolve({ id: 1, name: "John" })'
 
-  # Returns rejected Promise
+  # Rejected promise as error
   - params: [999]
-    result: !reject "User not found"
+    error: 'Promise.reject(new Error("User not found"))'
+
+  # Date and RegExp in params
+  - params:
+      - 'new Date("2024-01-15")'
+      - 'new RegExp("^[a-z]+$", "gi")'
+    result: true
+
+  # No-op function as param
+  - params:
+      - __fn__
+    result: ok
+
+  # Class reference as param
+  - params:
+      - __class_ref:Date__
+    result: true
 ```
 
-### Implementation
+---
+
+## TypeScript Model Types
+
+The internal representation after parsing, from `src/business/model/yaml-contract-model.ts`:
 
 ```typescript
-import yaml from 'js-yaml'
+export type YamlContractSubjectType = 'function' | 'class'
 
-const ErrorYamlType = new yaml.Type('!error', {
-  kind: 'scalar',
-  construct: (data: string) => new Error(data),
-})
+export type YamlContractTerm = {
+  params?: unknown[]
+  result?: unknown
+  error?: unknown
+  constructorParams?: unknown[]
+  returnFnParams?: unknown[]
+}
 
-const PromiseResolveYamlType = new yaml.Type('!resolve', {
-  kind: 'mapping', // or 'scalar' for simple values
-  construct: (data) => Promise.resolve(data),
-})
+export type YamlContractFunction = {
+  terms: YamlContractTerm[]
+  mock?: string[]
+  mockFunction?: string[]
+}
 
-const CONTRACT_SCHEMA = yaml.DEFAULT_SCHEMA.extend({
-  explicit: [ErrorYamlType, PromiseResolveYamlType, /* ... */],
-})
-
-// Parse with custom schema
-const contract = yaml.load(yamlContent, { schema: CONTRACT_SCHEMA })
-
-// Result is real JS objects
-contract.methods.findById.terms[0].result // => Error object
-contract.methods.findById.terms[1].result // => Promise object
+export type YamlContractModel = {
+  subjectName: string       // mapped from YAML 'subject'
+  subjectType: YamlContractSubjectType
+  module: string
+  mock?: string[]
+  fns: Record<string, YamlContractFunction>  // mapped from YAML 'methods'
+}
 ```
+
+### Key Field Mappings (YAML to Model)
+
+| YAML Field | Model Field | Notes |
+|------------|-------------|-------|
+| `subject` | `subjectName` | Renamed during parsing |
+| `methods` | `fns` | Renamed during parsing |
+| `constructor` | `fns.CONSTRUCTOR` | Moved into fns with special key |
+| `methods.__self__` | `fns.SELF` | Moved into fns with special key |
+| `mock` | `mock` | Same at both contract and method level |
 
 ---
 
-## TypeScript Parameter Types
+## error vs result on Terms
 
-### Primitive Types
+Each term must have either `result` or `error` (validated by `YamlContractModelValidator`):
 
-| Type | YAML Example | Description |
-|------|--------------|-------------|
-| `string` | `"hello"` or `'hello'` | Text values |
-| `number` | `42` or `3.14` or `1e10` | Integers and floats |
-| `boolean` | `true` or `false` | Boolean values |
-| `null` | `null` or `~` | Null/undefined |
-| `undefined` | `undefined` (or omit key) | Explicit undefined |
-
-### Composite Types
-
-| Type | YAML Example | Description |
-|------|--------------|-------------|
-| `array` | `[1, 2, 3]` | Array/list |
-| `object` | `{ key: value }` | Plain object |
-
-### Special Types
-
-| Type | YAML Example | Description |
-|------|--------------|-------------|
-| `Error` | `new Error("message")` | Error instance (matches TypeScript syntax) |
-| `Promise` | `Promise.resolve(value)` | Resolved promise (test runner awaits) |
-| `Promise` | `Promise.reject(new Error("msg"))` | Rejected promise |
+- `result`: The expected return value. The test runner compares the actual return against this.
+- `error`: The expected thrown error. The test runner catches the thrown value and compares. The `error` field supports:
+  - A plain string: `error: Something went wrong` (converted to `new Error("Something went wrong")`)
+  - A special object string: `error: 'new Error("Custom error")'` (parsed to an Error instance)
+  - An object with `message`: `error: { message: "fail", name: "CustomError" }`
+  - A promise: `error: 'Promise.reject(new Error("async fail"))'`
 
 ---
 
-## Special Type Definitions
+## mockFunction (Intra-Subject Mocking)
 
-### Error Types
-
-```yaml
-# Simple error (matches TypeScript syntax)
-result: new Error("Something went wrong")
-
-# Error in params
-params:
-  - new Error("Input validation failed")
-```
-
-### Promise Types
+The `mockFunction` field on a method definition allows mocking other methods within the same subject. This is useful for testing methods that depend on internal helpers:
 
 ```yaml
-# Resolved promise - test runner awaits and compares the resolved value
-result: !resolve { id: 1, name: "John" }
-
-# Rejected promise - test runner catches and compares the error
-result: !reject "User not found"
-
-# Simple resolved value
-result: !resolve "success"
+subject: logger
+module: ./logger.js
+subjectType: function
+methods:
+  _message:
+    mock:
+      - ./date-mock.yaml
+    terms:
+      - params: ['type', 'test-message']
+        result: '2020-01-01T00:00:00.000Z:TYPE:test-message'
+  debug:
+    mockFunction: [_message]
+    terms:
+      - params: ['test-message']
+        result: '2020-01-01T00:00:00.000Z:DEBUG:test-message'
 ```
 
-> **Note:** We use custom YAML tags (`!resolve`, `!reject`, `!error`) instead of TypeScript syntax.
-> This allows js-yaml to create real JavaScript objects at runtime.
+When `debug` is tested, the `_message` method of the same subject is mocked according to its own contract terms. A method cannot mock itself via `mockFunction`.
+
+---
+
+## __self__ Convention for Function Subjects
+
+Function subjects use `methods.__self__` to define terms for the function itself. This is because the `methods` map is the standard location for all callable members:
+
+```yaml
+subject: simpleFunction
+module: ./simple-function.js
+subjectType: function
+methods:
+  __self__:
+    terms:
+      - params: [1]
+        result: 1
+      - params: [11]
+        error: number is greater than ten
+```
+
+Internally, `__self__` is mapped to the special key `SELF` in the model's `fns` record.
+
+---
+
+## __import__ Dynamic Import Marker
+
+The `__import__:modulePath:propertyName` marker allows referencing values from external modules:
+
+```yaml
+terms:
+  - params:
+      - __import__:./constants.js:MAX_VALUE
+    result: 100
+```
+
+This is resolved during contract loading (in `contract-loader.ts`). The path is resolved relative to the contract file. Nested properties are supported with dot notation: `__import__:./config.js:database.host`.
+
+The `mock` field also supports `__import__:` prefixed paths to load mock functions from external modules:
+
+```yaml
+mock:
+  - __import__:./my-mock-function.js
+```
+
+In this case, the referenced module must export a default function that returns an array of revert functions.
 
 ---
 
@@ -382,229 +467,188 @@ result: !resolve "success"
 ### Simple Function Contract
 
 ```yaml
-$schema: https://your-domain.com/schemas/contract-v1.json
-module: ./utils/math
-subject: add
-
-terms:
-  - "[1, 2] => 3"
-  - "[-1, 1] => 0"
-  - params: [0.1, 0.2]
-    result: 0.3
+subject: simpleFunction
+module: ./simple-function.js
+subjectType: function
+methods:
+  __self__:
+    terms:
+      - params: [1]
+        result: 1
+      - params: [11]
+        error: number is greater than ten
 ```
 
-### Function with Constructor Shorthand
+### Class with Constructor and Methods
 
 ```yaml
-$schema: https://your-domain.com/schemas/contract-v1.json
-module: ./services/db-client
-subject: DbClient
+subject: DummyClass
+module: ./dummy-class.js
 subjectType: class
-
 constructor:
-  - params: ["postgresql://localhost:5432/test"]
-    result: {}
-
+  terms:
+    - params: [1, 2]
+      result: { __a: 1, __b: 2 }
 methods:
-  query:
+  add:
     terms:
-      # Shorthand with constructor override
-      - "(['sqlite://memory']); ['SELECT 1'] => [{ value: 1 }]"
-      - "(['sqlite://memory']); ['SELECT * FROM users'] => []"
+      - constructorParams: [1, 2]
+        params: [3]
+        result: 6
+  sub:
+    terms:
+      - constructorParams: [1, 2]
+        params: [1]
+        result: 2
 ```
 
-### Service with Dependencies
+### Function with Dependencies (Contract-Level Mock)
 
 ```yaml
-$schema: https://your-domain.com/schemas/contract-v1.json
-module: ./services/user-service
-subject: UserService
+subject: dummyFunction
+module: ./dummy-function.js
+subjectType: function
+mock:
+  - ./logger.contract.yaml
+  - ./dummy-class.contract.yaml
+methods:
+  add:
+    terms:
+      - params: [1, 2]
+        result: 3
+  errorIfMoreThenTen:
+    terms:
+      - params: [1]
+        result: 1
+      - params: [11]
+        error: 'More then 10'
+```
+
+### Method-Level Mock and mockFunction
+
+```yaml
+subject: logger
+module: ./logger.js
+subjectType: function
+methods:
+  _message:
+    mock:
+      - ./date-mock.yaml
+    terms:
+      - params: ['type', 'test-message']
+        result: '2020-01-01T00:00:00.000Z:TYPE:test-message'
+  debug:
+    mockFunction: [_message]
+    terms:
+      - params: ['test-message']
+        result: '2020-01-01T00:00:00.000Z:DEBUG:test-message'
+```
+
+### Multi-Method Function Contract
+
+```yaml
+subject: calculator
+module: ./calculator.js
+subjectType: function
+methods:
+  add:
+    terms:
+      - params: [1, 2]
+        result: 3
+      - params: [0, 0]
+        result: 0
+      - params: [-1, 5]
+        result: 4
+  divide:
+    terms:
+      - params: [10, 2]
+        result: 5
+      - params: [10, 0]
+        error: Division by zero
+```
+
+### Class with Constructor Terms
+
+```yaml
+subject: Calculator
+module: ./calculator.js
 subjectType: class
-
-mocks:
-  - ./repositories/user-repo.contract.yaml
-  - ./services/email.contract.yaml
-
 constructor:
-  - params:
-      - db: mock-db
-        logger: mock-logger
-    result: {}
-
+  terms:
+    - params: []
+      result: {}
 methods:
-  findById:
+  add:
     terms:
-      - params: [1]
-        result:
-          id: 1
-          name: John
-          email: john@example.com
-
-      - params: [999]
-        result: null
-
-      - params: [-1]
-        result: new Error("Invalid ID")
-
-  create:
-    mocks:
-      - ./validators/user-validator.contract.yaml
+      - params: [2, 3]
+        result: 5
+      - params: [0, 0]
+        result: 0
+  multiply:
     terms:
-      - params:
-          - name: John
-            email: john@example.com
-        result:
-          id: 1
-          name: John
-          created: true
-
-      - params:
-          - name: ""
-        result: new Error("Name required")
-
-  sendWelcomeEmail:
-    terms:
-      - params: [1]
-        result:
-          sent: true
-          messageId: "msg-abc123"
+      - params: [2, 3]
+        result: 6
 ```
 
-### Complex Nested Objects
+### Special Objects in Nested Structures
 
 ```yaml
-$schema: https://your-domain.com/schemas/contract-v1.json
-module: ./services/order-service
-subject: OrderService
-
+subject: myService
+module: ./my-service.js
+subjectType: function
 methods:
-  createOrder:
+  complexOp:
     terms:
-      # Using native YAML - clean and readable
       - params:
-          - userId: 123
-            items:
-              - productId: 1
-                quantity: 2
-                price: 9.99
-              - productId: 5
-                quantity: 1
-                price: 19.99
-            shipping:
-              address:
-                street: 123 Main St
-                city: New York
-                zip: "10001"
-                country: USA
-              method: express
-            payment:
-              method: credit_card
-              token: tok_visa
-        result:
-          orderId: "ord-abc123"
-          total: 39.97
-          status: pending
-          estimatedDelivery: "2024-01-15"
-
-      # Mixed: JSON block for params, shorthand for result
-      - params:
-          - |
-            {
-              "userId": 456,
-              "items": [{"productId": 10, "quantity": 1}],
-              "rush": true
-            }
-        result: "order-created"
-
-      # Error case
-      - params:
-          - userId: null
-            items: []
-        result: new Error("Invalid order")
+          - error: 'new Error("nested error")'
+            date: 'new Date("2024-06-01")'
+        result: true
 ```
 
-### Async Operations
+### Method with Per-Function Mock
 
 ```yaml
-$schema: https://your-domain.com/schemas/contract-v1.json
-module: ./services/api-client
-subject: ApiClient
-
+subject: DummyClass
+module: ./dummy-class.js
+subjectType: class
+constructor:
+  terms:
+    - params: [1, 2]
+      result: { __a: 1, __b: 2 }
 methods:
-  fetchUser:
+  externalAdd:
+    mock:
+      - ./dummy-function.contract.yaml
     terms:
-      # Resolved promise
-      - params: [1]
-        result: Promise.resolve({ id: 1, name: "John", email: "john@example.com" })
-
-      # Rejected promise
-      - params: [999]
-        result: Promise.reject(new Error("User not found"))
-
-  fetchAll:
-    terms:
-      # Resolved with array
-      - params: []
-        result:
-          Promise.resolve:
-            - id: 1
-              name: John
-            - id: 2
-              name: Jane
+      - constructorParams: [1, 2]
+        params: [3]
+        result: 6
 ```
 
 ---
 
-## TypeScript Parser Interface
+## Implementation Structure
 
-```typescript
-// Core types
-export type Primitive = string | number | boolean | null | undefined
-export type JsonValue = Primitive | JsonValue[] | { [key: string]: JsonValue }
+The YAML parser lives at `src/business/component/yaml-parser/`:
 
-// Special type pattern detectors
-export const ERROR_PATTERN = /^new Error\((.*)\)$/
-export const PROMISE_RESOLVE_PATTERN = /^Promise\.resolve\((.*)\)$/
-export const PROMISE_REJECT_PATTERN = /^Promise\.reject\((.*)\)$/
-
-// Term definition
-export interface Term {
-  params?: unknown[]
-  constructorParams?: unknown[]
-  result: unknown
-  setup?: string // Setup function body
-  timeout?: number // Test timeout override
-  skip?: boolean | string
-  only?: boolean
-}
-
-// Shorthand parser regex patterns
-// Basic: "[params] => result"
-// With ctor: "([ctorParams]); [params] => result"
-export const SHORTHAND_PATTERNS = {
-  withConstructor: /^\(([^)]*)\);\s*\[([^\]]*)\]\s*=>\s*(.+)$/,
-  basic: /^\[([^\]]*)\]\s*=>\s*(.+)$/,
-} as const
-
-// Method definition
-export interface MethodDefinition {
-  mocks?: string[]
-  setup?: string
-  terms: Term[]
-}
-
-// Contract definition
-export interface ContractDefinition {
-  $schema?: string
-  module: string
-  subject: string
-  subjectType?: 'class' | 'function' | 'constant'
-  mocks?: string[]
-  constructor?: Term[]
-  terms?: Term[]
-  methods?: Record<string, MethodDefinition>
-}
 ```
+src/business/component/yaml-parser/
+  index.ts              # Public exports
+  contract-parser.ts    # Parses YAML string/file to YamlContractModel
+  contract-loader.ts    # Loads contract files, resolves mocks, creates AnyContract
+  shorthand-parser.ts   # Shorthand "[params] => result" parsing
+  special-object.ts     # Dispatches special string marker parsing
+  error.ts              # Parses new Error("...") strings
+  promise.ts            # Parses Promise.resolve/reject strings
+  date.ts               # Parses new Date("...") strings
+  regex.ts              # Parses new RegExp("...") strings
+```
+
+The model type definitions are at `src/business/model/yaml-contract-model.ts`.
+
+Special function name enums are at `src/enum/special-fn-name.ts`:
+- `CONSTRUCTOR` -- internal key for constructor terms
+- `SELF` -- internal key for `__self__` method
 
 ---
 
@@ -631,8 +675,23 @@ export interface ContractDefinition {
 - `[]` - Wraps the params array
 - `=>` - Separates params from result
 
+### Special Value Syntax Reference
+
+| Pattern | Result Type |
+|---------|-------------|
+| `new Error("msg")` | `Error` |
+| `new Error("msg", { name: "N" })` | `Error` with `.name` |
+| `Promise.resolve(val)` | Resolved `Promise` |
+| `Promise.reject(err)` | Rejected `Promise` |
+| `new Date("iso")` | `Date` |
+| `new RegExp("p", "f")` | `RegExp` |
+| `__fn__` | `() => undefined` |
+| `__fn_identity__` | `(x) => x` |
+| `__class_ref:Name__` | Class from `globalThis` |
+| `__import__:path:prop` | Dynamic import |
+
 This format provides:
 - **Flexibility**: Choose the syntax that fits each case
 - **Readability**: Native YAML for complex objects, shorthand for simple
-- **Type Safety**: Full TypeScript type definitions
+- **Type Safety**: Full TypeScript type definitions with validation
 - **Familiarity**: Uses TypeScript syntax for special types (`new Error("msg")`, `Promise.resolve(value)`)
