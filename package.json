@@ -2,7 +2,7 @@
 	"name": "@beecode/msh-test-contractor",
 	"version": "0.4.2",
 	"description": "Test Contractor",
-	"keywords": [],
+	"keywords": ["testing", "contract", "mock", "vitest", "unit-test", "tdd"],
 	"homepage": "https://github.com/beecode-rs/msh-test-contractor#readme",
 	"bugs": {
 		"url": "https://github.com/beecode-rs/msh-test-contractor/issues"
