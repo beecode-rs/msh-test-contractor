@@ -1,7 +1,8 @@
-import { ContractReporter } from './src/contract/contract-reporter.js'
-import { contractYamlPlugin } from './src/vitest-plugin.js'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { coverageConfigDefaults, defineConfig } from 'vitest/config'
+
+import { ContractReporter } from '#src/contract/contract-reporter.js'
+import { contractYamlPlugin } from '#src/vitest-plugin.js'
 
 export default defineConfig({
 	plugins: [tsconfigPaths(), contractYamlPlugin()],
@@ -9,8 +10,8 @@ export default defineConfig({
 		coverage: {
 			exclude: ['lib/**', 'src/index.ts', 'src/**/__fixtures__/**', ...coverageConfigDefaults.exclude],
 		},
-		include: ['src/**/*.contract.yaml'],
 		exclude: ['src/**/__fixtures__/**'],
+		include: ['src/**/*.contract.yaml'],
 		mockReset: true,
 		passWithNoTests: true,
 		reporters: [new ContractReporter()],

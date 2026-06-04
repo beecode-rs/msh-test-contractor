@@ -1,14 +1,13 @@
 import c from 'tinyrainbow'
+import type { TestCase, TestModule, TestModuleState, TestSuite } from 'vitest/node'
 import { DefaultReporter } from 'vitest/reporters'
-
-import type { TestCase, TestModule, TestModuleState, TestSuite } from 'vitest/reporters'
 
 const INDENT = '  '
 const CONTRACT_SUFFIX = ' [contract]'
 const TERM_REGEX = /^input: (.+?)\s{2,}output: (.+)$/
 
 export class ContractReporter extends DefaultReporter {
-	protected override verbose = true
+	protected override _verbose = true
 	override renderSucceed = true
 
 	override printTestModule(testModule: TestModule): void {
@@ -20,27 +19,38 @@ export class ContractReporter extends DefaultReporter {
 		const relPath = this.relative(testModule.moduleId)
 		this.log()
 		this.log(c.dim(relPath))
-		this._printChildren(testModule.children.array(), 1, moduleState)
+		this._printChildren(testModule.children.array(), 1, moduleState, testModule.moduleId)
 	}
 
-	private _printChildren(children: (TestCase | TestSuite)[], depth: number, moduleState: TestModuleState): void {
+	protected _printChildren(
+		children: (TestCase | TestSuite)[],
+		depth: number,
+		moduleState: TestModuleState,
+		moduleId: string
+	): void {
 		for (const child of children) {
 			if (child.type === 'suite') {
-				this._printSuite(child, depth, moduleState)
+				this._printSuite(child, depth, moduleState, moduleId)
 			} else {
 				this._printTest(child, depth)
 			}
 		}
 	}
 
-	private _printSuite(suite: TestSuite, depth: number, moduleState: TestModuleState): void {
+	protected _printSuite(suite: TestSuite, depth: number, moduleState: TestModuleState, moduleId: string): void {
+		if (_isRedundantPathSuite(suite.name, moduleId)) {
+			this._printChildren(suite.children.array(), depth, moduleState, moduleId)
+
+			return
+		}
+
 		const indent = INDENT.repeat(depth)
 		const name = _cleanSuiteName(suite.name, depth)
 		this.log(`${indent}${c.bold(name)}`)
-		this._printChildren(suite.children.array(), depth + 1, moduleState)
+		this._printChildren(suite.children.array(), depth + 1, moduleState, moduleId)
 	}
 
-	private _printTest(test: TestCase, depth: number): void {
+	protected _printTest(test: TestCase, depth: number): void {
 		const indent = INDENT.repeat(depth)
 		const symbol = this.getStateSymbol(test)
 		const name = _formatTermName(test.name)
@@ -62,8 +72,12 @@ export class ContractReporter extends DefaultReporter {
 	}
 }
 
+const _isRedundantPathSuite = (suiteName: string, moduleId: string): boolean => {
+	return suiteName === moduleId
+}
+
 const _cleanSuiteName = (name: string, depth: number): string => {
-	if (depth >= 2 && name.endsWith(CONTRACT_SUFFIX)) {
+	if (depth >= 1 && name.endsWith(CONTRACT_SUFFIX)) {
 		return name.slice(0, -CONTRACT_SUFFIX.length)
 	}
 
@@ -71,9 +85,9 @@ const _cleanSuiteName = (name: string, depth: number): string => {
 }
 
 const _formatTermName = (name: string): string => {
-	const match = name.match(TERM_REGEX)
+	const match = TERM_REGEX.exec(name)
 	if (match) {
-		return `${match[1]} → ${match[2]}`
+		return `${String(match[1])} → ${String(match[2])}`
 	}
 
 	return name

@@ -74,6 +74,7 @@ Contract tests run via a Vite transform plugin that makes `.contract.yaml` files
 ### 1. Create `vitest.config.contract.ts`
 
 ```typescript
+import { ContractReporter } from '@beecode/msh-test-contractor/contract-reporter'
 import { contractYamlPlugin } from '@beecode/msh-test-contractor/vitest-plugin'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { coverageConfigDefaults, defineConfig } from 'vitest/config'
@@ -82,17 +83,20 @@ export default defineConfig({
 	plugins: [tsconfigPaths(), contractYamlPlugin()],
 	test: {
 		coverage: {
-			exclude: ['lib/**', ...coverageConfigDefaults.exclude],
+			exclude: ['lib/**', 'src/index.ts', 'src/**/__fixtures__/**', ...coverageConfigDefaults.exclude],
 		},
+		exclude: ['src/**/__fixtures__/**'],
 		include: ['src/**/*.contract.yaml'],
 		mockReset: true,
 		passWithNoTests: true,
-		reporters: ['verbose'],
-		setupFiles: ['./src/__tests__/index-jest-setup.ts'],
+		reporters: [new ContractReporter()],
+		setupFiles: ['./src/__tests__/index-vitest-setup.ts'],
 		watch: false,
 	},
 })
 ```
+
+**`ContractReporter`** is a purpose-built reporter for contract tests. It formats term names as `input: ... → output: ...`, strips redundant path suites, and shows pass/fail with duration — making contract test output readable at a glance. You can also use `'verbose'` if you prefer the default Vitest formatting.
 
 ### 2. Add `test:contract` script to `package.json`
 
