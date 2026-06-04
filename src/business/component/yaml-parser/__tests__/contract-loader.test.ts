@@ -18,12 +18,12 @@ describe('YamlParserContractLoader integration', () => {
 
 			expect(result.subjectName).toBe('join')
 			expect(result.module).toBeDefined()
-			expect(result.fns).toHaveProperty('default')
-			expect(result.fns.default?.terms).toHaveLength(2)
-			expect(result.fns.default?.terms[0]?.params).toEqual(['a', 'b'])
-			expect(result.fns.default?.terms[0]?.result).toBe('a/b')
-			expect(result.fns.default?.terms[1]?.params).toEqual(['x', 'y'])
-			expect(result.fns.default?.terms[1]?.result).toBe('x/y')
+			expect(result.fns).toHaveProperty('SELF')
+			expect(result.fns.SELF?.terms).toHaveLength(2)
+			expect(result.fns.SELF?.terms[0]?.params).toEqual(['a', 'b'])
+			expect(result.fns.SELF?.terms[0]?.result).toBe('a/b')
+			expect(result.fns.SELF?.terms[1]?.params).toEqual(['x', 'y'])
+			expect(result.fns.SELF?.terms[1]?.result).toBe('x/y')
 		})
 
 		it('loaded contract is structurally compatible with AnyContract type', async () => {
@@ -43,11 +43,11 @@ describe('YamlParserContractLoader integration', () => {
 				path: resolve(fixturesDir, 'function.contract.yaml'),
 			})
 
-			const fnName = 'default'
+			const fnName = 'SELF'
 			const fn = result.fns[fnName]!
 
 			const description = contractorService.testDescription({ fnName })
-			expect(description).toBe('default [contract]')
+			expect(description).toBe('SELF [contract]')
 
 			const testName = contractorService.testName({ term: fn.terms[0]! })
 			expect(testName).toBe('input: ["a","b"]   output: "a/b"')
@@ -58,7 +58,7 @@ describe('YamlParserContractLoader integration', () => {
 				path: resolve(fixturesDir, 'error.contract.yaml'),
 			})
 
-			const term = result.fns.default?.terms[0]
+			const term = result.fns.SELF?.terms[0]
 			expect(term?.result).toBeInstanceOf(Error)
 			if (term?.result instanceof Error) {
 				expect(term.result.message).toBe('Something went wrong')

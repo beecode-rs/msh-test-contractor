@@ -18,7 +18,7 @@ const getErrorMessage = (error: unknown): string => {
 
 export const contractorTestRunner = {
 	_file: async (fileLocation: string): Promise<void> => {
-		const absolutePath = path.join(process.cwd(), fileLocation)
+		const absolutePath = contractorTestRunner._resolveAbsolutePath(fileLocation)
 		let contract: AnyContract
 		try {
 			contract = await yamlLoader.load({ path: absolutePath })
@@ -27,9 +27,16 @@ export const contractorTestRunner = {
 		}
 		contractorTestRunner.contract(contract)
 	},
+	_resolveAbsolutePath: (fileLocation: string): string => {
+		if (path.isAbsolute(fileLocation)) {
+			return fileLocation
+		}
+
+		return path.join(process.cwd(), fileLocation)
+	},
 	contract: (contract: AnyContract): void => {
 		describe(contract.subjectName, () => {
-			// eslint-disable-line @typescript-eslint/no-unsafe-argument
+
 			Object.keys(contract.fns).forEach((fnName: string) => {
 				contractor(contract as any, fnName) // eslint-disable-line @typescript-eslint/no-explicit-any
 			})
@@ -42,9 +49,7 @@ export const contractorTestRunner = {
 			await contractorTestRunner._file(file)
 		}, Promise.resolve())
 	},
-	file: (fileLocation: string): void => {
-		describe(fileLocation, async () => {
-			await contractorTestRunner._file(fileLocation)
-		})
+	file: async (fileLocation: string): Promise<void> => {
+		await contractorTestRunner._file(fileLocation)
 	},
 }

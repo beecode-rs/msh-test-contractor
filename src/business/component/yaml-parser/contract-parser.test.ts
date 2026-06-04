@@ -473,6 +473,115 @@ methods:
 					expect(result.fns.transform.terms[0].params).toEqual([42, true, false, null])
 				})
 			})
+
+				describe('!undefined YAML tag', () => {
+					it('parses !undefined in params array as JavaScript undefined', () => {
+						const yamlString = `
+subject: myFunction
+module: ./my-module.js
+methods:
+  merge:
+    terms:
+      - params:
+          - !undefined
+          - !undefined
+        result: !undefined
+`
+						const result = yamlParserContract.parseString({ yaml: yamlString })
+
+						expect(result.fns.merge.terms[0].params).toEqual([undefined, undefined])
+						expect(result.fns.merge.terms[0].result).toBeUndefined()
+					})
+
+					it('parses !undefined mixed with regular values', () => {
+						const yamlString = `
+subject: myFunction
+module: ./my-module.js
+methods:
+  merge:
+    terms:
+      - params:
+          - !undefined
+          - name: alice
+        result:
+          name: alice
+`
+						const result = yamlParserContract.parseString({ yaml: yamlString })
+
+						expect(result.fns.merge.terms[0].params).toEqual([undefined, { name: 'alice' }])
+						expect(result.fns.merge.terms[0].result).toEqual({ name: 'alice' })
+					})
+
+					it('parses !undefined as object value', () => {
+						const yamlString = `
+subject: myFunction
+module: ./my-module.js
+methods:
+  merge:
+    terms:
+      - params:
+          - name: bob
+          - !undefined
+        result:
+          name: bob
+`
+						const result = yamlParserContract.parseString({ yaml: yamlString })
+
+						expect(result.fns.merge.terms[0].params).toEqual([{ name: 'bob' }, undefined])
+						expect(result.fns.merge.terms[0].result).toEqual({ name: 'bob' })
+					})
+
+					it('parses !undefined in error field', () => {
+						const yamlString = `
+subject: myFunction
+module: ./my-module.js
+methods:
+  mightFail:
+    terms:
+      - params: [1]
+        error: !undefined
+`
+						const result = yamlParserContract.parseString({ yaml: yamlString })
+
+						expect(result.fns.mightFail.terms[0].error).toBeUndefined()
+						expect(result.fns.mightFail.terms[0].result).toBeUndefined()
+					})
+
+					it('parses !undefined in constructorParams', () => {
+						const yamlString = `
+subject: MyClass
+module: ./my-module.js
+constructor:
+  terms:
+    - constructorParams:
+        - !undefined
+      params: [1]
+      result: 1
+`
+						const result = yamlParserContract.parseString({ yaml: yamlString })
+
+						expect(result.fns.CONSTRUCTOR.terms[0].constructorParams).toEqual([undefined])
+						expect(result.fns.CONSTRUCTOR.terms[0].params).toEqual([1])
+					})
+
+					it('preserves null as null (not undefined)', () => {
+						const yamlString = `
+subject: myFunction
+module: ./my-module.js
+methods:
+  transform:
+    terms:
+      - params:
+          - null
+          - !undefined
+        result: null
+`
+						const result = yamlParserContract.parseString({ yaml: yamlString })
+
+						expect(result.fns.transform.terms[0].params).toEqual([null, undefined])
+						expect(result.fns.transform.terms[0].result).toBeNull()
+					})
+				})
 		})
 
 		describe('US-004: Subject type inference', () => {

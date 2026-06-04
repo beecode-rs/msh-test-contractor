@@ -33,6 +33,18 @@ type RawYamlContract = Record<string, unknown> & {
 	mock?: string[]
 }
 
+const undefinedType = new yaml.Type('!undefined', {
+	kind: 'scalar',
+	resolve: () => {
+		return true
+	},
+	construct: () => {
+		return undefined
+	},
+})
+
+const customSchema = yaml.DEFAULT_SCHEMA.extend({ explicit: [undefinedType] })
+
 export class YamlParserContract {
 	protected readonly _specialObjectParser: YamlParserSpecialObject
 
@@ -54,7 +66,7 @@ export class YamlParserContract {
 
 	parseString(params: { yaml: string }): YamlContractModel {
 		const { yaml: yamlString } = params
-		const rawObject = yaml.load(yamlString)
+		const rawObject = yaml.load(yamlString, { schema: customSchema })
 
 		if (rawObject === null || typeof rawObject !== 'object') {
 			throw new Error('Invalid YAML: expected an object at the root')
@@ -227,15 +239,15 @@ export class YamlParserContract {
 	}): YamlContractTerm {
 		const result: YamlContractTerm = {}
 
-		if (parsed.constructorParams !== undefined) {
+		if (Object.hasOwn(parsed, 'constructorParams')) {
 			result.constructorParams = this._parseSpecialObjectsRecursively(parsed.constructorParams) as unknown[]
 		}
 
-		if (parsed.params !== undefined) {
+		if (Object.hasOwn(parsed, 'params')) {
 			result.params = this._parseSpecialObjectsRecursively(parsed.params) as unknown[]
 		}
 
-		if (parsed.result !== undefined) {
+		if (Object.hasOwn(parsed, 'result')) {
 			result.result = this._parseSpecialObjectsRecursively(parsed.result)
 		}
 
@@ -245,23 +257,23 @@ export class YamlParserContract {
 	protected _buildContractTermFromRaw(term: RawYamlTerm): YamlContractTerm {
 		const transformed: YamlContractTerm = {}
 
-		if (term.params !== undefined) {
+		if (Object.hasOwn(term, 'params')) {
 			transformed.params = this._parseSpecialObjectsRecursively(term.params) as unknown[]
 		}
 
-		if (term.result !== undefined) {
+		if (Object.hasOwn(term, 'result')) {
 			transformed.result = this._parseSpecialObjectsRecursively(term.result)
 		}
 
-		if (term.error !== undefined) {
+		if (Object.hasOwn(term, 'error')) {
 			transformed.error = this._parseSpecialObjectsRecursively(term.error)
 		}
 
-		if (term.constructorParams !== undefined) {
+		if (Object.hasOwn(term, 'constructorParams')) {
 			transformed.constructorParams = this._parseSpecialObjectsRecursively(term.constructorParams) as unknown[]
 		}
 
-		if (term.returnFnParams !== undefined) {
+		if (Object.hasOwn(term, 'returnFnParams')) {
 			transformed.returnFnParams = this._parseSpecialObjectsRecursively(term.returnFnParams) as unknown[]
 		}
 

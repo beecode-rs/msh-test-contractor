@@ -1,6 +1,46 @@
 # Special Object Syntax
 
-When `params` or `result` contain values that can't be expressed as plain YAML (Error instances, Date objects, Promises, etc.), use the special syntax patterns below. These are parsed at load time and converted to real JavaScript objects.
+When `params` or `result` contain values that can't be expressed as plain YAML (Error instances, Date objects, Promises, undefined, etc.), use the special syntax patterns below. These are parsed at load time and converted to real JavaScript objects.
+
+## Undefined — `!undefined`
+
+YAML has no native `undefined` type — bare `undefined` without quotes is parsed as the string `"undefined"`. Use the `!undefined` tag to pass actual JavaScript `undefined`.
+
+**Important:** `!undefined` must use block-style arrays. It cannot appear inside flow-style `[...]` arrays due to a js-yaml limitation.
+
+```yaml
+# ✓ Correct — block-style
+params:
+  - !undefined
+  - name: alice
+result: !undefined
+
+# ✗ Wrong — flow-style (causes parse error)
+params: [!undefined, { name: alice }]
+```
+
+Works in any field — `params`, `result`, `error`, `constructorParams`, nested inside objects:
+
+```yaml
+terms:
+  # undefined as a param
+  - params:
+      - !undefined
+      - name: alice
+    result:
+      name: alice
+
+  # undefined as result
+  - params: []
+    result: !undefined
+
+  # undefined nested in an object
+  - params:
+      - name: !undefined
+        age: 30
+    result:
+      age: 30
+```
 
 ## Error — `new Error(...)`
 

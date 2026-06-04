@@ -37,7 +37,7 @@ Read these files on-demand based on what you need:
 |---|---|
 | `references/contract-structure.md` | Always — core structure, required fields, subject types |
 | `references/term-types.md` | When writing params/results with primitives, objects, arrays, or errors |
-| `references/special-objects.md` | When using `new Error(...)`, `new Date(...)`, `Promise.resolve(...)`, `__fn__`, `__class_ref:`, `__import:` |
+| `references/special-objects.md` | When using `!undefined`, `new Error(...)`, `new Date(...)`, `Promise.resolve(...)`, `__fn__`, `__class_ref:`, `__import:` |
 | `references/mocking.md` | When the subject has dependencies that need mocking |
 | `references/examples.md` | When you want full end-to-end examples showing source + contract pairs |
 
@@ -67,12 +67,61 @@ After reading the source code, for each exported method ask yourself:
 
 Then write a term for each scenario that applies.
 
-## Test Runner Setup
+## Project Setup (one-time per package)
 
-Contract tests are executed through `contractorTestRunner`, imported from `#src/contract/contractor-test-runner.js`. The entry point is typically a `contract.test.ts` file at the project root:
+Contract tests run via a Vite transform plugin that makes `.contract.yaml` files directly executable — no entry `.test.ts` file needed. Each YAML file appears as its own filepath in the test output.
+
+### 1. Create `vitest.config.contract.ts`
 
 ```typescript
-import { contractorTestRunner } from '#src/contract/contractor-test-runner.js'
+import { contractYamlPlugin } from '@beecode/msh-test-contractor/vitest-plugin'
+import tsconfigPaths from 'vite-tsconfig-paths'
+import { coverageConfigDefaults, defineConfig } from 'vitest/config'
+
+export default defineConfig({
+	plugins: [tsconfigPaths(), contractYamlPlugin()],
+	test: {
+		coverage: {
+			exclude: ['lib/**', ...coverageConfigDefaults.exclude],
+		},
+		include: ['src/**/*.contract.yaml'],
+		mockReset: true,
+		passWithNoTests: true,
+		reporters: ['verbose'],
+		setupFiles: ['./src/__tests__/index-jest-setup.ts'],
+		watch: false,
+	},
+})
+```
+
+### 2. Add `test:contract` script to `package.json`
+
+```json
+{
+	"scripts": {
+		"test:contract": "vitest --config=./vitest.config.contract.ts"
+	}
+}
+```
+
+### 3. Verify
+
+```bash
+npm run test:contract
+```
+
+Each `*.contract.yaml` file shows up as its own test file in the output (e.g. `src/my-module/my-module.contract.yaml`) — not lumped into a single entry file.
+
+### How the plugin works
+
+The `contractYamlPlugin` is a Vite transform plugin. When Vitest encounters a `.contract.yaml` file (via the `include` glob), the plugin intercepts it and converts the YAML into JavaScript that calls `contractorTestRunner.file(absolutePath)`. The runner loads the YAML, resolves imports, and registers `describe`/`it` blocks with Vitest — all automatically.
+
+### Manual runner usage (advanced)
+
+For debugging or non-Vitest contexts, `contractorTestRunner` can still be used directly:
+
+```typescript
+import { contractorTestRunner } from '@beecode/msh-test-contractor/contract/contractor-test-runner'
 
 // Run all *.contract.yaml files in a directory (recursive)
 await contractorTestRunner.dir('./src')
@@ -81,14 +130,10 @@ await contractorTestRunner.dir('./src')
 await contractorTestRunner.file('./src/my-module/my-module.contract.yaml')
 ```
 
-### Two runner modes
-
 | Method | Purpose | Behavior |
 |--------|---------|----------|
 | `dir(path)` | Run all contracts in a directory | Recursively globs for `*.contract.yaml` files, excludes `__fixtures__` directories |
-| `file(path)` | Run one specific contract | Loads and runs a single `*.contract.yaml` file |
-
-Use `dir` for full test suites and `file` for targeted debugging of a single contract.
+| `file(path)` | Run one specific contract | Loads and runs a single `*.contract.yaml` file, accepts both relative and absolute paths |
 
 ## Falling Back to Vitest for Uncovered Cases
 
@@ -118,7 +163,8 @@ describe('myFunction (cases not expressible in contract.yaml)', () => {
 - For plain functions: use `__self__` as the method name under `methods`
 - For classes: add a `constructor` block and use `constructorParams` in method terms
 - Each term is one test case — `params` in, `result` or `error` out
-- The test runner auto-discovers all `*.contract.yaml` files via glob
+- The test runner auto-discovers all `*.contract.yaml` files via the Vite plugin — no entry `.test.ts` needed
+- Run with `npm run test:contract` (requires `vitest.config.contract.ts` setup)
 - Apply the **zero, one, many, lots, oops** strategy when designing terms
 
 ## Minimal Template

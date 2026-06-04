@@ -4,7 +4,7 @@ subjectType: function
 mock:
   - ./mock-dep.contract.yaml
 methods:
-  default:
+  __self__:
     terms:
       - params:
           - a

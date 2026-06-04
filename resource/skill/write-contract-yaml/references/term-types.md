@@ -10,6 +10,17 @@ All YAML native types work directly in `params` and `result`:
 | number | `42`, `3.14`, `-1` |
 | boolean | `true` or `false` |
 | null | `null` or `~` |
+| undefined | `!undefined` (see note below) |
+
+**Note on `undefined`:** YAML has no native undefined type. Use the `!undefined` tag. When used inside arrays, always use block-style (not `[...]` flow syntax):
+
+```yaml
+terms:
+  - params:
+      - !undefined
+      - { name: test }
+    result: !undefined
+```
 
 ```yaml
 terms:

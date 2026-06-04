@@ -2,7 +2,7 @@ subject: join
 module: node:path
 subjectType: function
 methods:
-  default:
+  __self__:
     terms:
       - params:
           - a
