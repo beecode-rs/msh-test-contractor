@@ -2,8 +2,8 @@ import { YamlParserContractLoader } from '../contract-loader.js'
 import { resolve } from 'node:path'
 import { describe, expect, it, vi } from 'vitest'
 
-import { contractorService } from '#src/contract/contractor-service.js'
-import { mocker } from '#src/mocker/mocker.js'
+import { contractorService } from '#src/business/component/contractor/contractor-service.js'
+import { mocker } from '#src/business/service/mocker.js'
 
 const fixturesDir = resolve(__dirname, '..', '__fixtures__')
 

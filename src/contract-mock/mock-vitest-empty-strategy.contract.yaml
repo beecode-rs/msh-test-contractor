@@ -1,7 +1,0 @@
-subject: MockVitestEmptyStrategy
-module: ./mock-vitest-empty-strategy.js
-subjectType: class
-constructor:
-  terms:
-    - params: []
-      result: {}

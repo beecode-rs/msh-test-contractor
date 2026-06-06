@@ -2,8 +2,8 @@ import { YamlParserContract } from './contract-parser.js'
 import { dirname, resolve } from 'node:path'
 
 import type { YamlContractModel, YamlContractTerm } from '#src/business/model/yaml-contract-model.js'
-import { mocker } from '#src/mocker/mocker.js'
-import type { AnyContract, ContractFunction, ContractMock, ContractTerm } from '#src/types/index.js'
+import { mocker } from '#src/business/service/mocker.js'
+import type { AnyContract, ContractFunction, ContractMock, ContractTerm } from '#src/business/model/contract-model.js'
 
 export class YamlParserContractLoader {
 	protected readonly _yamlParserContract = new YamlParserContract()

@@ -14,7 +14,7 @@
 	},
 	"main": "jest.config.ts",
 	"scripts": {
-		"test": "vitest"
+		"test": "vitest --config=./vitest.config.contract.ts"
 	},
 	"dependencies": {
 		"@beecode/msh-test-contract": ".."

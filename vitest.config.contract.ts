@@ -1,7 +1,7 @@
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { coverageConfigDefaults, defineConfig } from 'vitest/config'
 
-import { ContractReporter } from '#src/contract/contract-reporter.js'
+import { ContractReporter } from '#src/business/component/contractor/contract-reporter.js'
 import { contractYamlPlugin } from '#src/vitest-plugin.js'
 
 export default defineConfig({

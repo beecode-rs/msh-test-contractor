@@ -8,7 +8,7 @@ import * as yaml from 'js-yaml'
 import { readFile } from 'node:fs/promises'
 
 import type { YamlContractFunction, YamlContractModel, YamlContractTerm } from '#src/business/model/yaml-contract-model.js'
-import { SpecialFnName } from '#src/enum/special-fn-name.js'
+import { SpecialFnName } from '#src/business/model/special-fn-name.js'
 
 type RawYamlTerm = {
 	params?: unknown[]

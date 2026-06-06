@@ -8,7 +8,7 @@ export const contractYamlPlugin = (): Plugin => ({
 		const escapedPath = id.replace(/\\/g, '\\\\').replace(/'/g, "\\'")
 
 		return {
-			code: `import { contractorTestRunner } from '@beecode/msh-test-contractor/contract/contractor-test-runner'
+			code: `import { contractorTestRunner } from '@beecode/msh-test-contractor/business/component/contractor/contractor-test-runner'
 await contractorTestRunner.file('${escapedPath}')`,
 			map: null,
 		}
