@@ -6,4 +6,4 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SKILLS_DIR="$(cd "$SCRIPT_DIR/../../.claude/skills" && pwd)"
 
 mkdir -p ~/.claude/skills
-ln -sf "$SKILLS_DIR/write-contract-yaml" ~/.claude/skills/write-contract-yaml
+ln -sf "$SKILLS_DIR/test-contractor" ~/.claude/skills/test-contractor
