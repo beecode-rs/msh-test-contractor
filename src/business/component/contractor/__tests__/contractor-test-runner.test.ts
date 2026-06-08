@@ -1,8 +1,8 @@
 import { glob } from 'glob'
 import { describe, expect, it, vi } from 'vitest'
 
-import { YamlParserContractLoader } from '#src/business/component/yaml-parser/contract-loader.js'
 import { contractorTestRunner } from '#src/business/component/contractor/contractor-test-runner.js'
+import { YamlParserContractLoader } from '#src/business/component/yaml-parser/contract-loader.js'
 
 vi.mock('#src/business/service/contractor.js', () => ({
 	contractor: vi.fn(),
@@ -101,7 +101,7 @@ describe('contractorTestRunner', () => {
 		mockedContractor.mockImplementation((_: unknown, fnName: string) => {
 			calledFns.push(fnName)
 		})
-		contractorTestRunner.contract(mockContract as any) // eslint-disable-line @typescript-eslint/no-explicit-any
+		contractorTestRunner.contract(mockContract) // eslint-disable-line @typescript-eslint/no-explicit-any
 
 		it('calls contractor for each function name in contract', () => {
 			expect(calledFns.sort()).toEqual(['add', 'multiply', 'subtract'])

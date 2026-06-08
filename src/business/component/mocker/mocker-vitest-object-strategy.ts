@@ -1,8 +1,8 @@
 import { type MockInstance, vi } from 'vitest'
 
 import { type MockerStrategy } from '#src/business/component/mocker/mocker-strategy.js'
-import { type AnyContract } from '#src/business/model/contract-model.js'
 import { VitestSpyFunctionStrategy } from '#src/business/component/vitest-spy/vitest-spy-function-strategy.js'
+import { type AnyContract } from '#src/business/model/contract-model.js'
 
 export type MockerVitestObjectResult = Record<string, MockInstance<any>> // eslint-disable-line @typescript-eslint/no-explicit-any
 

@@ -1,13 +1,12 @@
 import c from 'tinyrainbow'
-import type { TestCase, TestModule, TestModuleState, TestSuite } from 'vitest/node'
-import { DefaultReporter } from 'vitest/reporters'
+import { DefaultReporter, type TestCase, type TestModule, type TestModuleState, type TestSuite } from 'vitest/node'
 
 const INDENT = '  '
 const CONTRACT_SUFFIX = ' [contract]'
 const TERM_REGEX = /^input: (.+?)\s{2,}output: (.+)$/
 
 export class ContractReporter extends DefaultReporter {
-	protected override _verbose = true
+	override verbose = true
 	override renderSucceed = true
 
 	override printTestModule(testModule: TestModule): void {
@@ -28,13 +27,13 @@ export class ContractReporter extends DefaultReporter {
 		moduleState: TestModuleState,
 		moduleId: string
 	): void {
-		for (const child of children) {
+		children.forEach((child) => {
 			if (child.type === 'suite') {
 				this._printSuite(child, depth, moduleState, moduleId)
 			} else {
 				this._printTest(child, depth)
 			}
-		}
+		})
 	}
 
 	protected _printSuite(suite: TestSuite, depth: number, moduleState: TestModuleState, moduleId: string): void {
@@ -58,14 +57,14 @@ export class ContractReporter extends DefaultReporter {
 
 		if (result.state === 'passed') {
 			const diag = test.diagnostic()
-			const duration = diag ? ` ${c.dim(`${diag.duration}ms`)}` : ''
+			const duration = _formatDuration(diag)
 			this.log(`${indent}${symbol} ${name}${duration}`)
 		} else if (result.state === 'failed') {
 			this.log(`${indent}${symbol} ${name}`)
-			for (const error of result.errors ?? []) {
-				const msg = typeof error === 'object' && 'message' in error ? String(error.message) : String(error)
+			result.errors.forEach((error: unknown) => {
+				const msg = _extractErrorMessage(error)
 				this.log(`${indent}${INDENT}${c.red(msg)}`)
-			}
+			})
 		} else {
 			this.log(`${indent}${symbol} ${name}`)
 		}
@@ -91,4 +90,20 @@ const _formatTermName = (name: string): string => {
 	}
 
 	return name
+}
+
+const _extractErrorMessage = (error: unknown): string => {
+	if (typeof error === 'object' && error !== null && 'message' in error) {
+		return (error as { message: string }).message
+	}
+
+	return String(error)
+}
+
+const _formatDuration = (diag: { duration: number } | undefined): string => {
+	if (!diag) {
+		return ''
+	}
+
+	return ` ${c.dim(`${String(diag.duration)}ms`)}`
 }

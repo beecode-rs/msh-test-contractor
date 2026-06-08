@@ -1,9 +1,9 @@
-import { SpecialFnName } from '#src/business/model/special-fn-name.js'
 import { type MockerStrategy } from '#src/business/component/mocker/mocker-strategy.js'
 import { MockerVitestClassStrategy } from '#src/business/component/mocker/mocker-vitest-class-strategy.js'
 import { MockerVitestFunctionStrategy } from '#src/business/component/mocker/mocker-vitest-function-strategy.js'
 import { MockerVitestObjectStrategy } from '#src/business/component/mocker/mocker-vitest-object-strategy.js'
 import { type AnyContract } from '#src/business/model/contract-model.js'
+import { SpecialFnName } from '#src/business/model/special-fn-name.js'
 import { typeUtil } from '#src/util/type-util.js'
 
 export const mockerService = {

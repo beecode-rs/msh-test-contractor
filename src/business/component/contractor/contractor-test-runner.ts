@@ -3,8 +3,8 @@ import path from 'path'
 import { describe } from 'vitest'
 
 import { YamlParserContractLoader } from '#src/business/component/yaml-parser/contract-loader.js'
-import { contractor } from '#src/business/service/contractor.js'
 import { type AnyContract } from '#src/business/model/contract-model.js'
+import { contractor } from '#src/business/service/contractor.js'
 
 const yamlLoader = new YamlParserContractLoader()
 
@@ -19,12 +19,9 @@ const getErrorMessage = (error: unknown): string => {
 export const contractorTestRunner = {
 	_file: async (fileLocation: string): Promise<void> => {
 		const absolutePath = contractorTestRunner._resolveAbsolutePath(fileLocation)
-		let contract: AnyContract
-		try {
-			contract = await yamlLoader.load({ path: absolutePath })
-		} catch (error) {
+		const contract = await yamlLoader.load({ path: absolutePath }).catch((error: unknown) => {
 			throw new Error(`Failed to load contract file "${fileLocation}": ${getErrorMessage(error)}`)
-		}
+		})
 		contractorTestRunner.contract(contract)
 	},
 	_resolveAbsolutePath: (fileLocation: string): string => {
@@ -36,7 +33,6 @@ export const contractorTestRunner = {
 	},
 	contract: (contract: AnyContract): void => {
 		describe(contract.subjectName, () => {
-
 			Object.keys(contract.fns).forEach((fnName: string) => {
 				contractor(contract as any, fnName) // eslint-disable-line @typescript-eslint/no-explicit-any
 			})

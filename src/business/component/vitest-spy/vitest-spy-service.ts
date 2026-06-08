@@ -1,7 +1,7 @@
-import { type ContractTerm } from '#src/business/model/contract-model.js'
 import { VitestSpyClassFunctionStrategy } from '#src/business/component/vitest-spy/vitest-spy-class-function-strategy.js'
 import { VitestSpyFunctionStrategy } from '#src/business/component/vitest-spy/vitest-spy-function-strategy.js'
 import { type VitestSpyStrategy } from '#src/business/component/vitest-spy/vitest-spy-strategy.js'
+import { type ContractTerm } from '#src/business/model/contract-model.js'
 
 export const vitestSpyService = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,6 +1,6 @@
-import { SpecialFnName } from '#src/business/model/special-fn-name.js'
 import { type SubjectFromContract, type SubjectStrategy } from '#src/business/component/subject/subject-strategy.js'
 import { type ContractTerm } from '#src/business/model/contract-model.js'
+import { SpecialFnName } from '#src/business/model/special-fn-name.js'
 
 export class SubjectFunctionStrategy implements SubjectStrategy {
 	protected readonly _subjectName: string

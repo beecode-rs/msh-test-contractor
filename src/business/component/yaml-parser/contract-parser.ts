@@ -7,8 +7,8 @@ import { YamlParserSpecialObject } from './special-object.js'
 import * as yaml from 'js-yaml'
 import { readFile } from 'node:fs/promises'
 
-import type { YamlContractFunction, YamlContractModel, YamlContractTerm } from '#src/business/model/yaml-contract-model.js'
 import { SpecialFnName } from '#src/business/model/special-fn-name.js'
+import type { YamlContractFunction, YamlContractModel, YamlContractTerm } from '#src/business/model/yaml-contract-model.js'
 
 type RawYamlTerm = {
 	params?: unknown[]
@@ -34,12 +34,12 @@ type RawYamlContract = Record<string, unknown> & {
 }
 
 const undefinedType = new yaml.Type('!undefined', {
+	construct: () => {
+		return undefined
+	},
 	kind: 'scalar',
 	resolve: () => {
 		return true
-	},
-	construct: () => {
-		return undefined
 	},
 })
 

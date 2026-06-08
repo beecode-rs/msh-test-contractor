@@ -1,9 +1,9 @@
-import { SpecialFnName } from '#src/business/model/special-fn-name.js'
 import { SubjectClassFunctionStrategy } from '#src/business/component/subject/subject-class-function-strategy.js'
 import { SubjectConstructorStrategy } from '#src/business/component/subject/subject-constructor-strategy.js'
 import { SubjectFunctionStrategy } from '#src/business/component/subject/subject-function-strategy.js'
-import { type SubjectFromContract, type SubjectStrategy } from '#src/business/component/subject/subject-strategy.js'
+import { type SubjectStrategy } from '#src/business/component/subject/subject-strategy.js'
 import { type AnyContract, type ContractTerm } from '#src/business/model/contract-model.js'
+import { SpecialFnName } from '#src/business/model/special-fn-name.js'
 import { fnUtil } from '#src/util/fn-util.js'
 
 export const subjectService = {
@@ -13,7 +13,7 @@ export const subjectService = {
 			fnName,
 			term: { constructorParams },
 		} = params
-		const subjectFromContract = { module, subjectName } as SubjectFromContract
+		const subjectFromContract = { module, subjectName }
 		if (fnUtil.isConstructor(fnName)) {
 			return new SubjectConstructorStrategy({ subjectFromContract })
 		}

@@ -1,9 +1,9 @@
 import { YamlParserContract } from './contract-parser.js'
 import { dirname, resolve } from 'node:path'
 
+import type { AnyContract, ContractFunction, ContractMock, ContractTerm } from '#src/business/model/contract-model.js'
 import type { YamlContractModel, YamlContractTerm } from '#src/business/model/yaml-contract-model.js'
 import { mocker } from '#src/business/service/mocker.js'
-import type { AnyContract, ContractFunction, ContractMock, ContractTerm } from '#src/business/model/contract-model.js'
 
 export class YamlParserContractLoader {
 	protected readonly _yamlParserContract = new YamlParserContract()
@@ -40,15 +40,8 @@ export class YamlParserContractLoader {
 			const contractMockPaths = definition.mock.filter((p) => !p.startsWith('__import__:'))
 			const importMockPaths = definition.mock.filter((p) => p.startsWith('__import__:'))
 
-			let mockContracts: AnyContract[] = []
-			if (contractMockPaths.length) {
-				mockContracts = await this._loadMockContracts({ loadedPaths, mockPaths: contractMockPaths, modulePath })
-			}
-
-			let importMocks: ContractMock[] = []
-			if (importMockPaths.length) {
-				importMocks = await this._loadImportMocks({ importPaths: importMockPaths, modulePath })
-			}
+			const mockContracts = await this._loadMockContracts({ loadedPaths, mockPaths: contractMockPaths, modulePath })
+			const importMocks = await this._loadImportMocks({ importPaths: importMockPaths, modulePath })
 
 			contract.mock = (options) => {
 				const reverts: (() => void)[] = []
@@ -88,19 +81,12 @@ export class YamlParserContractLoader {
 				const contractMockPaths = fnDef.mock!.filter((p) => !p.startsWith('__import__:'))
 				const importMockPaths = fnDef.mock!.filter((p) => p.startsWith('__import__:'))
 
-				let mockContracts: AnyContract[] = []
-				if (contractMockPaths.length) {
-					mockContracts = await this._loadMockContracts({
-						loadedPaths: new Set(loadedPaths),
-						mockPaths: contractMockPaths,
-						modulePath,
-					})
-				}
-
-				let importMocks: ContractMock[] = []
-				if (importMockPaths.length) {
-					importMocks = await this._loadImportMocks({ importPaths: importMockPaths, modulePath })
-				}
+				const mockContracts = await this._loadMockContracts({
+					loadedPaths: new Set(loadedPaths),
+					mockPaths: contractMockPaths,
+					modulePath,
+				})
+				const importMocks = await this._loadImportMocks({ importPaths: importMockPaths, modulePath })
 
 				contract.fns[fnName]!.mock = () => {
 					const restores: (() => void)[] = []
@@ -172,13 +158,10 @@ export class YamlParserContractLoader {
 
 				params.loadedPaths.add(absoluteMockPath)
 
-				let definition: YamlContractModel
-				try {
-					definition = await this._yamlParserContract.parseFile({ path: absoluteMockPath })
-				} catch (error) {
+				const definition = await this._yamlParserContract.parseFile({ path: absoluteMockPath }).catch((error: unknown) => {
 					const message = this._getErrorMessage({ error })
 					throw new Error(`Failed to load mock contract "${mockPath}": ${message}`)
-				}
+				})
 
 				const { mock: _, ...definitionWithoutMocks } = definition
 
@@ -215,13 +198,10 @@ export class YamlParserContractLoader {
 
 				const relativePath = match[1]!
 				const absolutePath = resolve(dirname(params.modulePath), relativePath)
-				let mod: unknown
-				try {
-					mod = await import(absolutePath)
-				} catch (error) {
+				const mod: unknown = await import(absolutePath).catch((error: unknown) => {
 					const message = this._getErrorMessage({ error })
 					throw new Error(`Failed to import mock "${importPath}" (referenced from contract "${params.modulePath}"): ${message}`)
-				}
+				})
 
 				if (typeof (mod as { default: unknown }).default !== 'function') {
 					throw new Error(`Import mock module "${importPath}" must export a default function`)
@@ -238,22 +218,31 @@ export class YamlParserContractLoader {
 			return globalThis
 		}
 
-		let specifier = params.moduleSpecifier
-
-		if (params.modulePath && (specifier.startsWith('./') || specifier.startsWith('../'))) {
-			specifier = resolve(dirname(params.modulePath), specifier)
-		}
+		const specifier = this._resolveSpecifier(params)
 
 		try {
 			return await import(specifier)
 		} catch (error) {
 			const message = this._getErrorMessage({ error })
-			let contractContext = ''
-			if (params.modulePath) {
-				contractContext = ` (referenced from contract "${params.modulePath}")`
-			}
+			const contractContext = this._getContractContext({ modulePath: params.modulePath })
 			throw new Error(`Failed to resolve module "${params.moduleSpecifier}"${contractContext}: ${message}`)
 		}
+	}
+
+	protected _resolveSpecifier(params: { moduleSpecifier: string; modulePath?: string }): string {
+		if (params.modulePath && (params.moduleSpecifier.startsWith('./') || params.moduleSpecifier.startsWith('../'))) {
+			return resolve(dirname(params.modulePath), params.moduleSpecifier)
+		}
+
+		return params.moduleSpecifier
+	}
+
+	protected _getContractContext(params: { modulePath?: string }): string {
+		if (params.modulePath) {
+			return ` (referenced from contract "${params.modulePath}")`
+		}
+
+		return ''
 	}
 
 	protected _getErrorMessage(params: { error: unknown }): string {

@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type MockInstance, vi } from 'vitest'
 
-import { SpecialFnName } from '#src/business/model/special-fn-name.js'
 import { mockerService } from '#src/business/component/mocker/mocker-service.js'
-import { type AnyContract, type ContractMockRevertFn, type PropType } from '#src/business/model/contract-model.js'
-import { fnUtil } from '#src/util/fn-util.js'
 import { VitestSpyFunctionStrategy } from '#src/business/component/vitest-spy/vitest-spy-function-strategy.js'
+import { type AnyContract, type ContractMockRevertFn, type PropType } from '#src/business/model/contract-model.js'
+import { SpecialFnName } from '#src/business/model/special-fn-name.js'
+import { fnUtil } from '#src/util/fn-util.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type MockerContractResult<SPY_INSTANCE = MockInstance<any>> = {

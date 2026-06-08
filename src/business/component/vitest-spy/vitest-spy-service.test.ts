@@ -13,7 +13,8 @@ vi.mock('#src/business/component/vitest-spy/vitest-spy-class-function-strategy.j
 
 // Import after mocking to get the mocked versions
 const { VitestSpyFunctionStrategy } = await import('#src/business/component/vitest-spy/vitest-spy-function-strategy.js')
-const { VitestSpyClassFunctionStrategy } = await import('#src/business/component/vitest-spy/vitest-spy-class-function-strategy.js')
+const { VitestSpyClassFunctionStrategy } =
+	await import('#src/business/component/vitest-spy/vitest-spy-class-function-strategy.js')
 
 describe('vitestSpyService', () => {
 	describe('strategyFromTerms', () => {
