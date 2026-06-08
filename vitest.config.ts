@@ -6,7 +6,7 @@ export default defineConfig({
 	},
 	test: {
 		coverage: {
-			exclude: ['lib/**', 'src/index.ts', 'src/**/__fixtures__/**', ...coverageConfigDefaults.exclude],
+			exclude: ['src/index.ts', 'src/**/__fixtures__/**', ...coverageConfigDefaults.exclude],
 		},
 		mockReset: true,
 		passWithNoTests: true,

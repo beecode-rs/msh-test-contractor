@@ -23,16 +23,11 @@
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js",
-			"require": "./lib/index.js"
+			"import": "./dist/index.js"
 		},
 		"./*": {
 			"types": "./dist/*.d.ts",
 			"import": "./dist/*.js"
-		},
-		"./lib/*": {
-			"types": "./lib/*.d.ts",
-			"require": "./lib/*.js"
 		},
 		"./contract-reporter": {
 			"types": "./dist/business/component/contractor/contract-reporter.d.ts",
@@ -43,18 +38,14 @@
 			"import": "./dist/vitest-plugin.js"
 		}
 	},
-	"main": "./lib/index.js",
-	"module": "./dist/index.js",
+	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"files": [
-		"./dist",
-		"./lib"
+		"./dist"
 	],
 	"scripts": {
 		"build": "npm run clean && npm run tsc && npm run fix-hybrid-lib-esm",
-		"build-cjs": "npm run clean-cjs && npm run tsc-cjs && npm run tsc-types-alias && npm run fix-hybrid-lib-cjs",
 		"clean": "rimraf ./dist",
-		"clean-cjs": "rimraf ./lib",
 		"doc": "concurrently -c auto 'npm:doc:*'",
 		"doc:api": "npx typedoc --tsconfig tsconfig.build.json",
 		"doc:toc": "npx markdown-toc -i ./README.md",
@@ -62,7 +53,6 @@
 		"docker-rmi": "docker rmi bc-msh-test-contractor",
 		"docker-run-package-lock-update": "docker run --rm -v ./:/usr/app/ milosbugarinovic/msh-lib-base:node22.14.0-alpine3.21 npm i --package-lock-only",
 		"docker-run-sh": "docker run --rm -it bc-msh-test-contractor sh",
-		"fix-hybrid-lib-cjs": "mkdir -p ./lib && echo '{\"type\": \"commonjs\"}' > ./lib/package.json",
 		"fix-hybrid-lib-esm": "mkdir -p ./dist && echo '{\"type\": \"module\", \"imports\": {\"#packageJson\": \"../package.json\", \"#src\": \"./index.js\", \"#src/*.js\": \"./*.js\", \"#src/*\": \"./*.js\"}}' > ./dist/package.json",
 		"init": "concurrently -c auto 'npm:init:*'",
 		"init:git-config": "git config include.path ./.git-config",
@@ -72,7 +62,7 @@
 		"lint-eslint-fix": "npm run lint-eslint -- --fix",
 		"lint-fix": "npm run lint-prettier-fix && npm run lint-eslint-fix && npm run lint-json-fix",
 		"lint-json": "npm run lint-json-fix -- -c",
-		"lint-json-fix": "jsonsort -p * .*.json '!./dist' '!./lib' '!./test/node_modules' '!./resource' '!**/.env*'  '!**/.gitignore' -t",
+		"lint-json-fix": "jsonsort -p * .*.json '!./dist' '!./test/node_modules' '!./resource' '!**/.env*'  '!**/.gitignore' -t",
 		"lint-prettier": "prettier --check {**/*,*}.{js,ts,jsx,tsx,cjs,cts,mjs,mts,html}",
 		"lint-prettier-fix": "prettier --write {**/*,*}.{js,ts,jsx,tsx,cjs,cts,mjs,mts,html}",
 		"npm-bump-version": "npm --no-git-tag-version version",
@@ -91,11 +81,7 @@
 		"test:unit": "vitest --config=./vitest.config.unit.ts",
 		"tsc": "tsc -p tsconfig.build.json",
 		"tsc-check": "npm run tsc -- --noEmit",
-		"tsc-cjs": "tsc -p tsconfig.build.cjs.json",
 		"tsc-time": "npm run tsc -- --diagnostics",
-		"tsc-types": "tsc -p tsconfig.build.json --emitDeclarationOnly --outDir ./lib",
-		"tsc-types-alias": "tsc-alias -p tsconfig.build.json --outDir ./lib --resolve-full-paths",
-		"tsc-esm-alias": "tsc-alias -p tsconfig.build.json --outDir ./dist --resolve-full-paths",
 		"tsc-watch": "npm run tsc -- -w --preserveWatchOutput",
 		"watch": "rimraf ./dist && npm run tsc-watch"
 	},
@@ -133,9 +119,6 @@
 		"markdown-toc": "^1.2.0",
 		"prettier": "^3.8.3",
 		"rimraf": "^6.1.3",
-		"source-map-support": "^0.5.21",
-		"ts-node": "^10.9.2",
-		"tsc-alias": "^1.8.17",
 		"tsc-watch": "^7.2.0",
 		"typedoc": "^0.28.19",
 		"typedoc-plugin-markdown": "^4.12.0",
