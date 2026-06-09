@@ -1,10 +1,10 @@
 import { ContractReporter } from '@beecode/msh-test-contractor/contract-reporter'
 import { contractYamlPlugin } from '@beecode/msh-test-contractor/vitest-plugin'
-import tsconfigPaths from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-	plugins: [tsconfigPaths(), contractYamlPlugin()],
+	plugins: [contractYamlPlugin()],
+	resolve: { tsconfigPaths: true },
 	test: {
 		include: ['**/*.contract.yaml'],
 		mockReset: true,

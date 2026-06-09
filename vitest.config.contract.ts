@@ -1,11 +1,11 @@
-import tsconfigPaths from 'vite-tsconfig-paths'
 import { coverageConfigDefaults, defineConfig } from 'vitest/config'
 
 import { ContractReporter } from '#src/business/component/contractor/contract-reporter.js'
 import { contractYamlPlugin } from '#src/vitest-plugin.js'
 
 export default defineConfig({
-	plugins: [tsconfigPaths(), contractYamlPlugin()],
+	plugins: [contractYamlPlugin()],
+	resolve: { tsconfigPaths: true },
 	test: {
 		coverage: {
 			exclude: ['lib/**', 'src/index.ts', 'src/**/__fixtures__/**', ...coverageConfigDefaults.exclude],
