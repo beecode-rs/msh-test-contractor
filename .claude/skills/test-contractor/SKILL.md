@@ -97,7 +97,7 @@ npm install --save-dev vite-tsconfig-paths
 }
 ```
 
-If a `test` script already exists that runs multiple test suites (e.g., `"test": "concurrently 'npm:test:*'"`), the `test:contract` script will be picked up automatically.
+If a `test` script already exists that runs multiple test suites (e.g., `"test": "concurrently --group 'npm:test:*'"`), the `test:contract` script will be picked up automatically.
 
 ### Step 4: Verify the setup
 
@@ -124,13 +124,13 @@ If there are no contract files yet, you'll see "no test files found" — that's 
 
 Read these files on-demand based on what you need:
 
-| File | When to read |
-|---|---|
-| `references/contract-structure.md` | Always — core structure, required fields, subject types |
-| `references/term-types.md` | When writing params/results with primitives, objects, arrays, or errors |
-| `references/special-objects.md` | When using `!undefined`, `new Error(...)`, `new Date(...)`, `Promise.resolve(...)`, `__fn__`, `__class_ref:`, `__import:` |
-| `references/mocking.md` | When the subject has dependencies that need mocking |
-| `references/examples.md` | When you want full end-to-end examples showing source + contract pairs |
+| File                               | When to read                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `references/contract-structure.md` | Always — core structure, required fields, subject types                                                                   |
+| `references/term-types.md`         | When writing params/results with primitives, objects, arrays, or errors                                                   |
+| `references/special-objects.md`    | When using `!undefined`, `new Error(...)`, `new Date(...)`, `Promise.resolve(...)`, `__fn__`, `__class_ref:`, `__import:` |
+| `references/mocking.md`            | When the subject has dependencies that need mocking                                                                       |
+| `references/examples.md`           | When you want full end-to-end examples showing source + contract pairs                                                    |
 
 Always start by reading `references/contract-structure.md` — it defines the required fields and conventions. Read the others as the specific situation calls for them.
 
@@ -148,12 +148,12 @@ src/
 
 When writing terms for a method, walk through these five scenarios in order. Aim for 3–7 terms per method.
 
-| Scenario | What to test | Example |
-|---|---|---|
-| **Zero** | Empty/missing input. What happens when there's nothing? | `[]`, `''`, `null`, `{}`, `0` |
-| **One** | Single item. The simplest non-trivial case. | `[42]`, `['alice']`, `{ id: 1 }` |
-| **Many** | A few items. The typical/happy-path case. | `[1, 2, 3]`, array of 3–5 elements |
-| **Lots** | Large input. Does behavior change at scale? | array of 1000 items, very long string |
+| Scenario | What to test                                             | Example                                    |
+| -------- | -------------------------------------------------------- | ------------------------------------------ |
+| **Zero** | Empty/missing input. What happens when there's nothing?  | `[]`, `''`, `null`, `{}`, `0`              |
+| **One**  | Single item. The simplest non-trivial case.              | `[42]`, `['alice']`, `{ id: 1 }`           |
+| **Many** | A few items. The typical/happy-path case.                | `[1, 2, 3]`, array of 3–5 elements         |
+| **Lots** | Large input. Does behavior change at scale?              | array of 1000 items, very long string      |
 | **Oops** | Something goes wrong. Invalid input, edge cases, errors. | negative id, malformed object, wrong types |
 
 Not every method needs all five — skip scenarios that don't apply. After reading the source code, for each exported method ask yourself:
@@ -190,6 +190,7 @@ npm run test:contract
 ```
 
 If a term fails:
+
 - Read the error message carefully — it tells you which term failed and what the actual vs expected result was
 - Check whether the `params` match what the function actually receives
 - Check whether the `result` matches what the function actually returns
@@ -205,11 +206,11 @@ npx vitest --config=./vitest.config.contract.ts path/to/the-updated.contract.yam
 ### Minimal Template
 
 ```yaml
-subject: myFunction        # exported name
-module: ./my-module.js     # path to compiled JS
-subjectType: function      # or "class"
+subject: myFunction # exported name
+module: ./my-module.js # path to compiled JS
+subjectType: function # or "class"
 methods:
-  __self__:                # for standalone functions; use method name for objects
+  __self__: # for standalone functions; use method name for objects
     terms:
       - params: [input]
         result: expected

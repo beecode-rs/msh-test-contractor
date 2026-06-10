@@ -1,7 +1,12 @@
+import path from 'node:path'
+
 import { coverageConfigDefaults, defineConfig } from 'vitest/config'
 
 export default defineConfig({
 	resolve: {
+		alias: {
+			'#src': path.resolve(import.meta.dirname, 'src'),
+		},
 		tsconfigPaths: true,
 	},
 	test: {

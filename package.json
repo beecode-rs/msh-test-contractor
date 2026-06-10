@@ -53,7 +53,7 @@
 	"scripts": {
 		"build": "npm run clean && npm run tsc && npm run fix-hybrid-lib-esm",
 		"clean": "rimraf ./dist",
-		"doc": "concurrently -c auto 'npm:doc:*'",
+		"doc": "concurrently --group -c auto 'npm:doc:*'",
 		"doc:api": "npx typedoc --tsconfig tsconfig.build.json",
 		"doc:toc": "npx markdown-toc -i ./README.md",
 		"docker-build": "docker build -f ./resource/docker/Dockerfile -t bc-msh-test-contractor ./",
@@ -61,7 +61,7 @@
 		"docker-run-package-lock-update": "docker run --rm -v ./:/usr/app/ milosbugarinovic/msh-lib-base:node22.22.1-alpine3.23 npm i --package-lock-only",
 		"docker-run-sh": "docker run --rm -it bc-msh-test-contractor sh",
 		"fix-hybrid-lib-esm": "mkdir -p ./dist && echo '{\"type\": \"module\", \"imports\": {\"#packageJson\": \"../package.json\", \"#src\": \"./index.js\", \"#src/*.js\": \"./*.js\", \"#src/*\": \"./*.js\"}}' > ./dist/package.json",
-		"init": "concurrently -c auto 'npm:init:*'",
+		"init": "concurrently --group -c auto 'npm:init:*'",
 		"init:git-config": "git config include.path ./.git-config",
 		"init:husky": "npx husky init",
 		"lint": "npm run lint-prettier && npm run lint-eslint && npm run lint-json",
@@ -79,7 +79,7 @@
 		"npm-pack": "mkdir -p packages && npm pack --pack-destination=./packages",
 		"npm-semantic-release": "semantic-release",
 		"npm-semantic-release-check": "npm run npm-semantic-release -- --dry-run --no-ci",
-		"test": "concurrently -c auto 'npm:test:*'",
+		"test": "concurrently --group -c auto 'npm:test:*'",
 		"test-coverage-unit": "npm run test:unit -- --coverage",
 		"test-coverage-unit-publish": "codecov",
 		"test:contract": "vitest --config=./vitest.config.contract.ts",
@@ -103,7 +103,7 @@
 		}
 	},
 	"dependencies": {
-		"@beecode/msh-config": "^1.1.8",
+		"@beecode/msh-config": "^1.2.0",
 		"@beecode/msh-logger": "^1.2.1",
 		"dotenv": "^17.4.2",
 		"fast-deep-equal": "^3.1.3",
