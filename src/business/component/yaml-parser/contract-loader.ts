@@ -1,8 +1,10 @@
-import { YamlParserContract } from './contract-parser.js'
 import { dirname, resolve } from 'node:path'
+
+import { YamlParserContract } from './contract-parser.js'
 
 import type { AnyContract, ContractFunction, ContractMock, ContractTerm } from '#src/business/model/contract-model.js'
 import type { YamlContractModel, YamlContractTerm } from '#src/business/model/yaml-contract-model.js'
+
 import { mocker } from '#src/business/service/mocker.js'
 
 export class YamlParserContractLoader {
@@ -158,10 +160,12 @@ export class YamlParserContractLoader {
 
 				params.loadedPaths.add(absoluteMockPath)
 
-				const definition = await this._yamlParserContract.parseFile({ path: absoluteMockPath }).catch((error: unknown) => {
-					const message = this._getErrorMessage({ error })
-					throw new Error(`Failed to load mock contract "${mockPath}": ${message}`)
-				})
+				const definition = await this._yamlParserContract
+					.parseFile({ path: absoluteMockPath })
+					.catch((error: unknown) => {
+						const message = this._getErrorMessage({ error })
+						throw new Error(`Failed to load mock contract "${mockPath}": ${message}`)
+					})
 
 				const { mock: _, ...definitionWithoutMocks } = definition
 
@@ -200,7 +204,9 @@ export class YamlParserContractLoader {
 				const absolutePath = resolve(dirname(params.modulePath), relativePath)
 				const mod: unknown = await import(absolutePath).catch((error: unknown) => {
 					const message = this._getErrorMessage({ error })
-					throw new Error(`Failed to import mock "${importPath}" (referenced from contract "${params.modulePath}"): ${message}`)
+					throw new Error(
+						`Failed to import mock "${importPath}" (referenced from contract "${params.modulePath}"): ${message}`
+					)
 				})
 
 				if (typeof (mod as { default: unknown }).default !== 'function') {
@@ -253,7 +259,10 @@ export class YamlParserContractLoader {
 		return String(params.error)
 	}
 
-	protected async _resolveImportPlaceholders(params: { definition: YamlContractModel; basePath: string }): Promise<void> {
+	protected async _resolveImportPlaceholders(params: {
+		definition: YamlContractModel
+		basePath: string
+	}): Promise<void> {
 		const { definition, basePath } = params
 
 		await Promise.all(
@@ -342,7 +351,9 @@ export class YamlParserContractLoader {
 		}, mod)
 	}
 
-	protected _transformFns(params: { fns: Record<string, { terms: YamlContractTerm[] }> }): Record<string, ContractFunction> {
+	protected _transformFns(params: {
+		fns: Record<string, { terms: YamlContractTerm[] }>
+	}): Record<string, ContractFunction> {
 		return Object.fromEntries(
 			Object.entries(params.fns).map(([fnName, fn]) => [fnName, { terms: this._transformTerms({ terms: fn.terms }) }])
 		)

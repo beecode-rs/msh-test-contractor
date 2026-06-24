@@ -7,7 +7,11 @@ import { SpecialFnName } from '#src/business/model/special-fn-name.js'
 import { fnUtil } from '#src/util/fn-util.js'
 
 export const subjectService = {
-	strategyFromContractFunction: (params: { contract: AnyContract; fnName: string; term: ContractTerm }): SubjectStrategy => {
+	strategyFromContractFunction: (params: {
+		contract: AnyContract
+		fnName: string
+		term: ContractTerm
+	}): SubjectStrategy => {
 		const {
 			contract: { module, subjectName, fns },
 			fnName,

@@ -191,16 +191,22 @@ describe('regex', () => {
 		describe('_isRegexPatternMatch', () => {
 			it('should return true for valid regex patterns', () => {
 				expect(
-					(service as unknown as { _isRegexPatternMatch: (v: string) => boolean })._isRegexPatternMatch('new RegExp("test")')
+					(service as unknown as { _isRegexPatternMatch: (v: string) => boolean })._isRegexPatternMatch(
+						'new RegExp("test")'
+					)
 				).toBe(true)
 				expect(
-					(service as unknown as { _isRegexPatternMatch: (v: string) => boolean })._isRegexPatternMatch("new RegExp('test')")
+					(service as unknown as { _isRegexPatternMatch: (v: string) => boolean })._isRegexPatternMatch(
+						"new RegExp('test')"
+					)
 				).toBe(true)
 			})
 
 			it('should return false for invalid regex patterns', () => {
 				expect(
-					(service as unknown as { _isRegexPatternMatch: (v: string) => boolean })._isRegexPatternMatch('RegExp("test")')
+					(service as unknown as { _isRegexPatternMatch: (v: string) => boolean })._isRegexPatternMatch(
+						'RegExp("test")'
+					)
 				).toBe(false)
 				expect(
 					(service as unknown as { _isRegexPatternMatch: (v: string) => boolean })._isRegexPatternMatch('new RegExp()')
@@ -219,19 +225,17 @@ describe('regex', () => {
 
 			it('should return undefined for invalid regex pattern', () => {
 				expect(
-					(service as unknown as { _createRegExpSafely: (p: string, f: string) => RegExp | undefined })._createRegExpSafely(
-						'[',
-						''
-					)
+					(
+						service as unknown as { _createRegExpSafely: (p: string, f: string) => RegExp | undefined }
+					)._createRegExpSafely('[', '')
 				).toBeUndefined()
 			})
 
 			it('should return undefined for invalid flags', () => {
 				expect(
-					(service as unknown as { _createRegExpSafely: (p: string, f: string) => RegExp | undefined })._createRegExpSafely(
-						'test',
-						'x'
-					)
+					(
+						service as unknown as { _createRegExpSafely: (p: string, f: string) => RegExp | undefined }
+					)._createRegExpSafely('test', 'x')
 				).toBeUndefined()
 			})
 		})

@@ -118,7 +118,10 @@ export class YamlContractModelValidator {
 		})
 	}
 
-	protected readonly _validateNonEmptyStringField = (params: { fieldName: string; model: Record<string, unknown> }): void => {
+	protected readonly _validateNonEmptyStringField = (params: {
+		fieldName: string
+		model: Record<string, unknown>
+	}): void => {
 		if (!(params.fieldName in params.model)) {
 			throw new Error(`YamlContractModel must have a "${params.fieldName}" field`)
 		}

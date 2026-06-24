@@ -26,8 +26,13 @@ export class MockerVitestObjectStrategy implements MockerStrategy<MockerVitestOb
 
 		return Object.fromEntries(
 			Object.entries(this._contract.fns).map(([fnName, ctFunc]) => {
-				const vitestSpyFunction = new VitestSpyFunctionStrategy({ name: `${subjectName}.${fnName}`, terms: ctFunc!.terms }) // eslint-disable-line @typescript-eslint/restrict-template-expressions
-				const spy = vi.spyOn(module[subjectName], fnName).mockImplementation(vitestSpyFunction.mockImplementationFactory())
+				const vitestSpyFunction = new VitestSpyFunctionStrategy({
+					name: `${subjectName}.${fnName}`, // eslint-disable-line @typescript-eslint/restrict-template-expressions
+					terms: ctFunc!.terms,
+				})
+				const spy = vi
+					.spyOn(module[subjectName], fnName)
+					.mockImplementation(vitestSpyFunction.mockImplementationFactory())
 				this._spies.push(spy)
 
 				return [fnName, spy]

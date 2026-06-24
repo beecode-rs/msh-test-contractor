@@ -60,7 +60,9 @@ describe('contractorTestRunner', () => {
 		})
 
 		it('throws with error message when load fails with Error instance', async () => {
-			const loadSpy = vi.spyOn(YamlParserContractLoader.prototype, 'load').mockRejectedValue(new Error('yaml parse error'))
+			const loadSpy = vi
+				.spyOn(YamlParserContractLoader.prototype, 'load')
+				.mockRejectedValue(new Error('yaml parse error'))
 
 			await expect(contractorTestRunner._file('./nonexistent.yaml')).rejects.toThrow(
 				'Failed to load contract file "./nonexistent.yaml": yaml parse error'

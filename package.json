@@ -104,25 +104,25 @@
 	},
 	"dependencies": {
 		"@beecode/msh-config": "^1.2.0",
-		"@beecode/msh-logger": "^1.2.1",
+		"@beecode/msh-logger": "^2.0.0",
 		"dotenv": "^17.4.2",
 		"fast-deep-equal": "^3.1.3",
 		"glob": "^13.0.6",
-		"js-yaml": "^4.2.0"
+		"js-yaml": "^5.1.0"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^21.0.2",
-		"@commitlint/config-conventional": "^21.0.2",
-		"@commitlint/prompt": "^21.0.2",
+		"@commitlint/cli": "^21.1.0",
+		"@commitlint/config-conventional": "^21.1.0",
+		"@commitlint/prompt": "^21.1.0",
 		"@types/deep-equal": "^1.0.4",
 		"@types/js-yaml": "^4.0.9",
-		"@types/node": "^25.9.2",
-		"@vitest/coverage-v8": "^4.1.8",
-		"commitizen": "^4.3.1",
+		"@types/node": "^26.0.1",
+		"@vitest/coverage-v8": "^4.1.9",
+		"commitizen": "^4.3.2",
 		"concurrently": "^10.0.3",
 		"husky": "^9.1.7",
 		"json-sort-cli": "^4.1.3",
-		"lint-staged": "^17.0.7",
+		"lint-staged": "^17.0.8",
 		"markdown-toc": "^1.2.0",
 		"prettier": "^3.8.4",
 		"rimraf": "^6.1.3",
@@ -130,7 +130,7 @@
 		"typedoc": "^0.28.19",
 		"typedoc-plugin-markdown": "^4.12.0",
 		"typescript": "^6.0.3",
-		"vitest": "^4.1.8"
+		"vitest": "^4.1.9"
 	},
 	"engines": {
 		"node": ">=20",

@@ -1,4 +1,9 @@
-import { type Contract, type ContractFns, type ContractMock, type PropType } from '#src/business/model/contract-model.js'
+import {
+	type Contract,
+	type ContractFns,
+	type ContractMock,
+	type PropType,
+} from '#src/business/model/contract-model.js'
 
 export const contractFactory = <
 	TModule,

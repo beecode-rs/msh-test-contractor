@@ -1,14 +1,21 @@
+import { readFile } from 'node:fs/promises'
+
+import * as yaml from 'js-yaml'
+
 import { YamlParserDate } from './date.js'
 import { YamlParserError } from './error.js'
 import { YamlParserPromise } from './promise.js'
 import { YamlParserRegex } from './regex.js'
 import { parseShorthandTerm } from './shorthand-parser.js'
 import { YamlParserSpecialObject } from './special-object.js'
-import * as yaml from 'js-yaml'
-import { readFile } from 'node:fs/promises'
+
+import type {
+	YamlContractFunction,
+	YamlContractModel,
+	YamlContractTerm,
+} from '#src/business/model/yaml-contract-model.js'
 
 import { SpecialFnName } from '#src/business/model/special-fn-name.js'
-import type { YamlContractFunction, YamlContractModel, YamlContractTerm } from '#src/business/model/yaml-contract-model.js'
 
 type RawYamlTerm = {
 	params?: unknown[]
@@ -33,17 +40,13 @@ type RawYamlContract = Record<string, unknown> & {
 	mock?: string[]
 }
 
-const undefinedType = new yaml.Type('!undefined', {
-	construct: () => {
-		return undefined
-	},
-	kind: 'scalar',
+const undefinedType = yaml.defineScalarTag('!undefined', {
 	resolve: () => {
-		return true
+		return undefined
 	},
 })
 
-const customSchema = yaml.DEFAULT_SCHEMA.extend({ explicit: [undefinedType] })
+const customSchema = yaml.CORE_SCHEMA.withTags(undefinedType)
 
 export class YamlParserContract {
 	protected readonly _specialObjectParser: YamlParserSpecialObject
@@ -53,7 +56,12 @@ export class YamlParserContract {
 		const yamlParserDate = new YamlParserDate()
 		const yamlParserRegex = new YamlParserRegex()
 		const yamlParserPromise = new YamlParserPromise(yamlParserError)
-		this._specialObjectParser = new YamlParserSpecialObject(yamlParserError, yamlParserPromise, yamlParserDate, yamlParserRegex)
+		this._specialObjectParser = new YamlParserSpecialObject(
+			yamlParserError,
+			yamlParserPromise,
+			yamlParserDate,
+			yamlParserRegex
+		)
 	}
 
 	async parseFile(params: { path: string }): Promise<YamlContractModel> {
@@ -66,7 +74,14 @@ export class YamlParserContract {
 
 	parseString(params: { yaml: string }): YamlContractModel {
 		const { yaml: yamlString } = params
-		const rawObject = yaml.load(yamlString, { schema: customSchema })
+		// js-yaml v5 throws on empty input ("expected a document"), whereas v4 returned null.
+		// Treat empty/whitespace input as null so it flows into the root validation below.
+		let rawObject: unknown
+		if (yamlString.trim() === '') {
+			rawObject = null
+		} else {
+			rawObject = yaml.load(yamlString, { schema: customSchema })
+		}
 
 		if (rawObject === null || typeof rawObject !== 'object') {
 			throw new Error('Invalid YAML: expected an object at the root')
@@ -290,7 +305,9 @@ export class YamlParserContract {
 		}
 
 		if (value !== null && typeof value === 'object') {
-			return Object.fromEntries(Object.entries(value).map(([key, val]) => [key, this._parseSpecialObjectsRecursively(val)]))
+			return Object.fromEntries(
+				Object.entries(value).map(([key, val]) => [key, this._parseSpecialObjectsRecursively(val)])
+			)
 		}
 
 		return value

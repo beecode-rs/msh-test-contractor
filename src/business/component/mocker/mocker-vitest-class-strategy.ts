@@ -67,8 +67,12 @@ export class MockerVitestClassStrategy implements MockerStrategy<MockInstance<an
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected _mockFunction(params: { terms: ContractTerm[]; mockClassParams: any[]; name: string }): (...args: any[]) => any {
+	protected _mockFunction(params: {
+		terms: ContractTerm[]
+		mockClassParams: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
+		name: string
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	}): (...args: any[]) => any {
 		const { terms, mockClassParams, name } = params
 		const vitestSpyStrategy = vitestSpyService.strategyFromTerms({ mockClassParams, name, terms })
 

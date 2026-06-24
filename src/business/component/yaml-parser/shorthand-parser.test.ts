@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
-import { ShorthandParseError, ShorthandParser, parseShorthandTerm } from '#src/business/component/yaml-parser/shorthand-parser.js'
+import {
+	ShorthandParseError,
+	ShorthandParser,
+	parseShorthandTerm,
+} from '#src/business/component/yaml-parser/shorthand-parser.js'
 
 describe('shorthand-parser', () => {
 	const parser = new ShorthandParser()
@@ -198,17 +202,21 @@ describe('shorthand-parser', () => {
 
 	describe('_findArrowPosition', () => {
 		it('should find arrow at top level', () => {
-			expect((parser as unknown as { _findArrowPosition: (s: string) => number })._findArrowPosition('[1] => 2')).toBe(4)
+			expect((parser as unknown as { _findArrowPosition: (s: string) => number })._findArrowPosition('[1] => 2')).toBe(
+				4
+			)
 		})
 
 		it('should not find arrow inside brackets', () => {
-			expect((parser as unknown as { _findArrowPosition: (s: string) => number })._findArrowPosition('["a => b"] => 2')).toBe(11)
+			expect(
+				(parser as unknown as { _findArrowPosition: (s: string) => number })._findArrowPosition('["a => b"] => 2')
+			).toBe(11)
 		})
 
 		it('should not find arrow inside nested brackets', () => {
-			expect((parser as unknown as { _findArrowPosition: (s: string) => number })._findArrowPosition('[{"x": "=>"}] => 1')).toBe(
-				14
-			)
+			expect(
+				(parser as unknown as { _findArrowPosition: (s: string) => number })._findArrowPosition('[{"x": "=>"}] => 1')
+			).toBe(14)
 		})
 
 		it('should return -1 if no arrow found', () => {
@@ -218,19 +226,21 @@ describe('shorthand-parser', () => {
 
 	describe('_parseJsonArray', () => {
 		it('should parse valid JSON array', () => {
-			expect((parser as unknown as { _parseJsonArray: (s: string) => unknown[] })._parseJsonArray('[1, 2, 3]')).toEqual([1, 2, 3])
+			expect((parser as unknown as { _parseJsonArray: (s: string) => unknown[] })._parseJsonArray('[1, 2, 3]')).toEqual(
+				[1, 2, 3]
+			)
 		})
 
 		it('should throw for non-array JSON', () => {
-			expect(() => (parser as unknown as { _parseJsonArray: (s: string) => unknown[] })._parseJsonArray('{"a": 1}')).toThrow(
-				ShorthandParseError
-			)
+			expect(() =>
+				(parser as unknown as { _parseJsonArray: (s: string) => unknown[] })._parseJsonArray('{"a": 1}')
+			).toThrow(ShorthandParseError)
 		})
 
 		it('should throw for invalid JSON', () => {
-			expect(() => (parser as unknown as { _parseJsonArray: (s: string) => unknown[] })._parseJsonArray('[invalid]')).toThrow(
-				ShorthandParseError
-			)
+			expect(() =>
+				(parser as unknown as { _parseJsonArray: (s: string) => unknown[] })._parseJsonArray('[invalid]')
+			).toThrow(ShorthandParseError)
 		})
 	})
 
@@ -243,7 +253,9 @@ describe('shorthand-parser', () => {
 
 		it('should parse multiple params in array', () => {
 			expect(
-				(parser as unknown as { _parseConstructorParams: (s: string) => unknown[] })._parseConstructorParams('([1, 2, 3])')
+				(parser as unknown as { _parseConstructorParams: (s: string) => unknown[] })._parseConstructorParams(
+					'([1, 2, 3])'
+				)
 			).toEqual([1, 2, 3])
 		})
 
@@ -274,7 +286,9 @@ describe('shorthand-parser', () => {
 		})
 
 		it('should throw for empty result', () => {
-			expect(() => (parser as unknown as { _parseResult: (s: string) => unknown })._parseResult('')).toThrow(ShorthandParseError)
+			expect(() => (parser as unknown as { _parseResult: (s: string) => unknown })._parseResult('')).toThrow(
+				ShorthandParseError
+			)
 		})
 
 		it('should throw for invalid JSON', () => {

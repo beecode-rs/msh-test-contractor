@@ -1,5 +1,6 @@
-import { glob } from 'glob'
 import path from 'path'
+
+import { glob } from 'glob'
 import { describe } from 'vitest'
 
 import { YamlParserContractLoader } from '#src/business/component/yaml-parser/contract-loader.js'

@@ -1,6 +1,7 @@
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 import { YamlParserContract } from '#src/business/component/yaml-parser/contract-parser.js'
@@ -25,13 +26,17 @@ module: ./my-module.js
 		it('throws error for invalid YAML (non-object root)', () => {
 			const yamlString = 'just a string'
 
-			expect(() => yamlParserContract.parseString({ yaml: yamlString })).toThrow('Invalid YAML: expected an object at the root')
+			expect(() => yamlParserContract.parseString({ yaml: yamlString })).toThrow(
+				'Invalid YAML: expected an object at the root'
+			)
 		})
 
 		it('throws error for null YAML root', () => {
 			const yamlString = 'null'
 
-			expect(() => yamlParserContract.parseString({ yaml: yamlString })).toThrow('Invalid YAML: expected an object at the root')
+			expect(() => yamlParserContract.parseString({ yaml: yamlString })).toThrow(
+				'Invalid YAML: expected an object at the root'
+			)
 		})
 
 		it('handles empty subject and module gracefully', () => {
@@ -771,7 +776,9 @@ constructor:
 		it('throws descriptive error for file not found', async () => {
 			const filePath = join(testDir, 'nonexistent.contract.yaml')
 
-			await expect(yamlParserContract.parseFile({ path: filePath })).rejects.toThrow(`YAML contract file not found: ${filePath}`)
+			await expect(yamlParserContract.parseFile({ path: filePath })).rejects.toThrow(
+				`YAML contract file not found: ${filePath}`
+			)
 		})
 
 		it('throws descriptive error for invalid YAML content', async () => {

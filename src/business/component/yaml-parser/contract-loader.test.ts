@@ -1,4 +1,5 @@
 import { resolve } from 'node:path'
+
 import { describe, expect, it, vi } from 'vitest'
 
 import { YamlParserContractLoader } from '#src/business/component/yaml-parser/contract-loader.js'
