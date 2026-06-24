@@ -151,37 +151,49 @@ describe('date', () => {
 			it('should return false for non-string values', () => {
 				expect((service as unknown as { _isStringValue: (v: unknown) => boolean })._isStringValue(123)).toBe(false)
 				expect((service as unknown as { _isStringValue: (v: unknown) => boolean })._isStringValue(null)).toBe(false)
-				expect((service as unknown as { _isStringValue: (v: unknown) => boolean })._isStringValue(undefined)).toBe(false)
+				expect((service as unknown as { _isStringValue: (v: unknown) => boolean })._isStringValue(undefined)).toBe(
+					false
+				)
 			})
 		})
 
 		describe('_isDatePatternMatch', () => {
 			it('should return true for valid date patterns', () => {
 				expect(
-					(service as unknown as { _isDatePatternMatch: (v: string) => boolean })._isDatePatternMatch('new Date("2024-01-15")')
+					(service as unknown as { _isDatePatternMatch: (v: string) => boolean })._isDatePatternMatch(
+						'new Date("2024-01-15")'
+					)
 				).toBe(true)
 				expect(
-					(service as unknown as { _isDatePatternMatch: (v: string) => boolean })._isDatePatternMatch("new Date('2024-01-15')")
+					(service as unknown as { _isDatePatternMatch: (v: string) => boolean })._isDatePatternMatch(
+						"new Date('2024-01-15')"
+					)
 				).toBe(true)
 			})
 
 			it('should return false for invalid date patterns', () => {
 				expect(
-					(service as unknown as { _isDatePatternMatch: (v: string) => boolean })._isDatePatternMatch('Date("2024-01-15")')
+					(service as unknown as { _isDatePatternMatch: (v: string) => boolean })._isDatePatternMatch(
+						'Date("2024-01-15")'
+					)
 				).toBe(false)
-				expect((service as unknown as { _isDatePatternMatch: (v: string) => boolean })._isDatePatternMatch('new Date()')).toBe(
-					false
-				)
+				expect(
+					(service as unknown as { _isDatePatternMatch: (v: string) => boolean })._isDatePatternMatch('new Date()')
+				).toBe(false)
 			})
 		})
 
 		describe('_isValidDate', () => {
 			it('should return true for valid dates', () => {
-				expect((service as unknown as { _isValidDate: (d: Date) => boolean })._isValidDate(new Date('2024-01-15'))).toBe(true)
+				expect(
+					(service as unknown as { _isValidDate: (d: Date) => boolean })._isValidDate(new Date('2024-01-15'))
+				).toBe(true)
 			})
 
 			it('should return false for invalid dates', () => {
-				expect((service as unknown as { _isValidDate: (d: Date) => boolean })._isValidDate(new Date('invalid'))).toBe(false)
+				expect((service as unknown as { _isValidDate: (d: Date) => boolean })._isValidDate(new Date('invalid'))).toBe(
+					false
+				)
 			})
 		})
 	})

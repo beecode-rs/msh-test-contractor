@@ -12,9 +12,6 @@ This project uses the **clean-typescript** skill for Claude Code assistance. Whe
 # Build (ESM to dist/)
 npm run build
 
-# Build (CommonJS to lib/)
-npm run build-cjs
-
 # Run all tests (unit + integration + examples)
 npm run test
 

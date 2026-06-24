@@ -258,15 +258,21 @@ describe('promise', () => {
 
 		describe('_isEmptyOrUndefined', () => {
 			it('should return true for empty or undefined strings', () => {
-				expect((service as unknown as { _isEmptyOrUndefined: (v: string) => boolean })._isEmptyOrUndefined('')).toBe(true)
-				expect((service as unknown as { _isEmptyOrUndefined: (v: string) => boolean })._isEmptyOrUndefined('undefined')).toBe(
+				expect((service as unknown as { _isEmptyOrUndefined: (v: string) => boolean })._isEmptyOrUndefined('')).toBe(
 					true
 				)
+				expect(
+					(service as unknown as { _isEmptyOrUndefined: (v: string) => boolean })._isEmptyOrUndefined('undefined')
+				).toBe(true)
 			})
 
 			it('should return false for other strings', () => {
-				expect((service as unknown as { _isEmptyOrUndefined: (v: string) => boolean })._isEmptyOrUndefined('test')).toBe(false)
-				expect((service as unknown as { _isEmptyOrUndefined: (v: string) => boolean })._isEmptyOrUndefined('null')).toBe(false)
+				expect(
+					(service as unknown as { _isEmptyOrUndefined: (v: string) => boolean })._isEmptyOrUndefined('test')
+				).toBe(false)
+				expect(
+					(service as unknown as { _isEmptyOrUndefined: (v: string) => boolean })._isEmptyOrUndefined('null')
+				).toBe(false)
 			})
 		})
 
@@ -276,19 +282,27 @@ describe('promise', () => {
 			})
 
 			it('should return false for other strings', () => {
-				expect((service as unknown as { _isNullLiteral: (v: string) => boolean })._isNullLiteral('undefined')).toBe(false)
+				expect((service as unknown as { _isNullLiteral: (v: string) => boolean })._isNullLiteral('undefined')).toBe(
+					false
+				)
 				expect((service as unknown as { _isNullLiteral: (v: string) => boolean })._isNullLiteral('test')).toBe(false)
 			})
 		})
 
 		describe('_isBooleanLiteral', () => {
 			it('should return true for boolean literals', () => {
-				expect((service as unknown as { _isBooleanLiteral: (v: string) => boolean })._isBooleanLiteral('true')).toBe(true)
-				expect((service as unknown as { _isBooleanLiteral: (v: string) => boolean })._isBooleanLiteral('false')).toBe(true)
+				expect((service as unknown as { _isBooleanLiteral: (v: string) => boolean })._isBooleanLiteral('true')).toBe(
+					true
+				)
+				expect((service as unknown as { _isBooleanLiteral: (v: string) => boolean })._isBooleanLiteral('false')).toBe(
+					true
+				)
 			})
 
 			it('should return false for other strings', () => {
-				expect((service as unknown as { _isBooleanLiteral: (v: string) => boolean })._isBooleanLiteral('test')).toBe(false)
+				expect((service as unknown as { _isBooleanLiteral: (v: string) => boolean })._isBooleanLiteral('test')).toBe(
+					false
+				)
 				expect((service as unknown as { _isBooleanLiteral: (v: string) => boolean })._isBooleanLiteral('1')).toBe(false)
 			})
 		})
@@ -309,15 +323,15 @@ describe('promise', () => {
 		describe('_convertToRejectionError', () => {
 			it('should return Error as-is', () => {
 				const error = new Error('test')
-				expect((service as unknown as { _convertToRejectionError: (v: unknown) => Error })._convertToRejectionError(error)).toBe(
-					error
-				)
+				expect(
+					(service as unknown as { _convertToRejectionError: (v: unknown) => Error })._convertToRejectionError(error)
+				).toBe(error)
 			})
 
 			it('should wrap non-Error values in Error', () => {
-				const result = (service as unknown as { _convertToRejectionError: (v: unknown) => Error })._convertToRejectionError(
-					'string value'
-				)
+				const result = (
+					service as unknown as { _convertToRejectionError: (v: unknown) => Error }
+				)._convertToRejectionError('string value')
 				expect(result).toBeInstanceOf(Error)
 				expect(result.message).toBe('string value')
 			})

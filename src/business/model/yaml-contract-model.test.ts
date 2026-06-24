@@ -114,7 +114,9 @@ describe('yaml-contract-model', () => {
 			})
 
 			it('should throw for empty object', () => {
-				expect(() => validator.isYamlContractTerm({})).toThrow('YamlContractTerm must have either "result" or "error" field')
+				expect(() => validator.isYamlContractTerm({})).toThrow(
+					'YamlContractTerm must have either "result" or "error" field'
+				)
 			})
 		})
 	})
@@ -160,7 +162,9 @@ describe('yaml-contract-model', () => {
 			})
 
 			it('should throw for undefined value', () => {
-				expect(() => validator.isYamlContractFunction(undefined)).toThrow('YamlContractFunction must be a non-null object')
+				expect(() => validator.isYamlContractFunction(undefined)).toThrow(
+					'YamlContractFunction must be a non-null object'
+				)
 			})
 
 			it('should throw for number value', () => {
@@ -168,7 +172,9 @@ describe('yaml-contract-model', () => {
 			})
 
 			it('should throw for string value', () => {
-				expect(() => validator.isYamlContractFunction('string')).toThrow('YamlContractFunction must be a non-null object')
+				expect(() => validator.isYamlContractFunction('string')).toThrow(
+					'YamlContractFunction must be a non-null object'
+				)
 			})
 
 			it('should throw for array value', () => {
@@ -662,7 +668,9 @@ describe('yaml-contract-model', () => {
 		})
 
 		it('should provide clear error for missing required field', () => {
-			expect(() => validator.isYamlContractTerm({})).toThrow('YamlContractTerm must have either "result" or "error" field')
+			expect(() => validator.isYamlContractTerm({})).toThrow(
+				'YamlContractTerm must have either "result" or "error" field'
+			)
 		})
 
 		it('should provide clear error for wrong type', () => {

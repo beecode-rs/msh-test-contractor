@@ -1,4 +1,4 @@
-FROM milosbugarinovic/msh-lib-base:node22.14.0-alpine3.21
+FROM milosbugarinovic/msh-lib-base:node22.22.1-alpine3.23
 
 USER root
 
@@ -10,5 +10,4 @@ USER node
 
 RUN npm ci        && \
     npm run lint  && \
-    npm run build && \
-    npm run build-cjs
+    npm run build

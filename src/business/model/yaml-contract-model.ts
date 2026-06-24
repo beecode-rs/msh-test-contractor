@@ -65,12 +65,7 @@ export class YamlContractModelValidator {
 			try {
 				this.isYamlContractTerm(term)
 			} catch (e) {
-				let message: string
-				if (e instanceof Error) {
-					message = e.message
-				} else {
-					message = String(e)
-				}
+				const message = this._getErrorMessage({ error: e })
 				throw new Error(`YamlContractFunction.terms[${String(index)}] is invalid: ${message}`)
 			}
 		})
@@ -123,7 +118,10 @@ export class YamlContractModelValidator {
 		})
 	}
 
-	protected readonly _validateNonEmptyStringField = (params: { fieldName: string; model: Record<string, unknown> }): void => {
+	protected readonly _validateNonEmptyStringField = (params: {
+		fieldName: string
+		model: Record<string, unknown>
+	}): void => {
 		if (!(params.fieldName in params.model)) {
 			throw new Error(`YamlContractModel must have a "${params.fieldName}" field`)
 		}
@@ -176,15 +174,18 @@ export class YamlContractModelValidator {
 			try {
 				this.isYamlContractFunction(fn)
 			} catch (e) {
-				let message: string
-				if (e instanceof Error) {
-					message = e.message
-				} else {
-					message = String(e)
-				}
+				const message = this._getErrorMessage({ error: e })
 				throw new Error(`YamlContractModel.fns["${key}"] is invalid: ${message}`)
 			}
 		})
+	}
+
+	protected readonly _getErrorMessage = (params: { error: unknown }): string => {
+		if (params.error instanceof Error) {
+			return params.error.message
+		}
+
+		return String(params.error)
 	}
 
 	isYamlContractModel(value: unknown): value is YamlContractModel {

@@ -3,7 +3,6 @@
 /.base-frame-template
 /coverage
 /dist
-/lib
 /node_modules
 /packages
 /resource/ai

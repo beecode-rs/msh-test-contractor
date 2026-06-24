@@ -150,10 +150,14 @@ describe('error', () => {
 		describe('_isErrorPatternMatch', () => {
 			it('should return true for valid error patterns', () => {
 				expect(
-					(service as unknown as { _isErrorPatternMatch: (v: string) => boolean })._isErrorPatternMatch('new Error("test")')
+					(service as unknown as { _isErrorPatternMatch: (v: string) => boolean })._isErrorPatternMatch(
+						'new Error("test")'
+					)
 				).toBe(true)
 				expect(
-					(service as unknown as { _isErrorPatternMatch: (v: string) => boolean })._isErrorPatternMatch("new Error('test')")
+					(service as unknown as { _isErrorPatternMatch: (v: string) => boolean })._isErrorPatternMatch(
+						"new Error('test')"
+					)
 				).toBe(true)
 			})
 
@@ -161,9 +165,9 @@ describe('error', () => {
 				expect(
 					(service as unknown as { _isErrorPatternMatch: (v: string) => boolean })._isErrorPatternMatch('Error("test")')
 				).toBe(false)
-				expect((service as unknown as { _isErrorPatternMatch: (v: string) => boolean })._isErrorPatternMatch('new Error()')).toBe(
-					false
-				)
+				expect(
+					(service as unknown as { _isErrorPatternMatch: (v: string) => boolean })._isErrorPatternMatch('new Error()')
+				).toBe(false)
 			})
 		})
 

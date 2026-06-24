@@ -1,8 +1,9 @@
 import { resolve } from 'node:path'
+
 import { describe, expect, it, vi } from 'vitest'
 
 import { YamlParserContractLoader } from '#src/business/component/yaml-parser/contract-loader.js'
-import { mocker } from '#src/mocker/mocker.js'
+import { mocker } from '#src/business/service/mocker.js'
 
 describe('YamlParserContractLoader', () => {
 	const loader = new YamlParserContractLoader()

@@ -1,14 +1,21 @@
+import { readFile } from 'node:fs/promises'
+
+import * as yaml from 'js-yaml'
+
 import { YamlParserDate } from './date.js'
 import { YamlParserError } from './error.js'
 import { YamlParserPromise } from './promise.js'
 import { YamlParserRegex } from './regex.js'
 import { parseShorthandTerm } from './shorthand-parser.js'
 import { YamlParserSpecialObject } from './special-object.js'
-import * as yaml from 'js-yaml'
-import { readFile } from 'node:fs/promises'
 
-import type { YamlContractFunction, YamlContractModel, YamlContractTerm } from '#src/business/model/yaml-contract-model.js'
-import { SpecialFnName } from '#src/enum/special-fn-name.js'
+import type {
+	YamlContractFunction,
+	YamlContractModel,
+	YamlContractTerm,
+} from '#src/business/model/yaml-contract-model.js'
+
+import { SpecialFnName } from '#src/business/model/special-fn-name.js'
 
 type RawYamlTerm = {
 	params?: unknown[]
@@ -33,6 +40,14 @@ type RawYamlContract = Record<string, unknown> & {
 	mock?: string[]
 }
 
+const undefinedType = yaml.defineScalarTag('!undefined', {
+	resolve: () => {
+		return undefined
+	},
+})
+
+const customSchema = yaml.CORE_SCHEMA.withTags(undefinedType)
+
 export class YamlParserContract {
 	protected readonly _specialObjectParser: YamlParserSpecialObject
 
@@ -41,7 +56,12 @@ export class YamlParserContract {
 		const yamlParserDate = new YamlParserDate()
 		const yamlParserRegex = new YamlParserRegex()
 		const yamlParserPromise = new YamlParserPromise(yamlParserError)
-		this._specialObjectParser = new YamlParserSpecialObject(yamlParserError, yamlParserPromise, yamlParserDate, yamlParserRegex)
+		this._specialObjectParser = new YamlParserSpecialObject(
+			yamlParserError,
+			yamlParserPromise,
+			yamlParserDate,
+			yamlParserRegex
+		)
 	}
 
 	async parseFile(params: { path: string }): Promise<YamlContractModel> {
@@ -54,7 +74,14 @@ export class YamlParserContract {
 
 	parseString(params: { yaml: string }): YamlContractModel {
 		const { yaml: yamlString } = params
-		const rawObject = yaml.load(yamlString)
+		// js-yaml v5 throws on empty input ("expected a document"), whereas v4 returned null.
+		// Treat empty/whitespace input as null so it flows into the root validation below.
+		let rawObject: unknown
+		if (yamlString.trim() === '') {
+			rawObject = null
+		} else {
+			rawObject = yaml.load(yamlString, { schema: customSchema })
+		}
 
 		if (rawObject === null || typeof rawObject !== 'object') {
 			throw new Error('Invalid YAML: expected an object at the root')
@@ -227,15 +254,15 @@ export class YamlParserContract {
 	}): YamlContractTerm {
 		const result: YamlContractTerm = {}
 
-		if (parsed.constructorParams !== undefined) {
+		if (Object.hasOwn(parsed, 'constructorParams')) {
 			result.constructorParams = this._parseSpecialObjectsRecursively(parsed.constructorParams) as unknown[]
 		}
 
-		if (parsed.params !== undefined) {
+		if (Object.hasOwn(parsed, 'params')) {
 			result.params = this._parseSpecialObjectsRecursively(parsed.params) as unknown[]
 		}
 
-		if (parsed.result !== undefined) {
+		if (Object.hasOwn(parsed, 'result')) {
 			result.result = this._parseSpecialObjectsRecursively(parsed.result)
 		}
 
@@ -245,23 +272,23 @@ export class YamlParserContract {
 	protected _buildContractTermFromRaw(term: RawYamlTerm): YamlContractTerm {
 		const transformed: YamlContractTerm = {}
 
-		if (term.params !== undefined) {
+		if (Object.hasOwn(term, 'params')) {
 			transformed.params = this._parseSpecialObjectsRecursively(term.params) as unknown[]
 		}
 
-		if (term.result !== undefined) {
+		if (Object.hasOwn(term, 'result')) {
 			transformed.result = this._parseSpecialObjectsRecursively(term.result)
 		}
 
-		if (term.error !== undefined) {
+		if (Object.hasOwn(term, 'error')) {
 			transformed.error = this._parseSpecialObjectsRecursively(term.error)
 		}
 
-		if (term.constructorParams !== undefined) {
+		if (Object.hasOwn(term, 'constructorParams')) {
 			transformed.constructorParams = this._parseSpecialObjectsRecursively(term.constructorParams) as unknown[]
 		}
 
-		if (term.returnFnParams !== undefined) {
+		if (Object.hasOwn(term, 'returnFnParams')) {
 			transformed.returnFnParams = this._parseSpecialObjectsRecursively(term.returnFnParams) as unknown[]
 		}
 
@@ -278,7 +305,9 @@ export class YamlParserContract {
 		}
 
 		if (value !== null && typeof value === 'object') {
-			return Object.fromEntries(Object.entries(value).map(([key, val]) => [key, this._parseSpecialObjectsRecursively(val)]))
+			return Object.fromEntries(
+				Object.entries(value).map(([key, val]) => [key, this._parseSpecialObjectsRecursively(val)])
+			)
 		}
 
 		return value

@@ -1,0 +1,43 @@
+import { describe, it } from 'vitest'
+
+import { contractorService } from '#src/business/component/contractor/contractor-service.js'
+import { contractExpectService } from '#src/business/component/contractor-expect/contract-expect-service.js'
+import { contractMockService } from '#src/business/component/contractor-mock/contractor-mock-service.js'
+import { subjectService } from '#src/business/component/subject/subject-service.js'
+import { type Contract, type PropType } from '#src/business/model/contract-model.js'
+
+export const contractor = <
+	TModule,
+	TSubjectName extends Extract<keyof TModule, string>,
+	TSubject extends PropType<TModule, TSubjectName>,
+	TContract extends Contract<TModule, TSubjectName, TSubject>,
+	TContractFnName extends Extract<keyof PropType<TContract, 'fns'>, string>, // eslint-disable-line @typescript-eslint/no-unnecessary-type-parameters
+>(
+	contract: TContract,
+	fnName: TContractFnName
+): void => {
+	const { terms, mock } = contract.fns[fnName]!
+
+	const moduleMockStrategy = contractMockService.strategyFromFunctionMock(contract.mock)
+	const functionMockStrategy = contractMockService.strategyFromFunctionMock(mock)
+
+	describe(contractorService.testDescription({ fnName }), () => {
+		try {
+			terms.forEach((term) => {
+				const subjectStrategy = subjectService.strategyFromContractFunction({ contract, fnName, term })
+
+				it(contractorService.testName({ term }), async () => {
+					moduleMockStrategy.mock({ params: term.params })
+					functionMockStrategy.mock({ params: term.params })
+					const expectStrategy = contractExpectService.fromTerm({ term })
+					await expectStrategy.test(() => subjectStrategy.exec(term))
+					functionMockStrategy.restore()
+					moduleMockStrategy.restore()
+				})
+			})
+		} catch (err) {
+			console.error(`Error running test on contract:${contract.subjectName}, fn:${fnName}`) // eslint-disable-line no-console
+			throw err
+		}
+	})
+}
