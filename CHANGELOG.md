@@ -1,3 +1,41 @@
+# [1.0.0](https://github.com/beecode-rs/msh-test-contractor/compare/v0.4.2...v1.0.0) (2026-06-24)
+
+
+* refactor!: restructure to clean-typescript layout and add YAML contracts ([#73](https://github.com/beecode-rs/msh-test-contractor/issues/73)) ([2c528ca](https://github.com/beecode-rs/msh-test-contractor/commit/2c528caf4ef1145b95a2c2bdd4885e1d91057eef))
+
+
+### BREAKING CHANGES
+
+* Introduce *.contract.yaml as the prefeand
+restructure the package around a clean-typescript layout.
+
+Contract YAML support:
+- add vitest plugin that discovers and
+- add custom contract reporter for test output, exported as a subpath
+- support !undefined YAML tag and use ields
+- rename default method key to __self__
+- serialize undefined values in test n
+
+Restructure & docs:
+- restructure to clean-typescript layoent)
+- rename files for domain clarity and update import paths and exports
+- rename skill to test-contractor and expand project-setup workflow docs
+- split reference docs into separate f
+
+Build & tooling:
+- drop CommonJS build support, ship ESM-only (dist/)
+- replace babel with tsc for compilati
+- point main entry to dist/ and simplify exports
+- update .nvmrc to Node 22.22.1
+
+Dependencies:
+- migrate to js-yaml v5 API
+- upgrade msh-logger to v2 and msh-config to v1.2.0
+- remove unused dev deps (ts-node, tsc
+  vite-tsconfig-paths)
+- fix husky hooks to load nvm before execution
+- add package-lock.json and remove sta
+
 ## [0.4.2](https://github.com/beecode-rs/msh-test-contractor/compare/v0.4.1...v0.4.2) (2026-05-25)
 
 
