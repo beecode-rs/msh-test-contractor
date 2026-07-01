@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.0.0...v1.0.1) (2026-07-01)
+
+
+### Bug Fixes
+
+* update msh-config to v1.2.2 ([c875d31](https://github.com/beecode-rs/msh-test-contractor/commit/c875d31e29fd0681e531324bff9c50ee2c726032))
+
 # [1.0.0](https://github.com/beecode-rs/msh-test-contractor/compare/v0.4.2...v1.0.0) (2026-06-24)
 
 
