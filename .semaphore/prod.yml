@@ -23,7 +23,7 @@ blocks:
             - git remote rm origin
             - git remote add origin https://$GH_USER:$GH_TOKEN@github.com/beecode-rs/msh-test-contractor.git
             - git checkout tags/v$VERSION -b tmp-prod-branch
-            - docker build -f ./resource/docker/Dockerfile -t bc-msh-test-contractor-deploy .
-            - docker run --rm -e CI bc-msh-test-contractor-deploy sh -c "npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN && npm publish --access public && git tag v$VERSION-prod && git push origin --tags"
+            - npm run docker-build
+            - docker run --rm -e CI bc-msh-test-contractor sh -c "npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN && npm publish --access public && git tag v$VERSION-prod && git push origin --tags"
     skip:
       when: branch != 'main'

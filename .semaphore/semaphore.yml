@@ -15,7 +15,7 @@ blocks:
           commands:
             - checkout
             - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
-            - docker build -f ./resource/docker/Dockerfile -t bc-msh-test-contractor .
+            - npm run docker-build
             - docker save -o bc-msh-test-contractor.tar bc-msh-test-contractor
             - cache store bc-msh-test-contractor-docker-image-$SEMAPHORE_GIT_SHA bc-msh-test-contractor.tar
 
