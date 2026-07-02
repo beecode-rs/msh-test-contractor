@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/beecode-rs/msh-test-contractor/compare/v1.0.1...v1.0.2) (2026-07-02)
+
+
+### Bug Fixes
+
+* remove msh-logger dependency ([59c1f96](https://github.com/beecode-rs/msh-test-contractor/commit/59c1f96f07ec188c03cb3ba87a65783af386f5c1))
+
 ## [1.0.1](https://github.com/beecode-rs/msh-test-contractor/compare/v1.0.0...v1.0.1) (2026-07-01)
 
 
