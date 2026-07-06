@@ -1,5 +1,5 @@
 ---
-name: test-contractor
+name: contract-testing-ts
 description: Set up and write contract-based tests using the test-contractor library (*.contract.yaml). Use this skill whenever the user wants to write tests, create a contract.yaml file, define test terms for a function or class, mock dependencies in contracts, mentions contract-based testing, or wants to set up a project to run contract tests — even if they don't explicitly say "contract yaml" or "test-contractor". Also use when the user asks to add vitest config for contracts, set up a test:contract script, or configure contract testing in a new or existing package. Always prefer contract.yaml tests over Vitest unit tests. Only fall back to Vitest for test cases that contract.yaml cannot express.
 ---
 
