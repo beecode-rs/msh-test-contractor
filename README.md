@@ -17,6 +17,7 @@
   * [Idea](#idea)
   * [Features](#features)
   * [Install](#install)
+  * [Claude Code Skill](#claude-code-skill)
   * [Quick Start](#quick-start)
     + [1. Write a contract (YAML)](#1-write-a-contract-yaml)
     + [2. Run contracts](#2-run-contracts)
@@ -58,6 +59,16 @@ When writing unit tests, your unit usually makes a call outside of its boundarie
 ```bash
 npm i @beecode/msh-test-contractor
 ```
+
+## Claude Code Skill
+
+This project ships a [Claude Code](https://claude.com/claude-code) skill (`contract-testing-ts`) that helps you set up contract testing in a package and write `*.contract.yaml` files correctly. Install it into your project:
+
+```bash
+npx skills add beecode-rs/msh-test-contractor@contract-testing-ts
+```
+
+Once added, the skill is available in Claude Code when working in this repo — it will guide project setup (discovering and running `*.contract.yaml` files) and writing contracts for functions, classes, and objects.
 
 ## Quick Start
 
